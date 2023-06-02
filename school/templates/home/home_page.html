@@ -1,0 +1,279 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;600;700&family=Rubik:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="{% static '/css/hamburger.css' %}">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__list-item"><a href="#" class="nav__list-link  menu-close"> Strona główna</a></li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__list-link"> O szkole<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon"></a>
+                <ul class="nav__dropdown">
+                    <li class="nav__dropdown-item"><a href="" class="nav__dropdown-link  menu-close">Dokumenty</a></li>
+                    <li class="nav__dropdown-item">
+                        <a href="" class="nav__dropdown-link  menu-close">Zasady oceniania</a></li>
+                    <li class="nav__dropdown-item">
+                        <a href="" class="nav__dropdown-link  menu-close">Grono pedagogiczne</a></li>
+                    <li class="nav__dropdown-item"><a href="" class="nav__dropdown-link  menu-close">Pedagog</a></li>
+                    <li class="nav__dropdown-item"><a href="" class="nav__dropdown-link  menu-close">Biblioteka</a></li>
+                    <li class="nav__dropdown-item">
+                        <a href="" class="nav__dropdown-link  menu-close">Świetlica szkolna</a></li>
+                </ul>
+            </li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__list-link"> Dla uczniów<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon"></a>
+                <ul class="nav__dropdown">
+                    <li class="nav__dropdown-item"><a href="" class="nav__dropdown-link  menu-close">Konkursy</a></li>
+                    <li class="nav__dropdown-item"><a href="" class="nav__dropdown-link  menu-close">RSU</a></li>
+                    <li class="nav__dropdown-item">
+                        <a href="" class="nav__dropdown-link  menu-close">Odjazdy autobusów</a></li>
+                </ul>
+            </li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__list-link"> Dla rodziców<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon"></a>
+                <ul class="nav__dropdown">
+                    <li class="nav__dropdown-item">
+                        <a href="" class="nav__dropdown-link  menu-close">Terminy i miejsca wywiadówek</a>
+                    </li>
+                    <li class="nav__dropdown-item">
+                        <a href="" class="nav__dropdown-link  menu-close">Wykaz podręczników</a>
+                    </li>
+                    <li class="nav__dropdown-item">
+                        <a href="" class="nav__dropdown-link  menu-close">Ubezpieczenie dzieci</a>
+                    <li class="nav__dropdown-item"><a href="" class="nav__dropdown-link  menu-close">Rada Rodziców</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav__list-item"><a href="#" class="nav__list-link  menu-close">Aktualności</a></li>
+            <li class="nav__list-item"><a href="#" class="nav__list-link  menu-close">Kontakt </a></li>
+        </ul>
+        <form class="nav__search" action="" method="get">
+            <label for="txtSearch" class="screenReaderOnly">Szukaj: </label>
+            <input id="txtSearch" type="text" placeholder="Wyszukaj" class="nav__search-input" />
+            <button id="btnSearch" type="submit" class="nav__search-btn"><img src="{% static '/img/search.svg' %}" alt="Szukaj"
+                    title="Szukaj"></button>
+        </form>
+        <button class="hamburger hamburger--spring" type="button">
+            <span class="hamburger-box" role="presentation"><span class="hamburger-inner" role="presentation"></span></span>
+            <span class="hamburger-text">Menu</span>
+        </button>
+    </nav>
+    <header class="header">
+
+        <div class="header__text">
+            <h1><span class="first-letter">P</span>ubliczna <span class="first-letter">S</span>zkoła
+                <span class="first-letter">P</span>odstawowa <br>w&nbsp;Turawie
+            </h1>
+        </div>
+        <!-- <img src="img/books.svg" class="header__icon header__icon--book" alt="">
+        <img src="img/pencil.svg" class="header__icon header__icon--pencil" alt="">
+        <img src="img/abacus.svg" class="header__icon header__icon--abacus" alt="">
+        <img src="img/ball.svg" class="header__icon header__icon--ball" alt="">
+        <img src="img/backpack.svg" class="header__icon header__icon--backpack" alt=""> -->
+
+    </header>
+    <main class="main">
+        <div class="header__links">
+            <a href="" class="header__links-link"><img src="{% static '/img/camera.svg' %}" alt="" aria-hidden="true"><span>Galeria zdjęć</span></a>
+            <a href="" class="header__links-link"><img src="{% static '/img/headphones.svg' %}" alt="" aria-hidden="true">Opolska eSzkoła</a>
+            <a href="" class="header__links-link"><img src="{% static '/img/calendar.svg' %}" alt="" aria-hidden="true">Rekrutacja</a>
+        </div>
+        <div class="posts__main posts__main--primary">
+            <img src="{% static '/img/painter.jpg' %}" alt="" class="posts__main-img posts__main-img--primary">
+            <div class="posts__main-box posts__main-box--primary">
+                <div class="posts__main-details">
+                    <div class="posts__main-category posts__main-category--1">Ogłoszenie</div>
+                    <p class="posts__main-details--date">2 września 2023</p>
+                </div>
+
+                <h3 class="posts__main-heading posts__main-heading--primary">Remont budynku głównego szkoły</h3>
+                <p class="posts__main-text">W najbliższym czasie podczas lekcji będą nam towarzyszyć stałe dźwięki pracy
+                    młotów i wiertarek. Bardziej wrażliwych uczniów prosimy o zabranie z domów stoperów (najlepiej
+                    woskowych).
+                    Po wakacjach zobaczymy się w odnowionym budynku. Przepraszamy za tymczasowe niedogodności!
+                </p>
+
+                <a href="https://google.com" class="posts__main-link posts__main-link--primary">Czytaj więcej...</a>
+            </div>
+        </div>
+        <div class="posts__categories">
+            <p class="posts__categories-category posts__categories-category--filter">Filtruj: </p>
+            <ul class="posts__list" id="categories-list">
+                <li><a href="#" class="posts__categories-category posts__categories-link posts__categories-link--active">Wszystkie kategorie</a>
+                </li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Ogłoszenia</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Relacje</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Sport</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Konkursy</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Wycieczki</a></li>
+            </ul>
+        </div>
+        <div class="posts__cards">
+
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    <img src="{% static '/img/nowy.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary" >
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--2">Relacja</div>
+                        <p class="posts__main-details--date">2 września 2023</p>
+                    </div>
+                    <h3 class="posts__main-heading posts__main-heading--secondary">Uroczystość rozpoczęcia roku
+                        szkolnego 2023/2024</h3>
+                    <p class="posts__main-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
+                        laboriosam minus ut exercitationem labore inventore quo iste et, obcaecati ad, alias ducimus
+                        omnis, soluta consequuntur!
+                    </p>
+                    <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+
+                </div>
+            </div>
+
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    <img src="{% static '/img/Budynek1.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary">
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--4">Konkurs</div>
+                        <p class="posts__main-details--date">2 września 2023</p>
+                    </div>
+                    <h3 class="posts__main-heading posts__main-heading--secondary">Wyzwanie dla małych matematyków</h3>
+                    <p class="posts__main-text">Przypomnij sobie ile okien miał budynek szkoły przed remontem, policz
+                        ile ma obecnie. Rozwiązaniem zagadki będzie...
+                    </p>
+                    <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+                </div>
+            </div>
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    <img src="{% static '/img/final.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary">
+
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--3">Sport</div>
+                        <p class="posts__main-details--date">2 września 2023</p>
+                    </div>
+
+                    <h3 class="posts__main-heading posts__main-heading--secondary">I miejsce w finale wojewódzkim LZS w
+                        mini koszykówce dziewcząt</h3>
+                    <p class="posts__main-text">Dziś 17.05.2023 r. w Turawie odbył się finał Wojewódzkich Igrzysk LZS
+                        Szkół Wiejskich w mini koszykówce dziewcząt -
+                        rocznik 2010 i młodsi. Dziewczęta z Turawy...
+                    </p>
+                    <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+
+                </div>
+            </div>
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    <img src="{% static '/img/onierze.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary">
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--2">Relacja</div>
+                        <p class="posts__main-details--date">17 maja 2023</p>
+                    </div>
+                    <h3 class="posts__main-heading posts__main-heading--secondary">Zajęcia z żołnierzami</h3>
+                    <p class="posts__main-text">Na zaproszenie nauczyciela EDB Anny Kulaszy zostały przeprowadzone
+                        zajęcia w klasie 8 a i b przez żołnierzy ze 172
+                        Batalionu Lekkiej Piechoty w Opolu. Uczniowie uczyli się pod fachowym okiem odczytywania map i
+                        orientacji w terenie oraz
+                        budowy broni, użycia i zasad bezpiecznego posługiwania się.
+                    </p>
+                    <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+
+                </div>
+            </div>
+
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    <img src="{% static '/img/las.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary">
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--2">Relacja</div>
+                        <p class="posts__main-details--date">22 kwietnia 2023</p>
+                    </div>
+                    <h3 class="posts__main-heading posts__main-heading--secondary">Las Pamięci Jana Pawła II</h3>
+                    <p class="posts__main-text">W piątek 21 kwietnia 2023 roku wraz z delegacją Uczniów naszej Szkoły -
+                        Mają i Karolem z klasy szóstej, miałem zaszczyt
+                        wziąć udział w imprezie zorganizowanej przez Nadleśnictwo Turawa: na zrębie Leśnictwa Marszałki
+                        posadziliśmy sadzonki
+                        modrzewia, komponujące się w litery JPII.
+                    </p>
+                    <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+                </div>
+            </div>
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    <img src="{% static '/img/bulb.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary">
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--1">Ogłoszenie</div>
+                        <p class="posts__main-details--date">29 maja 2023</p>
+                    </div>
+
+                    <h3 class="posts__main-heading posts__main-heading--secondary">Wtorek 30 maja bez obiadu</h3>
+                    <p class="posts__main-text">Szanowni Rodzice, Drodzy Uczniowie, z powodu planowanego wyłączenia
+                        prądu, we wtorek 30 maja 2023 roku w naszej Szkole
+                        nie zostanie przygotowany obiad. Pamiętajcie o suchym prowiancie.
+                    </p>
+                    <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+
+                </div>
+            </div>
+        </div>
+        <a href="#" class="posts__linktoall"><span>Przejdź do wszystkich wpisów </span><img src="{% static '/img/chevrons-right.svg' %}" alt=""></a>
+
+    </main>
+    <footer class="footer">
+        <div class="footer__upper">
+            <div class="footer__upper-contact">
+                <p>Publiczna Szkoła Podstawowa w Turawie</p>
+                <p>ul. Opolska 47</p>
+                <p>46-045 Turawa</p>
+                <div class="footer__upper-contact--phone"><img src="{% static '/img/phone.svg' %}" alt="">
+                    <p>tel.: 77 4212 029, 77 4212 082</p>
+                </div>
+                <div class="footer__upper-contact--mail"><img src="{% static '/img/mail.svg' %}" alt="">
+                    <p>mail: psp.turawa@oswiata-turawa.pl</p>
+                </div>
+            </div>
+            <div class="footer__upper-links">
+                <a href="">Znajdź nas na Facebooku: <img src="{% static '/img/facebook.svg' %}" alt=""> </a>
+                <div class="bip-box"><a href=""><img class="bip" src="{% static '/img/bip.png' %}" alt=""></a></div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2023 Publiczna Szkoła Podstawowa w Turawie</p>
+            <p>Projekt i wykonanie: IS</p>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init( {
+            once: true,
+        });
+    </script>
+    <script src="{% static '/js/script.min.js' %}"></script>
+</body>
+
+</html>
