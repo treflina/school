@@ -582,7 +582,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    height: calc(100vh + 300px);
+    height: calc(100vh - 88px);
     width: 100%;
     max-width: 100vw;
     display: block;
@@ -628,10 +628,11 @@ body {
 }
 @media (max-width: 31.2em) {
   .header__text {
+    margin-top: -50px;
     font-size: 2rem;
   }
   .header__links {
-    margin-top: -20px;
+    margin-top: -50px;
   }
   .posts__linktoall {
     margin-right: 0.5em;
@@ -652,6 +653,6 @@ body {
     margin: 2rem 1rem;
   }
   .posts__main-box--secondary {
-    padding: 1.5em 0.5em;
+    padding: 1.5em 0.75em;
   }
 }

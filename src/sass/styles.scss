@@ -774,7 +774,7 @@ body {
                 position: fixed;
                 top: 0;
                 left: 0;
-                height: calc(100vh + 300px);
+                height: calc(100vh - 88px);
                 width: 100%;
                 max-width: 100vw;
                 display: block;
@@ -842,11 +842,12 @@ body {
     .header {
 
         &__text {
+            margin-top: -50px;
             font-size: 2rem;
         }
 
         &__links {
-            margin-top: -20px;
+            margin-top: -50px;
         }
     }
 
@@ -870,14 +871,13 @@ body {
             }
 
             &--secondary {
-
                 width: 90vw;
                 margin: 2rem 1rem;
             }
 
             &-box {
                 &--secondary {
-                    padding: 1.5em .5em;
+                    padding: 1.5em .75em;
                 }
 
             }
