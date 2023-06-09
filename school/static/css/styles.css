@@ -589,6 +589,7 @@ body {
     box-shadow: none;
     margin-top: 88px;
     padding: 0;
+    padding-bottom: 50px;
     text-align: center;
     overflow-y: scroll;
     background-color: #fff;
