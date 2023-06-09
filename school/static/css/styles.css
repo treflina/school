@@ -557,6 +557,7 @@ body {
     display: block;
     position: relative;
     margin-left: auto;
+    padding-right: 2rem;
     font-size: 1.6rem;
     line-height: 1.5;
     opacity: 1;
@@ -570,16 +571,16 @@ body {
     color: black;
   }
   .nav {
+    position: relative;
     top: 0;
     right: 0;
-    margin: 0 2em;
     height: 90px;
   }
   .nav__list, .nav__search {
     display: none;
   }
   .nav__list--active, .nav__search--active {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
@@ -589,10 +590,10 @@ body {
     box-shadow: none;
     margin-top: 88px;
     padding: 0;
-    padding-bottom: 50px;
+    padding-bottom: 90px;
     text-align: center;
     overflow-y: scroll;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     z-index: 9;
   }
   .nav__list-item {

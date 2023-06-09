@@ -15,7 +15,6 @@ html {
 
 body {
     font-family: "Martel Sans", sans-serif;
-    // padding: 0 1%;
     font-size: 1.6rem;
     line-height: 1.5;
 }
@@ -739,12 +738,20 @@ body {
         display: block;
         position: relative;
         margin-left: auto;
-        // top: 0;
-        // right: 1.5rem;
+        padding-right: 2rem;
         font-size: 1.6rem;
         line-height: 1.5;
         opacity: 1;
         z-index: 500;
+
+        // &::before {
+        //     content: "";
+        //     position: absolute;
+        //     top: 0;
+        //     bottom: 0;
+        //     right: 0;
+        //     width: 100vw;
+        // }
 
         &-inner,
         &-inner::before,
@@ -759,10 +766,10 @@ body {
     }
 
     .nav {
-        // position: sticky;
+        position: relative;
         top: 0;
         right: 0;
-        margin: 0 2em;
+        // margin: 0 2em;
         height: 90px;
 
         &__list,
@@ -771,7 +778,7 @@ body {
 
 
             &--active {
-                position: fixed;
+                position: absolute;
                 top: 0;
                 left: 0;
                 height: calc(100vh);
@@ -781,11 +788,11 @@ body {
                 box-shadow: none;
                 margin-top: 88px;
                 padding: 0;
-                padding-bottom: 50px;
+                padding-bottom: 90px;
                 text-align: center;
                 overflow-y: scroll;
                 // scroll-padding-top: 90px;
-                background-color: #fff;
+                background-color: rgba(255,255,255,1);
                 z-index: 9;
             }
 
