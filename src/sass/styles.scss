@@ -271,7 +271,7 @@ body {
             flex-wrap: wrap;
             margin: .5em 1em;
             width: 300px;
-        padding: 1em;
+            padding: 1em;
             // border-radius: 20px;
             font-size: 2rem;
             font-weight: bold;
@@ -778,18 +778,12 @@ body {
         &__list-link {
             width: 300px;
             padding: 1em;
-            line-height: 1.2;
+            line-height: 1;
         }
 
         &__list-item {
             height: min-content;
-
-            // width: 100vw;
-
-            a {
-                // min-width: 300px;
-                // max-width: 95vw;
-            }
+            padding: 0.5em;
         }
 
         &__dropdown {
@@ -797,7 +791,6 @@ body {
             display: block;
             opacity: 1;
             min-height: 100%;
-            // max-width: 300p;
             margin: 0 auto;
             box-shadow: none;
 

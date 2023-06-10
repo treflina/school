@@ -600,11 +600,12 @@ body {
   .nav__list-link {
     width: 300px;
     padding: 1em;
-    line-height: 1.2;
+    line-height: 1;
   }
   .nav__list-item {
     height: -moz-min-content;
     height: min-content;
+    padding: 0.5em;
   }
   .nav__dropdown {
     position: static;
