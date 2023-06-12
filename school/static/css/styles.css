@@ -638,6 +638,9 @@ body {
   .nav__dropdown-link {
     box-shadow: none;
   }
+  .header::before {
+    background-image: linear-gradient(rgba(32, 83, 117, 0.7), rgba(32, 83, 117, 0.7)), url("/static/img/squares2min.jpg");
+  }
   .posts {
     padding: 0 0 1em;
   }
@@ -652,6 +655,9 @@ body {
   }
   .posts__categories-list {
     justify-content: flex-end;
+  }
+  .footer__upper::before {
+    background-image: linear-gradient(rgba(32, 83, 117, 0.7), rgba(32, 83, 117, 0.7)), url("/static/img/squaresmin2.jpg");
   }
 }
 @media (max-width: 49.1em) {
