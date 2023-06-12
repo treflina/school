@@ -265,7 +265,7 @@ body {
   padding: 3em 0.5em;
 }
 .posts__box-heading {
-  padding: 2em 0.5em 0.5em;
+  padding: 2em 0.75em 0.5em;
 }
 .posts__cards {
   display: flex;
@@ -358,7 +358,7 @@ body {
   margin: 0.5em 0 1em;
 }
 .posts__main-heading--primary {
-  font-size: 2.8rem;
+  font-size: 2.3rem;
 }
 .posts__main-heading--secondary {
   font-size: 2.3rem;
@@ -403,8 +403,7 @@ body {
 }
 .posts__categories {
   display: flex;
-  width: 100%;
-  margin: 1em 0.5em 0;
+  margin: 1em 1em 0;
   padding-bottom: 0.5em;
   border-top: 1px solid rgba(0, 0, 0, 0.4);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
@@ -641,6 +640,9 @@ body {
   .posts__main--secondary {
     margin: 2rem;
   }
+  .posts__categories-list {
+    justify-content: flex-end;
+  }
 }
 @media (max-width: 49.1em) {
   .header__text {
@@ -688,12 +690,18 @@ body {
     padding: 1.5em 0.75em;
   }
 }
+.heading-secondary {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
 .events {
   background-color: #efefef;
-  padding: 2em 0.5em;
+  padding: 2em 1em;
   width: 100%;
 }
 .events__timeline {
+  margin-top: 2rem;
   border-top: 3px solid rgba(17, 43, 60, 0.3);
 }
 .events__list {
@@ -716,6 +724,13 @@ body {
   border-right: 2px dashed rgba(17, 43, 60, 0.3);
   top: 0;
 }
+.event__details-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
 .event__details-date {
   position: absolute;
   top: 38px;
@@ -725,24 +740,22 @@ body {
   width: max-content;
   margin: 0 auto 1rem;
   padding: 0.3em 0.6em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
   font-weight: bold;
 }
 .event__details-hour {
-  padding: 0 0.5em;
+  min-width: 65px;
+  padding: 0.2em 0.6em;
+  margin: 0 0.5em 0.3em;
   color: rgba(0, 0, 0, 0.7);
+  background-color: white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
   font-weight: bold;
-}
-.event__details-item {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 1rem;
 }
 
 @media (min-width: 62em) {
-  .heading-secondary {
-    text-align: left;
-    margin-bottom: 2rem;
+  .events__timeline {
+    margin-top: 4rem;
   }
   .events__list {
     flex-direction: row;
@@ -769,10 +782,4 @@ body {
 
 .bg-soft-warning {
   background-color: #f3a26b;
-}
-
-.card {
-  border: none;
-  margin-bottom: 24px;
-  box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
 }

@@ -328,7 +328,7 @@ body {
 
     &__box {
         &-heading {
-            padding: 2em .5em .5em;
+            padding: 2em .75em .5em;
         }
     }
 
@@ -449,7 +449,7 @@ body {
 
 
             &--primary {
-                font-size: 2.8rem;
+                font-size: 2.3rem;
             }
 
             &--secondary {
@@ -509,9 +509,7 @@ body {
 
     &__categories {
         display: flex;
-        width: 100%;
-        // max-width: 1100px;
-        margin: 1em .5em 0;
+        margin: 1em 1em 0;
         padding-bottom: .5em;
         border-top: 1px solid rgba(0, 0, 0, .4);
         border-bottom: 1px solid rgba(0, 0, 0, .4);
@@ -822,6 +820,12 @@ body {
                 margin: 2rem;
             }
         }
+
+        &__categories {
+            &-list {
+                justify-content: flex-end;
+            }
+        }
     }
 }
 
@@ -901,15 +905,19 @@ body {
 
 ////////////////////////////////////////
 .heading-secondary {
-    // text-align: center;
+text-align: left;
+margin-bottom: 2rem;
 }
+
+
 
 .events {
     background-color: #efefef;
-    padding: 2em .5em;
+    padding: 2em 1em;
     width: 100%;
 
     &__timeline {
+        margin-top: 2rem;
         border-top: 3px solid rgba(17, 43, 60, .3);
 
     }
@@ -937,6 +945,14 @@ body {
     }
 
     &__details {
+        &-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
         &-date {
             position: absolute;
             top: 38px;
@@ -946,21 +962,19 @@ body {
             margin: 0 auto 1rem;
             // border-radius: 4px;
             padding: .3em .6em;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .4);
             font-weight: bold;
         }
 
         &-hour {
             // display: inline-block;
-            padding: 0 .5em;
+            min-width: 65px;
+            padding: .2em .6em;
+            margin: 0 .5em .3em;
             color: rgba(0, 0, 0, .7);
+            background-color: white;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .4);
             font-weight: bold;
-        }
-
-        &-item {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 1rem;
         }
 
     }
@@ -968,13 +982,12 @@ body {
 
 @media (min-width: 62em) {
 
-    ///////////////////////////////////////////
-    .heading-secondary {
-        text-align: left;
-        margin-bottom: 2rem;
-    }
 
     .events {
+        &__timeline {
+            margin-top: 4rem;
+        }
+
         &__list {
             flex-direction: row;
         }
@@ -1006,11 +1019,4 @@ body {
 
 .bg-soft-warning {
     background-color: #f3a26b;
-}
-
-.card {
-    border: none;
-    margin-bottom: 24px;
-    -webkit-box-shadow: 0 0 13px 0 rgba(236, 236, 241, .44);
-    box-shadow: 0 0 13px 0 rgba(236, 236, 241, .44);
 }
