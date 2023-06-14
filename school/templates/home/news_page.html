@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load wagtailcore_tags wagtailimages_tags %}
+    {% load static %}
+</head>
+<body>
+<div class="news" id="news">
+    <h2 class="heading-secondary news__heading">Aktualności </h2>
+    <div class="news__accordion">
+        {% for block in page.accordion_content %}
+        {% include_block block %}
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,3 +1,12 @@
+import Handsontable from "handsontable/base";
+import { registerLanguageDictionary, plPL } from "handsontable/i18n";
+
+registerLanguageDictionary(plPL);
+
+const hot = new Handsontable(container, {
+    language: plPL.languageCode,
+});
+
 // navbar
 
 const navMobile = document.querySelector(".nav__list");
@@ -13,8 +22,8 @@ const showDropdown = function (event) {
         if (
             drp[i].previousElementSibling === targ ||
             drp[i].previousElementSibling.children[0] === targ
-
-        ) {console.log(drp[i].previousElementSibling.children[0]);
+        ) {
+            console.log(drp[i].previousElementSibling.children[0]);
             drp[i].classList.toggle("show");
         } else {
             drp[i].classList.remove("show");
@@ -25,7 +34,6 @@ const showDropdown = function (event) {
 window.addEventListener("click", showDropdown);
 
 if (!navBtn.classList.contains("is-active")) {
-
     // window.addEventListener("mouseover", console.log("hmm5"));
 }
 
@@ -37,8 +45,6 @@ const closeNav = () => {
 allNavItems.forEach((item) => {
     item.addEventListener("click", closeNav);
 });
-
-
 
 const handleNav = () => {
     navBtn.classList.toggle("is-active");
