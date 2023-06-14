@@ -1,12 +1,3 @@
-import Handsontable from "handsontable/base";
-import { registerLanguageDictionary, plPL } from "handsontable/i18n";
-
-registerLanguageDictionary(plPL);
-
-const hot = new Handsontable(container, {
-    language: plPL.languageCode,
-});
-
 // navbar
 
 const navMobile = document.querySelector(".nav__list");
