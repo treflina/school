@@ -132,8 +132,6 @@ STATICFILES_FINDERS = [
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR,  "static"),
-    os.path.join(PROJECT_DIR,  "public", "static"),
-    "/usr/home/piotrcwik/domains/luizaslychan.online/public_python/public/static"
 ]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
