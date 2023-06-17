@@ -62,3 +62,4 @@ class AccordionBlock(blocks.StructBlock):
         template = "home/accordion_block.html"
         icon = "placeholder"
         label = "Aktualność"
+        form_classname = 'person-block struct-block'
