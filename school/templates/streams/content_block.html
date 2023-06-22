@@ -1,0 +1,18 @@
+{% load wagtailcore_tags static %}
+<div class="content">
+    {% for block in self.content %}
+    {% if block.block_type == 'image' %}
+    <div class="content__img">
+        {% include_block block %}
+    </div>
+    {% elif block.block_type == 'table' %}
+    <div class="content__table">
+        {% include_block block %}
+    </div>
+    {% else %}
+    <div class="content__text">
+        {% include_block block %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>

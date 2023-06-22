@@ -5,7 +5,7 @@ try:
 except ImportError:
     pass
 
-DEBUG = False
+DEBUG = True
 
 with open(os.path.join(BASE_DIR, "secret.json")) as f:
     secret = json.loads(f.read())

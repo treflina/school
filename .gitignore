@@ -1,0 +1,57 @@
+/secret.json
+/package-lock.json
+.dockerignore
+# .gitignore
+gulpfile.js
+package.json
+Dockerfile
+# /src
+
+# Django project
+/media/*
+/static/
+django.log
+staticfiles
+*.sqlite3
+
+
+/home/migrations/*
+/search/migrations/*
+/streams/migrations/*
+/news/migrations/*
+!__init__.py
+
+# Python and others
+__pycache__
+*.pyc
+.DS_Store
+*.swp
+/venv/
+/tmp/
+/.vagrant/
+/Vagrantfile.local
+node_modules/
+/npm-debug.log
+/.idea/
+.vscode
+coverage
+.python-version
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg

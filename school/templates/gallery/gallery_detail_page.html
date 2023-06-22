@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/glightbox.min.css" />
+{% endblock %}
+
+{% block content %}
+{%include 'includes/navbar.html'%}
+
+{{ page.heading }}
+
+<div class="">
+    {% for i in page.gallery_images.all %}
+    {% image i.image width-300 as thumbimg %}
+    {% image i.image original as img %}
+
+    <a data-fslightbox="gallery" href="{{img.file.url}}" >
+        <span><img class="photogallery-image" src="{{thumbimg.url}}"/></span>
+    </a>
+    {% endfor %}
+</div>
+
+<div class="">
+    {% for i in page.gallery_images.all %}
+    {% image i.image width-300 as thumbimg %}
+    {% image i.image original as img %}
+
+    <!-- <a data-fslightbox="gallery" href="{{img.file.url}}">
+        <span><img class="photogallery-image" src="{{thumbimg.url}}" /></span>
+    </a> -->
+    <a href="{{img.file.url}}" class="glightbox"  data-description="<a href='{{img.file.url}}' download tabindex='3'>Pobierz</a>" data-desc-position="bottom">
+      <img src="{{thumbimg.url}}" alt="image" />
+    </a>
+    {% endfor %}
+</div>
+
+<script src="/static/js/glightbox.min.js"></script>
+<script src="/static/js/fslightbox.js"></script>
+<script src="/static/js/gallery.min.js"></script>
+<script type="text/javascript">
+
+    const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container">
+    <div class="gloader visible"></div>
+    <div class="goverlay"></div>
+    <div class="gcontainer">
+    <div id="glightbox-slider" class="gslider"></div>
+    <button class="gnext gbtn" tabindex="0" aria-label="Next" data-customattribute="example">{nextSVG}</button>
+    <button class="gprev gbtn" tabindex="1" aria-label="Previous">{prevSVG}</button>
+    <button class="gclose gbtn" tabindex="2" aria-label="Close">{closeSVG}</button>
+</div>
+</div>`;
+
+        let customSlideHTML = `<div class="gslide">
+    <div class="gslide-inner-content">
+        <div class="ginner-container">
+            <div class="gslide-media">
+            </div>
+            <div class="gslide-description">
+                <div class="gdesc-inner">
+                    <h4 class="gslide-title"></h4>
+                    <div class="gslide-desc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`;
+
+        const glightbox = GLightbox({
+            lightboxHTML: customLightboxHTML,
+            slideHTML: customSlideHTML,
+            skin: 'supercool'
+        });
+    
+</script>
+
+{%endblock content %}
