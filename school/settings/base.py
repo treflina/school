@@ -61,6 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = "school.urls"
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "pl-PL"
 
 LOCALE_PATHS = (
-    os.path.join(PROJECT_DIR, 'locale/'),
+     os.path.join(BASE_DIR, 'locale'),
 )
 
 TIME_ZONE = "UTC"

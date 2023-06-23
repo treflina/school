@@ -41,7 +41,7 @@ class GalleryDetailPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("heading"),
         MultipleImagesPanel(
-            "gallery_images", label="Gallery images", image_field_name="image"
+            "gallery_images", label="zdjęcie", image_field_name="image"
         ),
     ]
 
@@ -51,7 +51,7 @@ class GalleryImage(Orderable):
         GalleryDetailPage, on_delete=models.CASCADE, related_name="gallery_images"
     )
     image = models.ForeignKey(
-        "wagtailimages.Image", on_delete=models.CASCADE, related_name="+"
+        "wagtailimages.Image", on_delete=models.CASCADE, related_name="+", verbose_name=""
     )
 
     panels = [

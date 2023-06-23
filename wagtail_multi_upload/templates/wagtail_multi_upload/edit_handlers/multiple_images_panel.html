@@ -10,15 +10,16 @@
 {{ self.media }}
 
 <fieldset class="multiple_images_panel_uploader">
-    <legend>Uploader</legend>
+    <legend>Zbiorcze dodawanie zdjęć</legend>
     <div class="upload_area">
 
         <div class="drop-zone">
-            <!--
-            <p>{% trans "Drag and drop images into this area to upload immediately." %}</p>
-            -->
+
+            {% comment %} <p>{% trans "Drag and drop images into this area to upload immediately." %}</p> {% endcomment %}
+
             <p>{{ help_text }}</p>
             <div class="replace-file-input">
+                {% comment %} <button class="button bicolor icon icon-plus">{% trans "Choose from your computer" %}</button> {% endcomment %}
                 <button class="button bicolor icon icon-plus">{% trans "Choose from your computer" %}</button>
                 <input id="{{self.formset.prefix}}-fileupload" type="file" name="files[]"
                        data-url="{% url 'add_multiple_fix' %}"
