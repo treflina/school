@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+    "wagtail_multi_upload",
     "modelcluster",
     "taggit",
     "django.contrib.admin",
@@ -114,6 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = "pl-PL"
+
+LOCALE_PATHS = (
+    os.path.join(PROJECT_DIR, 'locale/'),
+)
 
 TIME_ZONE = "UTC"
 
