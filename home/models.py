@@ -1,39 +1,32 @@
-from datetime import date
+from wagtail.models import Page
 
-from django.db import models
-from django.http import Http404
-from django.shortcuts import render
-from modelcluster.fields import ParentalKey
-from wagtail import blocks
-from wagtail import blocks as wagtail_blocks
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
-from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.contrib.table_block.blocks import TableBlock
-from wagtail.fields import RichTextField, StreamField
-from wagtail.models import Collection, Orderable, Page
-
-from . import blocks
+from news.models import NewsCategory, NewsDetailPage
 
 
 class HomePage(Page):
     template = "home/home_page.html"
 
+    def get_context(self, request, *args, **kwargs):
+        """Adding posts to news section"""
+        context = super().get_context(request, *args, **kwargs)
+        # Get all posts
+
+        posts = NewsDetailPage.objects.live().public().order_by("-publish_date")
+        categories = NewsCategory.objects.all().order_by("id")
+
+        main_post = posts.filter(highlight=True).first()
+        if not main_post:
+            main_post = posts.first()
+
+        if request.GET.get("category", None):
+            category = request.GET.get("category")
+            posts = posts.filter(category_id=category)
+            context["active_category"] = categories.filter(id=category).first()
+
+        context["main_post"] = main_post
+        context["categories"] = categories
+        context["posts"] = [p for p in posts if p != main_post][:6]
+        return context
+
     class Meta:
         verbose_name = "Strona główna"
-
-
-class NewsPage(Page):
-    template = "home/news_page.html"
-
-    accordion_content = StreamField(
-        [
-            ("cards", blocks.AccordionBlock()),
-        ],
-        null=True,
-        blank=True,
-        use_json_field=True,
-        verbose_name="Aktualności",
-    )
-    content_panels = Page.content_panels + [
-        FieldPanel("accordion_content"),
-    ]

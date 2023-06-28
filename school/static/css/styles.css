@@ -140,6 +140,39 @@ body {
   max-height: min-content;
 }
 
+.breadcrumb {
+  padding: 0 0.75rem;
+}
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb__list-item {
+  color: #205375;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+.breadcrumb__list-item:hover {
+  text-decoration: underline;
+}
+.breadcrumb__list-item--active {
+  color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+}
+.breadcrumb__list-item--active:hover {
+  text-decoration: none;
+}
+.breadcrumb__list li:not(:last-child)::after {
+  display: inline-block;
+  margin: 0 0.5rem;
+  content: ">";
+  color: rgba(0, 0, 0, 0.6);
+}
+
 .header {
   position: relative;
   margin: auto;
@@ -293,7 +326,6 @@ body {
   flex-direction: column;
   width: 350px;
   margin: 5rem 2rem 2rem;
-  border-radius: 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   transition: transform 0.5s, box-shadow 0.3s;
 }
@@ -329,6 +361,13 @@ body {
 .posts__main-box--secondary {
   max-width: 600px;
   padding: 1.5em;
+}
+.posts__main-box ul, .posts__main-box ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1em;
+}
+.posts__main-box p {
+  margin-bottom: 1em;
 }
 .posts__main-link {
   display: inline-block;
@@ -376,23 +415,23 @@ body {
   font-weight: bold;
   letter-spacing: 1px;
 }
-.posts__main-category--1 {
+.posts__main-category--0 {
   background-color: #EFDAE0;
   color: #914F4C;
 }
-.posts__main-category--2 {
+.posts__main-category--1 {
   background-color: #DDE6ED;
   color: #465F73;
 }
-.posts__main-category--3 {
+.posts__main-category--2 {
   background-color: #E9FDDF;
   color: #088251;
 }
-.posts__main-category--4 {
+.posts__main-category--3 {
   background-color: #F5CFAE;
   color: #8A4C09;
 }
-.posts__main-category--5 {
+.posts__main-category--4 {
   background-color: #E3CAA5;
   color: #603601;
 }
@@ -422,12 +461,13 @@ body {
 }
 .posts__categories-link {
   margin-top: 0.5em;
+  margin-left: 0.25em;
   color: #205375;
   text-decoration: none;
   border-radius: 20px;
   transition: box-shadow 0.3s, background-color 0.3s, color 0.3s;
 }
-.posts__categories-link:hover, .posts__categories-link:focus, .posts__categories-link:active, .posts__categories-link--active {
+.posts__categories-link:hover, .posts__categories-link:focus, .posts__categories-link:active {
   box-shadow: 0px 0px 3px #205375;
 }
 .posts__categories-link--active {

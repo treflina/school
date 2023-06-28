@@ -3,7 +3,10 @@
 {% load static %}
 {% block content %}
 {%include 'includes/navbar.html'%}
+{%include 'includes/breadcrumb.html'%}
 
-{{self}}
+
+<h1>{{self.title}}</h1>
+
 
 {%endblock content %}

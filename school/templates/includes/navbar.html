@@ -47,10 +47,10 @@
             <li class="nav__list-item"><a href="#news" class="nav__list-link  menu-close">Aktualności</a></li>
             <li class="nav__list-item"><a href="#" class="nav__list-link  menu-close">Kontakt </a></li>
         </ul>
-        <form class="nav__search" action="" method="get">
+        <form class="nav__search" action="{% url 'search' %}" method="get">
             <label for="txtSearch" class="screenReaderOnly">Szukaj: </label>
-            <input id="txtSearch" type="text" placeholder="Wyszukaj" class="nav__search-input" />
-            <button id="btnSearch" type="submit" class="nav__search-btn"><img src="{% static '/img/search.svg' %}"
+            <input id="txtSearch" type="text" placeholder="Wyszukaj" class="nav__search-input" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}/>
+            <button id="btnSearch" value="Search" type="submit" class="nav__search-btn"><img src="{% static '/img/search.svg' %}"
                     alt="Szukaj" title="Szukaj"></button>
         </form>
         <button class="hamburger hamburger--spring" type="button">
@@ -58,3 +58,6 @@
             <span class="hamburger-text">Menu</span>
         </button>
     </nav>
+
+
+

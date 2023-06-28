@@ -6,14 +6,16 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-<h1>Search</h1>
+{% include 'includes/navbar.html' %}
 
-<form action="{% url 'search' %}" method="get">
+
+{% comment %} <form action="{% url 'search' %}" method="get">
     <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
     <input type="submit" value="Search" class="button">
-</form>
+</form> {% endcomment %}
 
 {% if search_results %}
+<h1>Znaleziono {{search_results|length}} wyników wyszukiwania z frazą {{ search_query }}:</h1>
 <ul>
     {% for result in search_results %}
     <li>
@@ -33,6 +35,6 @@
 <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
 {% endif %}
 {% elif search_query %}
-No results found
+<p>Nie odnaleziono wyników dla zadanego zapytania.</p>
 {% endif %}
 {% endblock %}

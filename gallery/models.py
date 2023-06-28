@@ -1,6 +1,6 @@
 from django.db import models
 from modelcluster.fields import ForeignKey, ParentalKey
-from wagtail.admin.panels import FieldPanel, MultipleChooserPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, MultipleChooserPanel
 from wagtail.fields import RichTextField
 from wagtail.images.models import Image
 from wagtail.models import Collection, Orderable, Page
@@ -40,10 +40,19 @@ class GalleryDetailPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("heading"),
-        MultipleImagesPanel(
-            "gallery_images", label="zdjęcie", image_field_name="image"
+        MultiFieldPanel(
+            [
+                MultipleImagesPanel(
+                    "gallery_images", label="", image_field_name="image"
+                ),
+            ],
+            heading="Zdjęcia",
         ),
     ]
+
+    class Meta:
+        verbose_name = "Galeria zdjęć"
+        verbose_name_plural = "Galerie zdjęć"
 
 
 class GalleryImage(Orderable):
@@ -51,9 +60,20 @@ class GalleryImage(Orderable):
         GalleryDetailPage, on_delete=models.CASCADE, related_name="gallery_images"
     )
     image = models.ForeignKey(
-        "wagtailimages.Image", on_delete=models.CASCADE, related_name="+", verbose_name=""
+        "wagtailimages.Image",
+        on_delete=models.CASCADE,
+        related_name="+",
+        verbose_name="Zdjęcie",
+    )
+    alt_attr = models.CharField(
+        blank=True,
+        max_length=255,
+        verbose_name="Opis alternatywny",
+        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
+        na celu umożliwienie przekazu treści osobom słabowidzącym."""
     )
 
     panels = [
         FieldPanel("image"),
+        FieldPanel("alt_attr")
     ]

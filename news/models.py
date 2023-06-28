@@ -1,6 +1,7 @@
+from datetime import datetime
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from django.utils.text import slugify
+from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from streams import blocks
 from wagtail.admin.panels import (
@@ -13,6 +14,7 @@ from wagtail.fields import RichTextField, StreamField
 
 # from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.models import Orderable, Page
+from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
 
@@ -20,11 +22,22 @@ from wagtail.snippets.models import register_snippet
 class NewsCategory(models.Model):
     """News category for a snippet."""
 
+    choices = (
+        (0, "różowy"),
+        (1, "niebieski"),
+        (2, "zielony"),
+        (3, "brązowy"),
+        (4, "pomarańczowy"),
+    )
     name = models.CharField(max_length=25, verbose_name="nazwa kategorii")
-    slug = models.SlugField(max_length=50)
+    # slug = models.SlugField(max_length=50)
+    color = models.IntegerField(
+        default=0, choices=choices, verbose_name="Kolor powiązany z kategorią"
+    )
 
     panels = [
         FieldPanel("name"),
+        FieldPanel("color"),
     ]
 
     class Meta:
@@ -32,9 +45,10 @@ class NewsCategory(models.Model):
         verbose_name_plural = "Kategorie"
         ordering = ["name"]
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name, allow_unicode=True)
-        super().save(self, *args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.name, allow_unicode=True)
+    #     super().save(self, *args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -44,10 +58,6 @@ class NewsIndexPage(Page):
     """News listing page model."""
 
     template = "news/news_index_page.html"
-
-    class Meta:  # noqa
-        verbose_name = "Wszystkie aktualności"
-        verbose_name_plural = "Wszystkie aktualności"
 
     @property
     def get_child_pages(self):
@@ -59,7 +69,7 @@ class NewsIndexPage(Page):
         context = super().get_context(request, *args, **kwargs)
         # Get all posts
         all_posts = (
-            NewsDetailPage.objects.live().public().order_by("-first_published_at")
+            NewsDetailPage.objects.live().public().order_by("-publish_date")
         )
 
         if request.GET.get("tag", None):
@@ -87,16 +97,22 @@ class NewsIndexPage(Page):
         context["categories"] = NewsCategory.objects.all()
         return context
 
+    class Meta:  # noqa
+        verbose_name = "Wszystkie aktualności"
+        verbose_name_plural = "Wszystkie aktualności"
+
 
 class NewsDetailPage(Page):
     """Detail page for news content."""
 
+    page_description = "Strona służąca zamieszczeniu nowego artykułu w Aktualnościach"
+
     subpage_types = []
     parent_page_types = ["news.NewsIndexPage"]
 
-    heading = models.CharField(
-        max_length=90, verbose_name="Nagłówek", blank=False, null=True
-    )
+    # heading = models.CharField(
+    #     max_length=90, verbose_name="Nagłówek", blank=False, null=True
+    # )
     category = models.ForeignKey(
         "news.NewsCategory",
         blank=False,
@@ -112,6 +128,13 @@ class NewsDetailPage(Page):
         related_name="+",
         on_delete=models.SET_NULL,
         verbose_name="Zdjęcie główne",
+    )
+    alt_attr = models.CharField(
+        blank=True,
+        max_length=255,
+        verbose_name="Opis alternatywny",
+        help_text="""Opis tekstowy zdjęcia głównego (najczęściej od 5 do 15 słów) mający
+        na celu umożliwienie przekazu treści osobom słabowidzącym.""",
     )
     main_text = RichTextField(
         blank=False,
@@ -144,9 +167,10 @@ class NewsDetailPage(Page):
     publish_date = models.DateField(
         blank=True,
         null=True,
+        default=now(),
         verbose_name="Data publikacji",
-        help_text="""Możesz zmienić datę, jeżeli pole pozostawisz puste,
-        w artykule pojawi się data pierwszej publikacji artykułu.""")
+        help_text="""Data publikacji wyświetlana na stronie.""",
+    )
     button_cta = models.ForeignKey(
         "wagtailcore.Page",
         null=True,
@@ -168,8 +192,9 @@ class NewsDetailPage(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
-                FieldPanel("heading"),
+                # FieldPanel("heading"),
                 FieldPanel("banner_image"),
+                FieldPanel("alt_attr"),
                 FieldPanel("main_text"),
                 FieldPanel("body"),
             ],
@@ -190,19 +215,33 @@ class NewsDetailPage(Page):
                     "gallery_images",
                     label="Zdjęcia",
                     chooser_field_name="image",
+                    help_text="Wybrane zdjęcia zostaną zamieszczone na końcu artykułu.",
                 ),
             ],
             heading="""Opcjonalnie: link do strony z galerią zdjęć lub mini galeria
-            pod artykułem""",
+            na końcu artykułu.""",
             help_text="""Możesz wybrać link do utworzonej wcześniej strony
             z galerią zdjęć lub zamieścić kilka zdjęć, które będą wyświetlone na końcu
             artykułu w postaci mini galerii""",
         ),
     ]
 
+    search_fields = Page.search_fields + [
+        index.SearchField('main_text'),
+        index.SearchField('body'),
+        # index.FilterField('date'),
+    ]
+
     class Meta:  # noqa
         verbose_name = "Artykuł"
         verbose_name_plural = "Artykuły"
+
+
+NewsDetailPage._meta.get_field(
+    "title"
+).help_text = """Jeśli tytuł strony nie jest
+unikalny, przejdź do zakładki Promocja SEO (powyżej) i zmień pole slug tak, żeby się nie
+powtarzało (np.dopisując kolejną cyfrę)"""
 
 
 class MiniGalleryImage(Orderable):
@@ -214,9 +253,14 @@ class MiniGalleryImage(Orderable):
         "wagtailimages.Image",
         on_delete=models.CASCADE,
         related_name="+",
-        verbose_name="zdjęcie",
+        verbose_name="Zdjęcie",
+    )
+    alt_attr = models.CharField(
+        blank=True,
+        max_length=255,
+        verbose_name="Opis alternatywny",
+        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
+        na celu umożliwienie przekazu treści osobom słabowidzącym.""",
     )
 
-    panels = [
-        FieldPanel("image"),
-    ]
+    panels = [FieldPanel("image"), FieldPanel("alt_attr")]

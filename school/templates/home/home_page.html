@@ -22,6 +22,19 @@
     </div>
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
+            {% image main_post.banner_image width-500 as img %}
+            <img src="{{img.url}}" alt="{{main_post.alt_attr}}" class="posts__main-img posts__main-img--primary">
+            <div class="posts__main-box posts__main-box--primary">
+                <div class="posts__main-details">
+                    <div class="posts__main-category posts__main-category--{{main_post.category.color}}">{{main_post.category}}</div>
+                    <p class="posts__main-details--date">{{main_post.publish_date|date}}</p>
+                </div>
+                <h2 class="posts__main-heading posts__main-heading--primary">{{main_post.title}}</h2>
+                {{main_post.main_text|richtext}}
+                <a href="#" class="posts__main-link posts__main-link--primary">Czytaj więcej...</a>
+            </div>
+        </div>
+               {% comment %} <div class="posts__main posts__main--primary">
             <img src="{% static '/img/nowy.jpg' %}" alt="" class="posts__main-img posts__main-img--primary">
             <div class="posts__main-box posts__main-box--primary">
                 <div class="posts__main-details">
@@ -36,7 +49,7 @@
                 </p>
                 <a href="#" class="posts__main-link posts__main-link--primary">Czytaj więcej...</a>
             </div>
-        </div>
+        </div> {% endcomment %}
     </div>
     <div class="events">
         <div class="wrapper">
@@ -96,14 +109,38 @@
         <div class="posts__categories">
             <p class="posts__categories-category posts__categories-category--filter">Filtruj: </p>
             <ul class="posts__categories-list" id="categories-list">
-                <li><a href="#" class="posts__categories-category posts__categories-link posts__categories-link--active">Wszystkie kategorie</a>
+                <li><a href="{%slugurl 'home'%}#news" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
                 </li>
-                <li><a href="#" class="posts__categories-category posts__categories-link">Ogłoszenia</a></li>
-                <li><a href="#" class="posts__categories-category posts__categories-link">Relacje</a></li>
+                {% for category in categories %}
+                <li><a href="{%slugurl 'home'%}?category={{category.id}}#news" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a></li>
+                {% comment %} <li><a href="#" class="posts__categories-category posts__categories-link">Relacje</a></li>
                 <li><a href="#" class="posts__categories-category posts__categories-link">Sport</a></li>
                 <li><a href="#" class="posts__categories-category posts__categories-link">Konkursy</a></li>
-                <li><a href="#" class="posts__categories-category posts__categories-link">Wycieczki</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Wycieczki</a></li> {% endcomment %}
+                {% endfor %}
             </ul>
+        </div>
+
+        <div class="posts__cards">
+            {% for post in posts %}
+            {% image post.banner_image width-500 as img %}
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    <img src="{{img.url}}" alt="{{post.alt_attr}}"
+                        class="posts__main-img posts__main-img--secondary">
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--{{post.category.color}}">{{post.category}}</div>
+                        <p class="posts__main-details--date">{% if post.publish_date%} {{post.publish_date}} {% else %} {{post.first_published_at | date }} {% endif %}</p>
+                    </div>
+                    <h3 class="posts__main-heading posts__main-heading--secondary">{{post.title}}
+                    </h3>
+                    {{post.main_text|richtext|truncatechars_html:250}}
+                    <a href="{% slugurl post.slug %}" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
         <div class="posts__cards">

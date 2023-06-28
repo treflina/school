@@ -168,12 +168,59 @@ body {
             }
         }
     }
+
+
 }
 
 .show {
     display: flex;
     opacity: 1;
     max-height: min-content;
+}
+
+.breadcrumb {
+    padding: 0 .75rem;
+
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &-item {
+            color: #205375;
+            // font-weight: bold;
+            font-size: 1.4rem;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+
+            &--active {
+                color: rgba(0, 0, 0, 0.6);
+                display: inline-block;
+
+                &:hover {
+                    text-decoration: none;
+                }
+
+            }
+        }
+
+
+
+        li:not(:last-child)::after {
+            display: inline-block;
+            margin: 0 .5rem;
+            content: ">";
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
 }
 
 
@@ -364,7 +411,7 @@ body {
             // height: auto;
             // max-height: 60rem;
             margin: 5rem 2rem 2rem;
-            border-radius: 20px;
+            // border-radius: 20px;
             box-shadow: 0 0 8px rgba(0, 0, 0, .5);
             // overflow: hidden;
             transition: transform .5s,
@@ -411,6 +458,14 @@ body {
                 padding: 1.5em;
             }
 
+
+            ul, ol {
+                padding-left: 1.5rem;
+                margin-bottom: 1em;
+            }
+            p {
+                margin-bottom: 1em;
+            }
         }
 
         &-link {
@@ -472,27 +527,27 @@ body {
             font-weight: bold;
             letter-spacing: 1px;
 
-            &--1 {
+            &--0 {
                 background-color: #EFDAE0;
                 color: #914F4C;
             }
 
-            &--2 {
+            &--1 {
                 background-color: #DDE6ED;
                 color: #465F73;
             }
 
-            &--3 {
+            &--2 {
                 background-color: #E9FDDF;
                 color: #088251;
             }
 
-            &--4 {
+            &--3 {
                 background-color: #F5CFAE;
                 color: #8A4C09;
             }
 
-            &--5 {
+            &--4 {
                 background-color: #E3CAA5;
                 color: #603601;
             }
@@ -531,6 +586,7 @@ body {
 
         &-link {
             margin-top: .5em;
+            margin-left: .25em;
             color: #205375;
             text-decoration: none;
             border-radius: 20px;
@@ -539,8 +595,7 @@ body {
 
             &:hover,
             &:focus,
-            &:active,
-            &--active {
+            &:active {
                 box-shadow: 0px 0px 3px #205375;
             }
 
@@ -548,6 +603,7 @@ body {
                 background-color: #205375;
                 color: white;
             }
+
         }
 
         &-category {
@@ -814,8 +870,8 @@ body {
 
     .header {
         &::before {
-               background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
-               url("/static/img/squares2min.jpg");
+            background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
+                url("/static/img/squares2min.jpg");
         }
     }
 
@@ -844,11 +900,11 @@ body {
         }
     }
 
-    .footer{
+    .footer {
         &__upper {
             &::before {
-                  background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
-                  url("/static/img/squaresmin2.jpg");
+                background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
+                    url("/static/img/squaresmin2.jpg");
             }
         }
     }
