@@ -123,11 +123,17 @@
 
         <div class="posts__cards">
             {% for post in posts %}
-            {% image post.banner_image width-500 as img %}
+
+
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
-                    <img src="{{img.url}}" alt="{{post.alt_attr}}"
-                        class="posts__main-img posts__main-img--secondary">
+                    {% if post.banner_image %}
+                        {% image post.banner_image width-500 as img %}
+                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary">
+                    {% else %}
+                    {% image post.image width-500 as img %}
+                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary">
+                        {% endif %}
                 </div>
                 <div class="posts__main-box posts__main-box--secondary">
                     <div class="posts__main-details">
@@ -141,9 +147,7 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
-
-        <div class="posts__cards">
+     
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
                     <img src="{% static '/img/painter.jpg' %}" alt=""
@@ -167,12 +171,12 @@
                     <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
                 </div>
             </div>
-            <div class="posts__main posts__main--secondary" data-aos="fade-up">
-                <div class="img-wrapper">
+            <!-- <div class="posts__main posts__main--secondary" data-aos="fade-up"> -->
+                <!-- <div class="img-wrapper">
                     <img src="{% static '/img/Budynek1.jpg' %}" alt=""
                         class="posts__main-img posts__main-img--secondary">
-                </div>
-                <div class="posts__main-box posts__main-box--secondary">
+                </div> -->
+                <!-- <div class="posts__main-box posts__main-box--secondary">
                     <div class="posts__main-details">
                         <div class="posts__main-category posts__main-category--4">Konkurs</div>
                         <p class="posts__main-details--date">2 września 2023</p>
@@ -184,8 +188,8 @@
                         ile ma obecnie. Rozwiązaniem zagadki będzie...
                     </p>
                     <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
                     <img src="{% static '/img/final.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary">

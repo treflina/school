@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from news.models import NewsCategory
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, FieldRowPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
@@ -92,5 +92,13 @@ class GalleryImage(Orderable):
         help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
         na celu umożliwienie przekazu treści osobom słabowidzącym.""",
     )
+    highlight = models.BooleanField(
+        default=False,
+        verbose_name="Zdjęcie główne",
+        help_text="""Wybrane zdjęcie będzie wyświetlone w wizytówce galerii""",
+    )
 
-    panels = [FieldPanel("image"), FieldPanel("alt_attr")]
+    panels = [
+        FieldRowPanel([FieldPanel("image"), FieldPanel("highlight")]),
+        FieldPanel("alt_attr")
+        ]
