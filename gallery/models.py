@@ -1,6 +1,9 @@
 from django.db import models
+from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
+from news.models import NewsCategory
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
@@ -32,15 +35,31 @@ class GalleryDetailPage(Page):
     parent_page_types = ["gallery.GalleryIndexPage"]
     # password_required_template = "gallery/password_required.html"
 
-    description = models.TextField(
+    main_text = RichTextField(
         blank=True,
         null=True,
         verbose_name="Opis galerii",
         help_text="Opcjonalny dodatkowy opis galerii.",
     )
 
+    publish_date = models.DateField(
+        blank=True,
+        null=True,
+        default=now,
+        verbose_name="Data publikacji",
+        help_text="""Data publikacji wyświetlana na stronie.""",
+    )
+
+    category = models.ForeignKey(
+        NewsCategory,
+        null=True,
+        on_delete=models.SET_NULL,
+        default=NewsCategory.get_default_id,
+    )
+
     content_panels = Page.content_panels + [
-        FieldPanel("description"),
+        FieldPanel("publish_date"),
+        FieldPanel("main_text"),
         MultiFieldPanel(
             [
                 MultipleImagesPanel(

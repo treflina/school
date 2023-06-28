@@ -23,8 +23,14 @@ body {
 .heading-primary {
   font-family: "Rubik", sans-serif;
   margin: 4rem 0;
+  line-height: 1.3;
 }
 
+@media (max-width: 500px) {
+  .heading-primary {
+    margin: 3rem 0;
+  }
+}
 .screenReaderOnly {
   border: 0;
   clip: rect(0 0 0 0);
@@ -374,7 +380,8 @@ body {
   max-width: 600px;
   padding: 1.5em;
 }
-.posts__main-box ul, .posts__main-box ol {
+.posts__main-box ul,
+.posts__main-box ol {
   padding-left: 1.5rem;
   margin-bottom: 1em;
 }
@@ -1002,4 +1009,18 @@ body {
 }
 .gallery__list-item img:hover {
   transform: scale(1.15);
+}
+
+@media (max-width: 992px) {
+  .gallery__list {
+    justify-content: center;
+  }
+}
+@media (max-width: 600px) {
+  .gallery__list-item {
+    flex-basis: 350px;
+  }
+  .gallery__list-item img {
+    height: auto;
+  }
 }

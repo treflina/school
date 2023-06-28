@@ -48,6 +48,13 @@ class NewsCategory(models.Model):
     #     if not self.slug:
     #         self.slug = slugify(self.name, allow_unicode=True)
     #     super().save(self, *args, **kwargs)
+    @classmethod
+    def get_default_id(cls):
+        category, created = cls.objects.get_or_create(
+            name='Galeria',
+            defaults=dict(color=3),
+        )
+        return category.id
 
     def __str__(self):
         return self.name

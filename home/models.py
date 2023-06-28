@@ -1,6 +1,9 @@
-from wagtail.models import Page
+from itertools import chain
+from operator import attrgetter
 
+from gallery.models import GalleryDetailPage
 from news.models import NewsCategory, NewsDetailPage
+from wagtail.models import Page
 
 
 class HomePage(Page):
@@ -11,12 +14,21 @@ class HomePage(Page):
         context = super().get_context(request, *args, **kwargs)
         # Get all posts
 
-        posts = NewsDetailPage.objects.live().public().order_by("-publish_date")
-        categories = NewsCategory.objects.all().order_by("id")
-
-        main_post = posts.filter(highlight=True).first()
+        news_list = NewsDetailPage.objects.live().public().order_by("-publish_date")
+        main_post = news_list.filter(highlight=True).first()
         if not main_post:
-            main_post = posts.first()
+            main_post = news_list.first()
+
+        galleries_list = (
+            GalleryDetailPage.objects.live().public().order_by("-publish_date")
+        )
+
+        posts = sorted(
+            chain(news_list, galleries_list),
+            key=attrgetter("publish_date"),
+            reverse=True,
+        )
+        categories = NewsCategory.objects.all().order_by("id")
 
         if request.GET.get("category", None):
             category = request.GET.get("category")
