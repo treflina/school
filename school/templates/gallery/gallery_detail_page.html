@@ -1,48 +1,27 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load static %}
-{% block extra_css %}
-<link rel="stylesheet" href="/static/css/glightbox.min.css" />
-{% endblock %}
-
 {% block content %}
 {%include 'includes/navbar.html'%}
-
-{{ page.heading }}
-
-<div class="">
-    {% for i in page.gallery_images.all %}
-    {% image i.image width-300 as thumbimg %}
-    {% image i.image original as img %}
-
-    <a data-fslightbox="gallery" href="{{img.file.url}}" >
-        <span><img class="photogallery-image" src="{{thumbimg.url}}"/></span>
-    </a>
-    {% endfor %}
+<main class="wrapper">
+    {%include 'includes/breadcrumb.html'%}
+    <h1 class="heading-primary">{{ page.title }}</h1>
+    <p>{{page.description}}</p>
+    <div class="gallery">
+        <ul class="gallery__list">
+            {% for i in page.gallery_images.all %}
+            {% image i.image width-300 as thumbimg %}
+            {% image i.image original as img %}
+            <li class="gallery__list-item">
+                <a data-fslightbox="gallery" href="{{img.file.url}}">
+                    <img class="gallery-image" src="{{thumbimg.url}}" alt="Podgląd zdjęcia {{img}}"/>
+                    <span class="screenReaderOnly">Link do powiększonego zdjęcia</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</main>
 </div>
-
-<div class="">
-    {% for i in page.gallery_images.all %}
-    {% image i.image width-300 as thumbimg %}
-    {% image i.image original as img %}
-
-    <!-- <a data-fslightbox="gallery" href="{{img.file.url}}">
-        <span><img class="photogallery-image" src="{{thumbimg.url}}" /></span>
-    </a> -->
-    <a href="{{img.file.url}}" class="glightbox" >
-      <img src="{{thumbimg.url}}" alt="image" />
-    </a>
-    {% endfor %}
-</div>
-
-<script src="/static/js/glightbox.min.js"></script>
 <script src="/static/js/fslightbox.js"></script>
-<script src="/static/js/gallery.min.js"></script>
-<script type="text/javascript">
-
-
-        const lightbox = GLightbox({});
-
-</script>
-
 {%endblock content %}

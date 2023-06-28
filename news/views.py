@@ -1,16 +1,12 @@
-from django.shortcuts import render
-from generic_chooser.views import ModelChooserViewSet
-from wagtail.admin.viewsets.chooser import ChooserViewSet
 from wagtail.images.views.chooser import (
+    # BaseImageChooseView,
     ImageChooseResultsView,
     ImageChooserViewSet,
     ImageChooseView,
-    BaseImageChooseView
 )
 
 
-
-class GalleryChooseView(ImageChooseView, BaseImageChooseView):
+class GalleryChooseView(ImageChooseView):
     per_page = 30
 
 

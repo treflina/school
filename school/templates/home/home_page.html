@@ -16,7 +16,7 @@
 </header>
 <main class="main">
     <div class="header__links">
-        <a href="#" class="header__links-link"><img src="{% static '/img/camera.svg' %}" alt="" aria-hidden="true"> <span>Galeria zdjęć</span></a>
+        <a href="{% slugurl 'galeria1' %}" class="header__links-link"><img src="{% static '/img/camera.svg' %}" alt="" aria-hidden="true"> <span>Galeria zdjęć</span></a>
         <a href="https://adfs.eszkola.opolskie.pl/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fcufs.eszkola.opolskie.pl%3a443%2fturawa%2fAccount%2fLogOn&wctx=rm%3d0%26id%3deSzkola%26ru%3d%252fturawa%252fFS%252fLS%253fwa%253dwsignin1.0%2526wtrealm%253dhttps%25253A%25252F%25252Fuonetplus.eszkola.opolskie.pl%25252Fturawa%25252FLoginEndpoint.aspx%2526wctx%253dhttps%25253A%25252F%25252Fuonetplus.eszkola.opolskie.pl%25252Fturawa%25252FLoginEndpoint.aspx&wct=2023-06-08T14%3a48%3a22Z" class="header__links-link"><img src="{% static '/img/logosz2.jpg' %}" alt="" aria-hidden="true"> Opolska eSzkoła</a>
         <a href="#" class="header__links-link"><img src="{% static '/img/calendar.svg' %}" alt="" aria-hidden="true"> Rekrutacja</a>
     </div>
@@ -31,7 +31,7 @@
                 </div>
                 <h2 class="posts__main-heading posts__main-heading--primary">{{main_post.title}}</h2>
                 {{main_post.main_text|richtext}}
-                <a href="#" class="posts__main-link posts__main-link--primary">Czytaj więcej...</a>
+                <a href="{% slugurl main_post.slug %}" class="posts__main-link posts__main-link--primary">Czytaj więcej...</a>
             </div>
         </div>
                {% comment %} <div class="posts__main posts__main--primary">

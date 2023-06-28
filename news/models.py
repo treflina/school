@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.timezone import now
@@ -167,7 +166,7 @@ class NewsDetailPage(Page):
     publish_date = models.DateField(
         blank=True,
         null=True,
-        default=now(),
+        default=now,
         verbose_name="Data publikacji",
         help_text="""Data publikacji wyświetlana na stronie.""",
     )
@@ -180,15 +179,6 @@ class NewsDetailPage(Page):
         verbose_name="Link do galerii zdjęć",
     )
 
-    #     accordion_content = StreamField(
-    #     [
-    #         ("cards", blocks.AccordionBlock()),
-    #     ],
-    #     null=True,
-    #     blank=True,
-    #     use_json_field=True,
-    #     verbose_name="Aktualności"
-    # )
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -237,13 +227,6 @@ class NewsDetailPage(Page):
         verbose_name_plural = "Artykuły"
 
 
-NewsDetailPage._meta.get_field(
-    "title"
-).help_text = """Jeśli tytuł strony nie jest
-unikalny, przejdź do zakładki Promocja SEO (powyżej) i zmień pole slug tak, żeby się nie
-powtarzało (np.dopisując kolejną cyfrę)"""
-
-
 class MiniGalleryImage(Orderable):
     page = ParentalKey(
         NewsDetailPage, on_delete=models.CASCADE, related_name="gallery_images"
@@ -264,3 +247,10 @@ class MiniGalleryImage(Orderable):
     )
 
     panels = [FieldPanel("image"), FieldPanel("alt_attr")]
+
+
+NewsDetailPage._meta.get_field(
+    "title"
+).help_text = """Jeśli tytuł strony nie jest
+unikalny, przejdź do zakładki Promocja SEO (powyżej) i zmień pole slug tak, żeby się nie
+powtarzało (np.dopisując kolejną cyfrę)"""

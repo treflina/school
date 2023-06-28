@@ -1,7 +1,8 @@
 {% load static wagtailcore_tags %}
+
 <nav class="nav">
         <ul class="nav__list">
-            <li class="nav__list-item"><a href="#" class="nav__list-link  menu-close"> Strona główna</a></li>
+            <li class="nav__list-item"><a href="{% slugurl 'home' %}" class="nav__list-link  menu-close"> Strona główna</a></li>
             <li class="nav__list-item">
                 <a href="#" class="nav__list-link"> O szkole<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon"></a>
                 <ul class="nav__dropdown">
@@ -58,6 +59,7 @@
             <span class="hamburger-text">Menu</span>
         </button>
     </nav>
+    <div class="nav__line"></div>
 
 
 

@@ -1,9 +1,7 @@
 from django.db import models
-from modelcluster.fields import ForeignKey, ParentalKey
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, MultipleChooserPanel
-from wagtail.fields import RichTextField
-from wagtail.images.models import Image
-from wagtail.models import Collection, Orderable, Page
+from modelcluster.fields import ParentalKey
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.models import Orderable, Page
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
@@ -34,12 +32,15 @@ class GalleryDetailPage(Page):
     parent_page_types = ["gallery.GalleryIndexPage"]
     # password_required_template = "gallery/password_required.html"
 
-    heading = models.CharField(
-        max_length=255, blank=True, null=True, verbose_name="Nazwa galerii"
+    description = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Opis galerii",
+        help_text="Opcjonalny dodatkowy opis galerii.",
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel("heading"),
+        FieldPanel("description"),
         MultiFieldPanel(
             [
                 MultipleImagesPanel(
@@ -63,17 +64,14 @@ class GalleryImage(Orderable):
         "wagtailimages.Image",
         on_delete=models.CASCADE,
         related_name="+",
-        verbose_name="Zdjęcie",
+        verbose_name="",
     )
     alt_attr = models.CharField(
         blank=True,
         max_length=255,
         verbose_name="Opis alternatywny",
         help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
-        na celu umożliwienie przekazu treści osobom słabowidzącym."""
+        na celu umożliwienie przekazu treści osobom słabowidzącym.""",
     )
 
-    panels = [
-        FieldPanel("image"),
-        FieldPanel("alt_attr")
-    ]
+    panels = [FieldPanel("image"), FieldPanel("alt_attr")]
