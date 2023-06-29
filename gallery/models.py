@@ -51,7 +51,7 @@ class GalleryDetailPage(Page):
     )
 
     category = models.ForeignKey(
-        NewsCategory,
+        "news.NewsCategory",
         null=True,
         on_delete=models.SET_NULL,
         default=NewsCategory.get_default_id,

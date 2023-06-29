@@ -23,11 +23,12 @@ class HomePage(Page):
             GalleryDetailPage.objects.live().public().order_by("-publish_date")
         )
         for gallery in galleries_list:
-            if gallery.gallery_images.filter(highlight=True)[0]:
+            if gallery.gallery_images.filter(highlight=True).first():
                 gallery.banner_image = gallery.gallery_images \
                     .filter(highlight=True)[0].image
             else:
-                gallery.banner_image = gallery.gallery_images.all()[0].image
+                if gallery.gallery_images.all():
+                    gallery.banner_image = gallery.gallery_images.all()[0].image
 
         posts = sorted(
             chain(news_list, galleries_list),
