@@ -295,6 +295,7 @@ body {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 .main {
@@ -711,7 +712,7 @@ body {
     margin: 5rem 0 2rem;
   }
   .posts__main--secondary {
-    margin: 2rem;
+    margin: 2rem 0;
   }
   .posts__categories-list {
     justify-content: flex-end;
