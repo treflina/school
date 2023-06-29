@@ -31,7 +31,7 @@ class HomePage(Page):
                 if gallery.gallery_images.all():
                     gallery.banner_image = gallery.gallery_images.all()[0].image
 
-        posts = chain(news_list, galleries_list)
+        posts = list(chain(news_list, galleries_list))
             # key=attrgetter("publish_date"),
             # reverse=True,
 
