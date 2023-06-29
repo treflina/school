@@ -22,6 +22,7 @@ class HomePage(Page):
         galleries_list = (
             GalleryDetailPage.objects.live().public().order_by("-publish_date")
         )
+
         for gallery in galleries_list:
             if gallery.gallery_images.filter(highlight=True).first():
                 gallery.banner_image = gallery.gallery_images \
@@ -30,11 +31,11 @@ class HomePage(Page):
                 if gallery.gallery_images.all():
                     gallery.banner_image = gallery.gallery_images.all()[0].image
 
-        posts = sorted(
-            chain(news_list, galleries_list),
-            key=attrgetter("publish_date"),
-            reverse=True,
-        )
+        posts = chain(news_list, galleries_list)
+            # key=attrgetter("publish_date"),
+            # reverse=True,
+
+        print(posts)
         categories = NewsCategory.objects.all().order_by("id")
 
         if request.GET.get("category", None):
