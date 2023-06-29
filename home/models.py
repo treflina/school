@@ -25,22 +25,24 @@ class HomePage(Page):
 
         for gallery in galleries_list:
             if gallery.gallery_images.filter(highlight=True).first():
-                gallery.banner_image = gallery.gallery_images \
-                    .filter(highlight=True)[0].image
+                gallery.banner_image = gallery.gallery_images.filter(highlight=True)[
+                    0
+                ].image
             else:
                 if gallery.gallery_images.all():
                     gallery.banner_image = gallery.gallery_images.all()[0].image
 
-        posts = list(chain(news_list, galleries_list))
-            # key=attrgetter("publish_date"),
-            # reverse=True,
+        posts = sorted(
+            chain(news_list, galleries_list),
+            key=attrgetter("publish_date"),
+            reverse=True,
+        )
 
-        print(posts)
         categories = NewsCategory.objects.all().order_by("id")
 
         if request.GET.get("category", None):
             category = request.GET.get("category")
-            posts = posts.filter(category_id=category)
+            posts = list(filter(lambda x: x.category_id == int(category), posts))
             context["active_category"] = categories.filter(id=category).first()
 
         context["main_post"] = main_post
