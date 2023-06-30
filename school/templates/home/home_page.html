@@ -105,7 +105,7 @@
     </div>
 
     <div class="posts__box wrapper" id="news">
-        <h2 class="posts__box-heading heading-secondary"> Aktualności</h2>
+        <h2 class="posts__box-heading heading-secondary">Wszystkie wpisy</h2>
         <div class="posts__categories">
             <p class="posts__categories-category posts__categories-category--filter">Filtruj: </p>
             <ul class="posts__categories-list" id="categories-list">
@@ -143,11 +143,15 @@
                     <h3 class="posts__main-heading posts__main-heading--secondary">{{post.title}}
                     </h3>
                     {{post.main_text|richtext|truncatechars_html:250}}
+                    {% if post.page_type == "gallery" %}
+                    <a href="{% slugurl post.slug %}" class="posts__main-link posts__main-link--secondary">Przejdź do galerii</a>
+                    {% else %}
                     <a href="{% slugurl post.slug %}" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
-     
+
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
                     <img src="{% static '/img/painter.jpg' %}" alt=""

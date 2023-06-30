@@ -83,7 +83,7 @@ class NewsIndexPage(Page):
             all_posts = all_posts.filter(tags__slug__in=[tags])
 
         # Paginate all posts by 2 per page
-        paginator = Paginator(all_posts, 2)
+        paginator = Paginator(all_posts, 5)
         # Try to get the ?page=x value
         page = request.GET.get("page")
         try:

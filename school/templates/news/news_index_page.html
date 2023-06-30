@@ -3,9 +3,52 @@
 {% load static %}
 {% block content %}
 {%include 'includes/navbar.html'%}
-
-{% for category in categories %}
-{{category}} - {{category.slug}}
-{% endfor %}
+<main class="wrapper">
+    <!-- {%include 'includes/breadcrumb.html'%} -->
+    <section class="allnews">
+        <h1 class="heading-primary">Wszystkie aktualności</h1>
+        <div class="posts__categories">
+            <p class="posts__categories-category posts__categories-category--filter">Filtruj: </p>
+            <ul class="posts__categories-list" id="categories-list">
+                <li><a href="{%slugurl 'home'%}#news" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
+                </li>
+                {% for category in categories %}
+                <li><a href="{%slugurl 'home'%}?category={{category.id}}#news" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a>
+                </li>
+                {% comment %} <li><a href="#" class="posts__categories-category posts__categories-link">Relacje</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Sport</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Konkursy</a></li>
+                <li><a href="#" class="posts__categories-category posts__categories-link">Wycieczki</a></li> {% endcomment %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="posts__cards">
+            {% for post in posts %}
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    {% if post.banner_image %}
+                    {% image post.banner_image width-500 as img %}
+                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary">
+                    {% else %}
+                    {% image post.image width-500 as img %}
+                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary">
+                    {% endif %}
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <div class="posts__main-details">
+                        <div class="posts__main-category posts__main-category--{{post.category.color}}">
+                            {{post.category}}</div>
+                        <p class="posts__main-details--date">{% if post.publish_date%} {{post.publish_date}} {% else %}
+                            {{post.first_published_at | date }} {% endif %}</p>
+                    </div>
+                    <h2 class="posts__main-heading">{{post.title}}</h2>
+                    <!-- {{post.main_text|richtext|truncatechars_html:250}}
+            <a href="{% slugurl post.slug %}" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a> -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
 
 {%endblock content %}

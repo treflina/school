@@ -24,6 +24,7 @@ class HomePage(Page):
         )
 
         for gallery in galleries_list:
+            gallery.page_type = "gallery"
             if gallery.gallery_images.filter(highlight=True).first():
                 gallery.banner_image = gallery.gallery_images.filter(highlight=True)[
                     0
@@ -37,6 +38,8 @@ class HomePage(Page):
             key=attrgetter("publish_date"),
             reverse=True,
         )
+
+        print(posts[0].__dict__)
 
         categories = NewsCategory.objects.all().order_by("id")
 
