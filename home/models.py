@@ -39,8 +39,6 @@ class HomePage(Page):
             reverse=True,
         )
 
-        print(posts[0].__dict__)
-
         categories = NewsCategory.objects.all().order_by("id")
 
         if request.GET.get("category", None):

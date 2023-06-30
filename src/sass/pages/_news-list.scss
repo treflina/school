@@ -1,0 +1,31 @@
+@use 'abstracts'as *;
+.allnews {
+    .posts {
+        &__categories {
+            border: none;
+        }
+
+        &__cards {
+            padding: 5rem 0 0;
+        }
+
+        &__main {
+            &-details {
+                position: absolute;
+                top: 5px;
+                transform: translateX(-50%);
+                left: 50%;
+            }
+
+            &--secondary {
+                margin: 0;
+            }
+
+            &-heading {
+                font-size: 1.7rem;
+                margin: 0;
+            }
+        }
+
+    }
+}

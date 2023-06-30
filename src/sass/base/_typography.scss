@@ -1,0 +1,20 @@
+@use 'abstracts' as *;
+
+.heading-primary {
+    font-family: 'Rubik', sans-serif;
+    font-size: 3rem;
+    margin: 4rem 0 6rem;
+    line-height: 1.3;
+
+}
+
+.heading-secondary {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+@include media(xsm) {
+    .heading-primary {
+        margin: 3rem 0;
+    }
+}

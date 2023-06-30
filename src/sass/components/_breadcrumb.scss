@@ -1,0 +1,45 @@
+.breadcrumb {
+    margin: 2em 0;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &-item {
+            color: #205375;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+
+            &--active {
+                color: rgba(0, 0, 0, 0.9);
+                font-weight: normal;
+                font-size: 1.5rem;
+                // display: inline-block;
+
+                &:hover {
+                    text-decoration: none;
+                }
+
+            }
+        }
+
+
+
+        li:not(:last-child)::after {
+            display: inline-block;
+            margin: 0 .5rem;
+            content: "/";
+            color: rgba(0, 0, 0, 0.8);
+        }
+    }
+}

@@ -1,0 +1,54 @@
+@use 'abstracts'as *;
+
+.gallery {
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+        margin: 2em 0;
+
+        &-item {
+            flex-basis: 300px;
+            list-style: none;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                object-position: center;
+                vertical-align: middle;
+                transform: scale(1);
+                transition: transform .7s;
+
+                &:hover {
+                    transform: scale(1.15);
+                }
+            }
+        }
+    }
+}
+
+@include media(l) {
+    .gallery {
+        &__list {
+            justify-content: center;
+        }
+    }
+}
+
+@include media(sm) {
+    .gallery {
+        &__list {
+
+            &-item {
+                flex-basis: 350px;
+
+                img {
+                    height: auto;
+                }
+            }
+        }
+    }
+}

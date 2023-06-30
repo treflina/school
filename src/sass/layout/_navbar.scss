@@ -1,0 +1,235 @@
+@use 'abstracts'as *;
+.nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .4);
+
+
+    &__list {
+        display: inline-flex;
+        // justify-content: flex-start;
+        // height: 90px;
+        // align-items: center;
+        list-style: none;
+        // margin: 0 auto;
+        //  border: 5px solid red;
+
+
+        &-item {
+            position: relative;
+            display: block;
+            height: 90px;
+
+        }
+
+        &-icon {
+            margin-bottom: -5px;
+            pointer-events: none;
+        }
+
+        &-link {
+            display: inline-block;
+            padding: 0 1em;
+            line-height: 90px;
+            text-decoration: none;
+            color: black;
+            // text-transform: uppercase;
+            font-size: 1.8rem;
+            font-weight: bold;
+
+            &:hover,
+            &:focus {
+                background-color: #EFEFEF;
+            }
+        }
+
+
+    }
+
+    &__dropdown {
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        top: 90px;
+        width: 300px;
+        max-width: 100vw;
+        background-color: white;
+        box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+        list-style: none;
+        z-index: 10;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+
+        &-link {
+            display: inline-block;
+            padding: .75em;
+            width: 100%;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+            text-decoration: none;
+            color: black;
+            transition: background-color .3s;
+
+
+
+            &:hover,
+            &:focus {
+                background-color: rgba(246, 107, 14, .8);
+            }
+        }
+    }
+}
+
+.nav__search {
+    display: flex;
+    width: 30rem;
+    margin-left: auto;
+    margin-right: 1em;
+    padding: .5em 0 .5em 0;
+
+    &-input,
+    &-btn {
+        border: 1px solid rgba(32, 83, 117, .6);
+        font-size: inherit;
+
+    }
+
+    &-input {
+        flex-grow: 2;
+        width: 50vw;
+        padding: .25em .5em .25em .75em;
+        border-radius: 15px 0 0 15px;
+
+        &:focus {
+            outline: none;
+            border: 2px solid rgb(17, 43, 60);
+            background-color: #EFEFEF;
+        }
+    }
+
+    &-btn {
+        padding: .1em .5em .1em .25em;
+        background-color: rgb(32, 83, 117);
+        border-radius: 0 15px 15px 0;
+        cursor: pointer;
+        transition: background-color .3s, transform .3s;
+
+        &:hover,
+        &:focus {
+            background-color: rgba(17, 43, 60, .6);
+        }
+
+        &:active {
+            img {
+                transform: scale(.9);
+            }
+        }
+    }
+}
+
+.hamburger {
+    display: none;
+}
+
+.show {
+    display: flex;
+    opacity: 1;
+    max-height: min-content;
+}
+
+@include media(l) {
+    .hamburger {
+        display: block;
+        position: relative;
+        // margin-left: auto;
+        margin-right: 1rem;
+        padding-bottom: 0;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        opacity: 1;
+        z-index: 500;
+
+        &-inner,
+        &-inner::before,
+        &-inner::after {
+            z-index: 500;
+        }
+
+        &-text {
+            display: block;
+            color: black;
+        }
+    }
+
+    .nav {
+        flex-wrap: wrap-reverse;
+        justify-content: flex-end;
+        max-width: 100%;
+        min-height: 6.6rem;
+
+
+        &__search {
+            width: min-content;
+            max-width: 300px;
+            margin-right: .5em;
+            margin: 0 auto;
+        }
+
+
+        &__list {
+            display: none;
+
+
+            &--active {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                // width: 100%;
+                width: 100vw;
+                display: block;
+                box-shadow: none;
+                margin-top: 64px;
+                padding: 0;
+                padding-bottom: 90px;
+                padding-top: 30px;
+                text-align: center;
+                overflow-y: scroll;
+                // scroll-padding-top: 90px;
+                background-color: rgba(255, 255, 255, 1);
+                z-index: 9;
+            }
+
+        }
+
+        &__list-link {
+            width: 300px;
+            padding: 1em;
+            line-height: 1;
+        }
+
+        &__list-item {
+            height: min-content;
+            padding: 0.5em;
+        }
+
+        &__dropdown {
+            position: static;
+            display: block;
+            opacity: 1;
+            min-height: 100%;
+            margin: 0 auto;
+            box-shadow: none;
+
+            &-link {
+                box-shadow: none;
+            }
+        }
+    }
+}
