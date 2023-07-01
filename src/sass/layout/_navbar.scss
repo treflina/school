@@ -7,25 +7,18 @@
     flex-wrap: wrap;
     max-width: 1400px;
     margin: 0 auto;
-
     border-bottom: 1px solid rgba(0, 0, 0, .4);
 
 
     &__list {
         display: inline-flex;
-        // justify-content: flex-start;
-        // height: 90px;
-        // align-items: center;
         list-style: none;
-        // margin: 0 auto;
-        //  border: 5px solid red;
 
 
         &-item {
             position: relative;
             display: block;
             height: 90px;
-
         }
 
         &-icon {
@@ -71,7 +64,8 @@
             display: inline-block;
             padding: .75em;
             width: 100%;
-            box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+            border-bottom: 1px solid rgba(0,0,0,.4);
+            // box-shadow: 0 0 1px rgba(0, 0, 0, .7);
             text-decoration: none;
             color: black;
             transition: background-color .3s;

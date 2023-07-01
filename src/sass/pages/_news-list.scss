@@ -1,4 +1,5 @@
 @use 'abstracts'as *;
+
 .allnews {
     .posts {
         &__categories {
@@ -6,7 +7,7 @@
         }
 
         &__cards {
-            padding: 5rem 0 0;
+            padding: 4rem 0 0;
         }
 
         &__main {
@@ -22,10 +23,18 @@
             }
 
             &-heading {
-                font-size: 1.7rem;
+                font-size: 2rem;
                 margin: 0;
             }
         }
 
+    }
+}
+
+@include media(sm) {
+    .posts {
+        &__cards {
+            padding: 2rem 0 0;
+        }
     }
 }
