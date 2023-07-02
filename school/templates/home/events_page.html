@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags %}
+{% load static %}
+{% block content %}
+{%include 'includes/navbar.html'%}
+
+<main class="wrapper">
+    <div class="calendar">
+        <h1 class="heading-primary">Kalendarz wydarzeń</h1>
+        {% for month, e in events.items %}
+        <div class="calendar__month">
+        <div class="calendar__month-heading">
+            {{month|date:"F Y"}}
+        </div>
+        <div class="calendar__events">
+        {% for event in e %}
+
+        <div class="calendar__event">
+            <div class="calendar__event-dates">
+                <div class="calendar__event-date calendar__event-date--start">
+                    <span class="calendar__event-date--1 bg-soft-warning">{{event.start_date|date:"j"}} {% if event.end_date %} - {{event.end_date|date:"j"}}{% endif %} </span>
+                    <span class="calendar__event-date--2">{{event.start_date|date:"b"}}</span>
+                </div>
+            </div>
+            <div class="calendar__event-details">
+                <p>{{event.name}}</p>
+                {% if event.hour %}
+                <p>godz. {{event.hour}}</p>
+                {% endif %}
+                {% if event.description %}
+                <p>{{event.description}}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% endfor %}
+        </div>
+</div>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock content%}

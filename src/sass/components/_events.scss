@@ -13,6 +13,7 @@
 
     &__list {
         display: flex;
+        justify-content: space-around;
         list-style: none;
     }
 }
@@ -36,9 +37,10 @@
         &-item {
             display: flex;
             flex-wrap: wrap;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 1rem;
+            margin: 1rem 0 2.5rem;
         }
 
         &-date {
@@ -61,7 +63,9 @@
             background-color: white;
             box-shadow: 0 0 2px rgba(0, 0, 0, .4);
             font-weight: bold;
+
         }
+
 
         &-text {
             margin-top: .25em;
@@ -85,7 +89,12 @@
         display: block;
         padding: 70px 0 0 0;
 
+
         &__details {
+            &-item {
+                flex-direction: row;
+                margin: 1rem 0 1.5rem;
+            }
             &-date {
                 top: 38px;
             }

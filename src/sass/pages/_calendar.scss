@@ -1,0 +1,29 @@
+.calendar {
+    &__month {
+        display: flex;
+        border: 1px solid black;
+    }
+    &__event {
+        display: flex;
+        margin-bottom: 2rem;
+        &-dates {
+            display: flex;
+            // flex-direction: column;
+        }
+
+        &-date {
+            &--1,
+            &--2 {
+                display: block;
+                margin-right: 10px;
+                padding: .2em .5em;
+                border: 1px solid rgba(0,0,0,.4);
+                text-align: center;
+            }
+             &--1 {
+                border-bottom: none;
+             }
+
+        }
+    }
+}

@@ -385,6 +385,7 @@ body {
 }
 .events__list {
   display: flex;
+  justify-content: space-around;
   list-style: none;
 }
 
@@ -405,9 +406,10 @@ body {
 .event__details-item {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin: 1rem 0 2.5rem;
 }
 .event__details-date {
   position: absolute;
@@ -444,6 +446,10 @@ body {
   .event {
     display: block;
     padding: 70px 0 0 0;
+  }
+  .event__details-item {
+    flex-direction: row;
+    margin: 1rem 0 1.5rem;
   }
   .event__details-date {
     top: 38px;
@@ -941,4 +947,25 @@ body {
   .gallery__list-item img {
     height: auto;
   }
+}
+.calendar__month {
+  display: flex;
+  border: 1px solid black;
+}
+.calendar__event {
+  display: flex;
+  margin-bottom: 2rem;
+}
+.calendar__event-dates {
+  display: flex;
+}
+.calendar__event-date--1, .calendar__event-date--2 {
+  display: block;
+  margin-right: 10px;
+  padding: 0.2em 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+.calendar__event-date--1 {
+  border-bottom: none;
 }

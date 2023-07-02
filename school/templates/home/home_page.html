@@ -104,6 +104,37 @@
         </div>
     </div>
 
+    <div class="events">
+        <div class="wrapper">
+            <h2 class="events__heading heading-secondary"> Nadchodzące wydarzenia</h2>
+            <div class="events__timeline">
+                <ul class="events__list">
+                    {% for day, items in events.items %}
+                    <li class="event-list event">
+                        <div class="event__details">
+                            <div class="event__details-date event-date bg-soft-warning">{{ day|date:"j E"}}</div>
+                            {% for event in items %}
+                            <div class="event__details-item">
+                                {% if event.end_date %}
+                                <p class="event__details-hour bg-soft-warning">do {{event.end_date|date:"j E"}}</p>
+                                {% endif %}
+                                {% if event.hour %}
+                                <p class="event__details-hour">{{event.hour}}</p>
+                                {% endif %}
+                                <p class="event__details-text">{{event.name}}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <a href="#" class="posts__linktoall"><span>Przejdź do wszystkich wydarzeń </span><img src="{% static '/img/chevrons-right.svg' %}" alt=""></a>
+        </div>
+    </div>
+
+
     <div class="posts__box wrapper" id="news">
         <h2 class="posts__box-heading heading-secondary">Wszystkie wpisy</h2>
         <div class="posts__categories">
