@@ -13,7 +13,7 @@ Dockerfile
 django.log
 staticfiles
 *.sqlite3
-
+/events
 
 /home/migrations/*
 /search/migrations/*
