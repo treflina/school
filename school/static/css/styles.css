@@ -970,6 +970,9 @@ body {
   padding: 0 2rem;
   border-left: 3px solid rgb(32, 83, 117);
 }
+.calendar__month-events div:last-of-type {
+  border-bottom: none;
+}
 .calendar__month:nth-child(even) {
   background-color: #efefef;
 }
