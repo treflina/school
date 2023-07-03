@@ -13,12 +13,14 @@ Dockerfile
 django.log
 staticfiles
 *.sqlite3
-/events
+
 
 /home/migrations/*
 /search/migrations/*
 /streams/migrations/*
 /news/migrations/*
+/gallery/migrations/*
+/events/migrations/*
 !__init__.py
 
 # Python and others
