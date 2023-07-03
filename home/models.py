@@ -57,44 +57,44 @@ class HomePage(Page):
         # get upcoming events
         today = date.today()
 
-        allevents = (
-            EventsPage.objects.live().first().events.all().order_by("start_date")
-        )
+        eventpage = EventsPage.objects.live().first()
+        if eventpage:
+            allevents = (eventpage.events.all().order_by("start_date"))
 
-        allevents_days = {}
-        for e in allevents:
-            if e.start_date not in allevents_days:
-                allevents_days[e.start_date] = [e]
-            else:
-                allevents_days[e.start_date].append(e)
+            allevents_days = {}
+            for e in allevents:
+                if e.start_date not in allevents_days:
+                    allevents_days[e.start_date] = [e]
+                else:
+                    allevents_days[e.start_date].append(e)
 
-        for day in allevents_days.values():
-            day.sort(key=lambda x: time(0, 0) if x.hour is None else x.hour)
+            for day in allevents_days.values():
+                day.sort(key=lambda x: time(0, 0) if x.hour is None else x.hour)
 
-        latest_events_days = dict(
-            filter(lambda x: x[0] < today, allevents_days.items())
-        )
-        upcoming_events_days = dict(
-            filter(lambda x: x[0] >= today, allevents_days.items())
-        )
-        latest_events_days_count = len(latest_events_days)
-        upcoming_events_days_count = len(upcoming_events_days)
-
-        num_diff = 4 - upcoming_events_days_count
-
-        if latest_events_days_count + upcoming_events_days_count <= 4:
-            events = allevents_days
-        elif num_diff < 0:
-            events = dict(islice(upcoming_events_days.items(), 4))
-        else:
-            latest_dict = dict(list(latest_events_days.items())[-num_diff:])
-            upcoming_dict = dict(
-                islice(upcoming_events_days.items(), upcoming_events_days_count)
+            latest_events_days = dict(
+                filter(lambda x: x[0] < today, allevents_days.items())
             )
-            latest_dict.update(upcoming_dict)
-            events = latest_dict
+            upcoming_events_days = dict(
+                filter(lambda x: x[0] >= today, allevents_days.items())
+            )
+            latest_events_days_count = len(latest_events_days)
+            upcoming_events_days_count = len(upcoming_events_days)
 
-        context["events"] = events
+            num_diff = 4 - upcoming_events_days_count
+
+            if latest_events_days_count + upcoming_events_days_count <= 4:
+                events = allevents_days
+            elif num_diff < 0:
+                events = dict(islice(upcoming_events_days.items(), 4))
+            else:
+                latest_dict = dict(list(latest_events_days.items())[-num_diff:])
+                upcoming_dict = dict(
+                    islice(upcoming_events_days.items(), upcoming_events_days_count)
+                )
+                latest_dict.update(upcoming_dict)
+                events = latest_dict
+
+            context["events"] = events
 
         return context
 
