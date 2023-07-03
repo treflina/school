@@ -34,76 +34,7 @@
                 <a href="{% slugurl main_post.slug %}" class="posts__main-link posts__main-link--primary">Czytaj więcej...</a>
             </div>
         </div>
-               {% comment %} <div class="posts__main posts__main--primary">
-            <img src="{% static '/img/nowy.jpg' %}" alt="" class="posts__main-img posts__main-img--primary">
-            <div class="posts__main-box posts__main-box--primary">
-                <div class="posts__main-details">
-                    <div class="posts__main-category posts__main-category--2">Relacja</div>
-                    <p class="posts__main-details--date">2 września 2023</p>
-                </div>
-                <h2 class="posts__main-heading posts__main-heading--primary">Uroczystość rozpoczęcia roku
-                    szkolnego 2023/2024</h2>
-                <p class="posts__main-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-                    laboriosam minus ut exercitationem labore inventore quo iste et, obcaecati ad, alias ducimus
-                    omnis, soluta consequuntur!
-                </p>
-                <a href="#" class="posts__main-link posts__main-link--primary">Czytaj więcej...</a>
-            </div>
-        </div> {% endcomment %}
     </div>
-    <div class="events">
-        <div class="wrapper">
-            <h2 class="events__heading heading-secondary"> Nadchodzące wydarzenia</h2>
-            <div class="events__timeline">
-                <ul class="events__list">
-                    <li class="event-list event">
-                        <div class="event__details">
-                            <div class="event__details-date event-date bg-soft-warning text-primary">8 maja</div>
-                            <div class="event__details-item">
-                                <p class="event__details-hour">15:00</p>
-                                <p class="event__details-text">Egzamin na kartę rowerową dla klas czwartych</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="event-list event">
-                        <div class="event__details">
-                            <div class="event__details-date event-date bg-soft-warning">17 maja</div>
-                            <div class="event__details-item">
-                                <p class="event__details-hour">8:00</p>
-                                <p class="event__details-text">Wyjazd na wycieczkę do Trójmiasta klas ósmych</p>
-                            </div>
-                            <div class="event__details-item">
-                                <p class="event__details-hour">17:30</p>
-                                <p class="event__details-text">Spotkanie zapoznawcze dla pierwszoklasistów</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="event-list event">
-                        <div class="event__details">
-                            <div class="event__details-date event-date bg-soft-warning">9 czerwca</div>
-                            <div class="event__details-item">
-                                {% comment %} <p class="event__details-hour">8:00</p> {% endcomment %}
-                                <p class="event__details-text">Dodatkowy dzień wolny</p>
-                            </div>
-                        </div>
-
-                    </li>
-                    <li class="event-list event">
-                        <div class="event__details">
-                            <div class="event__details-date event-date bg-soft-warning">19 czerwca</div>
-                            <div class="event__details-item">
-                                <p class="event__details-hour">16:00</p>
-                                <p class="event__details-text">Posiedzenie klasyfikacyjne Rady Pedagogicznej</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <a href="#" class="posts__linktoall"><span>Przejdź do wszystkich wydarzeń </span><img src="{% static '/img/chevrons-right.svg' %}" alt=""></a>
-        </div>
-    </div>
-
     <div class="events">
         <div class="wrapper">
             <h2 class="events__heading heading-secondary"> Nadchodzące wydarzenia</h2>
@@ -116,10 +47,10 @@
                             {% for event in items %}
                             <div class="event__details-item">
                                 {% if event.end_date %}
-                                <p class="event__details-hour bg-soft-warning">do {{event.end_date|date:"j E"}}</p>
+                                <p class="event__details-square event__details-date--end bg-soft-warning">do {{event.end_date|date:"j E"}}</p>
                                 {% endif %}
                                 {% if event.hour %}
-                                <p class="event__details-hour">{{event.hour}}</p>
+                                <p class="event__details-square event__details-hour">{{event.hour}}</p>
                                 {% endif %}
                                 <p class="event__details-text">{{event.name}}</p>
                             </div>
@@ -130,7 +61,7 @@
                 </ul>
             </div>
 
-            <a href="#" class="posts__linktoall"><span>Przejdź do wszystkich wydarzeń </span><img src="{% static '/img/chevrons-right.svg' %}" alt=""></a>
+            <a href="{%slugurl 'wydarzenia'%}" class="posts__linktoall"><span>Przejdź do wszystkich wydarzeń </span><img src="{% static '/img/chevrons-right.svg' %}" alt=""></a>
         </div>
     </div>
 

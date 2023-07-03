@@ -43,6 +43,14 @@
             margin: 1rem 0 2.5rem;
         }
 
+        &-square {
+              min-width: 65px;
+              padding: .2em .6em;
+              margin: 0 .5em .3em;
+               box-shadow: 0 0 2px rgba(0, 0, 0, .4);
+               font-weight: bold;
+        }
+
         &-date {
             position: absolute;
             top: -12px;
@@ -53,17 +61,16 @@
             padding: .3em .6em;
             box-shadow: 0 0 2px rgba(0, 0, 0, .4);
             font-weight: bold;
+
+            &--end {
+                color: black;
+                margin: 0 .5em .3em;
+            }
         }
 
         &-hour {
-            min-width: 65px;
-            padding: .2em .6em;
-            margin: 0 .5em .3em;
             color: rgba(0, 0, 0, .7);
             background-color: white;
-            box-shadow: 0 0 2px rgba(0, 0, 0, .4);
-            font-weight: bold;
-
         }
 
 

@@ -1,29 +1,83 @@
+@use 'abstracts'as *;
+
 .calendar {
+
     &__month {
         display: flex;
-        border: 1px solid black;
-    }
-    &__event {
-        display: flex;
-        margin-bottom: 2rem;
-        &-dates {
-            display: flex;
-            // flex-direction: column;
+        padding: 1rem 2rem 1rem;
+
+        &-heading {
+            flex: 1 0 20%;
+            margin: 1rem 0 1rem;
+
+            h2 {
+                font-size: 1.8rem;
+            }
         }
 
+        &-events {
+            width: 100%;
+            padding: 0 2rem;
+            border-left: 3px solid rgb(32, 83, 117);
+        }
+
+        &:nth-child(even) {
+            background-color: #efefef;
+        }
+    }
+
+    &__event {
+        display: flex;
+        margin: 0 0;
+        padding: .5rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, .2);
+
+
+
         &-date {
+            flex: 0 0 7rem;
+
             &--1,
             &--2 {
                 display: block;
                 margin-right: 10px;
-                padding: .2em .5em;
-                border: 1px solid rgba(0,0,0,.4);
+                padding: .2em .2em;
+                border: 1px solid rgba(0, 0, 0, .4);
                 text-align: center;
             }
-             &--1 {
-                border-bottom: none;
-             }
 
+            &--1 {
+                border-bottom: none;
+                font-weight: bold;
+            }
+        }
+
+        &-details {
+            &--name {
+                font-weight: bold;
+            }
+
+            &--description {
+                margin-top: 1rem;
+            }
+        }
+    }
+}
+
+@include media(sm) {
+    .calendar {
+        &__month {
+            padding: 1rem 1rem 1rem;
+            flex-direction: column;
+
+            &-events {
+                border-left: none;
+                padding: 0 0;
+            }
+
+            &-heading {
+                margin: 1rem 0 0;
+            }
         }
     }
 }

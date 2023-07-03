@@ -118,7 +118,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  max-width: 1150px;
+  max-width: 1200px;
   margin: 3rem 0 3rem;
   gap: 20px;
 }
@@ -411,6 +411,13 @@ body {
   align-items: center;
   margin: 1rem 0 2.5rem;
 }
+.event__details-square {
+  min-width: 65px;
+  padding: 0.2em 0.6em;
+  margin: 0 0.5em 0.3em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+}
 .event__details-date {
   position: absolute;
   top: -12px;
@@ -423,14 +430,13 @@ body {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
   font-weight: bold;
 }
-.event__details-hour {
-  min-width: 65px;
-  padding: 0.2em 0.6em;
+.event__details-date--end {
+  color: black;
   margin: 0 0.5em 0.3em;
+}
+.event__details-hour {
   color: rgba(0, 0, 0, 0.7);
   background-color: white;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-  font-weight: bold;
 }
 .event__details-text {
   margin-top: 0.25em;
@@ -950,22 +956,60 @@ body {
 }
 .calendar__month {
   display: flex;
-  border: 1px solid black;
+  padding: 1rem 2rem 1rem;
+}
+.calendar__month-heading {
+  flex: 1 0 20%;
+  margin: 1rem 0 1rem;
+}
+.calendar__month-heading h2 {
+  font-size: 1.8rem;
+}
+.calendar__month-events {
+  width: 100%;
+  padding: 0 2rem;
+  border-left: 3px solid rgb(32, 83, 117);
+}
+.calendar__month:nth-child(even) {
+  background-color: #efefef;
 }
 .calendar__event {
   display: flex;
-  margin-bottom: 2rem;
+  margin: 0 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.calendar__event-dates {
-  display: flex;
+.calendar__event-date {
+  flex: 0 0 7rem;
 }
 .calendar__event-date--1, .calendar__event-date--2 {
   display: block;
   margin-right: 10px;
-  padding: 0.2em 0.5em;
+  padding: 0.2em 0.2em;
   border: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 .calendar__event-date--1 {
   border-bottom: none;
+  font-weight: bold;
+}
+.calendar__event-details--name {
+  font-weight: bold;
+}
+.calendar__event-details--description {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 37.5em) {
+  .calendar__month {
+    padding: 1rem 1rem 1rem;
+    flex-direction: column;
+  }
+  .calendar__month-events {
+    border-left: none;
+    padding: 0 0;
+  }
+  .calendar__month-heading {
+    margin: 1rem 0 0;
+  }
 }
