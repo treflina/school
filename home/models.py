@@ -1,4 +1,4 @@
-from datetime import date, time, datetime
+from datetime import date, datetime, time
 from itertools import chain, islice
 from operator import attrgetter
 
@@ -59,7 +59,7 @@ class HomePage(Page):
 
         eventpage = EventsPage.objects.live().first()
         if eventpage:
-            allevents = (eventpage.events.all().order_by("start_date"))
+            allevents = eventpage.events.all().order_by("start_date", "hour")
 
             allevents_days = {}
             for e in allevents:
@@ -68,8 +68,8 @@ class HomePage(Page):
                 else:
                     allevents_days[e.start_date].append(e)
 
-            for day in allevents_days.values():
-                day.sort(key=lambda x: time(0, 0) if x.hour is None else x.hour)
+            # for day in allevents_days.values():
+            #     day.sort(key=lambda x: time(0, 0) if x.hour is None else x.hour)
 
             latest_events_days = dict(
                 filter(lambda x: x[0] < today, allevents_days.items())
@@ -124,31 +124,41 @@ class EventsPage(Page):
     template = "home/events_page.html"
     base_form_class = EventsPageForm
 
-    content_panels = Page.content_panels + [MultiFieldPanel(
-        [InlinePanel("events", label="")],
-        classname="collapsed",)]
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [InlinePanel("events", label="")],
+            classname="collapsed",
+        )
+    ]
 
     def get_context(self, request, *args, **kwargs):
         """Adding posts to news section"""
         context = super().get_context(request, *args, **kwargs)
 
         allevents = (
-            EventsPage.objects.live().first().events.all().order_by("start_date")
+            EventsPage.objects.live()
+            .first()
+            .events.all()
+            .order_by("start_date", "hour")
         )
+        for e in allevents:
+            print(e)
 
         allevents_months = {}
         for e in allevents:
-            date_key = datetime.strptime(f"01/{str(e.start_date.month)}/{str(e.start_date.year)}", "%d/%m/%Y").date()
+            date_key = datetime.strptime(
+                f"01/{str(e.start_date.month)}/{str(e.start_date.year)}", "%d/%m/%Y"
+            ).date()
             if date_key not in allevents_months:
                 allevents_months[date_key] = [e]
             else:
                 allevents_months[date_key].append(e)
 
-        for day in allevents_months.values():
-            day.sort(key=lambda x: time(0, 0) if x.hour is None else x.hour)
-
         context["events"] = allevents_months
         return context
+
+    def __str__(self):
+        return f"{self.title}"
 
 
 class Event(Orderable):
@@ -170,3 +180,6 @@ class Event(Orderable):
         ),
         FieldPanel("description"),
     ]
+
+    def __str__(self):
+        return f"{self.name} - {self.start_date}"
