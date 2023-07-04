@@ -64,6 +64,8 @@ class NewsIndexPage(Page):
     """News listing page model."""
 
     template = "news/news_index_page.html"
+    subpage_types = ["news.NewsDetailPage"]
+    parent_page_types = ["home.HomePage"]
 
     @property
     def get_child_pages(self):

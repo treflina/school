@@ -2,10 +2,16 @@ from datetime import date
 from itertools import chain, islice
 from operator import attrgetter
 
+from django.db import models
+
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
 from news.models import NewsCategory, NewsDetailPage
+from streams import blocks
 from wagtail.models import Page
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel
+from wagtail.search import index
 
 
 def get_today():
@@ -14,6 +20,7 @@ def get_today():
 
 class HomePage(Page):
     template = "home/home_page.html"
+    parent_page_types = []
 
     def get_context(self, request, *args, **kwargs):
         """Adding posts to news section"""
@@ -99,3 +106,31 @@ class HomePage(Page):
 
     class Meta:
         verbose_name = "Strona główna"
+
+
+class OrdinaryPage(Page):
+
+    template = "home/ordinary_page.html"
+    
+    introduction = models.TextField(verbose_name="Wprowadzenie", blank=True)
+    content = StreamField(
+        blocks.RichtextAndTableBlock(),
+        null=True,
+        blank=True,
+        use_json_field=True,
+        verbose_name="Treść",
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("introduction"),
+        FieldPanel("content")
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('introduction'),
+        index.SearchField('content'),
+    ]
+
+    class Meta:  # noqa
+        verbose_name = "Podstrona"
+        verbose_name_plural = "Podstrony"

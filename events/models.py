@@ -27,6 +27,8 @@ class EventsPageForm(WagtailAdminPageForm):
 
 class EventsPage(Page):
     template = "events/events_page.html"
+    parent_page_types = ['home.HomePage']
+    subpage_types = []
     base_form_class = EventsPageForm
 
     content_panels = Page.content_panels + [
@@ -46,8 +48,6 @@ class EventsPage(Page):
             .events.all()
             .order_by("start_date", "hour")
         )
-        for e in allevents:
-            print(e)
 
         allevents_months = {}
         for e in allevents:
@@ -64,6 +64,9 @@ class EventsPage(Page):
 
     def __str__(self):
         return f"{self.title}"
+
+    class Meta:
+        verbose_name = "Wydarzenia"
 
 
 class Event(Orderable):

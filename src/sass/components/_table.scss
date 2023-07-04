@@ -1,0 +1,111 @@
+@use 'abstracts' as *;
+
+.table {
+    margin: 3rem 0 1rem;
+
+}
+
+div[tabindex="0"][aria-labelledby][role="region"] {
+    overflow: auto;
+    scroll-snap-type: both mandatory;
+    max-width: 90vw;
+}
+
+div[tabindex="0"][aria-labelledby][role="region"]:focus {
+    box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+    outline: .1em solid rgba(0, 0, 0, .1);
+}
+
+div[tabindex="0"][aria-labelledby][role="region"] table {
+    margin: 0;
+}
+
+
+div[tabindex="0"][aria-labelledby][role="region"].colheaders {
+    background:
+        linear-gradient(white 30%, rgba(255, 255, 255, 0)),
+        linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+        radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-size: 100% 4em, 100% 4em, 100% 1.4em, 100% 1.4em;
+    background-attachment: local, local, scroll, scroll;
+}
+
+.tb-block {
+    max-width: 100vw;
+    margin: .5rem 0;
+    padding: .25rem;
+    border-collapse: collapse;
+
+    font-weight: normal;
+    font-size: 1.6rem;
+    table-layout: auto;
+    width: 100%;
+    overflow: scroll;
+}
+
+.caption-block {
+    text-align: left;
+    margin: 1rem 0 .5rem;
+    padding: .5rem 0;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.th-block {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #efefef;
+}
+
+.th-block,
+.td-block {
+    border: 1px solid #777;
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.richtext-image {
+    max-width: 100%;
+    height: auto;
+    margin: .5rem 0;
+}
+
+.responsive-object {
+    position: relative;
+}
+
+.responsive-object iframe,
+.responsive-object object,
+.responsive-object embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@include media(md) {
+
+    .tb-block {
+        font-size: 1.6rem;
+    }
+
+    .th-block,
+    .td-block {
+        padding: 0.75rem .75rem;
+    }
+}
+
+@include media(sm) {
+
+    .th-block,
+    .td-block {
+        padding: 0.5rem .5rem;
+    }
+}

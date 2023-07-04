@@ -3,14 +3,22 @@
 .heading-primary {
     font-family: 'Rubik', sans-serif;
     font-size: 3rem;
-    margin: 4rem 0 6rem;
+    // margin: 4rem 0 4rem;
     line-height: 1.3;
+    text-align: left;
 
 }
 
 .heading-secondary {
     text-align: left;
     margin-bottom: 2rem;
+
+}
+
+@include media(md) {
+    .heading-primary {
+        text-align: center;
+    }
 }
 
 @include media(xsm) {
@@ -18,3 +26,4 @@
         margin: 3rem 0;
     }
 }
+
