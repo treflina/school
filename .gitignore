@@ -57,3 +57,6 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+notes.txt
+django.log
