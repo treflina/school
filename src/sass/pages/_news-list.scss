@@ -2,12 +2,13 @@
 
 .allnews {
     .posts {
-        &__categories {
-            border: none;
+        &__cards {
+            padding: 1rem 0 0;
         }
 
-        &__cards {
-            padding: 4rem 0 0;
+        &__categories {
+            border: none;
+            background-color: #efefef;
         }
 
         &__main {
@@ -18,12 +19,12 @@
                 left: 50%;
             }
 
-            &--secondary {
-                margin: 0;
-            }
+            // &--secondary {
+            //     margin: 0;
+            // }
 
             &-heading {
-                font-size: 2rem;
+                font-size: 1.9rem;
                 margin: 0;
             }
         }
@@ -31,10 +32,3 @@
     }
 }
 
-@include media(sm) {
-    .posts {
-        &__cards {
-            padding: 2rem 0 0;
-        }
-    }
-}

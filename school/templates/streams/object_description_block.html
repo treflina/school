@@ -1,0 +1,10 @@
+{% load wagtailcore_tags static %}
+
+  <li class="teachers__subject"><span>{% include_block value.subject %}</span>
+    <ul class="teachers__names">
+      {% for name in value.description %}
+      <li class="teachers__names-name">{{ name }}</li>
+      {% endfor %}
+    </ul>
+  </li>
+

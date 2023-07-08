@@ -6,8 +6,11 @@
 <main class="wrapper">
 {%include 'includes/breadcrumb.html'%}
 
-
-<h1 class="heading-primary">{{self.title}}</h1>
-
+<main>
+<h1 class="heading-primary mtb-3">{{self.title}}</h1>
+<div class="wrapper wrapper-md">
+{{page.main_text|richtext}}
+</div>
 </main>
 {%endblock content %}
+</main>

@@ -2,15 +2,15 @@ from datetime import date
 from itertools import chain, islice
 from operator import attrgetter
 
+from django import forms
 from django.db import models
-
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
 from news.models import NewsCategory, NewsDetailPage
 from streams import blocks
-from wagtail.models import Page
+from wagtail.admin.panels import FieldPanel, FieldRowPanel
 from wagtail.fields import StreamField
-from wagtail.admin.panels import FieldPanel
+from wagtail.models import Page
 from wagtail.search import index
 
 
@@ -66,7 +66,7 @@ class HomePage(Page):
         today = get_today()
 
         q = EventsPage.objects.live().all()
-        eventpage = q[len(q)-1] if q else None
+        eventpage = q[len(q) - 1] if q else None
         if eventpage:
             allevents = eventpage.events.all().order_by("start_date", "hour")
 
@@ -109,10 +109,12 @@ class HomePage(Page):
 
 
 class OrdinaryPage(Page):
-
     template = "home/ordinary_page.html"
-    
-    introduction = models.TextField(verbose_name="Wprowadzenie", blank=True)
+
+    introduction = models.TextField(verbose_name="Tekst", blank=True)
+    bold_intro = models.BooleanField(
+        verbose_name="Pogrubienie", default=False, null=True
+    )
     content = StreamField(
         blocks.RichtextAndTableBlock(),
         null=True,
@@ -121,16 +123,55 @@ class OrdinaryPage(Page):
         verbose_name="Treść",
     )
 
+    boolean_widget = forms.RadioSelect(choices=((True, "Tak"), (False, "Nie")))
+
     content_panels = Page.content_panels + [
-        FieldPanel("introduction"),
-        FieldPanel("content")
+        FieldRowPanel(
+            [
+                FieldPanel("introduction", classname="col10", disable_comments=True),
+                FieldPanel("bold_intro", classname="col2", widget=boolean_widget),
+            ],
+            heading="Wprowadzenie",
+        ),
+        FieldPanel("content"),
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField('introduction'),
-        index.SearchField('content'),
+        index.SearchField("introduction"),
+        index.SearchField("content"),
     ]
 
     class Meta:  # noqa
         verbose_name = "Podstrona"
         verbose_name_plural = "Podstrony"
+
+
+class TeachersPage(Page):
+    template = "home/teachers_page.html"
+
+    year = models.CharField(
+        verbose_name="Rok szkolny", null=True, blank=True, max_length=10
+    )
+    introduction = models.TextField(verbose_name="Wprowadzenie", null=True, blank=True)
+    content = StreamField(
+        [("info", blocks.ObjectAndDescriptionBlock())],
+        use_json_field=True,
+        verbose_name="Nauczyciele",
+        null=True,
+        blank=True,
+    )
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="Zdjęcie",
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("year"),
+        FieldPanel("introduction"),
+        FieldPanel("content"),
+        FieldPanel("image")
+    ]

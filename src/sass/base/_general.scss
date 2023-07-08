@@ -34,7 +34,7 @@ body {
 .subpage-heading {
     position: relative;
     padding: 4rem 0;
-    margin-bottom: 4rem;
+    // margin-bottom: 4rem;
     color: #efefef;
     z-index: 2;
 
@@ -84,10 +84,16 @@ body {
 
     .subpage-heading {
         padding: 3rem 0;
-        margin-bottom: 2rem;
+        // margin-bottom: 2rem;
 
         h1::first-letter {
             font-size: 130%;
         }
+    }
+}
+
+@include media(sm) {
+    .subpage-heading {
+        padding: 2rem 0;
     }
 }

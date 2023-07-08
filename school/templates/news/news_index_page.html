@@ -5,15 +5,15 @@
 {%include 'includes/navbar.html'%}
 <main class="wrapper">
     <!-- {%include 'includes/breadcrumb.html'%} -->
-    <section class="allnews">
-        <h1 class="heading-primary">Wszystkie aktualności</h1>
+    <section class="allnews" id="allnews">
+        <h1 class="heading-primary mtb-3">Wszystkie aktualności</h1>
         <div class="posts__categories">
             <p class="posts__categories-category posts__categories-category--filter">Filtruj: </p>
             <ul class="posts__categories-list" id="categories-list">
-                <li><a href="{%slugurl 'home'%}#news" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
+                <li><a href="{% pageurl page%}#allnews" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
                 </li>
                 {% for category in categories %}
-                <li><a href="{%slugurl 'home'%}?category={{category.id}}#news" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a>
+                <li><a href="?category={{category.id}}" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a>
                 </li>
                 {% comment %} <li><a href="#" class="posts__categories-category posts__categories-link">Relacje</a></li>
                 <li><a href="#" class="posts__categories-category posts__categories-link">Sport</a></li>
@@ -49,6 +49,7 @@
             {% endfor %}
         </div>
     </section>
+    {%include 'includes/pagination.html'%}
 </main>
 
 {%endblock content %}

@@ -13,6 +13,8 @@ from wagtail.fields import RichTextField, StreamField
 
 # from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.models import Orderable, Page
+from wagtail.contrib.routable_page.models import RoutablePageMixin
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
@@ -60,7 +62,7 @@ class NewsCategory(models.Model):
         return self.name
 
 
-class NewsIndexPage(Page):
+class NewsIndexPage(RoutablePageMixin, Page):
     """News listing page model."""
 
     template = "news/news_index_page.html"
@@ -75,35 +77,43 @@ class NewsIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
         """Adding custom stuff to our context."""
         context = super().get_context(request, *args, **kwargs)
-        # Get all posts
-        all_posts = (
+
+        all_news = (
             NewsDetailPage.objects.live().public().order_by("-publish_date")
         )
+        # Add filtering news by category
+        categories = NewsCategory.objects.all().order_by("id")
+        context["categories"] = categories
 
-        if request.GET.get("tag", None):
-            tags = request.GET.get("tag")
-            all_posts = all_posts.filter(tags__slug__in=[tags])
+        if request.GET.get("category", None):
+            category = request.GET.get("category")
+            try:
+                all_news = list(filter(lambda x: x.category_id == int(category), all_news))
+                context["active_category"] = categories.filter(id=category).first()
+            except ValueError:
+                pass
 
-        # Paginate all posts by 2 per page
-        paginator = Paginator(all_posts, 5)
-        # Try to get the ?page=x value
-        page = request.GET.get("page")
+        context['posts'], context['page_range'] = self.pagination(request, all_news)
+        print('context', context)
+        return context
+
+    def pagination(self, request, posts):
+        paginator = Paginator(posts, 1)
+        page = request.GET.get('page')
         try:
-            # If the page exists and the ?page=x is an int
             posts = paginator.page(page)
         except PageNotAnInteger:
-            # If the ?page=x is not an int; show the first page
             posts = paginator.page(1)
         except EmptyPage:
-            # If the ?page=x is out of range (too high most likely)
-            # Then return the last page
             posts = paginator.page(paginator.num_pages)
+        index = posts.number - 1
+        max_index = len(paginator.page_range)
+        start_index = index - 5 if index >= 5 else 0
+        end_index = index + 5 if index <= max_index - 5 else max_index
+        page_range = paginator.page_range[start_index:end_index]
+        print('\n', posts, '\n', page_range)
+        return posts, page_range
 
-        # "posts" will have child pages; you'll need to use .specific in the template
-        # in order to access child properties, such as youtube_video_id and subtitle
-        context["posts"] = posts
-        context["categories"] = NewsCategory.objects.all()
-        return context
 
     class Meta:  # noqa
         verbose_name = "Wszystkie aktualności"
@@ -152,6 +162,7 @@ class NewsDetailPage(Page):
             "bold",
             "italic",
             "center",
+            "right",
             "ol",
             "ul",
             "hr",

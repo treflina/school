@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "core",
     "home",
     "events",
     "gallery",
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.table_block",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.routable_page",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -174,6 +176,7 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
 WAGTAILIMAGES_CHOOSER_PAGE_SIZE = 30
+WAGTAILDOCS_DOCUMENT_MODEL = 'core.CustomDocument'
 
 LOGGING = {
     "version": 1,

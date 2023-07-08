@@ -15,7 +15,8 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(350px, auto));
         gap: 40px;
-        padding: 5rem 2rem 0;
+        justify-items: center;
+        padding: 3rem 2rem 0;
     }
 
     &__main {
@@ -35,7 +36,7 @@
             flex-direction: column;
             height: auto;
             max-width: 500px;
-            margin: 5rem 0 2rem;
+            margin: 3rem 0 2rem;
             box-shadow: 0 0 8px rgba(0, 0, 0, .5);
             overflow: hidden;
             transition: transform .5s,
@@ -80,7 +81,7 @@
 
             &--secondary {
                 max-width: 600px;
-                padding: 1.5em;
+                padding: 1em;
             }
 
 
@@ -202,8 +203,10 @@
     &__categories {
         display: grid;
         grid-template-columns: 1fr minmax(1fr, auto) 4fr;
-        margin: 1em 1em 0;
+        margin: 3em 0 0;
         padding-bottom: .5em;
+        padding-left: 1em;
+        padding-right: 1em;
         border-top: 1px solid rgba(0, 0, 0, .4);
         border-bottom: 1px solid rgba(0, 0, 0, .4);
 
@@ -239,7 +242,7 @@
         &-category {
             display: inline-block;
             height: min-content;
-            padding: 0.25em 1em;
+            padding: 0.25em .75em;
             font-weight: bold;
 
             &--filter {

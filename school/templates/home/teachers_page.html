@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+{%include 'includes/navbar.html'%}
+<main>
+    <div class="subpage-heading">
+        <div class="wrapper wrapper-md">
+            <h1 class="heading-primary">{{page.title}} {% if page.year %}- rok&nbsp;szkolny {{page.year}}{% endif %}</h1>
+        </div>
+    </div>
+    <nav class="wrapper">{%include 'includes/breadcrumb.html'%}</nav>
+    <div class="teachers wrapper wrapper-md">
+        {% if page.introduction %} <p class="teachers__intro">{{ page.introduction }}</p> {% endif %}
+        <div class="teachers__box">
+        <ul class="teachers__list">
+            {% for block in page.content %}
+            {% include_block block %}
+            {% endfor %}
+        </ul>
+        <div class="teachers__image">
+            {% image page.image width-500 as img %}
+            <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ img.alt }}"/>
+        </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

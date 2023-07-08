@@ -1,5 +1,5 @@
 .breadcrumb {
-    margin: 2em 0;
+    margin: .5rem 0 2rem;
 
     &__list {
         display: flex;
@@ -38,8 +38,11 @@
         li:not(:last-child)::after {
             display: inline-block;
             margin: 0 .5rem;
-            content: "/";
+            // content: "/";
+            content: "▶";
+            font-size: 1.2rem;
             color: rgba(0, 0, 0, 0.8);
+            color: #f3a26b;
         }
     }
 }

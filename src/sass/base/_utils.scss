@@ -1,4 +1,4 @@
-@use 'abstracts' as *;
+@use 'abstracts'as *;
 
 .screenReaderOnly {
     border: 0;
@@ -9,6 +9,27 @@
     padding: 0;
     position: absolute;
     width: 1px;
+}
+
+.d-block {
+    display: block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mtb-3{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .wrapper {
@@ -22,6 +43,7 @@
     padding: 0 100px;
 }
 
+
 @include media(l) {
     .wrapper-md {
         padding: 0 50px;
@@ -31,5 +53,10 @@
 @include media(md) {
     .wrapper-md {
         padding: 0 20px;
+    }
+}
+@include media(xsm) {
+    .wrapper-md {
+        padding: 0 10px;
     }
 }
