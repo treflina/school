@@ -2,13 +2,22 @@ from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from news.models import NewsCategory
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, FieldRowPanel
+from wagtail.admin.panels import (
+    FieldPanel,
+    FieldRowPanel,
+    MultiFieldPanel
+)
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
+from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
+from .utils import get_banner_image
+from core.models import SchoolYearSnippet
 
-class GalleryIndexPage(Page):
+
+class GalleryIndexPage(RoutablePageMixin, Page):
+
     template = "gallery/gallery_index_page.html"
     parent_page_types = ["home.HomePage"]
     subpage_types = ["gallery.GalleryDetailPage"]
@@ -17,11 +26,27 @@ class GalleryIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         galleries = (
-            GalleryIndexPage.get_children(self)
+            GalleryDetailPage.objects
             .specific()
             .live()
-            .order_by("-first_published_at")
+            .order_by("-publish_date")
         )
+        galleries = get_banner_image(galleries)
+
+        context["years"] = SchoolYearSnippet.objects.all()
+
+        if request.GET.get("year", None):
+            urlyear = request.GET.get("year")
+            if len(urlyear) >= 4:
+                year = f"{urlyear[:4]}/{urlyear[4:]}"
+            try:
+                galleries = list(
+                    filter(lambda x: x.year.name == year, galleries)
+                )
+                context["active_year"] = year
+            except ValueError:
+                pass
+
         context["galleries"] = galleries
         return context
 
@@ -39,7 +64,7 @@ class GalleryDetailPage(Page):
         blank=True,
         null=True,
         verbose_name="Opis galerii",
-        help_text="Opcjonalny dodatkowy opis galerii.",
+        help_text="Opcjonalny opis galerii.",
     )
 
     publish_date = models.DateField(
@@ -50,15 +75,24 @@ class GalleryDetailPage(Page):
         help_text="""Data publikacji wyświetlana na stronie.""",
     )
 
+    year = models.ForeignKey(
+        "core.SchoolYearSnippet",
+        blank=False,
+        null=True,
+        verbose_name="Rok szkolny",
+        on_delete=models.SET_NULL,
+        related_name="+"
+    )
+
     category = models.ForeignKey(
         "news.NewsCategory",
         null=True,
         on_delete=models.SET_NULL,
-        default=NewsCategory.get_default_id,
+        default=NewsCategory.get_default_id
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel("publish_date"),
+        FieldRowPanel([FieldPanel("publish_date"), FieldPanel("year")]),
         FieldPanel("main_text"),
         MultiFieldPanel(
             [
@@ -84,6 +118,7 @@ class GalleryImage(Orderable):
         on_delete=models.CASCADE,
         related_name="+",
         verbose_name="",
+        null=True
     )
     alt_attr = models.CharField(
         blank=True,
@@ -100,5 +135,8 @@ class GalleryImage(Orderable):
 
     panels = [
         FieldRowPanel([FieldPanel("image"), FieldPanel("highlight")]),
-        FieldPanel("alt_attr")
-        ]
+        FieldPanel("alt_attr"),
+    ]
+
+    def __str__(self):
+        return self.image.title

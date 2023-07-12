@@ -51,15 +51,13 @@ const handleNav = () => {
 navBtn.addEventListener("click", handleNav);
 
 // categories
-// const catLinks = document.querySelectorAll(".posts__categories-link")
+const catLinks = document.querySelectorAll(".posts__categories-link")
 
-// const addActiveClass = (event) => {
-//     // for (el of catLinks) {
-//     //     el.classList.remove(".posts__categories-link--active");
-//     // }
-//     event.target.classList.add("posts__categories-link--active");
-// }
+const addActiveClass = (event) => {
 
-// catLinks.forEach(btn => {
-//     btn.addEventListener("click", addActiveClass);
-// } )
+    event.target.classList.add("posts__categories-link--active");
+}
+
+catLinks.forEach(btn => {
+    btn.addEventListener("click", addActiveClass);
+} )

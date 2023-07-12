@@ -1,6 +1,6 @@
 {% load wagtailcore_tags static %}
 <ul class="block-docs__list">
     {% for doc in block.value %}
-    <li class="block-docs__list-item"><a href="{{doc.file.url}}">{{doc.title}} ({{doc.get_extension}}, {{doc.file_size|filesizeformat}}) </a></li>
+    <li class="block-docs__list-item"><a href="{{doc.file.url}}">{{doc.title}} <span class="block-docs__details">({{doc.get_extension}}, {{doc.file_size|filesizeformat}})</span></a></li>
     {% endfor %}
 </ul>

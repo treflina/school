@@ -12,38 +12,29 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
-
-
-def get_today():
-    return date.today()
+from gallery.utils import get_banner_image
 
 
 class HomePage(Page):
     template = "home/home_page.html"
     parent_page_types = []
 
+    def get_today(self):
+        return date.today()
+
     def get_context(self, request, *args, **kwargs):
         """Adding posts to news section"""
         context = super().get_context(request, *args, **kwargs)
         # Get all posts from news and gallery
-        news_list = NewsDetailPage.objects.live().public().order_by("-publish_date")
+        news_list = NewsDetailPage.objects.live().specific().order_by("-publish_date")
         main_post = news_list.filter(highlight=True).first()
         if not main_post:
             main_post = news_list.first()
 
         galleries_list = (
-            GalleryDetailPage.objects.live().public().order_by("-publish_date")
+            GalleryDetailPage.objects.live().specific().order_by("-publish_date")
         )
-
-        for gallery in galleries_list:
-            gallery.page_type = "gallery"
-            if gallery.gallery_images.filter(highlight=True).first():
-                gallery.banner_image = gallery.gallery_images.filter(highlight=True)[
-                    0
-                ].image
-            else:
-                if gallery.gallery_images.all():
-                    gallery.banner_image = gallery.gallery_images.all()[0].image
+        get_banner_image(galleries_list)
 
         posts = sorted(
             chain(news_list, galleries_list),
@@ -63,7 +54,7 @@ class HomePage(Page):
         context["posts"] = [p for p in posts if p != main_post][:6]
 
         # get upcoming events
-        today = get_today()
+        today = self.get_today()
 
         q = EventsPage.objects.live().all()
         eventpage = q[len(q) - 1] if q else None
@@ -149,8 +140,14 @@ class OrdinaryPage(Page):
 class TeachersPage(Page):
     template = "home/teachers_page.html"
 
-    year = models.CharField(
-        verbose_name="Rok szkolny", null=True, blank=True, max_length=10
+    year = models.ForeignKey(
+        "core.SchoolYearSnippet",
+        verbose_name="Rok szkolny",
+        max_length=10,
+        blank=False,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+"
     )
     introduction = models.TextField(verbose_name="Wprowadzenie", null=True, blank=True)
     content = StreamField(

@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
+
+{% block content %}
+
+<main class="wrapper">
+    <!-- {%include 'includes/breadcrumb.html'%} -->
+    <section class="allnews" id="allnews">
+        <div class="heading-wrapper mtb-3">
+            <h1 class="heading-primary ">Galerie zdjęć - rok szkolny {{active_year}}</h1>
+            <div class="select menu-button-actions">
+                <button class="select__btn" type="button" id="menubutton1" aria-haspopup="true" aria-controls="menu1">
+                    Wybierz rok szkolny:
+                    <svg xmlns="http://www.w3.org/2000/svg" class="down" width="12" height="9" viewBox="0 0 12 9">
+                        <polygon points="1 0, 11 0, 6 8"></polygon>
+                    </svg>
+                </button>
+                <ul class="select__list" id="menu1" role="menu" aria-labelledby="menubutton1">
+                    {% for year in years %}
+                    <li class="select__list-item" role="menuitem">
+                        <a class="dropdown-item select__list-link" href="{{page.get_url}}?year={{year.urlname}}" aria-label="Przejdź do galerii zdjęć z {{year.name}}">{{year.name}}</a>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="posts__cards">
+            {% for gallery in galleries %}
+            <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <div class="img-wrapper">
+                    {% if gallery.banner_image %}
+                    {% image gallery.banner_image width-500 as img %}
+                    <img src="{{img.url}}" alt="img.alt_attr" width="{{img.width}}" height="{{img.height}}"
+                        class="posts__main-img posts__main-img--secondary">
+                    {% endif %}
+                </div>
+                <div class="posts__main-box posts__main-box--secondary">
+                    <h2 class="posts__main-heading">{{gallery.title}}</h2>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {%include 'includes/pagination.html'%}
+</main>
+
+{%endblock content %}
+{% block extra_js %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+    integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+    $(document).ready(function () {
+        var keys = {
+            ESC: 27,
+            TAB: 9,
+            RETURN: 13,
+            SPACE: 32,
+            LEFT: 37,
+            UP: 38,
+            RIGHT: 39,
+            DOWN: 40
+        };
+
+        $("#dropdownMenu1").on("click", function (event) {
+            $(".dropdown-menu").toggle(function () {
+                if ($('.dropdown-menu').is(':visible')) {
+                    $('#dropdownMenu1').attr("aria-expanded", "true");
+                    $(".dropdown-menu").focus();
+                }
+            });
+
+        });
+        $(".dropdown-menu").on("keydown", function (event) {
+            doKeypress(keys, event);
+        });
+        $(".dropdown-menu").on("click", "button", function (event) {
+
+            selectOption($(this));
+        });
+
+
+    });
+
+    function doKeypress(keys, event) {
+        current = $(':focus');
+        current.addClass("highlight");
+        switch (event.which) {
+
+            case keys.ESC:
+                $(".dropdown-menu").hide();
+                $("#dropdownMenu1").focus();
+                break;
+
+            case keys.TAB:
+                if (current.hasClass("last")) {
+                    if (event.shiftKey) {
+                        current.removeClass('highlight').prev("button").addClass('highlight').focus();
+                    }
+                    else {
+                        $('#dropdownMenu1').attr("aria-expanded", "false");
+                        $(".dropdown-menu").hide();
+                        $("*").removeClass('highlight');
+                    }
+                }
+                if (event.shiftKey) {
+                    current.removeClass('highlight').prev("button").addClass('highlight').focus();
+                }
+                else {
+
+                    current.removeClass('highlight').next("button").addClass('highlight').focus();
+                }
+                break;
+
+            case keys.UP:
+                event.preventDefault();
+                event.stopPropagation();
+                return moveUp(highligted);
+                break;
+
+            case keys.DOWN:
+                highligted = $(':focus');
+                event.preventDefault();
+                event.stopPropagation();
+                return moveDown(highligted);
+                break;
+
+
+            case keys.RETURN:
+                highligted = $('.highlight');
+                if (highligted) {
+                    if (highligted.attr("id") == "dropdown-menu") {
+                        return false;
+                    }
+                    else {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        return selectOption(highligted);
+                    }
+                    break;
+                }
+            case keys.SPACE:
+                highligted = $('.highlight');
+                if (highligted) {
+                    if (highligted.attr("id") == "dropdown-menu") {
+                        return false;
+                    }
+                    else {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        return selectOption(highligted);
+                    }
+                    break;
+                }
+            default:
+                return;
+        }
+    }
+
+    function selectOption(highligted) {
+        if (highligted) {
+            highligted.attr('aria-selected', true);
+            $('#dropdownMenu1').html(highligted.text());
+            $('#dropdownMenu1').attr("aria-label", "Current company: " + $(highligted).text() + ".");
+            $('#dropdownMenu1').focus();
+            $('#dropdownMenu1').attr("aria-expanded", "false");
+            $(".dropdown-menu").hide();
+            $("*").removeClass('highlight');
+        } else {
+            return;
+        }
+    }
+    function moveDown(highligted) {
+        highligted = $(':focus');
+        if (highligted.attr("id") == "dropdown-menu") {
+            highligted.removeClass('highlight');
+            highligted.children().first("li").children("button").addClass('highlight').focus();
+        }
+        else {
+            highligted.removeClass('highlight').parent().next("li").children("button").addClass('highlight').focus();
+        }
+    }
+    function moveUp(highligted) {
+        highligted = $(':focus');
+        if (highligted.attr("id") == "dropdown-menu") {
+            highligted.removeClass('highlight');
+        }
+        else {
+            highligted.removeClass('highlight').parent().prev("li").children("button").addClass('highlight').focus();
+        }
+    }
+    {% comment %}
+    <!-- const selectBox = document.querySelector('#year-select');
+    const options = selectBox.querySelectorAll('option');
+    selectBox.addEventListener("change", function () {
+        let value = selectBox.options[selectBox.selectedIndex].value;
+        let encoded = encodeURIComponent(value);
+        window.location.replace(`/galerie/?year=${encoded}`)
+    }); -->{% endcomment %}
+</script>
+<script src="{% static 'js/dropdown.min.js' %}"></script>
+{%endblock%}

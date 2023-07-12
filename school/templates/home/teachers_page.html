@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static menu_tags %}
 {% block content %}
-{%include 'includes/navbar.html'%}
+
 <main>
     <div class="subpage-heading">
         <div class="wrapper wrapper-md">
-            <h1 class="heading-primary">{{page.title}} {% if page.year %}- rok&nbsp;szkolny {{page.year}}{% endif %}</h1>
+            <h1 class="heading-primary heading-center-md">{{page.title}} {% if page.year %}- rok&nbsp;szkolny {{page.year}}{% endif %}</h1>
         </div>
     </div>
     <nav class="wrapper">{%include 'includes/breadcrumb.html'%}</nav>

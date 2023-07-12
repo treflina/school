@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load static %}
 {% block content %}
-{%include 'includes/navbar.html'%}
+
 <main class="wrapper">
     <!-- {%include 'includes/breadcrumb.html'%} -->
     <section class="allnews" id="allnews">
@@ -13,13 +13,13 @@
                 <li><a href="{% pageurl page%}#allnews" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
                 </li>
                 {% for category in categories %}
+                {%if category.name != 'Galeria' %}
                 <li><a href="?category={{category.id}}" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a>
                 </li>
-                {% comment %} <li><a href="#" class="posts__categories-category posts__categories-link">Relacje</a></li>
-                <li><a href="#" class="posts__categories-category posts__categories-link">Sport</a></li>
-                <li><a href="#" class="posts__categories-category posts__categories-link">Konkursy</a></li>
-                <li><a href="#" class="posts__categories-category posts__categories-link">Wycieczki</a></li> {% endcomment %}
+                {% endif %}
                 {% endfor %}
+                <li><a href="#" class="posts__categories-category posts__categories-link posts__categories-link--gallery">Przejdź do galerii zdjęć</a></li>
+
             </ul>
         </div>
         <div class="posts__cards">

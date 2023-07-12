@@ -17,10 +17,12 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
-            url("/static/img/squares2.jpg");
-        background-image: linear-gradient(rgba(25, 64, 91, 0.8), rgba(25, 64, 91, .8)),
-            url("/static/img/Budynek1.jpg");
+        // background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
+        //     url("/static/img/squares2.jpg");
+        background-image: linear-gradient(rgba(25, 64, 91, 0.65), rgba(25, 64, 91, .65)),
+            url("/static/img/szkola1.jpeg");
+        // background-image: url("/static/img/Budynek1.jpg");
+
         background-size: cover;
         background-position: center;
 
@@ -34,8 +36,7 @@
 
         h1 {
             font-size: 5.5rem;
-            font-family: 'Rubik',
-                sans-serif;
+            font-family: $heading-font;
             line-height: 1.5;
             color: white;
         }

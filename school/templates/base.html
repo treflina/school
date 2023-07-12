@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar menu_tags %}
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -41,9 +41,12 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
+    {% main_menu template="includes/navbar2.html" add_sub_menus_inline=True %}
     {% wagtailuserbar %}
 
-    {% block content %}{% endblock %}
+    {% block content %}
+
+    {% endblock %}
 
     {# Global javascript #}
     <script src="{% static 'js/script.min.js' %}"></script>

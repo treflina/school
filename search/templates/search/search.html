@@ -1,40 +1,39 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags %}
-
 {% block body_class %}template-searchresults{% endblock %}
 
 {% block title %}Search{% endblock %}
 
 {% block content %}
-{% include 'includes/navbar.html' %}
+<main class="search">
+<div class="wrapper wrapper-md">
+    {% if search_results %}
+    <h1 class="heading-primary mtb-3">Znaleziono {{search_results|length}} wyników wyszukiwania z frazą
+        <span>{{ search_query }}</span>:</h1>
+    <ul class="search__list">
+        {% for result in search_results %}
+        <li class="search__list-item">
+            <h4><a class="search__list-link" href="{% pageurl result %}">{{ result }}</a></h4>
+            <p>{{ result.get_full_url }}</p>
+            {% if result.search_description %}
+            {{ result.search_description }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
 
-
-{% comment %} <form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <input type="submit" value="Search" class="button">
-</form> {% endcomment %}
-
-{% if search_results %}
-<h1>Znaleziono {{search_results|length}} wyników wyszukiwania z frazą {{ search_query }}:</h1>
-<ul>
-    {% for result in search_results %}
-    <li>
-        <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-        {% if result.search_description %}
-        {{ result.search_description }}
+    <div class="search__pagination">
+        {% if search_results.has_previous %}
+        <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}" class="pagination__item-link search__pagination-link">&laquo; Poprzednie</a>
         {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+        {% if search_results.has_next %}
+        <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}" class="pagination__item-link search__pagination-link">Następne &raquo;</a>
+        {% endif %}
+        {% elif search_query %}
+        <h1 class="heading-primary mtb-3">Nie odnaleziono wyników dla zadanego zapytania.</h1>
+        {% endif %}
+    </div>
+</div>
+</main>
 
-{% if search_results.has_previous %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-{% endif %}
-
-{% if search_results.has_next %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-{% endif %}
-{% elif search_query %}
-<p>Nie odnaleziono wyników dla zadanego zapytania.</p>
-{% endif %}
 {% endblock %}

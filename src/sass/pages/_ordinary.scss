@@ -8,6 +8,11 @@
     padding: 1rem 4rem;
     list-style: none;
 
+    span {
+        font-weight: normal;
+        font-size: 1.5rem;
+    }
+
     a {
         display: inline-block;
         margin: 1rem 0 1rem 2rem;
@@ -35,8 +40,8 @@
         vertical-align: middle;
         content: url('/static/img/file-text.svg');
     }
-
 }
+
 
 @include media(md) {
     .block-docs__list {

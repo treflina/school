@@ -9,12 +9,11 @@ from wagtail.admin.panels import (
     MultipleChooserPanel,
     PageChooserPanel,
 )
+from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField, StreamField
 
 # from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.models import Orderable, Page
-from wagtail.contrib.routable_page.models import RoutablePageMixin
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
@@ -53,7 +52,7 @@ class NewsCategory(models.Model):
     @classmethod
     def get_default_id(cls):
         category, created = cls.objects.get_or_create(
-            name='Galeria',
+            name="Galeria",
             defaults=dict(color=3),
         )
         return category.id
@@ -78,9 +77,8 @@ class NewsIndexPage(RoutablePageMixin, Page):
         """Adding custom stuff to our context."""
         context = super().get_context(request, *args, **kwargs)
 
-        all_news = (
-            NewsDetailPage.objects.live().public().order_by("-publish_date")
-        )
+        all_news = NewsDetailPage.objects.live().public().order_by("-publish_date")
+
         # Add filtering news by category
         categories = NewsCategory.objects.all().order_by("id")
         context["categories"] = categories
@@ -88,18 +86,19 @@ class NewsIndexPage(RoutablePageMixin, Page):
         if request.GET.get("category", None):
             category = request.GET.get("category")
             try:
-                all_news = list(filter(lambda x: x.category_id == int(category), all_news))
+                all_news = list(
+                    filter(lambda x: x.category_id == int(category), all_news)
+                )
                 context["active_category"] = categories.filter(id=category).first()
             except ValueError:
                 pass
 
-        context['posts'], context['page_range'] = self.pagination(request, all_news)
-        print('context', context)
+        context["posts"], context["page_range"] = self.pagination(request, all_news)
         return context
 
     def pagination(self, request, posts):
-        paginator = Paginator(posts, 1)
-        page = request.GET.get('page')
+        paginator = Paginator(posts, 3)
+        page = request.GET.get("page")
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -111,9 +110,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
         start_index = index - 5 if index >= 5 else 0
         end_index = index + 5 if index <= max_index - 5 else max_index
         page_range = paginator.page_range[start_index:end_index]
-        print('\n', posts, '\n', page_range)
         return posts, page_range
-
 
     class Meta:  # noqa
         verbose_name = "Wszystkie aktualności"
@@ -237,8 +234,8 @@ class NewsDetailPage(Page):
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField('main_text'),
-        index.SearchField('body'),
+        index.SearchField("main_text"),
+        index.SearchField("body"),
         # index.FilterField('date'),
     ]
 

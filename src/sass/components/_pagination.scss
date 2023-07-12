@@ -1,3 +1,5 @@
+@use 'abstracts' as *;
+
 .pagination {
     margin: 2rem 0 1rem;
 }
@@ -26,8 +28,8 @@
     }
 
     .active {
-        background-color: #F66B0E;
+        background-color: $color-secondary-cta;
         // color: #efefef;
-        border: 1px solid #F66B0E;
+        border: 1px solid $color-secondary-cta;
     }
 }

@@ -43,6 +43,14 @@
     padding: 0 100px;
 }
 
+.heading-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
 
 @include media(l) {
     .wrapper-md {
