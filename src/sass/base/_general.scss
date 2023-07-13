@@ -16,6 +16,10 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100vh;
     background-color: #fff;
     font-family: $main-font;
     font-size: 1.6rem;

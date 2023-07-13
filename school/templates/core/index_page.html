@@ -4,9 +4,9 @@
 {% block content %}
 <main class="main wrapper wrapper-md">
     <h1 class="heading-primary mtb-3">{{page.title}}</h1>
-    <ul class="index">
+    <ul class="index__list">
         {% for subpage in page.get_child_pages %}
-        <li><a href="{{subpage.get_url}}">{{subpage.title}}</a></li>
+        <li class="index__item"><a href="{{subpage.get_url}}" class="index__link">{{subpage.title}}</a></li>
         {% endfor %}
     </ul>
 </main>

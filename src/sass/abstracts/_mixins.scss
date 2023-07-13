@@ -16,3 +16,12 @@ $media: (xxsm: 25em, //400px
         }
     }
 }
+
+@mixin flex-basic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrapxz;
+    width: 100%;
+}

@@ -1,0 +1,25 @@
+@use 'abstracts' as *;
+
+.index__list {
+    list-style: none;
+}
+
+.index__item {
+    padding: 1rem 0;
+    font-size: 1.8rem;
+}
+
+.index__link {
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    color: $color-primary-dark;
+    font-weight: bold;
+    transition: text-decoration-color .3s;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration-color: $color-primary-dark;
+    }
+}
