@@ -17,12 +17,8 @@
         top: 0;
         width: 100%;
         height: 100%;
-        // background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
-        //     url("/static/img/squares2.jpg");
         background-image: linear-gradient(rgba(25, 64, 91, 0.65), rgba(25, 64, 91, .65)),
             url("/static/img/szkola1lgm.jpg");
-        // background-image: url("/static/img/Budynek1.jpg");
-
         background-size: cover;
         background-position: center;
 
@@ -90,7 +86,6 @@
         width: 100%;
         min-height: 10rem;
         margin-top: -40px;
-        // border: 1px solid red;
         z-index: 5;
 
 
@@ -102,12 +97,10 @@
             margin: .5em 1em;
             width: 300px;
             padding: 1em;
-            // border-radius: 20px;
             font-size: 2rem;
             font-weight: bold;
             background-color: #EFEFEF;
             color: #112B3C;
-            // border: 4px solid #C4DFDF;
             box-shadow: 0 0 10px rgba(0, 0, 0, .7);
             text-decoration: none;
             text-align: center;
