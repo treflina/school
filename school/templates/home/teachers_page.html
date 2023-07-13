@@ -17,10 +17,12 @@
             {% include_block block %}
             {% endfor %}
         </ul>
+        {% if page.image %}
         <div class="teachers__image">
             {% image page.image width-500 as img %}
             <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ img.alt }}"/>
         </div>
+        {% endif %}
         </div>
     </div>
 </main>
