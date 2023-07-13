@@ -1517,10 +1517,10 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
 
 .index__item {
   padding: 1rem 0;
-  font-size: 1.8rem;
 }
 
 .index__link {
+  font-size: 1.7rem;
   -webkit-text-decoration-color: transparent;
           text-decoration-color: transparent;
   text-underline-offset: 3px;
@@ -1534,4 +1534,32 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
 .index__link:hover, .index__link:focus, .index__link:active {
   -webkit-text-decoration-color: rgb(32, 83, 117);
           text-decoration-color: rgb(32, 83, 117);
+}
+
+.search__list {
+  margin-left: 1rem;
+}
+
+.search__pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.search__pagination-link {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  color: black;
+  -webkit-text-decoration-color: transparent;
+          text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: background-color 0.3s, -webkit-text-decoration-color 0.3s;
+  transition: background-color 0.3s, text-decoration-color 0.3s;
+  transition: background-color 0.3s, text-decoration-color 0.3s, -webkit-text-decoration-color 0.3s;
+}
+.search__pagination-link:hover, .search__pagination-link:focus, .search__pagination-link:active {
+  background-color: rgba(246, 107, 14, 0.8);
+  -webkit-text-decoration-color: black;
+          text-decoration-color: black;
 }

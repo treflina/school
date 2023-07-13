@@ -12,7 +12,17 @@ def search(request):
     # Search
     if search_query:
         search_results = Page.objects.live().search(search_query)
+        num_results = len(search_results)
+        if num_results == 1:
+            result = f"{num_results} wynik"
+        elif num_results in [2,3,4]:
+            result = f"{num_results} wyniki"
+        elif num_results > 4:
+            result = f"{num_results} wyników"
+        else:
+            result = None
         query = Query.get(search_query)
+
 
         # Record hit
         query.add_hit()
@@ -20,7 +30,7 @@ def search(request):
         search_results = Page.objects.none()
 
     # Pagination
-    paginator = Paginator(search_results, 2)
+    paginator = Paginator(search_results, 1)
     try:
         search_results = paginator.page(page)
     except PageNotAnInteger:
@@ -34,5 +44,6 @@ def search(request):
         {
             "search_query": search_query,
             "search_results": search_results,
+            "result": result
         },
     )

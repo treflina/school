@@ -2,18 +2,18 @@
 {% load static wagtailcore_tags %}
 {% block body_class %}template-searchresults{% endblock %}
 
-{% block title %}Search{% endblock %}
+{% block title %}Wyniki wyszukiwania{% endblock %}
 
 {% block content %}
 <main class="search">
 <div class="wrapper wrapper-md">
     {% if search_results %}
-    <h1 class="heading-primary mtb-3">Znaleziono {{search_results|length}} wyników wyszukiwania z frazą
-        <span>{{ search_query }}</span>:</h1>
+    <h1 class="heading-primary mtb-3">Znaleziono {{result}} wyszukiwania z frazą
+        "<span style="color: rgb(246, 107, 14);">{{ search_query }}</span>":</h1>
     <ul class="search__list">
         {% for result in search_results %}
-        <li class="search__list-item">
-            <h4><a class="search__list-link" href="{% pageurl result %}">{{ result }}</a></h4>
+        <li class="search__list-item index__item">
+            <h4><a class="search__list-link index__link" href="{% pageurl result %}">{{ result }}</a></h4>
             <p>{{ result.get_full_url }}</p>
             {% if result.search_description %}
             {{ result.search_description }}
@@ -24,10 +24,10 @@
 
     <div class="search__pagination">
         {% if search_results.has_previous %}
-        <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}" class="pagination__item-link search__pagination-link">&laquo; Poprzednie</a>
+        <a class="search__pagination-link" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}" class="pagination__item-link search__pagination-link">&laquo; Poprzednie</a>
         {% endif %}
         {% if search_results.has_next %}
-        <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}" class="pagination__item-link search__pagination-link">Następne &raquo;</a>
+        <a class="search__pagination-link" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}" class="pagination__item-link search__pagination-link">Następne &raquo;</a>
         {% endif %}
         {% elif search_query %}
         <h1 class="heading-primary mtb-3">Nie odnaleziono wyników dla zadanego zapytania.</h1>

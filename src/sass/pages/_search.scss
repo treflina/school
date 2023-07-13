@@ -1,0 +1,29 @@
+@use 'abstracts'as *;
+
+.search__list {
+    margin-left: 1rem;
+}
+
+.search__pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+
+    &-link {
+        display: inline-block;
+        padding: .25em .5em;
+        box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+        color: black;
+        text-decoration-color: transparent;
+        text-underline-offset: 3px;
+        transition: background-color .3s, text-decoration-color .3s;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: $color-secondary-cta;
+            text-decoration-color: black;
+        }
+    }
+}
