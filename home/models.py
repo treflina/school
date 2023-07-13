@@ -49,9 +49,10 @@ class HomePage(RoutablePageMixin, Page):
             category = request.GET.get("category")
             try:
                 posts = list(filter(lambda x: x.category_id == int(category), posts))
+                context["active_category"] = categories.filter(id=category).first()
             except ValueError:
                 pass
-            context["active_category"] = categories.filter(id=category).first()
+
 
         context["main_post"] = main_post
         context["categories"] = categories
