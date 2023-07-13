@@ -8,7 +8,7 @@
     <!-- {%include 'includes/breadcrumb.html'%} -->
     <section class="allnews" id="allnews">
         <div class="heading-wrapper mtb-3">
-            <h1 class="heading-primary ">Galerie zdjęć - rok szkolny {{active_year}}</h1>
+            <h1 class="heading-primary ">Galerie zdjęć {% if active_year %}- rok szkolny{% endif %} {{active_year}}</h1>
             <div class="select menu-button-actions">
                 <button class="select__btn" type="button" id="menubutton1" aria-haspopup="true" aria-controls="menu1">
                     Wybierz rok szkolny:

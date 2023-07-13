@@ -130,17 +130,17 @@
 
         &-heading {
             font-weight: 700;
-            font-family: $heading-font;
+            // font-family: $heading-font;
             margin: .5em 0 1em;
             overflow-wrap: anywhere;
 
 
             &--primary {
-                font-size: 2.3rem;
+                font-size: 2.2rem;
             }
 
             &--secondary {
-                font-size: 2.3rem;
+                font-size: 2.1rem;
             }
         }
 
@@ -228,19 +228,20 @@
             text-align: right;
             border-radius: 20px;
             transition: box-shadow .3s,
-                background-color .3s, color .3s;
+                background-color .3s, color .3s, transform .3s;
 
             &:hover,
             &:focus,
             &:active {
                 box-shadow: 0px 0px 3px #205375;
+                // transform: translateY(-2px);
             }
 
             &--active {
                 background-color: #205375;
                 color: white;
             }
-        
+
         }
 
         &-category {
@@ -319,6 +320,14 @@
     }
 }
 
+@include media(md) {
+    .posts {
+        &__cards {
+            gap: 10px;
+        }
+    }
+}
+
 @include media(sm) {
     .posts {
         &__cards {
@@ -334,6 +343,7 @@
         &__categories {
             &-link {
                 margin-left: .25em;
+
                 &--gallery {
                     margin-left: .25em;
                 }
@@ -363,6 +373,11 @@
 
 @include media(xxsm) {
     .posts {
+        &__box {
+            &-heading {
+                padding: 2em .5rem .5em;
+            }
+        }
 
         &__main {
             position: relative;

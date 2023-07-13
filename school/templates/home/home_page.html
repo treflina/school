@@ -17,7 +17,7 @@
 </header>
 <main class="main">
     <div class="header__links">
-        <a href="{% slugurl 'galeria1' %}" class="header__links-link"><img src="{% static '/img/camera.svg' %}" alt="" aria-hidden="true"> <span>Galeria zdjęć</span></a>
+        <a href="{% slugurl 'galerie' %}" class="header__links-link"><img src="{% static '/img/camera.svg' %}" alt="" aria-hidden="true"> <span>Galerie zdjęć</span></a>
         <a href="https://adfs.eszkola.opolskie.pl/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fcufs.eszkola.opolskie.pl%3a443%2fturawa%2fAccount%2fLogOn&wctx=rm%3d0%26id%3deSzkola%26ru%3d%252fturawa%252fFS%252fLS%253fwa%253dwsignin1.0%2526wtrealm%253dhttps%25253A%25252F%25252Fuonetplus.eszkola.opolskie.pl%25252Fturawa%25252FLoginEndpoint.aspx%2526wctx%253dhttps%25253A%25252F%25252Fuonetplus.eszkola.opolskie.pl%25252Fturawa%25252FLoginEndpoint.aspx&wct=2023-06-08T14%3a48%3a22Z" class="header__links-link"><img src="{% static '/img/logosz2.jpg' %}" alt="" aria-hidden="true"> Opolska eSzkoła</a>
         <a href="#" class="header__links-link"><img src="{% static '/img/calendar.svg' %}" alt="" aria-hidden="true"> Rekrutacja</a>
     </div>
@@ -62,7 +62,7 @@
                 </ul>
             </div>
 
-            <a href="{%slugurl 'wydarzenia'%}" class="posts__linktoall"><span>Przejdź do wszystkich wydarzeń &raquo;</span></a>
+            <a href="{%slugurl 'wydarzenia'%}" class="posts__linktoall"><span>Przejdź do wszystkich wydarzeń&nbsp;&raquo;</span></a>
         </div>
     </div>
     <div class="posts__box wrapper" id="news">
@@ -76,7 +76,7 @@
                 <li><a href="?category={{category.id}}#news" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a></li>
                 {% endfor %}
             </ul>
-        </div> 
+        </div>
         <div class="posts__cards">
             {% for post in posts %}
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
@@ -230,7 +230,7 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="posts__linktoall"><span>Przejdź do wszystkich aktualności &raquo;</span></a>
+        <a href="{% slugurl 'aktualnosci'%}" class="posts__linktoall"><span>Przejdź do wszystkich aktualności &raquo;</span></a>
     </div>
 </main>
 <footer class="footer">

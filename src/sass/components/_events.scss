@@ -113,3 +113,8 @@
 .bg-soft-warning {
     background-color: #f3a26b;
 }
+
+@include media(xxsm) {
+    .events {
+        padding: 2em .5rem;
+    }}

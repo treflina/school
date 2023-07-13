@@ -13,10 +13,12 @@
             &-link {
                 &--gallery {
                     margin-left: 5rem;
-                    padding: 0.25em 1em;
+                    padding: 0.25em 1.25em;
                     background-color: $color-secondary-cta;
-                    color: black;
-                    font-weight: normal;
+                    // border: 1px solid $color-primary-dark;
+                    color: #efefef;
+                    // font-weight: normal;
+                    font-size: 1.5rem;
 
                     &:hover,
                     &:focus,

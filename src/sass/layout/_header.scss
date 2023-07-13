@@ -20,7 +20,7 @@
         // background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
         //     url("/static/img/squares2.jpg");
         background-image: linear-gradient(rgba(25, 64, 91, 0.65), rgba(25, 64, 91, .65)),
-            url("/static/img/szkola1.jpeg");
+            url("/static/img/szkola1lgm.jpg");
         // background-image: url("/static/img/Budynek1.jpg");
 
         background-size: cover;
@@ -131,8 +131,8 @@
 @include media(l) {
     .header {
         &::before {
-            background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
-                url("/static/img/squares2min.jpg");
+            background-image: linear-gradient(rgba(25, 64, 91, 0.65), rgba(25, 64, 91, .65)),
+                url("/static/img/szkola1sm.jpg");
         }
     }
 }
