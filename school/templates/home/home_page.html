@@ -68,7 +68,7 @@
       <div class="posts__categories">
             <p class="posts__categories-category posts__categories-category--filter">Filtruj: </p>
             <ul class="posts__categories-list" id="categories-list">
-                <li><a href="#news" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
+                <li><a href="{% pageurl page%}#news" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
                 </li>
                 {% for category in categories %}
                 <li><a href="?category={{category.id}}#news" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a></li>

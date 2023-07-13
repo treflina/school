@@ -12,10 +12,11 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
+from wagtail.contrib.routable_page.models import RoutablePageMixin
 from gallery.utils import get_banner_image
 
 
-class HomePage(Page):
+class HomePage(RoutablePageMixin, Page):
     template = "home/home_page.html"
     parent_page_types = []
 
@@ -46,7 +47,10 @@ class HomePage(Page):
 
         if request.GET.get("category", None):
             category = request.GET.get("category")
-            posts = list(filter(lambda x: x.category_id == int(category), posts))
+            try:
+                posts = list(filter(lambda x: x.category_id == int(category), posts))
+            except ValueError:
+                pass
             context["active_category"] = categories.filter(id=category).first()
 
         context["main_post"] = main_post
