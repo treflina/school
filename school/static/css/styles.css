@@ -228,6 +228,10 @@ body {
 .posts__main {
   position: relative;
 }
+.posts__main a {
+  text-decoration: none;
+  color: black;
+}
 .posts__main--primary {
   display: flex;
   flex-wrap: wrap;
@@ -460,7 +464,7 @@ body {
 }
 @media screen and (max-width: 48em) {
   .posts__cards {
-    gap: 10px;
+    gap: 30px;
   }
 }
 @media screen and (max-width: 37.5em) {
@@ -480,6 +484,9 @@ body {
 @media screen and (max-width: 31.25em) {
   .posts__cards {
     grid-template-columns: auto;
+  }
+  .posts__main--secondary {
+    margin: 0 1rem;
   }
   .posts__linktoall {
     margin-right: 0.5em;
@@ -503,7 +510,6 @@ body {
   }
   .posts__main--secondary {
     width: 90vw;
-    margin: 2rem 1rem;
   }
   .posts__main-box--secondary {
     padding: 1.5em 0.75em;
@@ -1253,6 +1259,9 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     background-image: linear-gradient(rgba(32, 83, 117, 0.7), rgba(32, 83, 117, 0.7)), url("/static/img/squaresmin2.jpg");
   }
 }
+.allnews {
+  padding-top: 2rem;
+}
 .allnews .posts__cards {
   padding: 1rem 0 0;
 }
@@ -1265,7 +1274,6 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   padding: 0.25em 1.25em;
   background-color: rgba(246, 107, 14, 0.8);
   color: #efefef;
-  font-size: 1.5rem;
 }
 .allnews .posts__categories-link--gallery:hover, .allnews .posts__categories-link--gallery:focus, .allnews .posts__categories-link--gallery:active {
   box-shadow: 0px 0px 6px #205375;
@@ -1282,6 +1290,11 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   margin: 0;
 }
 
+@media screen and (max-width: 48em) {
+  .allnews {
+    padding-top: 0;
+  }
+}
 .gallery__list {
   display: flex;
   flex-wrap: wrap;

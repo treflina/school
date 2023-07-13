@@ -30,19 +30,21 @@
         <div class="posts__cards">
             {% for gallery in galleries %}
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
+                <a href="{{gallery.get_url}}" aria-label="Przejdź do galerii zdjęć {{gallery.title}}">
                 <div class="img-wrapper">
                     {% if gallery.banner_image %}
                     {% image gallery.banner_image width-500 as img %}
-                    <img src="{{img.url}}" alt="img.alt_attr" width="{{img.width}}" height="{{img.height}}"
+                    <img src="{{img.url}}" alt="{{img.alt_attr}}" width="{{img.width}}" height="{{img.height}}"
                         class="posts__main-img posts__main-img--secondary">
                     {% endif %}
                 </div>
                 <div class="posts__main-box posts__main-box--secondary">
-                    <h2 class="posts__main-heading">{{gallery.title}}</h2>
+                   <h2 class="posts__main-heading">{{gallery.title}}</h2>
                 </div>
+                </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
     </section>
     {%include 'includes/pagination.html'%}
 </main>

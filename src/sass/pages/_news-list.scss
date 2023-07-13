@@ -1,6 +1,8 @@
 @use 'abstracts'as *;
 
 .allnews {
+    padding-top: 2rem;
+
     .posts {
         &__cards {
             padding: 1rem 0 0;
@@ -18,7 +20,7 @@
                     // border: 1px solid $color-primary-dark;
                     color: #efefef;
                     // font-weight: normal;
-                    font-size: 1.5rem;
+                    // font-size: 1.5rem;
 
                     &:hover,
                     &:focus,
@@ -45,5 +47,11 @@
             }
         }
 
+    }
+}
+
+@include media(md) {
+    .allnews {
+    padding-top: 0;
     }
 }

@@ -22,6 +22,11 @@
     &__main {
         position: relative;
 
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
         &--primary {
             display: flex;
             flex-wrap: wrap;
@@ -323,7 +328,7 @@
 @include media(md) {
     .posts {
         &__cards {
-            gap: 10px;
+            gap: 30px;
         }
     }
 }
@@ -360,6 +365,12 @@
             grid-template-columns: auto;
         }
 
+        &__main{
+            &--secondary {
+                margin: 0 1rem;
+            }
+        }
+
         &__linktoall {
             margin-right: .5em;
 
@@ -390,7 +401,6 @@
 
             &--secondary {
                 width: 90vw;
-                margin: 2rem 1rem;
             }
 
             &-box {
