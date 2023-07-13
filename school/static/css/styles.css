@@ -810,6 +810,8 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   position: relative;
 }
 .select__list-link {
+  display: inline-block;
+  width: 100%;
   color: inherit;
   text-decoration: none;
 }
