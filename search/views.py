@@ -12,6 +12,9 @@ def search(request):
     # Search
     if search_query:
         search_results = Page.objects.live().search(search_query)
+        query = Query.get(search_query)
+        query.add_hit()
+
         num_results = len(search_results)
         if num_results == 1:
             result = f"{num_results} wynik"
@@ -21,13 +24,9 @@ def search(request):
             result = f"{num_results} wyników"
         else:
             result = None
-        query = Query.get(search_query)
-
-
-        # Record hit
-        query.add_hit()
     else:
         search_results = Page.objects.none()
+        result = f"0 wyników"
 
     # Pagination
     paginator = Paginator(search_results, 1)

@@ -24,26 +24,39 @@
             position: relative;
             display: block;
             height: 90px;
+            margin: auto 0;
+            border-top: 5px solid transparent;
+            transition: border-top-color .3s;
+
+            &:focus,
+            &:hover,
+            &:active {
+                border-top-color: $color-primary-dark;
+            }
         }
 
         &-icon {
-            margin-bottom: -5px;
             pointer-events: none;
         }
 
         &-link {
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
             padding: 0 1em;
-            line-height: 90px;
+            // line-height: 90px;
             text-decoration: none;
             color: black;
             // text-transform: uppercase;
             font-size: 1.8rem;
             font-weight: bold;
+            transition: background-color .3s;
 
             &:hover,
             &:focus {
                 background-color: #EFEFEF;
+
             }
         }
     }
@@ -53,6 +66,7 @@
         cursor: pointer;
         font-family: $main-font;
         background-color: inherit;
+
     }
 
     &__dropdown {
@@ -99,9 +113,8 @@
 
     &-input,
     &-btn {
-        border: 2px solid rgba(0, 0, 0, .5);
+        border: 2px solid $color-primary-dark;
         font-size: inherit;
-
     }
 
     &-input {
@@ -114,7 +127,7 @@
 
         &:focus {
             outline: none;
-            border: 2px solid rgb(17, 43, 60);
+            border: 2px solid $color-secondary-cta;
             background-color: #EFEFEF;
         }
     }
@@ -122,15 +135,16 @@
     &-btn {
         padding: .1em .5em .1em .25em;
         background-color: rgb(32, 83, 117);
-        border: 2px solid transparent;
+        // border: 2px solid transparent;
+        border-left: 2px solid transparent;
         border-radius: 0 15px 15px 0;
         cursor: pointer;
         transition: background-color .3s, transform .3s, color .3s;
 
         &:hover,
         &:focus {
-            background-color: $color-secondary-cta;
-            border: 2px solid rgb(17, 43, 60);
+            background-color: black;
+            border: 2px solid black;
 
         }
 
