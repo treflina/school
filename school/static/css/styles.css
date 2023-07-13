@@ -1474,13 +1474,15 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .teachers__subject span {
-  flex: 1 1 30%;
-  padding-right: 20px;
+  flex: 1 1 50%;
   font-weight: bold;
 }
 .teachers__names {
   flex: 0 1 60%;
   list-style: none;
+}
+.teachers__names-name {
+  padding-left: 30px;
 }
 
 @media screen and (max-width: 37.5em) {
@@ -1493,10 +1495,6 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     flex-direction: column;
   }
   .teachers__subject span {
-    padding-right: 0;
     flex: auto;
-  }
-  .teachers__names-name {
-    margin-left: 30px;
   }
 }

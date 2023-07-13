@@ -38,16 +38,18 @@
         border-bottom: 1px solid rgba(0, 0, 0, .1);
 
         span {
-            flex: 1 1 30%;
-            padding-right: 20px;
+            flex: 1 1 50%;
             font-weight: bold;
         }
     }
 
     &__names {
         flex: 0 1 60%;
-        // width: 70%;
         list-style: none;
+
+        &-name {
+            padding-left: 30px;
+        }
     }
 }
 
@@ -64,14 +66,7 @@
             flex-direction: column;
 
             span {
-                padding-right: 0;
                 flex: auto;
-            }
-        }
-
-        &__names {
-            &-name {
-                margin-left: 30px;
             }
         }
     }
