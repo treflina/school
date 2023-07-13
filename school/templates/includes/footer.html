@@ -1,0 +1,26 @@
+{% load static wagtailcore_tags %}
+<footer class="footer">
+    <div class="footer__upper">
+        <div class="footer__upper-contact">
+            <p>Publiczna Szkoła Podstawowa w Turawie</p>
+            <p>ul. Opolska 47</p>
+            <p>46-045 Turawa</p>
+            <div class="footer__upper-contact--phone"><img src="{% static '/img/phone.svg' %}" alt="">
+                <p>tel.: 77 4212 029, 77 4212 082</p>
+            </div>
+            <div class="footer__upper-contact--mail"><img src="{% static '/img/mail.svg' %}" alt="">
+                <p>email: psp.turawa@oswiata-turawa.pl</p>
+            </div>
+        </div>
+        <div class="footer__upper-links">
+            <a href="#">Znajdź nas na Facebooku: <img src="{% static '/img/facebook.svg' %}" alt=""> </a>
+            <div class="bip-box">
+                <a href="http://pspturawa.oswiata-turawa.pl/7/strona-glowna-bip.html" aria-label="Przejdź do biuletynu informacji publicznej"><img class="bip" src="{% static '/img/bip.png' %}" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer__bottom">
+        <p>&copy; <span class="footer__year">{% now "Y" %}</span> Publiczna Szkoła Podstawowa w Turawie</p>
+        <p>Projekt i wykonanie: IS</p>
+    </div>
+</footer>

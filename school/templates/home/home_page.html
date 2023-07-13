@@ -5,8 +5,6 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 {% endblock %}
 {% block content %}
-{% comment %} {% main_menu template="includes/navbar2.html" add_sub_menus_inline=True %} {% endcomment %}
-{% comment %} {%include 'includes/navbar.html'%} {% endcomment %}
 
 <header class="header">
     <div class="header__text">
@@ -129,25 +127,6 @@
                     <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
                 </div>
             </div>
-            <!-- <div class="posts__main posts__main--secondary" data-aos="fade-up"> -->
-                <!-- <div class="img-wrapper">
-                    <img src="{% static '/img/Budynek1.jpg' %}" alt=""
-                        class="posts__main-img posts__main-img--secondary">
-                </div> -->
-                <!-- <div class="posts__main-box posts__main-box--secondary">
-                    <div class="posts__main-details">
-                        <div class="posts__main-category posts__main-category--4">Konkurs</div>
-                        <p class="posts__main-details--date">2 września 2023</p>
-                    </div>
-                    <h3 class="posts__main-heading posts__main-heading--secondary">Wyzwanie dla małych matematyków
-                    </h3>
-                    <p class="posts__main-text">Przypomnij sobie ile okien miał budynek szkoły przed remontem,
-                        policz
-                        ile ma obecnie. Rozwiązaniem zagadki będzie...
-                    </p>
-                    <a href="#" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a>
-                </div> -->
-            <!-- </div> -->
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
                     <img src="{% static '/img/final.jpg' %}" alt="" class="posts__main-img posts__main-img--secondary">
@@ -233,31 +212,6 @@
         <a href="{% slugurl 'aktualnosci'%}" class="posts__linktoall"><span>Przejdź do wszystkich aktualności &raquo;</span></a>
     </div>
 </main>
-<footer class="footer">
-    <div class="footer__upper">
-        <div class="footer__upper-contact">
-            <p>Publiczna Szkoła Podstawowa w Turawie</p>
-            <p>ul. Opolska 47</p>
-            <p>46-045 Turawa</p>
-            <div class="footer__upper-contact--phone"><img src="{% static '/img/phone.svg' %}" alt="">
-                <p>tel.: 77 4212 029, 77 4212 082</p>
-            </div>
-            <div class="footer__upper-contact--mail"><img src="{% static '/img/mail.svg' %}" alt="">
-                <p>email: psp.turawa@oswiata-turawa.pl</p>
-            </div>
-        </div>
-        <div class="footer__upper-links">
-            <a href="#">Znajdź nas na Facebooku: <img src="{% static '/img/facebook.svg' %}" alt=""> </a>
-            <div class="bip-box">
-                <a href="http://pspturawa.oswiata-turawa.pl/7/strona-glowna-bip.html" aria-label="Przejdź do biuletynu informacji publicznej"><img class="bip" src="{% static '/img/bip.png' %}" alt=""></a>
-            </div>
-        </div>
-    </div>
-    <div class="footer__bottom">
-        <p>&copy; <span class="footer__year">{% now "Y" %}</span> Publiczna Szkoła Podstawowa w Turawie</p>
-        <p>Projekt i wykonanie: IS</p>
-    </div>
-</footer>
 {% endblock %}
 {% block extra_js %}
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

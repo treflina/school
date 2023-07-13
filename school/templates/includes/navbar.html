@@ -1,52 +1,24 @@
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags menu_tags %}
 
 <nav class="nav">
-        <ul class="nav__list">
-            <li class="nav__list-item"><a href="{% slugurl 'home' %}" class="nav__list-link  menu-close"> Strona główna</a></li>
+    <div class="nav__wrapper">
+
+        <ul class="nav__list" id="menu-list">
+           {% for item in menu_items %}
             <li class="nav__list-item">
-                <a href="#" class="nav__list-link"> O szkole<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon"></a>
-                <ul class="nav__dropdown">
-                    <li class="nav__dropdown-item"><a href="#" class="nav__dropdown-link  menu-close">Dokumenty</a></li>
-                    <li class="nav__dropdown-item">
-                        <a href="#" class="nav__dropdown-link  menu-close">Zasady oceniania</a>
-                    </li>
-                    <li class="nav__dropdown-item">
-                        <a href="#" class="nav__dropdown-link  menu-close">Grono pedagogiczne</a>
-                    </li>
-                    <li class="nav__dropdown-item"><a href="#" class="nav__dropdown-link  menu-close">Pedagog</a></li>
-                    <li class="nav__dropdown-item"><a href="#" class="nav__dropdown-link  menu-close">Biblioteka</a></li>
-                    <li class="nav__dropdown-item">
-                        <a href="#" class="nav__dropdown-link  menu-close">Świetlica szkolna</a>
-                    </li>
+                {% if not item.sub_menu %}
+                <a href="{{item.href}}" class="nav__list-link menu-close">{{ item.text }}</a>
+                {% else %}
+                <button class="nav__list-link nav-link nav__btn" aria-haspopup="true" data-dropdown="dropdown{{item.id}}"> {{item.text}}<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon">
+                 </button>
+                <ul class="nav__dropdown" id="dropdown{{item.id}}">
+                    {% for sub_item in item.sub_menu.items %}
+                    <li class="nav__dropdown-item"><a href="{{sub_item.href}}" class="nav__dropdown-link menu-close">{{ sub_item.text }}</a></li>
+                    {% endfor %}
                 </ul>
+                {% endif %}
             </li>
-            <li class="nav__list-item">
-                <a href="#" class="nav__list-link"> Dla uczniów<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon"></a>
-                <ul class="nav__dropdown">
-                    <li class="nav__dropdown-item"><a href="#" class="nav__dropdown-link  menu-close">Konkursy</a></li>
-                    <li class="nav__dropdown-item"><a href="#" class="nav__dropdown-link  menu-close">RSU</a></li>
-                    <li class="nav__dropdown-item">
-                        <a href="#" class="nav__dropdown-link  menu-close">Odjazdy autobusów</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav__list-item">
-                <a href="#" class="nav__list-link"> Dla rodziców<img src="{% static '/img/chevrond.svg' %}" alt="" class="nav__list-icon"></a>
-                <ul class="nav__dropdown">
-                    <li class="nav__dropdown-item">
-                        <a href="#" class="nav__dropdown-link  menu-close">Terminy i miejsca wywiadówek</a>
-                    </li>
-                    <li class="nav__dropdown-item">
-                        <a href="#" class="nav__dropdown-link  menu-close">Wykaz podręczników</a>
-                    </li>
-                    <li class="nav__dropdown-item">
-                        <a href="#" class="nav__dropdown-link  menu-close">Ubezpieczenie dzieci</a>
-                    <li class="nav__dropdown-item"><a href="#" class="nav__dropdown-link  menu-close">Rada Rodziców</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav__list-item"><a href="#news" class="nav__list-link  menu-close">Aktualności</a></li>
-            <li class="nav__list-item"><a href="#" class="nav__list-link  menu-close">Kontakt </a></li>
+            {% endfor %}
         </ul>
         <form class="nav__search" action="{% url 'search' %}" method="get">
             <label for="txtSearch" class="screenReaderOnly">Szukaj: </label>
@@ -54,12 +26,13 @@
             <button id="btnSearch" value="Search" type="submit" class="nav__search-btn"><img src="{% static '/img/search.svg' %}"
                     alt="Szukaj" title="Szukaj"></button>
         </form>
-        <button class="hamburger hamburger--spring" type="button">
+        <button class="hamburger hamburger--spring" type="button" aria-haspopup="true" aria-expanded="false">
             <span class="hamburger-box" role="presentation"><span class="hamburger-inner" role="presentation"></span></span>
             <span class="hamburger-text">Menu</span>
         </button>
+        </div>
     </nav>
-    <div class="nav__line"></div>
+
 
 
 
