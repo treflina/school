@@ -57,8 +57,8 @@
 
     &__btn {
         border-left: none;
-        border-right:none;
-        border-bottom:none;
+        border-right: none;
+        border-bottom: none;
         cursor: pointer;
         font-family: $main-font;
         background-color: inherit;
@@ -140,7 +140,7 @@
         &:hover,
         &:focus {
             background-color: $color-primary-dark;
-            border: 2px solid black;
+            border: 2px solid $color-primary-dark;
 
         }
 
@@ -244,9 +244,12 @@
             line-height: 1;
         }
 
-        &__list-item {
-            height: min-content;
-            padding: 0 0.5em;
+        &__list {
+            &-item {
+                height: min-content;
+                padding: 0 0.5em;
+                margin: 0;
+            }
         }
 
 

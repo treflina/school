@@ -938,7 +938,7 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
 }
 .nav__search-btn:hover, .nav__search-btn:focus {
   background-color: rgb(32, 83, 117);
-  border: 2px solid black;
+  border: 2px solid rgb(32, 83, 117);
 }
 .nav__search-btn:active img {
   transform: scale(0.9);
@@ -1027,6 +1027,7 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     height: -moz-min-content;
     height: min-content;
     padding: 0 0.5em;
+    margin: 0;
   }
   .nav__dropdown {
     position: static;
