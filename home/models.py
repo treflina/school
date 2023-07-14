@@ -13,7 +13,6 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
 from wagtail.contrib.routable_page.models import RoutablePageMixin
-from gallery.utils import get_banner_image
 
 
 class HomePage(RoutablePageMixin, Page):
@@ -35,7 +34,6 @@ class HomePage(RoutablePageMixin, Page):
         galleries_list = (
             GalleryDetailPage.objects.live().specific().order_by("-publish_date")
         )
-        # galleries_list = get_banner_image(galleries_list)
 
         posts = sorted(
             chain(news_list, galleries_list),
@@ -52,7 +50,6 @@ class HomePage(RoutablePageMixin, Page):
                 context["active_category"] = categories.filter(id=category).first()
             except ValueError:
                 pass
-
 
         context["main_post"] = main_post
         context["categories"] = categories
