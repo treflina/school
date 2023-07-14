@@ -318,14 +318,6 @@ body {
 .posts__main-link:hover, .posts__main-link:focus {
   box-shadow: 0px 0px 3px #205375;
 }
-.posts__main-link::after {
-  position: absolute;
-  content: "";
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
 .posts__main-heading {
   font-weight: 700;
   margin: 0.5em 0 1em;

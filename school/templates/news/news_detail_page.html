@@ -4,12 +4,8 @@
 {% block content %}
 <main class="wrapper">
 {%include 'includes/breadcrumb.html'%}
-
-<main>
-<h1 class="heading-primary mtb-3">{{self.title}}</h1>
-<div class="wrapper wrapper-md">
+ <h1 class="heading-primary mtb-3">{{self.title}}</h1>
 {{page.main_text|richtext}}
-</div>
+
 </main>
 {%endblock content %}
-</main>

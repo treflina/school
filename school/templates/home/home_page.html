@@ -95,7 +95,7 @@
                     <h3 class="posts__main-heading posts__main-heading--secondary">{{post.title}}
                     </h3>
                     {{post.main_text|richtext|truncatechars_html:250}}
-                    {% if post.page_type == "gallery" %}
+                    {% if post.category.name == "Galeria" %}
                     <a href="{% slugurl post.slug %}" class="posts__main-link posts__main-link--secondary">Przejdź do galerii &raquo;</a>
                     {% else %}
                     <a href="{% slugurl post.slug %}" class="posts__main-link posts__main-link--secondary">Czytaj więcej &raquo;</a>
