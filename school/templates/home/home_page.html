@@ -22,7 +22,7 @@
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
             {% image main_post.banner_image width-500 as img %}
-            <img src="{{img.url}}" alt="{{main_post.alt_attr}}" class="posts__main-img posts__main-img--primary">
+            <img src="{{img.url}}" alt="{{main_post.alt_attr}}" class="posts__main-img posts__main-img--primary" width="{{img.width}}" height="{{img.height}}">
             <div class="posts__main-box posts__main-box--primary">
                 <div class="posts__main-details">
                     <div class="posts__main-category posts__main-category--{{main_post.category.color}}">{{main_post.category}}</div>
@@ -79,18 +79,18 @@
             {% for post in posts %}
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
-                    {% if post.banner_image %}
-                        {% image post.banner_image width-500 as img %}
-                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary">
-                    {% else %}
-                    {% image post.image width-500 as img %}
-                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary">
-                        {% endif %}
+                    {% if post.get_banner_image is not None %}
+                     {% image post.get_banner_image.image width-500 as img %}
+                     <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}" height="{{img.height}}" class="posts__main-img posts__main-img--secondary">
+                    {% elif post.banner_image %}
+                     {% image post.banner_image width-500 as img %}
+                     <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary" width="{{img.width}}" height="{{img.height}}">
+                     {% endif %}
                 </div>
                 <div class="posts__main-box posts__main-box--secondary">
                     <div class="posts__main-details">
                         <div class="posts__main-category posts__main-category--{{post.category.color}}">{{post.category}}</div>
-                        <p class="posts__main-details--date">{% if post.publish_date%} {{post.publish_date}} {% else %} {{post.first_published_at | date }} {% endif %}</p>
+                        <p class="posts__main-details--date">{% if post.publish_date %} {{post.publish_date}} {% else %} {{post.first_published_at | date }} {% endif %}</p>
                     </div>
                     <h3 class="posts__main-heading posts__main-heading--secondary">{{post.title}}
                     </h3>

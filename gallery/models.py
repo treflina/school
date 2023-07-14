@@ -1,23 +1,16 @@
+from core.models import SchoolYearSnippet
 from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from news.models import NewsCategory
-from wagtail.admin.panels import (
-    FieldPanel,
-    FieldRowPanel,
-    MultiFieldPanel
-)
-from wagtail.fields import RichTextField
-from wagtail.models import Orderable, Page
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin
+from wagtail.fields import RichTextField
+from wagtail.models import Orderable, Page, PageManager, PageQuerySet
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
-
-from .utils import get_banner_image
-from core.models import SchoolYearSnippet
 
 
 class GalleryIndexPage(RoutablePageMixin, Page):
-
     template = "gallery/gallery_index_page.html"
     parent_page_types = ["home.HomePage"]
     subpage_types = ["gallery.GalleryDetailPage"]
@@ -26,12 +19,8 @@ class GalleryIndexPage(RoutablePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         galleries = (
-            GalleryDetailPage.objects
-            .specific()
-            .live()
-            .order_by("-publish_date")
+            GalleryDetailPage.objects.specific().live().order_by("-publish_date")
         )
-        galleries = get_banner_image(galleries)
 
         context["years"] = SchoolYearSnippet.objects.all()
 
@@ -40,9 +29,7 @@ class GalleryIndexPage(RoutablePageMixin, Page):
             if len(urlyear) >= 4:
                 year = f"{urlyear[:4]}/{urlyear[4:]}"
             try:
-                galleries = list(
-                    filter(lambda x: x.year.name == year, galleries)
-                )
+                galleries = list(filter(lambda x: x.year.name == year, galleries))
                 context["active_year"] = year
             except ValueError:
                 pass
@@ -58,7 +45,6 @@ class GalleryDetailPage(Page):
     template = "gallery/gallery_detail_page.html"
     subpage_types = []
     parent_page_types = ["gallery.GalleryIndexPage"]
-    # password_required_template = "gallery/password_required.html"
 
     main_text = RichTextField(
         blank=True,
@@ -81,15 +67,22 @@ class GalleryDetailPage(Page):
         null=True,
         verbose_name="Rok szkolny",
         on_delete=models.SET_NULL,
-        related_name="+"
+        related_name="+",
     )
 
     category = models.ForeignKey(
         "news.NewsCategory",
         null=True,
         on_delete=models.SET_NULL,
-        default=NewsCategory.get_default_id
+        default=NewsCategory.get_default_id,
     )
+
+    @property
+    def get_banner_image(self):
+        img = self.gallery_images.filter(highlight=True).last()
+        if img is None:
+            img = self.gallery_images.last()
+        return img
 
     content_panels = Page.content_panels + [
         FieldRowPanel([FieldPanel("publish_date"), FieldPanel("year")]),
@@ -118,7 +111,7 @@ class GalleryImage(Orderable):
         on_delete=models.CASCADE,
         related_name="+",
         verbose_name="",
-        null=True
+        null=True,
     )
     alt_attr = models.CharField(
         blank=True,

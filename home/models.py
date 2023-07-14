@@ -35,7 +35,7 @@ class HomePage(RoutablePageMixin, Page):
         galleries_list = (
             GalleryDetailPage.objects.live().specific().order_by("-publish_date")
         )
-        get_banner_image(galleries_list)
+        # galleries_list = get_banner_image(galleries_list)
 
         posts = sorted(
             chain(news_list, galleries_list),

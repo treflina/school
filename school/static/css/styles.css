@@ -1573,3 +1573,50 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   -webkit-text-decoration-color: black;
           text-decoration-color: black;
 }
+
+.galleryall {
+  padding: 0 2rem;
+}
+.galleryall .posts__cards {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3rem 0;
+  justify-content: flex-start;
+}
+.galleryall .posts__main {
+  flex: 1 0 300px;
+}
+.galleryall .posts__main-gallerylink::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.galleryall .posts__main-heading {
+  font-size: 1.7rem;
+  margin: 0.5em;
+}
+.galleryall .posts__main .img-wrapper {
+  flex: 0 1 200px;
+}
+.galleryall .posts__main--secondary {
+  max-width: 400px;
+  margin: 0;
+}
+
+@media screen and (max-width: 62em) {
+  .galleryall .posts__cards {
+    justify-content: center;
+    padding: 1.5rem 0;
+  }
+}
+@media screen and (max-width: 25em) {
+  .galleryall {
+    padding: 0 0.5rem;
+  }
+  .galleryall .posts__cards {
+    padding: 1rem 0;
+  }
+}

@@ -1,0 +1,60 @@
+@use 'abstracts'as *;
+
+.galleryall {
+    padding: 0 2rem;
+
+    .posts__cards {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 3rem 0;
+        justify-content: flex-start;
+    }
+
+    .posts__main {
+        flex: 1 0 300px;
+
+        &-gallerylink {
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        &-heading {
+            font-size: 1.7rem;
+            margin: .5em;
+        }
+
+        .img-wrapper {
+            flex: 0 1 200px;
+        }
+
+        &--secondary {
+            max-width: 400px;
+            margin: 0;
+        }
+    }
+}
+
+@include media(l) {
+    .galleryall {
+        .posts__cards {
+            justify-content: center;
+            padding: 1.5rem 0;
+        }
+    }
+}
+
+@include media(xxsm) {
+    .galleryall {
+        padding: 0 .5rem;
+
+        .posts__cards {
+            padding: 1rem 0;
+        }
+    }
+}
