@@ -848,11 +848,6 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   display: block;
   height: 90px;
   margin: auto 0;
-  border-top: 5px solid transparent;
-  transition: border-top-color 0.3s;
-}
-.nav__list-item:focus, .nav__list-item:hover, .nav__list-item:active {
-  border-top-color: rgb(32, 83, 117);
 }
 .nav__list-icon {
   pointer-events: none;
@@ -867,13 +862,17 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   color: black;
   font-size: 1.8rem;
   font-weight: bold;
-  transition: background-color 0.3s;
+  border-top: 5px solid transparent;
+  transition: background-color 0.3s, border-top-color 0.3s;
 }
 .nav__list-link:hover, .nav__list-link:focus {
   background-color: #EFEFEF;
+  border-top-color: rgb(32, 83, 117);
 }
 .nav__btn {
-  border: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
   cursor: pointer;
   font-family: "Martel Sans", sans-serif;
   background-color: inherit;
@@ -915,7 +914,7 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   padding: 0.5em 0 0.5em 0;
 }
 .nav__search-input, .nav__search-btn {
-  border: 2px solid rgb(32, 83, 117);
+  border: 2px solid black;
   font-size: inherit;
 }
 .nav__search-input {
@@ -926,20 +925,19 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   font-family: "Martel Sans", sans-serif;
 }
 .nav__search-input:focus {
-  outline: none;
-  border: 2px solid rgba(246, 107, 14, 0.8);
+  border: 2px solid rgb(32, 83, 117);
   background-color: #EFEFEF;
 }
 .nav__search-btn {
   padding: 0.1em 0.5em 0.1em 0.25em;
-  background-color: rgb(32, 83, 117);
+  background-color: black;
   border-left: 2px solid transparent;
   border-radius: 0 15px 15px 0;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s, color 0.3s;
 }
 .nav__search-btn:hover, .nav__search-btn:focus {
-  background-color: black;
+  background-color: rgb(32, 83, 117);
   border: 2px solid black;
 }
 .nav__search-btn:active img {
@@ -994,6 +992,7 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   }
   .nav__list {
     display: none;
+    align-items: stretch;
   }
   .nav__list--active {
     position: absolute;
@@ -1019,13 +1018,15 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   .nav__list-link {
     width: -moz-max-content;
     width: max-content;
+    min-width: 320px;
+    height: auto;
     padding: 1em;
     line-height: 1;
   }
   .nav__list-item {
     height: -moz-min-content;
     height: min-content;
-    padding: 0.5em;
+    padding: 0 0.5em;
   }
   .nav__dropdown {
     position: static;
@@ -1039,6 +1040,7 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   }
   .nav__dropdown-link {
     box-shadow: none;
+    min-width: 320px;
   }
 }
 .header {
