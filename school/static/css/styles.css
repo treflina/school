@@ -1014,6 +1014,12 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     height: auto;
     padding: 1em;
     line-height: 1;
+    border-top: none;
+    border-left: 5px solid transparent;
+    transition: border-left-color 0.3s;
+  }
+  .nav__list-link:hover, .nav__list-link:focus, .nav__list-link:active {
+    border-left-color: rgb(32, 83, 117);
   }
   .nav__list-item {
     height: -moz-min-content;

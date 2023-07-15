@@ -236,12 +236,23 @@
 
         }
 
-        &__list-link {
+        &__list {
+            &-link {
             width: max-content;
             min-width: 320px;
             height: auto;
             padding: 1em;
             line-height: 1;
+            border-top: none;
+            border-left: 5px solid transparent;
+            transition: border-left-color .3s;
+
+            &:hover,
+            &:focus,
+            &:active {
+                border-left-color: $color-primary-dark;
+            }
+        }
         }
 
         &__list {
