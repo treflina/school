@@ -16,6 +16,8 @@
         &-gallerylink {
             display: block;
             margin: auto .5em;
+            color: black;
+
             &::after {
                 content: '';
                 position: absolute;

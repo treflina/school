@@ -24,7 +24,7 @@
 
         a {
             text-decoration: none;
-            color: black;
+            // color: black;
         }
 
         &--primary {
@@ -44,9 +44,6 @@
             margin: 3rem 0 2rem;
             box-shadow: 0 0 8px rgba(0, 0, 0, .5);
             overflow: hidden;
-
-
-
         }
 
         &-img {
@@ -118,20 +115,10 @@
             &:focus {
                 background-color: #efefef;
             }
-
-            // &::after {
-            //     position: absolute;
-            //     content: "";
-            //     top: 0;
-            //     bottom: 0;
-            //     left: 0;
-            //     right: 0;
-            // }
         }
 
         &-heading {
             font-weight: 700;
-            // font-family: $heading-font;
             margin: .5em 0 1em;
             overflow-wrap: anywhere;
 
