@@ -7,6 +7,7 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page, PageManager, PageQuerySet
+from wagtail.search import index
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
@@ -15,6 +16,8 @@ class GalleryIndexPage(RoutablePageMixin, Page):
     parent_page_types = ["home.HomePage"]
     subpage_types = ["gallery.GalleryDetailPage"]
     password_required_template = "gallery/password_required.html"
+
+    search_fields = Page.search_fields
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
@@ -47,10 +50,7 @@ class GalleryDetailPage(Page):
     parent_page_types = ["gallery.GalleryIndexPage"]
 
     main_text = RichTextField(
-        blank=True,
-        null=True,
-        verbose_name="Opis galerii",
-        help_text="Opcjonalny opis galerii.",
+        blank=True, null=True, verbose_name="Opis galerii", features=[]
     )
 
     publish_date = models.DateField(
@@ -95,6 +95,10 @@ class GalleryDetailPage(Page):
             ],
             heading="Zdjęcia",
         ),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("main_text")
     ]
 
     class Meta:

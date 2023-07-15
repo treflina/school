@@ -13,7 +13,7 @@
     <ul class="search__list">
         {% for result in search_results %}
         <li class="search__list-item index__item">
-            <h4><a class="search__list-link index__link" href="{% pageurl result %}">{{ result }}</a></h4>
+            <a class="search__list-link index__link" href="{% pageurl result %}">{{ result }}</a>
             <p>{{ result.get_full_url }}</p>
             {% if result.search_description %}
             {{ result.search_description }}

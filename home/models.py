@@ -97,6 +97,8 @@ class HomePage(RoutablePageMixin, Page):
 
         return context
 
+    search_fields = Page.search_fields
+
     class Meta:
         verbose_name = "Strona główna"
 
@@ -173,4 +175,9 @@ class TeachersPage(Page):
         FieldPanel("introduction"),
         FieldPanel("content"),
         FieldPanel("image")
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("introduction"),
+        index.SearchField("content"),
     ]

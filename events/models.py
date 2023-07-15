@@ -5,6 +5,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.models import Orderable, Page
+from wagtail.search import index
 
 
 class EventsPageForm(WagtailAdminPageForm):
@@ -27,7 +28,7 @@ class EventsPageForm(WagtailAdminPageForm):
 
 class EventsPage(Page):
     template = "events/events_page.html"
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ["home.HomePage"]
     subpage_types = []
     base_form_class = EventsPageForm
 
@@ -35,6 +36,15 @@ class EventsPage(Page):
         MultiFieldPanel(
             [InlinePanel("events", label="")],
             classname="collapsed",
+        )
+    ]
+
+    search_fields = [
+        index.RelatedFields(
+            "events",
+            [
+                index.SearchField("name"),
+            ],
         )
     ]
 

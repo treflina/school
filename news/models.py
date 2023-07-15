@@ -64,10 +64,11 @@ class NewsIndexPage(RoutablePageMixin, Page):
     subpage_types = ["news.NewsDetailPage"]
     parent_page_types = ["home.HomePage"]
 
+    search_fields = Page.search_fields
+
     @property
     def get_child_pages(self):
         return self.get_children().public().live()
-        # return self.get_children().public().live().values("id", "title", "slug")
 
     def get_context(self, request, *args, **kwargs):
         """Adding custom stuff to our context."""
