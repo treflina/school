@@ -14,6 +14,8 @@
         flex: 1 0 300px;
 
         &-gallerylink {
+            display: block;
+            margin: auto .5em;
             &::after {
                 content: '';
                 position: absolute;
@@ -26,7 +28,8 @@
 
         &-heading {
             font-size: 1.7rem;
-            margin: .5em;
+            margin: .5em 0;
+
         }
 
         .img-wrapper {
@@ -36,7 +39,19 @@
         &--secondary {
             max-width: 400px;
             margin: 0;
+            transition: all .3s;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    box-shadow: 0 0 25px rgba(0, 0, 0, .5);
+                    transform: translateY(-3px);
+                }
         }
+
+
+
+
     }
 }
 

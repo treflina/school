@@ -41,9 +41,10 @@
                         <p class="posts__main-details--date">{% if post.publish_date%} {{post.publish_date}} {% else %}
                             {{post.first_published_at | date }} {% endif %}</p>
                     </div>
+                    <a href="{% slugurl post.slug %}" class="posts__main-newslink">
                     <h2 class="posts__main-heading">{{post.title}}</h2>
-                    <!-- {{post.main_text|richtext|truncatechars_html:250}}
-            <a href="{% slugurl post.slug %}" class="posts__main-link posts__main-link--secondary">Czytaj więcej...</a> -->
+                     {% comment %} {{post.main_text|richtext|truncatechars_html:250}} {% endcomment %}
+            </a>
                 </div>
             </div>
             {% endfor %}

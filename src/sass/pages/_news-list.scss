@@ -17,10 +17,7 @@
                     margin-left: 5rem;
                     padding: 0.25em 1.25em;
                     background-color: $color-secondary-cta;
-                    // border: 1px solid $color-primary-dark;
                     color: #efefef;
-                    // font-weight: normal;
-                    // font-size: 1.5rem;
 
                     &:hover,
                     &:focus,
@@ -33,6 +30,15 @@
         }
 
         &__main {
+            transition: all .5s;
+
+            &:hover,
+            &:focus,
+            &:active {
+                box-shadow: 0 0 25px rgba(0, 0, 0, .5);
+                transform: translateY(-3px);
+            }
+
             &-details {
                 position: absolute;
                 top: 5px;
@@ -45,6 +51,17 @@
                 font-size: 1.7rem;
                 margin: 0;
             }
+
+            &-newslink {
+                &::after {
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+            }
         }
 
     }
@@ -52,6 +69,6 @@
 
 @include media(md) {
     .allnews {
-    padding-top: 0;
+        padding-top: 0;
     }
 }
