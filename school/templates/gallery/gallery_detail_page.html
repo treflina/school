@@ -9,7 +9,7 @@
     <p>{{page.main_text|richtext}}</p>
     <div class="gallery">
         <ul class="gallery__list">
-            {% for i in page.gallery_images.all %}
+            {% for i in posts %}
             {% image i.image width-300 as thumbimg %}
             {% image i.image original as img %}
             <li class="gallery__list-item">
@@ -20,6 +20,7 @@
             </li>
             {% endfor %}
         </ul>
+         {%include 'includes/pagination.html'%}
     </div>
 </main>
 </div>

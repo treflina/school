@@ -1,8 +1,7 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
-
-from wagtail.models import Page
 from wagtail.contrib.search_promotions.models import Query
+from wagtail.models import Page
 
 
 def search(request):
@@ -18,7 +17,7 @@ def search(request):
         num_results = len(search_results)
         if num_results == 1:
             result = f"{num_results} wynik"
-        elif num_results in [2,3,4]:
+        elif num_results in [2, 3, 4]:
             result = f"{num_results} wyniki"
         elif num_results > 4:
             result = f"{num_results} wyników"
@@ -26,7 +25,7 @@ def search(request):
             result = None
     else:
         search_results = Page.objects.none()
-        result = f"0 wyników"
+        result = "0 wyników"
 
     # Pagination
     paginator = Paginator(search_results, 1)
@@ -43,6 +42,6 @@ def search(request):
         {
             "search_query": search_query,
             "search_results": search_results,
-            "result": result
+            "result": result,
         },
     )

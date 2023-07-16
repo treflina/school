@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wagtail.admin.panels import FieldPanel
 from wagtail.documents.models import AbstractDocument, Document
 from wagtail.models import Page
@@ -40,6 +41,29 @@ class CustomDocument(AbstractDocument):
         return convert_bytes(self.file_size)
 
     admin_form_fields = Document.admin_form_fields
+
+
+class PagePaginationMixin:
+    """Mixin that handles pagination for index pages giving an ability to use page
+    range in case of too many subpages"""
+    def pagination(self, request, posts, num=12):
+        paginator = Paginator(posts, num)
+        page = request.GET.get("page")
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        index = posts.number - 1
+        max_index = len(paginator.page_range)
+        start_index = index - 5 if index >= 5 else 0
+        end_index = index + 5 if index <= max_index - 5 else max_index
+        page_range = paginator.page_range[start_index:end_index]
+        return posts, page_range
+
+    class Meta:
+        abstract = True
 
 
 class IndexPage(Page):

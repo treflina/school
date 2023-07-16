@@ -1,4 +1,5 @@
-from core.models import SchoolYearSnippet
+from core.models import PagePaginationMixin, SchoolYearSnippet
+# from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
@@ -6,12 +7,12 @@ from news.models import NewsCategory
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
-from wagtail.models import Orderable, Page, PageManager, PageQuerySet
+from wagtail.models import Orderable, Page
 from wagtail.search import index
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
-class GalleryIndexPage(RoutablePageMixin, Page):
+class GalleryIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
     template = "gallery/gallery_index_page.html"
     parent_page_types = ["home.HomePage"]
     subpage_types = ["gallery.GalleryDetailPage"]
@@ -36,15 +37,16 @@ class GalleryIndexPage(RoutablePageMixin, Page):
                 context["active_year"] = year
             except ValueError:
                 pass
-
-        context["galleries"] = galleries
+        context["posts"], context["page_range"] = self.pagination(
+            request, galleries
+        )
         return context
 
     class Meta:
         verbose_name = "Lista galerii zdjęć"
 
 
-class GalleryDetailPage(Page):
+class GalleryDetailPage(PagePaginationMixin, Page):
     template = "gallery/gallery_detail_page.html"
     subpage_types = []
     parent_page_types = ["gallery.GalleryIndexPage"]
@@ -97,9 +99,17 @@ class GalleryDetailPage(Page):
         ),
     ]
 
-    search_fields = Page.search_fields + [
-        index.SearchField("main_text")
-    ]
+    search_fields = Page.search_fields + [index.SearchField("main_text")]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        gallery_images = (
+            GalleryImage.objects.filter(page_id=self.id)
+        )
+        context["posts"], context["page_range"] = self.pagination(
+            request, gallery_images, num=18
+        )
+        return context
 
     class Meta:
         verbose_name = "Galeria zdjęć"

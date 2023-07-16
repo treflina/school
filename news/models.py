@@ -17,6 +17,8 @@ from wagtail.models import Orderable, Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
+from core.models import PagePaginationMixin
+
 
 @register_snippet
 class NewsCategory(models.Model):
@@ -57,7 +59,7 @@ class NewsCategory(models.Model):
         return self.name
 
 
-class NewsIndexPage(RoutablePageMixin, Page):
+class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
     """News listing page model."""
 
     template = "news/news_index_page.html"
@@ -93,21 +95,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
         context["posts"], context["page_range"] = self.pagination(request, all_news)
         return context
 
-    def pagination(self, request, posts):
-        paginator = Paginator(posts, 3)
-        page = request.GET.get("page")
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            posts = paginator.page(1)
-        except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
-        index = posts.number - 1
-        max_index = len(paginator.page_range)
-        start_index = index - 5 if index >= 5 else 0
-        end_index = index + 5 if index <= max_index - 5 else max_index
-        page_range = paginator.page_range[start_index:end_index]
-        return posts, page_range
+
 
     class Meta:  # noqa
         verbose_name = "Wszystkie aktualności"
@@ -233,7 +221,7 @@ class NewsDetailPage(Page):
     search_fields = Page.search_fields + [
         index.SearchField("main_text"),
         index.SearchField("body"),
-        # index.FilterField('date'),
+        index.FilterField("publish_date"),
     ]
 
     class Meta:  # noqa
