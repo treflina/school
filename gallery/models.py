@@ -74,9 +74,9 @@ class GalleryDetailPage(PagePaginationMixin, Page):
     category = models.ForeignKey(
         "core.CategorySnippet",
         null=True,
-        blank=True,
+        blank=False,
         on_delete=models.SET_NULL,
-        # default=CategorySnippet.get_default_id,
+        default=CategorySnippet.get_default_id,
     )
 
     @property

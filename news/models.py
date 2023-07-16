@@ -1,4 +1,6 @@
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from itertools import chain
+from operator import attrgetter
+
 from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
@@ -15,9 +17,10 @@ from wagtail.fields import RichTextField, StreamField
 # from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.models import Orderable, Page
 from wagtail.search import index
-from wagtail.snippets.models import register_snippet
+# from wagtail.snippets.models import register_snippet
 
 from core.models import PagePaginationMixin, CategorySnippet
+from gallery.models import GalleryDetailPage
 
 
 # TO REMOVE
@@ -77,7 +80,16 @@ class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
         """Adding custom stuff to our context."""
         context = super().get_context(request, *args, **kwargs)
 
-        all_news = NewsDetailPage.objects.live().public().order_by("-publish_date")
+        news = NewsDetailPage.objects.live().specific().order_by("-publish_date")
+        galleries_list = (
+            GalleryDetailPage.objects.live().specific().order_by("-publish_date")
+        )
+
+        all_news = sorted(
+            chain(news, galleries_list),
+            key=attrgetter("publish_date"),
+            reverse=True,
+        )
 
         # Add filtering news by category
         categories = CategorySnippet.objects.all().order_by("id")
