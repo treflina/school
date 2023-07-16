@@ -13,6 +13,7 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
 from wagtail.contrib.routable_page.models import RoutablePageMixin
+from core.models import CategorySnippet
 
 
 class HomePage(RoutablePageMixin, Page):
@@ -41,7 +42,7 @@ class HomePage(RoutablePageMixin, Page):
             reverse=True,
         )
 
-        categories = NewsCategory.objects.all().order_by("id")
+        categories = CategorySnippet.objects.all().order_by("id")
 
         if request.GET.get("category", None):
             category = request.GET.get("category")

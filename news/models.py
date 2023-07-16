@@ -17,7 +17,7 @@ from wagtail.models import Orderable, Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
-from core.models import PagePaginationMixin
+from core.models import PagePaginationMixin, CategorySnippet
 
 
 @register_snippet
@@ -115,7 +115,7 @@ class NewsDetailPage(Page):
     # )
     category = models.ForeignKey(
         "news.NewsCategory",
-        blank=False,
+        blank=True,
         null=True,
         on_delete=models.SET_NULL,
         verbose_name="Kategoria",

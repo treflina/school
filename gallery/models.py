@@ -1,4 +1,4 @@
-from core.models import PagePaginationMixin, SchoolYearSnippet
+from core.models import PagePaginationMixin, SchoolYearSnippet, CategorySnippet
 # from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.timezone import now

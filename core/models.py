@@ -9,6 +9,45 @@ from .utils import convert_bytes, extract_extension
 
 
 @register_snippet
+class CategorySnippet(models.Model):
+    """News category for a snippet."""
+
+    choices = (
+        (0, "różowy"),
+        (1, "niebieski"),
+        (2, "zielony"),
+        (3, "brązowy"),
+        (4, "pomarańczowy"),
+    )
+    name = models.CharField(max_length=25, verbose_name="nazwa kategorii")
+    # slug = models.SlugField(max_length=50)
+    color = models.IntegerField(
+        default=0, choices=choices, verbose_name="Kolor powiązany z kategorią"
+    )
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("color"),
+    ]
+
+    class Meta:
+        verbose_name = "Kategoria1"
+        verbose_name_plural = "Kategorie"
+        ordering = ["name"]
+
+    @classmethod
+    def get_default_id(cls):
+        category, created = cls.objects.get_or_create(
+            name="Galeria",
+            defaults=dict(color=3),
+        )
+        return category.id
+
+    def __str__(self):
+        return self.name
+
+
+@register_snippet
 class SchoolYearSnippet(models.Model):
     """School year for a snippet."""
 
