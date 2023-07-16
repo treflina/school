@@ -79,7 +79,7 @@ class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
         all_news = NewsDetailPage.objects.live().public().order_by("-publish_date")
 
         # Add filtering news by category
-        categories = NewsCategory.objects.all().order_by("id")
+        categories = CategorySnippet.objects.all().order_by("id")
         context["categories"] = categories
 
         if request.GET.get("category", None):
@@ -114,7 +114,7 @@ class NewsDetailPage(Page):
     #     max_length=90, verbose_name="Nagłówek", blank=False, null=True
     # )
     category = models.ForeignKey(
-        "news.NewsCategory",
+        "core.CategorySnippet",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
