@@ -20,7 +20,8 @@ from wagtail.snippets.models import register_snippet
 from core.models import PagePaginationMixin, CategorySnippet
 
 
-@register_snippet
+# TO REMOVE
+# @register_snippet
 class NewsCategory(models.Model):
     """News category for a snippet."""
 

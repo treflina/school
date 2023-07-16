@@ -3,7 +3,6 @@ from core.models import PagePaginationMixin, SchoolYearSnippet, CategorySnippet
 from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
-from news.models import NewsCategory
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
@@ -75,8 +74,9 @@ class GalleryDetailPage(PagePaginationMixin, Page):
     category = models.ForeignKey(
         "core.CategorySnippet",
         null=True,
+        blank=True,
         on_delete=models.SET_NULL,
-        default=CategorySnippet.get_default_id,
+        # default=CategorySnippet.get_default_id,
     )
 
     @property

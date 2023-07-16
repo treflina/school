@@ -6,7 +6,7 @@ from django import forms
 from django.db import models
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
-from news.models import NewsCategory, NewsDetailPage
+from news.models import NewsDetailPage
 from streams import blocks
 from wagtail.admin.panels import FieldPanel, FieldRowPanel
 from wagtail.fields import StreamField
