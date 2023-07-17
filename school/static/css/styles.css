@@ -1464,6 +1464,13 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     margin: 1rem 0 0;
   }
 }
+.ordinary h2 {
+  font-size: 2rem;
+}
+.ordinary h3 {
+  font-size: 1.8rem;
+}
+
 .introduction {
   padding: 1rem 0;
 }
