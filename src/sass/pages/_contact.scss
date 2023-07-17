@@ -1,0 +1,48 @@
+@use 'abstracts'as *;
+
+
+.contact {
+
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 3rem;
+
+    &__info {
+        flex: 1 1 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+
+        &-bottom {
+            padding-bottom: 1rem;
+        }
+    }
+
+    &__additional_info {
+        padding-top: 1rem;
+        border-top: 2px solid rgba(0,0,0,.2);
+        a {
+            color: $color-primary-dark;
+            font-weight: bold;
+        }
+
+        p {
+            padding-top: 1rem;
+        }
+    }
+    &__img{
+        &-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+
+
+}

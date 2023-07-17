@@ -73,7 +73,7 @@ class ContentBlock(blocks.StreamBlock):
     table = TableBlock(
         required=False,
         label="Tabela",
-        template="home/table_block.html",
+        template="streams/table_block.html",
         table_options=custom_table_options,
     )
 
@@ -102,7 +102,7 @@ class RichtextAndTableBlock(blocks.StreamBlock):
     table = TableBlock(
         required=False,
         label="Tabela",
-        template="home/table_block.html",
+        template="streams/table_block.html",
         table_options=custom_table_options,
     )
 

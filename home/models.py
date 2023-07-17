@@ -172,17 +172,20 @@ class TeachersPage(Page):
         related_name="+",
         verbose_name="",
     )
-    alt_attr = models.CharField("Opis alternatywny", max_length=255, null=True, blank=True)
-    additional_content = StreamField(blocks.ContentBlock(), use_json_field=True, null=True, blank=True)
+    alt_attr = models.CharField(
+        "Opis alternatywny", max_length=255, null=True, blank=True
+    )
+    additional_content = StreamField(
+        blocks.ContentBlock(), use_json_field=True, null=True, blank=True
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("year"),
         FieldPanel("introduction"),
         FieldPanel("content"),
-        MultiFieldPanel([
-            FieldPanel("image"),
-            FieldPanel("alt_attr")
-        ], heading="Zdjęcie główne"),
+        MultiFieldPanel(
+            [FieldPanel("image"), FieldPanel("alt_attr")], heading="Zdjęcie główne"
+        ),
         FieldPanel("additional_content", heading="Dodatkowy tekst, zdjęcia, tabele"),
     ]
 
@@ -195,3 +198,63 @@ class TeachersPage(Page):
         verbose_name = """Podstrona typu przedmiot-bardzo krótki opis
                  (np. imię i nazwisko)"""
         verbose_name_plural = "Podstrony typu przedmiot-opis"
+
+
+class ContactPage(Page):
+    template = "home/contact_page.html"
+    max_count = 1
+    subpage_types = []
+    parent_page_types = ["home.HomePage"]
+
+    name = models.CharField("nazwa", max_length=255, blank=False, null=True)
+    address1 = models.CharField("ulica, numer", max_length=255, blank=False, null=True)
+    address2 = models.CharField(
+        "kod pocztowy, miejscowość", max_length=255, blank=False, null=True
+    )
+    phone = models.CharField("telefon", max_length=60, blank=False, null=True)
+    fax = models.CharField("fax", max_length=30, blank=True, null=True)
+    email = models.EmailField("e-mail", blank=False, null=True)
+
+    additional_info = RichTextField(
+        "Dodatkowe informacje",
+        features=["bold", "hr", "link", "document-link"],
+    )
+
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="",
+    )
+    alt_attr = models.CharField(
+        "Opis alternatywny", max_length=255, null=True, blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("name"),
+                FieldPanel("address1"),
+                FieldPanel("address2"),
+                FieldPanel("phone"),
+                FieldPanel("fax"),
+                FieldPanel("email"),
+            ],
+            heading="Podstawowe dane kontaktowe",
+        ),
+        FieldPanel("additional_info", heading="Dodatkowe informacje"),
+        MultiFieldPanel(
+            [FieldPanel("image"), FieldPanel("alt_attr")], heading="Zdjęcie"
+        ),
+
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("additional_info"),
+    ]
+
+    class Meta:  # noqa
+        verbose_name = "Kontakt"
+        verbose_name_plural = "Kontakt"

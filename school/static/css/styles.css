@@ -1672,3 +1672,39 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     padding: 1rem 0;
   }
 }
+.contact {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 3rem;
+}
+.contact__info {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.contact__info-bottom {
+  padding-bottom: 1rem;
+}
+.contact__additional_info {
+  padding-top: 1rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+}
+.contact__additional_info a {
+  color: rgb(32, 83, 117);
+  font-weight: bold;
+}
+.contact__additional_info p {
+  padding-top: 1rem;
+}
+.contact__img-img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
