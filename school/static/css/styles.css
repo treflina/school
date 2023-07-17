@@ -78,9 +78,6 @@ body {
   }
 }
 @media screen and (max-width: 48em) {
-  .main {
-    align-items: center;
-  }
   .subpage-heading {
     padding: 3rem 0;
   }
@@ -1501,7 +1498,7 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   height: 3rem;
   padding-left: 1rem;
   padding-right: 3rem;
-  margin-left: -3rem;
+  margin-left: -4rem;
   vertical-align: middle;
   content: url("/static/img/file-text.svg");
 }
