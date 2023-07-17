@@ -2,18 +2,18 @@ from datetime import date
 from itertools import chain, islice
 from operator import attrgetter
 
+from core.models import CategorySnippet
 from django import forms
 from django.db import models
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
 from news.models import NewsDetailPage
 from streams import blocks
-from wagtail.admin.panels import FieldPanel, FieldRowPanel
-from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin
+from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
 from wagtail.search import index
-from wagtail.contrib.routable_page.models import RoutablePageMixin
-from core.models import CategorySnippet
 
 
 class HomePage(RoutablePageMixin, Page):
@@ -134,16 +134,18 @@ class OrdinaryPage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField("introduction"),
-        index.SearchField("content"),
+        index.RelatedFields("content", [index.SearchField("docs")]),
     ]
 
     class Meta:  # noqa
-        verbose_name = "Podstrona"
-        verbose_name_plural = "Podstrony"
+        verbose_name = "Podstrona - zwykła"
+        verbose_name_plural = "Zwykłe podstrony"
 
 
 class TeachersPage(Page):
     template = "home/teachers_page.html"
+    page_description = """Używana np. do stworzenia
+             zakładek 'Grono pedagogiczne', 'RSU'"""
 
     year = models.ForeignKey(
         "core.SchoolYearSnippet",
@@ -152,7 +154,7 @@ class TeachersPage(Page):
         blank=False,
         null=True,
         on_delete=models.SET_NULL,
-        related_name="+"
+        related_name="+",
     )
     introduction = models.TextField(verbose_name="Wprowadzenie", null=True, blank=True)
     content = StreamField(
@@ -168,17 +170,28 @@ class TeachersPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
-        verbose_name="Zdjęcie",
+        verbose_name="",
     )
+    alt_attr = models.CharField("Opis alternatywny", max_length=255, null=True, blank=True)
+    additional_content = StreamField(blocks.ContentBlock(), use_json_field=True, null=True, blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel("year"),
         FieldPanel("introduction"),
         FieldPanel("content"),
-        FieldPanel("image")
+        MultiFieldPanel([
+            FieldPanel("image"),
+            FieldPanel("alt_attr")
+        ], heading="Zdjęcie główne"),
+        FieldPanel("additional_content", heading="Dodatkowy tekst, zdjęcia, tabele"),
     ]
 
     search_fields = Page.search_fields + [
         index.SearchField("introduction"),
         index.SearchField("content"),
     ]
+
+    class Meta:  # noqa
+        verbose_name = """Podstrona typu przedmiot-bardzo krótki opis
+                 (np. imię i nazwisko)"""
+        verbose_name_plural = "Podstrony typu przedmiot-opis"

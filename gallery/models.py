@@ -1,21 +1,26 @@
-from core.models import PagePaginationMixin, SchoolYearSnippet, CategorySnippet
-# from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from core.models import CategorySnippet, PagePaginationMixin, SchoolYearSnippet
+
 from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
+from wagtail.admin.panels import (
+    FieldPanel,
+    FieldRowPanel,
+    MultiFieldPanel,
+    MultipleChooserPanel,
+)
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
-from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
+# from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
 class GalleryIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
     template = "gallery/gallery_index_page.html"
     parent_page_types = ["home.HomePage"]
     subpage_types = ["gallery.GalleryDetailPage"]
-    password_required_template = "gallery/password_required.html"
+    max_count = 1
 
     search_fields = Page.search_fields
 
@@ -36,9 +41,7 @@ class GalleryIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
                 context["active_year"] = year
             except ValueError:
                 pass
-        context["posts"], context["page_range"] = self.pagination(
-            request, galleries
-        )
+        context["posts"], context["page_range"] = self.pagination(request, galleries)
         return context
 
     class Meta:
@@ -91,8 +94,8 @@ class GalleryDetailPage(PagePaginationMixin, Page):
         FieldPanel("main_text"),
         MultiFieldPanel(
             [
-                MultipleImagesPanel(
-                    "gallery_images", label="", image_field_name="image"
+                MultipleChooserPanel(
+                    "gallery_images", label="", chooser_field_name="image"
                 ),
             ],
             heading="Zdjęcia",
@@ -103,9 +106,7 @@ class GalleryDetailPage(PagePaginationMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        gallery_images = (
-            GalleryImage.objects.filter(page_id=self.id)
-        )
+        gallery_images = GalleryImage.objects.filter(page_id=self.id)
         context["posts"], context["page_range"] = self.pagination(
             request, gallery_images, num=18
         )
@@ -132,7 +133,7 @@ class GalleryImage(Orderable):
         max_length=255,
         verbose_name="Opis alternatywny",
         help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
-        na celu umożliwienie przekazu treści osobom słabowidzącym.""",
+        na celu m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
     )
     highlight = models.BooleanField(
         default=False,

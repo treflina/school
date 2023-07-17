@@ -30,6 +30,7 @@ class EventsPage(Page):
     template = "events/events_page.html"
     parent_page_types = ["home.HomePage"]
     subpage_types = []
+    max_count = 1
     base_form_class = EventsPageForm
 
     content_panels = Page.content_panels + [
@@ -38,8 +39,7 @@ class EventsPage(Page):
             classname="collapsed",
         )
     ]
-
-    search_fields = [
+    search_fields = Page.search_fields + [
         index.RelatedFields(
             "events",
             [

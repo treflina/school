@@ -1,5 +1,5 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wagtail.admin.panels import FieldPanel
 from wagtail.documents.models import AbstractDocument, Document
 from wagtail.models import Page
@@ -85,6 +85,7 @@ class CustomDocument(AbstractDocument):
 class PagePaginationMixin:
     """Mixin that handles pagination for index pages giving an ability to use page
     range in case of too many subpages"""
+
     def pagination(self, request, posts, num=12):
         paginator = Paginator(posts, num)
         page = request.GET.get("page")
@@ -107,7 +108,8 @@ class PagePaginationMixin:
 
 class IndexPage(Page):
     template = "core/index_page.html"
-    desription = "Strona nadrzędna (np. 'O szkole', 'Galerie') - listująca podstrony"
+    page_description = """Np. 'O szkole', 'Dla rodziców' - używana do stworzenia rodzica
+                dla innych podstron"""
 
     @property
     def get_child_pages(self):

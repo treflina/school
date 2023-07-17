@@ -39,6 +39,18 @@ custom_table_options = {
 }
 
 
+class ImageWithAltAttr(blocks.StructBlock):
+    img = ImageChooserBlock(blank=True, null=True, label="Zdjęcie")
+    alt__attr = blocks.CharBlock(
+        label="Opis alternatywny",
+        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający na celu
+        m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
+    )
+
+    class Meta:
+        label = "Zdjęcie"
+
+
 class ContentBlock(blocks.StreamBlock):
     text = blocks.RichTextBlock(
         features=[
@@ -57,7 +69,7 @@ class ContentBlock(blocks.StreamBlock):
         # ////////////////////////////
         null=True,
     )
-    image = ImageChooserBlock(blank=True, null=True, label="Zdjęcie")
+    image = ImageWithAltAttr()
     table = TableBlock(
         required=False,
         label="Tabela",
@@ -104,11 +116,8 @@ class RichtextAndTableBlock(blocks.StreamBlock):
 
 class ObjectAndDescriptionBlock(blocks.StructBlock):
     subject = blocks.CharBlock(label="Nazwa")
-    description = blocks.ListBlock(
-        blocks.CharBlock(), label="Imię i nazwisko"
-    )
+    description = blocks.ListBlock(blocks.CharBlock(), label="Imię i nazwisko")
 
     class Meta:
-
         label = "Przedmiot (funkcja)"
         template = "streams/object_description_block.html"

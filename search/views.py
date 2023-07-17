@@ -2,6 +2,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
 from wagtail.contrib.search_promotions.models import Query
 from wagtail.models import Page
+from wagtail.search.backends import get_search_backend
 
 
 def search(request):

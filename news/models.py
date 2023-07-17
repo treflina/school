@@ -69,7 +69,7 @@ class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
     template = "news/news_index_page.html"
     subpage_types = ["news.NewsDetailPage"]
     parent_page_types = ["home.HomePage"]
-
+    max_count = 1
     search_fields = Page.search_fields
 
     @property
@@ -258,7 +258,7 @@ class MiniGalleryImage(Orderable):
         max_length=255,
         verbose_name="Opis alternatywny",
         help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
-        na celu umożliwienie przekazu treści osobom słabowidzącym.""",
+        na celu m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
     )
 
     panels = [FieldPanel("image"), FieldPanel("alt_attr")]
