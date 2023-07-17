@@ -494,6 +494,9 @@ body {
   .posts__cards {
     gap: 30px;
   }
+  .posts__main-img--primary {
+    height: 270px;
+  }
 }
 @media screen and (max-width: 37.5em) {
   .posts__cards {
@@ -1707,4 +1710,10 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+}
+
+@media screen and (max-width: 37.5em) {
+  .contact {
+    margin-bottom: 1rem;
+  }
 }

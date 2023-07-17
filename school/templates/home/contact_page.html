@@ -15,7 +15,9 @@
         <p class="contact__info-address">{{ page.address1 }}</p>
         <p class="contact__info-address contact__info-bottom">{{ page.address2 }}</p>
         <p class="contact__info-phone contact__info-bottom"><span class="bold">Telefon: </span>{{ page.phone }}</p>
+        {% if page.fax %}
         <p class="contact__info-fax  contact__info-bottom"><span class="bold">Fax: </span>{{ page.fax }}</p>
+        {% endif %}
         <p class="contact__info-email contact__info-bottom"><span class="bold">E-mail: </span>{{ page.email }}</p>
         </div>
         <div class="contact__additional_info">

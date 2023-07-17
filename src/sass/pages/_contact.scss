@@ -42,7 +42,10 @@
             object-position: center;
         }
     }
+}
 
-
-
+@include media(sm) {
+    .contact {
+        margin-bottom: 1rem;
+    }
 }

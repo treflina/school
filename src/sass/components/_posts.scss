@@ -314,6 +314,14 @@
         &__cards {
             gap: 30px;
         }
+
+        &__main {
+            &-img {
+                &--primary {
+                    height: 270px;
+                }
+            }
+        }
     }
 }
 
