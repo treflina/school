@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/magnific_popup.min.css' %}">
+{% endblock %}
 {% block content %}
 <main class="wrapper wrapper-md" id="main">
-{%include 'includes/breadcrumb.html'%}
-<section class="news">
- <h1 class="heading-primary mtb-3">{{self.title}}</h1>
-{% if page.banner_image %}
-<div class="news__bannerimg">
-    {% image page.banner_image width-500 as img %}
-    <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ img.alt }}" />
-</div>
-{% endif %}
-{{page.main_text|richtext}}
+    {%include 'includes/breadcrumb.html'%}
+    <section class="news">
+        <h1 class="heading-primary mtb-3">{{self.title}}</h1>
+        {% if page.banner_image %}
+        <div class="news__bannerimg">
+
+            {% image page.banner_image width-500 as img %}
+            {% image page.banner_image original as org_img %}
+            <a class="image-link" href="{{org_img.file.url}}">
+            <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ img.alt }}" />
+            </a>
+        </div>
+        {% endif %}
+        {{page.main_text|richtext}}
 
 
 
 
-       {% for block in page.content %}
+        {% for block in page.content %}
         {% if block.block_type == 'table' %}
         <div class="table">{% include_block block %}</div>
         {% elif block.block_type == 'docs' %}
@@ -28,6 +35,28 @@
         </div>
         {% endif %}
         {% endfor %}
-</section>
+    </section>
 </main>
 {%endblock content %}
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.image-link').magnificPopup({
+                type: 'image',
+                mainClass: 'mfp-with-zoom', 
+                zoom: {
+                    enabled: true,
+                    duration: 300,
+                    easing: 'ease-in-out',
+                    opener: function (openerElement) {
+                        return openerElement.is('img') ? openerElement : openerElement.find('img');
+                    }
+                }
+
+            });
+             });
+</script>
+{% endblock %}

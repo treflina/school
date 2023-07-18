@@ -1447,15 +1447,48 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     padding-top: 0;
   }
 }
-.news ul, .news ol {
+.news ul,
+.news ol {
   margin-left: 2rem;
 }
 .news__bannerimg {
+  position: relative;
   max-width: calc(35% + 40px);
   min-width: 250px;
+  max-height: 350px;
+  overflow: hidden;
   float: left;
   padding-right: 40px;
   padding-bottom: 20px;
+}
+.news__bannerimg a {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.news__bannerimg a:hover:after, .news__bannerimg a:hover:before {
+  opacity: 1;
+}
+.news__bannerimg a::after, .news__bannerimg a::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.news__bannerimg a::after {
+  content: url("/static/img/zoom.svg");
+  width: 40px;
+  height: 40px;
+}
+.news__bannerimg a::before {
+  content: "";
+  width: 25%;
+  height: 25%;
+  background-color: #ddd;
+  border-radius: 50px;
 }
 .news__bannerimg img {
   width: 100%;
@@ -1473,6 +1506,11 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     float: none;
     clear: both;
     margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 48em) {
+  .news__bannerimg a::after, .news__bannerimg a::before {
+    display: none;
   }
 }
 .gallery__list {
