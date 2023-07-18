@@ -39,6 +39,7 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
+    {%include 'includes/cookies.html'%}
     {% main_menu template="includes/navbar.html" add_sub_menus_inline=True %}
     {% wagtailuserbar %}
     {% block content %}

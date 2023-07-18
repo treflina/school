@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load static %}
 {% block content %}
-<main class="wrapper">
+<main class="wrapper" id="main">
 {%include 'includes/breadcrumb.html'%}
  <h1 class="heading-primary mtb-3">{{self.title}}</h1>
 {{page.main_text|richtext}}

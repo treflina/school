@@ -280,3 +280,32 @@
         }
     }
 }
+
+.skipnav {
+    line-height: 1.5;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.skipnav a {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skipnav a:focus,
+.skipnav a:active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    font-size: 1.8rem;
+    color: white;
+    background-color: $color-primary-dark;
+    overflow: visible;
+    z-index: 9999;
+}

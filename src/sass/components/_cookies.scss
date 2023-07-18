@@ -1,0 +1,63 @@
+@use 'abstracts'as *;
+
+.hide {
+    display: none;
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.cookie-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    max-height: 60vh;
+    width: 100%;
+    background-color: rgba($color-primary-dark, .95);
+    color: #efefef;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    font-size: 1.5rem;
+    z-index: 10;
+}
+
+.cookie-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: .5rem 1rem;
+    overflow: auto;
+}
+
+
+.cookie-btn {
+    margin-left: 10px;
+    padding: .75rem 1.5rem;
+    background-color: #F66B0E;
+    border-radius: 8px;
+    border: 1px solid black;
+    font-size: 1.6rem;
+    font-family: $heading-font;
+    cursor: pointer;
+    transition: transform .3s, background-color .5s;
+
+    &:hover,
+    &:focus,
+    &:active {
+        transform: translateY(-1px);
+        background-color: #ddd;
+        box-shadow: 0 0 1px 2px rgba(0,0,0,.2) inset;
+
+    }
+}
+
+@include media(xsm) {
+    .cookie-wrapper {
+        flex-direction: column;
+    }
+}
