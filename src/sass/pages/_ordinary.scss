@@ -30,6 +30,7 @@
         color: #205375;
         text-decoration-color: transparent;
         text-underline-offset: 3px;
+        text-decoration-line: 2px;
         transition: text-decoration-color .3s;
 
         &:hover,
@@ -56,5 +57,6 @@
 @include media(md) {
     .block-docs__list {
         padding: 1rem 0;
+        margin-left: 1rem;
     }
 }
