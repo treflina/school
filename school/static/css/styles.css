@@ -1359,11 +1359,20 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   background-color: white;
   border-radius: 5px;
 }
+.footer__upper-links .links-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .footer__upper-links a {
   display: flex;
   justify-content: center;
   text-decoration: none;
   color: white;
+  transition: color 0.3s;
+}
+.footer__upper-links a:hover {
+  color: #F66B0E;
 }
 .footer__upper-links a img {
   display: inline-block;

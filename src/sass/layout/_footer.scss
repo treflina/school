@@ -83,11 +83,22 @@
                 border-radius: 5px;
             }
 
+            .links-box {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             a {
                 display: flex;
                 justify-content: center;
                 text-decoration: none;
                 color: white;
+                transition: color .3s;
+
+                &:hover {
+                    color: $color-secondary-basic;
+                }
 
                 img {
                     display: inline-block;
