@@ -243,7 +243,7 @@ class NewsDetailPage(Page):
         """Adding custom stuff to our context."""
         context = super().get_context(request, *args, **kwargs)
 
-        news = NewsDetailPage.objects.live().filter(publish_date__lte=self.publish_date)
+        news = NewsDetailPage.objects.live().filter(publish_date__lte=self.publish_date).exclude(id=self.id)
         galleries = GalleryDetailPage.objects.live().filter(
             publish_date__lte=self.publish_date
         )
