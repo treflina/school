@@ -5,38 +5,90 @@
 <link rel="stylesheet" href="{% static 'css/magnific_popup.min.css' %}">
 {% endblock %}
 {% block content %}
-<main class="wrapper wrapper-md" id="main">
-    {%include 'includes/breadcrumb.html'%}
-    <section class="news">
-        <h1 class="heading-primary mtb-3">{{self.title}}</h1>
-        {% if page.banner_image %}
-        <div class="news__bannerimg">
-
-            {% image page.banner_image width-500 as img %}
-            {% image page.banner_image original as org_img %}
-            <a class="image-link" href="{{org_img.file.url}}">
-            <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ img.alt }}" />
+<nav class="wrapper">{%include 'includes/breadcrumb.html'%}</nav>
+<div class="flex-wrapper">
+    <main class="wrapper" id="main">
+        <section class="news">
+            <h1 class="heading-primary mtb-3">{{self.title}}</h1>
+            <div class="news__content">
+                {% if page.banner_image %}
+                <div class="news__bannerimg">
+                    {% image page.banner_image width-500 as img %}
+                    {% image page.banner_image original as org_img %}
+                    <a class="image-link" href="{{org_img.file.url}}"><span class="screenReaderOnly">Powiększ zdjęcie</span>
+            <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.alt_attr }}" />
             </a>
-        </div>
-        {% endif %}
-        {{page.main_text|richtext}}
+                </div>
+                {% endif %}
+                {{page.main_text|richtext}}
 
+                {% for block in page.content %}
+                {% if block.block_type == 'table' %}
+                <div class="table">{% include_block block %}</div>
+                {% elif block.block_type == 'docs' %}
+                {% include_block block %}
+                {% else %}
+                <div class="block-{{ block.block_type }}">
+                    {% include_block block %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    <aside class="news__aside">
+        <ul class="news__aside-list">
+            {% for news in prev_news %}
+            <li class="news__aside-item">
+                <div class="news__aside-item--txt">
+                    <a href="{{news.get_url}}">
+                    <p>{{ news.publish_date }}{% if news.category.name == "Galeria" %} <span>G</span>{% endif %}</p>
+                    <p>{{ news.title }}</p>
+                    </a>
+                </div>
+                <div class="news__aside-item--img">
+                        {% if news.get_banner_image is not None %}
+                        {% image news.get_banner_image.image width-500 as img %}
+                        <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}" height="{{img.height}}"
+                            class="posts__main-img posts__main-img--secondary">
+                        {% elif news.banner_image %}
+                        {% image news.banner_image width-500 as img %}
+                        <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary" width="{{img.width}}"
+                            height="{{img.height}}">
+                        {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+            <li class="news__aside-item">
 
+                <div class="news__aside-item--txt">
+                    <a href="#">
+                    <p>20 czerwca 2023</p>
+                    <p>Druga kąpiel w baenie lorem isum nowo otwarte</p>
+                    </a>
+                </div>
+                <div class="news__aside-item--img">
+                    <img src="{% static 'img/szkola1sm.jpg'%}" alt="">
+                </div>
 
+            </li>
+            <li class="news__aside-item">
+                <div class="news__aside-item--txt">
+                    <a href="#">
+                    <p>20 czerwca 2023</p>
+                    <p>Trzecia kąpiel w basenie</p>
+                    </a>
+                </div>
+                <div class="news__aside-item--img">
+                    <img src="{% static 'img/szkola1sm.jpg'%}" alt="">
+                </div>
 
-        {% for block in page.content %}
-        {% if block.block_type == 'table' %}
-        <div class="table">{% include_block block %}</div>
-        {% elif block.block_type == 'docs' %}
-        {% include_block block %}
-        {% else %}
-        <div class="block-{{ block.block_type }}">
-            {% include_block block %}
-        </div>
-        {% endif %}
-        {% endfor %}
-    </section>
-</main>
+            </li>
+
+        </ul>
+    </aside>
+</div>
+
 {%endblock content %}
 {% block extra_js %}
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
@@ -45,18 +97,18 @@
 <script>
     $(document).ready(function () {
         $('.image-link').magnificPopup({
-                type: 'image',
-                mainClass: 'mfp-with-zoom', 
-                zoom: {
-                    enabled: true,
-                    duration: 300,
-                    easing: 'ease-in-out',
-                    opener: function (openerElement) {
-                        return openerElement.is('img') ? openerElement : openerElement.find('img');
-                    }
+            type: 'image',
+            mainClass: 'mfp-with-zoom',
+            zoom: {
+                enabled: true,
+                duration: 300,
+                easing: 'ease-in-out',
+                opener: function (openerElement) {
+                    return openerElement.is('img') ? openerElement : openerElement.find('img');
                 }
+            }
 
-            });
-             });
+        });
+    });
 </script>
 {% endblock %}

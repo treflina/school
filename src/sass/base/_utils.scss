@@ -43,6 +43,8 @@
     padding: 0 100px;
 }
 
+
+
 .heading-wrapper {
     display: flex;
     justify-content: space-between;
@@ -51,14 +53,28 @@
     flex-wrap: wrap;
 }
 
+.flex-wrapper {
+    display: flex;
+    gap: 30px;
+    padding: 0 50px 0 80px;
+}
+
+@include media(xl) {
+
+    .flex-wrapper {
+        padding: 0 30px 0 50px;
+    }
+}
 
 @include media(l) {
+    .flex-wrapper,
     .wrapper-md {
-        padding: 0 50px;
+        padding: 0 30px 0 30px;
     }
 }
 
 @include media(md) {
+
     .wrapper-md {
         padding: 0 20px;
     }

@@ -1,8 +1,10 @@
 from itertools import chain
 from operator import attrgetter
 
+from core.models import CategorySnippet, PagePaginationMixin
 from django.db import models
 from django.utils.timezone import now
+from gallery.models import GalleryDetailPage
 from modelcluster.fields import ParentalKey
 from streams import blocks
 from wagtail.admin.panels import (
@@ -17,10 +19,8 @@ from wagtail.fields import RichTextField, StreamField
 # from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.models import Orderable, Page
 from wagtail.search import index
-# from wagtail.snippets.models import register_snippet
 
-from core.models import PagePaginationMixin, CategorySnippet
-from gallery.models import GalleryDetailPage
+# from wagtail.snippets.models import register_snippet
 
 
 # TO REMOVE
@@ -107,8 +107,6 @@ class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
 
         context["posts"], context["page_range"] = self.pagination(request, all_news)
         return context
-
-
 
     class Meta:  # noqa
         verbose_name = "Wszystkie aktualności"
@@ -240,6 +238,24 @@ class NewsDetailPage(Page):
     class Meta:  # noqa
         verbose_name = "Artykuł"
         verbose_name_plural = "Artykuły"
+
+    def get_context(self, request, *args, **kwargs):
+        """Adding custom stuff to our context."""
+        context = super().get_context(request, *args, **kwargs)
+
+        news = NewsDetailPage.objects.live().filter(publish_date__lte=self.publish_date)
+        galleries = GalleryDetailPage.objects.live().filter(
+            publish_date__lte=self.publish_date
+        )
+        all_posts = sorted(
+            chain(news, galleries),
+            key=attrgetter("publish_date"),
+            reverse=True,
+        )
+
+        context["prev_news"] = all_posts
+
+        return context
 
 
 class MiniGalleryImage(Orderable):
