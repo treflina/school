@@ -154,7 +154,7 @@ body {
   margin-bottom: 1rem;
   color: rgba(0, 0, 0, 0.8);
 }
-.page-details > * {
+.page-details > *, .page-details > * > * {
   padding-right: 0.5rem;
 }
 .page-details .page-author {
@@ -164,6 +164,10 @@ body {
 .page-details .page-date,
 .page-details .page-author {
   padding-bottom: 0;
+}
+.page-details .page-dbox {
+  display: flex;
+  align-items: center;
 }
 .page-details svg {
   margin-top: -4px;
@@ -221,7 +225,7 @@ body {
 @media screen and (max-width: 25em) {
   .flex-wrapper,
   .wrapper-md {
-    padding: 0;
+    padding: 0 5px;
   }
 }
 @keyframes hover-shadow {

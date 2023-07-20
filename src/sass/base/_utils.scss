@@ -40,7 +40,8 @@
     margin-bottom: 1rem;
     color: rgba(0,0,0,.8);
 
-    & > * {
+    & > *,
+    & > * > * {
         padding-right: .5rem;
     }
 
@@ -51,6 +52,11 @@
     .page-date,
     .page-author {
         padding-bottom: 0;
+    }
+
+    .page-dbox {
+        display: flex;
+        align-items: center;
     }
 
     svg {
@@ -123,6 +129,6 @@
 
     .flex-wrapper,
     .wrapper-md {
-        padding: 0;
+        padding: 0 5px;
     }
 }
