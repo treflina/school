@@ -32,41 +32,6 @@
     font-weight: bold;
 }
 
-
-.page-details {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 1rem;
-    color: rgba(0,0,0,.8);
-
-    & > *,
-    & > * > * {
-        padding-right: .5rem;
-    }
-
-    .page-author {
-        font-weight: bold;
-        padding-right: 1rem;
-    }
-    .page-date,
-    .page-author {
-        padding-bottom: 0;
-    }
-
-    .page-dbox {
-        display: flex;
-        align-items: center;
-    }
-
-    svg {
-        margin-top: -4px;
-        color: $color-secondary-cta;
-    }
-
-    ;
-}
-
 .wrapper {
     max-width: 1400px;
     width: 100%;
@@ -77,8 +42,6 @@
 .wrapper-md {
     padding: 0 100px;
 }
-
-
 
 .heading-wrapper {
     display: flex;
@@ -128,7 +91,8 @@
 @include media(xxsm) {
 
     .flex-wrapper,
-    .wrapper-md {
+    .wrapper-md
+    {
         padding: 0 5px;
     }
 }

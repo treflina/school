@@ -299,7 +299,7 @@
             }
 
             &--secondary {
-                margin: 2rem 0;
+                margin: 0;
             }
         }
 
@@ -359,11 +359,11 @@
             grid-template-columns: auto;
         }
 
-        &__main {
-            &--secondary {
-                margin: 2rem 1rem 0;
-            }
-        }
+        // &__main {
+        //     &--secondary {
+        //         margin: 2rem 1rem 0;
+        //     }
+        // }
 
         &__linktoall {
             margin-right: .5em;
@@ -373,6 +373,10 @@
                 text-align: right;
             }
         }
+    }
+
+    .img-wrapper {
+        flex: 0 0 25rem;
     }
 }
 
@@ -394,12 +398,12 @@
             }
 
             &--secondary {
-                width: 90vw;
+                width: 95vw;
             }
 
             &-box {
                 &--secondary {
-                    padding: 1.5em .75em;
+                    padding: .75em;
                 }
             }
         }
