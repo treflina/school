@@ -23,13 +23,42 @@
     text-align: right;
 }
 
-.mtb-3{
+.mtb-3 {
     margin-top: 3rem;
     margin-bottom: 3rem;
 }
 
 .bold {
     font-weight: bold;
+}
+
+
+.page-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: rgba(0,0,0,.8);
+
+    & > * {
+        padding-right: .5rem;
+    }
+
+    .page-author {
+        font-weight: bold;
+        padding-right: 1rem;
+    }
+    .page-date,
+    .page-author {
+        padding-bottom: 0;
+    }
+
+    svg {
+        margin-top: -4px;
+        color: $color-secondary-cta;
+    }
+
+    ;
 }
 
 .wrapper {
@@ -67,6 +96,7 @@
 }
 
 @include media(l) {
+
     .flex-wrapper,
     .wrapper-md {
         padding: 0 30px 0 30px;
@@ -75,12 +105,24 @@
 
 @include media(md) {
 
+    .flex-wrapper,
     .wrapper-md {
         padding: 0 20px;
     }
 }
+
 @include media(xsm) {
+
+    .flex-wrapper,
     .wrapper-md {
         padding: 0 10px;
+    }
+}
+
+@include media(xxsm) {
+
+    .flex-wrapper,
+    .wrapper-md {
+        padding: 0;
     }
 }

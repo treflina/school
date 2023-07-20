@@ -1,5 +1,4 @@
 from core.models import CategorySnippet, PagePaginationMixin, SchoolYearSnippet
-
 from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
@@ -13,6 +12,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
+
 # from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
@@ -64,6 +64,14 @@ class GalleryDetailPage(PagePaginationMixin, Page):
         verbose_name="Data publikacji",
         help_text="""Data publikacji wyświetlana na stronie.""",
     )
+    author = models.CharField(
+        "autor",
+        max_length=80,
+        blank=True,
+        null=True,
+        help_text="""Podaj autora, jeśli chcesz żeby ta informacja była wyświetlona
+            na stronie""",
+    )
 
     year = models.ForeignKey(
         "core.SchoolYearSnippet",
@@ -90,7 +98,13 @@ class GalleryDetailPage(PagePaginationMixin, Page):
         return img
 
     content_panels = Page.content_panels + [
-        FieldRowPanel([FieldPanel("publish_date"), FieldPanel("year")]),
+        MultiFieldPanel(
+            [
+                FieldRowPanel([FieldPanel("publish_date"), FieldPanel("year")]),
+                FieldPanel("author"),
+            ],
+            heading="Informacje o galerii",
+        ),
         FieldPanel("main_text"),
         MultiFieldPanel(
             [

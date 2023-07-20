@@ -183,6 +183,14 @@ class NewsDetailPage(Page):
         verbose_name="Data publikacji",
         help_text="""Data publikacji wyświetlana na stronie.""",
     )
+    author = models.CharField(
+        "autor",
+        max_length=80,
+        blank=True,
+        null=True,
+        help_text="""Podaj autora, jeśli chcesz żeby ta informacja była wyświetlona
+            na stronie""",
+    )
     button_cta = models.ForeignKey(
         "wagtailcore.Page",
         null=True,
@@ -208,6 +216,7 @@ class NewsDetailPage(Page):
                 FieldPanel("category"),
                 FieldPanel("highlight"),
                 FieldPanel("publish_date"),
+                FieldPanel("author"),
             ],
             heading="Informacje o artykule",
         ),
@@ -243,7 +252,11 @@ class NewsDetailPage(Page):
         """Adding custom stuff to our context."""
         context = super().get_context(request, *args, **kwargs)
 
-        news = NewsDetailPage.objects.live().filter(publish_date__lte=self.publish_date).exclude(id=self.id)
+        news = (
+            NewsDetailPage.objects.live()
+            .filter(publish_date__lte=self.publish_date)
+            .exclude(id=self.id)
+        )
         galleries = GalleryDetailPage.objects.live().filter(
             publish_date__lte=self.publish_date
         )

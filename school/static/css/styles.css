@@ -147,6 +147,29 @@ body {
   font-weight: bold;
 }
 
+.page-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: rgba(0, 0, 0, 0.8);
+}
+.page-details > * {
+  padding-right: 0.5rem;
+}
+.page-details .page-author {
+  font-weight: bold;
+  padding-right: 1rem;
+}
+.page-details .page-date,
+.page-details .page-author {
+  padding-bottom: 0;
+}
+.page-details svg {
+  margin-top: -4px;
+  color: rgba(246, 107, 14, 0.8);
+}
+
 .wrapper {
   max-width: 1400px;
   width: 100%;
@@ -184,13 +207,21 @@ body {
   }
 }
 @media screen and (max-width: 48em) {
+  .flex-wrapper,
   .wrapper-md {
     padding: 0 20px;
   }
 }
 @media screen and (max-width: 31.25em) {
+  .flex-wrapper,
   .wrapper-md {
     padding: 0 10px;
+  }
+}
+@media screen and (max-width: 25em) {
+  .flex-wrapper,
+  .wrapper-md {
+    padding: 0;
   }
 }
 @keyframes hover-shadow {

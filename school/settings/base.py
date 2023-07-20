@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "streams",
     "search",
     "generic_chooser",
+    'wagtail.contrib.styleguide',
     "wagtail.contrib.table_block",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
