@@ -1,3 +1,5 @@
+@use 'abstracts'as *;
+
 .breadcrumb {
     margin: .5rem 0 2rem;
 
@@ -43,5 +45,11 @@
             color: rgba(0, 0, 0, 0.8);
             color: #f3a26b;
         }
+    }
+}
+
+@include media(l) {
+    .breadcrumb {
+        margin: .5rem 0 0;
     }
 }

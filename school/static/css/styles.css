@@ -293,6 +293,11 @@ body {
   color: #f3a26b;
 }
 
+@media screen and (max-width: 62em) {
+  .breadcrumb {
+    margin: 0.5rem 0 0;
+  }
+}
 .posts {
   padding: 3em 0.5em;
   display: flex;

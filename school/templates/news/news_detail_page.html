@@ -5,8 +5,10 @@
 <link rel="stylesheet" href="{% static 'css/magnific_popup.min.css' %}">
 {% endblock %}
 {% block content %}
-<nav class="wrapper">{%include 'includes/breadcrumb.html'%}</nav>
-<div class="flex-wrapper wrapper">
+<div class="wrapper">
+{%include 'includes/breadcrumb.html'%}
+<div class="flex-wrapper">
+
     <main id="main">
         <section class="news">
             <h1 class="heading-primary mtb-3">{{self.title}}</h1>
@@ -78,7 +80,7 @@
         </ul>
     </aside>
 </div>
-
+</div>
 {%endblock content %}
 {% block extra_js %}
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
