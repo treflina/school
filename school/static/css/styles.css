@@ -365,6 +365,14 @@ body {
 .posts__main-link:hover, .posts__main-link:focus {
   background-color: #efefef;
 }
+.posts__main-link::after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
 .posts__main-heading {
   font-weight: 700;
   margin: 0.5em 0 1em;
@@ -1142,7 +1150,7 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
     width: 100%;
     margin-top: 6.4rem;
     padding: 0;
-    padding-bottom: 9rem;
+    padding-bottom: 15rem;
     padding-top: 3.5rem;
     box-shadow: none;
     text-align: center;
