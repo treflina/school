@@ -10,7 +10,7 @@
     <div class="flex-wrapper">
 
         <main id="main">
-            <section class="news group">
+            <section id="introduction" class="news group">
                 <h1 class="heading-primary mtb-3">{{self.title}}</h1>
                 <div class="page-details">
                     {% if page.author %}
@@ -38,25 +38,37 @@
                     </div>
                     {% endif %}
                     {{page.main_text|richtext}}
-
-                    {% for block in page.content %}
-                    {% if block.block_type == 'table' %}
-                    <div class="table">{% include_block block %}</div>
+                </div>
+            </section>
+            <section id="additional-content">
+                <div class="content">
+                    {%for block in page.body %}
+                    {% if block.block_type == 'image' %}
+                    <div class="content__image">
+                        {% image block.value.img width-800 as img %}
+                        <img class="content__image-img" src="{{img.url}}" alt="{{block.value.alt_attr}}">
+                    </div>
+                    {% elif block.block_type == 'table' %}
+                    <div class="content__table">
+                        {% include_block block %}
+                    </div>
                     {% elif block.block_type == 'docs' %}
                     {% include_block block %}
                     {% else %}
-                    <div class="block-{{ block.block_type }}">
+                    <div class="content__text">
                         {% include_block block %}
                     </div>
                     {% endif %}
                     {% endfor %}
                 </div>
+
+
             </section>
             <section class="news-gallery">
                 <div class="gallery">
                     <ul class="gallery__list">
                         {% for i in page.gallery_images.all %}
-                        {% image i.image width-300 as thumbimg %}
+                        {% image i.image width-600 as thumbimg %}
                         {% image i.image original as img %}
                         <li class="gallery__list-item">
                             <a data-fslightbox="gallery" href="{{img.file.url}}" data-alt="{{i.alt_attr}}">
@@ -67,6 +79,9 @@
                         {% endfor %}
                     </ul>
                 </div>
+                {% if page.button_cta %}
+                <a href="{{page.button_cta.url}}" class="gallery-link">Zobacz zdjęcia</a>
+                {% endif %}
             </section>
         </main>
         <aside class="news__aside">

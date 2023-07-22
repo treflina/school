@@ -1,9 +1,10 @@
 {% load wagtailcore_tags static %}
 <div class="content">
-    {% for block in self.content %}
+{%for block in page.body %}
     {% if block.block_type == 'image' %}
     <div class="content__img">
-        {% include_block block %}
+        {% image block.value.img width-800 as img %}
+        <img src="{{img.url}}" alt="{{block.value.alt_attr}}">
     </div>
     {% elif block.block_type == 'table' %}
     <div class="content__table">
@@ -14,5 +15,5 @@
         {% include_block block %}
     </div>
     {% endif %}
-    {% endfor %}
+{% endfor %}
 </div>

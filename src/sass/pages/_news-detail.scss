@@ -13,6 +13,19 @@ main {
         p {
             padding-bottom: .5em;
         }
+
+        a {
+            color: $color-primary-dark;
+            font-weight: bold;
+            text-decoration-color: $color-primary-dark;
+            transition: text-decoration-thickness .3s;
+
+            &:hover,
+            &:focus {
+                text-decoration-thickness: 2px;
+                text-decoration-color: $color-secondary-light;
+            }
+        }
     }
 }
 
@@ -185,16 +198,55 @@ main {
 }
 
 .news-gallery {
+
+    display: flex;
+    flex-direction: column;
+
+
+    .gallery-link {
+        display: inline-block;
+        padding: 0.25em 1em;
+        border-radius: 20px;
+        margin: 2rem auto;
+        color: $color-primary-dark;
+        font-weight: bold;
+        box-shadow: 0px 0px 8px #205375;
+        text-decoration: none;
+        transition: all .3s;
+
+        &:hover,
+        &:focus {
+            box-shadow: 0px 0px 14px $color-primary-dark;
+            background-color: #efefef;
+            color: black;
+            transform: translateY(-3px);
+        }
+
+    }
+
     .gallery {
         &__list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             grid-gap: 10px;
             justify-content: space-between;
             margin: 2rem 0;
 
+            a {
+                display: flex;
+                max-width: 420px;
+
+
+            }
+
             img {
-                height: 180px;
+                flex: 0 1 500px;
+                height: 230px;
+
+
+
+                // max-width: 400px;
+                // min-height: 80%;
             }
         }
     }
@@ -266,9 +318,9 @@ main {
 @include media(xsm) {
     .news-gallery {
         .gallery {
-                img {
-                    height: 120px;
-                }
+            img {
+                height: 120px;
             }
         }
     }
+}

@@ -62,7 +62,6 @@ class ContentBlock(blocks.StreamBlock):
             "ul",
             "hr",
             "link",
-            "document-link",
         ],
         label="Tekst",
         blank=True,
@@ -75,6 +74,12 @@ class ContentBlock(blocks.StreamBlock):
         label="Tabela",
         template="streams/table_block.html",
         table_options=custom_table_options,
+    )
+    docs = blocks.ListBlock(
+        DocumentChooserBlock(),
+        required=False,
+        label="Dokumenty do pobrania",
+        template="streams/document_link_block.html",
     )
 
 
@@ -109,7 +114,7 @@ class RichtextAndTableBlock(blocks.StreamBlock):
     docs = blocks.ListBlock(
         DocumentChooserBlock(),
         required=False,
-        label="Lista dokumentów do pobrania",
+        label="DokumentY do pobrania",
         template="streams/document_link_block.html",
     )
 

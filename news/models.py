@@ -139,6 +139,7 @@ class NewsDetailPage(Page):
         related_name="+",
         on_delete=models.SET_NULL,
         verbose_name="Zdjęcie główne",
+        help_text="Preferowana orientacja pozioma."
     )
     alt_attr = models.CharField(
         blank=True,
@@ -201,6 +202,13 @@ class NewsDetailPage(Page):
     )
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel("category"),
+            FieldPanel("highlight"),
+            FieldPanel("publish_date"),
+            FieldPanel("author"),
+        ], heading="Informacje o artykule",
+        ),
         MultiFieldPanel(
             [
                 # FieldPanel("heading"),
@@ -211,18 +219,10 @@ class NewsDetailPage(Page):
             ],
             heading="Treść",
         ),
+
         MultiFieldPanel(
             [
-                FieldPanel("category"),
-                FieldPanel("highlight"),
-                FieldPanel("publish_date"),
-                FieldPanel("author"),
-            ],
-            heading="Informacje o artykule",
-        ),
-        MultiFieldPanel(
-            [
-                PageChooserPanel("button_cta"),
+                PageChooserPanel("button_cta", "gallery.GalleryDetailPage"),
                 MultipleChooserPanel(
                     "gallery_images",
                     label="Zdjęcia",
@@ -230,10 +230,10 @@ class NewsDetailPage(Page):
                     help_text="Wybrane zdjęcia zostaną zamieszczone na końcu artykułu.",
                 ),
             ],
-            heading="""Opcjonalnie: link do strony z galerią zdjęć lub mini galeria
+            heading="""Link do strony z galerią zdjęć lub/i mini galeria
             na końcu artykułu.""",
             help_text="""Możesz wybrać link do utworzonej wcześniej strony
-            z galerią zdjęć lub zamieścić kilka zdjęć, które będą wyświetlone na końcu
+            z galerią zdjęć lub zamieścić zdjęcia, które będą wyświetlone na końcu
             artykułu w postaci mini galerii""",
         ),
     ]

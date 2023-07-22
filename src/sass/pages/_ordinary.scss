@@ -14,55 +14,7 @@
     padding: 1rem 0;
 }
 
-.block-docs__list {
-    padding: 1rem 4rem;
-    list-style: none;
-
-    span {
-        font-weight: normal;
-        font-size: 1.5rem;
-    }
-
-    a {
-        display: inline-block;
-        margin: 1rem 0 1rem 2rem;
-        font-weight: bold;
-        color: #205375;
-        text-decoration-color: transparent;
-        text-underline-offset: 3px;
-        text-decoration-line: 2px;
-        transition: text-decoration-color .3s;
-
-        &:hover,
-        &:focus,
-        &:active {
-            text-decoration-color: #205375;
-
-        }
-    }
-
-    a[href$='pdf']::before {
-        display: inline-block;
-        width: 3rem;
-        height: 3rem;
-        padding-left: 1rem;
-        padding-right: 3rem;
-        margin-left: -4rem;
-        vertical-align: middle;
-        content: url('/static/img/file-text.svg');
-    }
-}
-
-
 @include media(l) {
     .introduction {
         padding-top: 2rem;
     }}
-
-@include media(md) {
-
-    .block-docs__list {
-        padding: 1rem 0 1rem 1rem;
-        margin-left: 1rem;
-    }
-}
