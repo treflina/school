@@ -8,7 +8,7 @@
             <h1 class="heading-primary heading-center-md">{{page.title}} {% if page.year %}- rok&nbsp;szkolny {{page.year}}{% endif %}</h1>
         </div>
     </div>
-    <nav class="wrapper">{%include 'includes/breadcrumb.html'%}</nav>
+    <div class="wrapper">{%include 'includes/breadcrumb.html'%}</div>
     <div class="teachers wrapper wrapper-md">
         {% if page.introduction %} <p class="teachers__intro">{{ page.introduction }}</p> {% endif %}
         <div class="teachers__box">

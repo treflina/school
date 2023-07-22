@@ -6,83 +6,100 @@
 {% endblock %}
 {% block content %}
 <div class="wrapper">
-{%include 'includes/breadcrumb.html'%}
-<div class="flex-wrapper">
+    {%include 'includes/breadcrumb.html'%}
+    <div class="flex-wrapper">
 
-    <main id="main">
-        <section class="news">
-            <h1 class="heading-primary mtb-3">{{self.title}}</h1>
-            <div class="page-details">
-                {% if page.author %}
-                <p class="page-author">{{page.author}}</p>
-                {% endif %}
-                <div class="page-dbox">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="bi bi-calendar-event" viewBox="0 0 16 16">
-                        <path
-                            d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                        <path
-                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                    </svg>
-                    <p class="page-date">{{page.publish_date}}</p>
+        <main id="main">
+            <section class="news group">
+                <h1 class="heading-primary mtb-3">{{self.title}}</h1>
+                <div class="page-details">
+                    {% if page.author %}
+                    <p class="page-author">{{page.author}}</p>
+                    {% endif %}
+                    <div class="page-dbox">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-calendar-event" viewBox="0 0 16 16">
+                            <path
+                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+                        <p class="page-date">{{page.publish_date}}</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="news__content">
-                {% if page.banner_image %}
-                <div class="news__bannerimg">
-                    {% image page.banner_image width-500 as img %}
-                    {% image page.banner_image original as org_img %}
-                    <a class="image-link" href="{{org_img.file.url}}"><span class="screenReaderOnly">Powiększ zdjęcie</span>
+                <div class="news__content">
+                    {% if page.banner_image %}
+                    <div class="news__bannerimg">
+                        {% image page.banner_image width-500 as img %}
+                        {% image page.banner_image original as org_img %}
+                        <a class="image-link" href="{{org_img.file.url}}"><span class="screenReaderOnly">Powiększ zdjęcie</span>
             <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.alt_attr }}" />
             </a>
-                </div>
-                {% endif %}
-                {{page.main_text|richtext}}
+                    </div>
+                    {% endif %}
+                    {{page.main_text|richtext}}
 
-                {% for block in page.content %}
-                {% if block.block_type == 'table' %}
-                <div class="table">{% include_block block %}</div>
-                {% elif block.block_type == 'docs' %}
-                {% include_block block %}
-                {% else %}
-                <div class="block-{{ block.block_type }}">
+                    {% for block in page.content %}
+                    {% if block.block_type == 'table' %}
+                    <div class="table">{% include_block block %}</div>
+                    {% elif block.block_type == 'docs' %}
                     {% include_block block %}
+                    {% else %}
+                    <div class="block-{{ block.block_type }}">
+                        {% include_block block %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </section>
-    </main>
-    <aside class="news__aside">
-        <ul class="news__aside-list">
-            {% for news in prev_news %}
-            <li class="news__aside-item">
-                <div class="news__aside-item--txt">
-                    <a href="{{news.get_url}}">
+            </section>
+            <section class="news-gallery">
+                <div class="gallery">
+                    <ul class="gallery__list">
+                        {% for i in page.gallery_images.all %}
+                        {% image i.image width-300 as thumbimg %}
+                        {% image i.image original as img %}
+                        <li class="gallery__list-item">
+                            <a data-fslightbox="gallery" href="{{img.file.url}}" data-alt="{{i.alt_attr}}">
+                                <span class="screenReaderOnly">Link do powiększonego zdjęcia</span>
+                            <img class="gallery-image" src="{{thumbimg.url}}" alt="Podgląd zdjęcia {{i.image.title}}"/>
+                        </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+        </main>
+        <aside class="news__aside">
+            <ul class="news__aside-list">
+                {% for news in prev_news %}
+                <li class="news__aside-item">
+                    <div class="news__aside-item--txt">
+                        <a href="{{news.get_url}}">
                     <p>{{ news.publish_date }}{% if news.category.name == "Galeria" %} <span>G</span>{% endif %}</p>
                     <p>{{ news.title }}</p>
                     </a>
-                </div>
-                <div class="news__aside-item--img">
-                    {% if news.get_banner_image is not None %}
-                    {% image news.get_banner_image.image width-500 as img %}
-                    <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}"
-                        height="{{img.height}}" class="posts__main-img posts__main-img--secondary">
-                    {% elif news.banner_image %}
-                    {% image news.banner_image width-500 as img %}
-                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary"
-                        width="{{img.width}}" height="{{img.height}}">
-                    {% endif %}
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </aside>
-</div>
+                    </div>
+                    <div class="news__aside-item--img">
+                        {% if news.get_banner_image is not None %}
+                        {% image news.get_banner_image.image width-500 as img %}
+                        <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}"
+                            height="{{img.height}}" class="posts__main-img posts__main-img--secondary">
+                        {% elif news.banner_image %}
+                        {% image news.banner_image width-500 as img %}
+                        <img src="{{img.url}}" alt="{{post.alt_attr}}"
+                            class="posts__main-img posts__main-img--secondary" width="{{img.width}}"
+                            height="{{img.height}}">
+                        {% endif %}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </aside>
+    </div>
 </div>
 {%endblock content %}
 {% block extra_js %}
+<script src="/static/js/fslightbox.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>

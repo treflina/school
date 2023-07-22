@@ -54,9 +54,15 @@
 }
 
 
+@include media(l) {
+    .introduction {
+        padding-top: 2rem;
+    }}
+
 @include media(md) {
+
     .block-docs__list {
-        padding: 1rem 0;
+        padding: 1rem 0 1rem 1rem;
         margin-left: 1rem;
     }
 }

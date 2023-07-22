@@ -63,7 +63,7 @@ main {
                         display: inline-block;
                         padding: 0 .5rem;
                         margin-left: .5rem;
-                        background-color: rgba($color-primary-dark,.8);
+                        background-color: rgba($color-primary-dark, .8);
                         color: #efefef;
                         font-weight: bold;
                         font-size: 1.3rem;
@@ -121,7 +121,7 @@ main {
     }
 
     &__content {
-        padding: 2rem 0 4rem;
+        padding: 2rem 0;
     }
 
     &__bannerimg {
@@ -182,7 +182,22 @@ main {
         }
     }
 
+}
 
+.news-gallery {
+    .gallery {
+        &__list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 10px;
+            justify-content: space-between;
+            margin: 2rem 0;
+
+            img {
+                height: 180px;
+            }
+        }
+    }
 }
 
 @include media(xl) {
@@ -227,3 +242,33 @@ main {
         }
     }
 }
+
+
+
+@include media(xsm) {
+    .news-gallery {
+        .gallery {
+            &__list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                grid-gap: 8px;
+                justify-content: space-between;
+                margin: 2rem 0;
+
+                img {
+                    height: 100px;
+                }
+            }
+        }
+    }
+}
+
+@include media(xsm) {
+    .news-gallery {
+        .gallery {
+                img {
+                    height: 120px;
+                }
+            }
+        }
+    }

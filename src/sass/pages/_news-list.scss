@@ -54,6 +54,7 @@
 
             &-newslink {
                 color: black;
+
                 &::after {
                     position: absolute;
                     content: "";
@@ -67,6 +68,18 @@
 
     }
 }
+
+@include media(l) {
+    .allnews {
+
+        .posts {
+            &__cards {
+                padding: 3rem 0 0;
+            }
+        }
+    }
+}
+
 
 @include media(md) {
     .allnews {

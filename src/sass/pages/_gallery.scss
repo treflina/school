@@ -9,9 +9,11 @@
         margin: 2em 0;
 
         &-item {
-            flex-basis: 300px;
+            position: relative;
+            flex: 0 1 300px;
             list-style: none;
             overflow: hidden;
+
 
             img {
                 width: 100%;
@@ -43,7 +45,7 @@
         &__list {
 
             &-item {
-                flex-basis: 350px;
+                flex: 0 1 350px;
 
                 img {
                     height: auto;

@@ -126,6 +126,12 @@ body {
   width: 1px;
 }
 
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .d-block {
   display: block;
 }
@@ -196,8 +202,7 @@ body {
   }
 }
 @media screen and (max-width: 25em) {
-  .flex-wrapper,
-  .wrapper-md {
+  .flex-wrapper {
     padding: 0 5px;
   }
 }
@@ -568,9 +573,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .posts__main--secondary {
-    width: 95vw;
   }
   .posts__main-box--secondary {
     padding: 0.75em;
@@ -1521,6 +1523,11 @@ div[tabindex="0"][aria-labelledby][role=region].colheaders {
   right: 0;
 }
 
+@media screen and (max-width: 62em) {
+  .allnews .posts__cards {
+    padding: 3rem 0 0;
+  }
+}
 @media screen and (max-width: 48em) {
   .allnews {
     padding-top: 0;
@@ -1619,7 +1626,7 @@ main .news p {
      object-position: center;
 }
 .news__content {
-  padding: 2rem 0 4rem;
+  padding: 2rem 0;
 }
 .news__bannerimg {
   position: relative;
@@ -1669,6 +1676,17 @@ main .news p {
      object-position: center;
 }
 
+.news-gallery .gallery__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+.news-gallery .gallery__list img {
+  height: 180px;
+}
+
 @media screen and (max-width: 75em) {
   .news__aside {
     flex: 0 0 300px;
@@ -1694,6 +1712,23 @@ main .news p {
     display: none;
   }
 }
+@media screen and (max-width: 31.25em) {
+  .news-gallery .gallery__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-gap: 8px;
+    justify-content: space-between;
+    margin: 2rem 0;
+  }
+  .news-gallery .gallery__list img {
+    height: 100px;
+  }
+}
+@media screen and (max-width: 31.25em) {
+  .news-gallery .gallery img {
+    height: 120px;
+  }
+}
 .gallery__list {
   display: flex;
   flex-wrap: wrap;
@@ -1702,7 +1737,8 @@ main .news p {
   margin: 2em 0;
 }
 .gallery__list-item {
-  flex-basis: 300px;
+  position: relative;
+  flex: 0 1 300px;
   list-style: none;
   overflow: hidden;
 }
@@ -1728,7 +1764,7 @@ main .news p {
 }
 @media screen and (max-width: 37.5em) {
   .gallery__list-item {
-    flex-basis: 350px;
+    flex: 0 1 350px;
   }
   .gallery__list-item img {
     height: auto;
@@ -1844,9 +1880,14 @@ main .news p {
   content: url("/static/img/file-text.svg");
 }
 
+@media screen and (max-width: 62em) {
+  .introduction {
+    padding-top: 2rem;
+  }
+}
 @media screen and (max-width: 48em) {
   .block-docs__list {
-    padding: 1rem 0;
+    padding: 1rem 0 1rem 1rem;
     margin-left: 1rem;
   }
 }

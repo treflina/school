@@ -11,6 +11,12 @@
     width: 1px;
 }
 
+.group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .d-block {
     display: block;
 }
@@ -90,8 +96,7 @@
 
 @include media(xxsm) {
 
-    .flex-wrapper,
-    .wrapper-md
+    .flex-wrapper
     {
         padding: 0 5px;
     }
