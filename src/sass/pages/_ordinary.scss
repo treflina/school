@@ -2,14 +2,15 @@
 
 .ordinary {
 
-    margin: 3rem 0;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 
     h2 {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
 
     h3 {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
     }
 }
 
@@ -52,7 +53,8 @@
 
 @include media(l) {
     .ordinary {
-        margin: 2rem 0;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 
     .subpage-heading {
