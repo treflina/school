@@ -10,9 +10,9 @@
     </div>
     <div class="wrapper">{%include 'includes/breadcrumb.html'%}</div>
     <div class="main ordinary wrapper wrapper-md">
-        {% if page.introduction %}
+        {% comment %} {% if page.introduction %}
         <p class="introduction{% if page.bold_intro %} bold {% endif %}">{{page.introduction}}</p>
-        {% endif %}
+        {% endif %} {% endcomment %}
         {% for block in page.content %}
         {% if block.block_type == 'table' %}
         <div class="table">{% include_block block %}</div>

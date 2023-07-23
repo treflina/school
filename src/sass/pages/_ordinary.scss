@@ -1,6 +1,9 @@
 @use 'abstracts'as *;
 
 .ordinary {
+
+    margin: 3rem 0;
+
     h2 {
         font-size: 2rem;
     }
@@ -48,8 +51,8 @@
 }
 
 @include media(l) {
-    .introduction {
-        padding-top: 2rem;
+    .ordinary {
+        margin: 2rem 0;
     }
 
     .subpage-heading {

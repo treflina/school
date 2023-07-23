@@ -107,10 +107,10 @@ class HomePage(RoutablePageMixin, Page):
 class OrdinaryPage(Page):
     template = "home/ordinary_page.html"
 
-    introduction = models.TextField(verbose_name="Tekst", blank=True)
-    bold_intro = models.BooleanField(
-        verbose_name="Pogrubienie", default=False, null=True
-    )
+    # introduction = models.TextField(verbose_name="Tekst", blank=True)
+    # bold_intro = models.BooleanField(
+    #     verbose_name="Pogrubienie", default=False, null=True
+    # )
     content = StreamField(
         blocks.RichtextAndTableBlock(),
         null=True,
@@ -119,21 +119,21 @@ class OrdinaryPage(Page):
         verbose_name="Treść",
     )
 
-    boolean_widget = forms.RadioSelect(choices=((True, "Tak"), (False, "Nie")))
+    # boolean_widget = forms.RadioSelect(choices=((True, "Tak"), (False, "Nie")))
 
     content_panels = Page.content_panels + [
-        FieldRowPanel(
-            [
-                FieldPanel("introduction", classname="col10", disable_comments=True),
-                FieldPanel("bold_intro", classname="col2", widget=boolean_widget),
-            ],
-            heading="Wprowadzenie",
-        ),
+        # FieldRowPanel(
+        #     [
+        #         FieldPanel("introduction", classname="col10", disable_comments=True),
+        #         FieldPanel("bold_intro", classname="col2", widget=boolean_widget),
+        #     ],
+        #     heading="Wprowadzenie",
+        # ),
         FieldPanel("content"),
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField("introduction"),
+        # index.SearchField("introduction"),
         index.RelatedFields("content", [index.SearchField("docs")]),
     ]
 
