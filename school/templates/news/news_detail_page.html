@@ -41,21 +41,21 @@
                 </div>
             </section>
             <section id="additional-content">
-                <div class="content">
+                <div class="block">
                     {%for block in page.body %}
                     {% if block.block_type == 'image' %}
-                    <div class="content__image">
+                    <div class="block__image">
                         {% image block.value.img width-800 as img %}
-                        <img class="content__image-img" src="{{img.url}}" alt="{{block.value.alt_attr}}">
+                        <img class="block__image-img" src="{{img.url}}" alt="{{block.value.alt_attr}}">
                     </div>
                     {% elif block.block_type == 'table' %}
-                    <div class="content__table">
+                    <div class="block__table">
                         {% include_block block %}
                     </div>
                     {% elif block.block_type == 'docs' %}
                     {% include_block block %}
                     {% else %}
-                    <div class="content__text">
+                    <div class="block__text">
                         {% include_block block %}
                     </div>
                     {% endif %}

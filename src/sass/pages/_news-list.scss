@@ -23,7 +23,6 @@
                     &:focus,
                     &:active {
                         box-shadow: 0px 0px 6px #205375;
-
                     }
                 }
             }
@@ -56,12 +55,7 @@
                 color: black;
 
                 &::after {
-                    position: absolute;
-                    content: "";
-                    top: 0;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
+                    @include pseudocontent-basic;
                 }
             }
         }

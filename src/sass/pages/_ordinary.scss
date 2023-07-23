@@ -1,4 +1,4 @@
-@use 'abstracts' as *;
+@use 'abstracts'as *;
 
 .ordinary {
     h2 {
@@ -14,7 +14,66 @@
     padding: 1rem 0;
 }
 
+.subpage-heading {
+    position: relative;
+    padding: 4rem 0;
+    color: #efefef;
+    z-index: 2;
+
+
+    &::before {
+        @include pseudocontent-basic;
+        background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
+            url("/static/img/squareslg.jpg");
+        background-size: cover;
+        background-position: top;
+        z-index: -1;
+    }
+
+    h1 {
+        line-height: 1.6;
+    }
+
+    h1::first-letter {
+        display: inline-block;
+        margin-right: 3px;
+        color: #F66B0E;
+        background-color: rgba(32, 83, 117, .5);
+        font-size: 165%;
+        // transform: translateY(15px);
+        border: 6px solid #efefef;
+        border-radius: 10px;
+        padding: 0 .2em;
+    }
+}
+
 @include media(l) {
     .introduction {
         padding-top: 2rem;
-    }}
+    }
+
+    .subpage-heading {
+        &::before {
+            background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
+                url("/static/img/squaressm.jpg");
+            background-position: bottom;
+        }
+    }
+}
+
+@include media(md) {
+
+    .subpage-heading {
+        padding: 3rem 0;
+
+        h1::first-letter {
+            font-size: 130%;
+        }
+    }
+}
+
+@include media(sm) {
+    .subpage-heading {
+        padding: 2rem 0;
+    }
+}

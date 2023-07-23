@@ -38,66 +38,7 @@
     font-weight: bold;
 }
 
-.wrapper {
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 10px;
+.first-letter {
+    color: #F66B0E;
 }
 
-.wrapper-md {
-    padding: 0 100px;
-}
-
-.heading-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.flex-wrapper {
-    display: flex;
-    gap: 30px;
-    padding: 0 50px 0 80px;
-}
-
-@include media(xl) {
-
-    .flex-wrapper {
-        padding: 0 30px 0 50px;
-    }
-}
-
-@include media(l) {
-
-    .flex-wrapper,
-    .wrapper-md {
-        padding: 0 30px 0 30px;
-    }
-}
-
-@include media(md) {
-
-    .flex-wrapper,
-    .wrapper-md {
-        padding: 0 20px;
-    }
-}
-
-@include media(xsm) {
-
-    .flex-wrapper,
-    .wrapper-md {
-        padding: 0 10px;
-    }
-}
-
-@include media(xxsm) {
-
-    .flex-wrapper
-    {
-        padding: 0 5px;
-    }
-}

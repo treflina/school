@@ -12,37 +12,23 @@
     a {
         display: inline-block;
         margin: 1rem 0 1rem 2rem;
-        font-weight: bold;
-        color: #205375;
-        text-decoration-color: transparent;
+        @include link-primary(2px, 2px, transparent);
         text-underline-offset: 3px;
-        text-decoration-thickness: 2px;
-        transition: text-decoration-color .3s;
-
-        &:hover,
-        &:focus,
-        &:active {
-            text-decoration-color: $color-secondary-light;
-
-        }
     }
 
-    a[href$='pdf']::before {
-        display: inline-block;
-        width: 3rem;
-        height: 3rem;
-        padding-left: 1rem;
-        padding-right: 3rem;
-        margin-left: -4rem;
-        vertical-align: middle;
-        content: url('/static/img/file-text.svg');
+    a[href$='pdf']::before,
+    a[href$='doc']::before,
+    a[href$='docx']::before,
+    a[href$='odt']::before,
+    a[href$='xls']::before,
+    a[href$='xlsx']::before {
+        @include link-document;
     }
 }
 
-.content {
+.block {
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
 
     &__image,
@@ -66,20 +52,17 @@
 
     &__text {
         a {
-            color: $color-primary-dark;
-            font-weight: bold;
-            text-decoration-color: $color-primary-dark;
-            transition: text-decoration-thickness .3s;
-
-            &:hover,
-            &:focus {
-                text-decoration-thickness: 2px;
-                text-decoration-color: $color-secondary-light;
-            }
+            @include link-primary(1px, 2px, $color-primary-dark)
         }
 
-        ul, ol {
+        ul,
+        ol {
             margin-left: 3rem;
+             padding-bottom: .5em;
+        }
+
+        p {
+             padding-bottom: .5em;
         }
     }
 }

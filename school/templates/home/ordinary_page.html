@@ -13,14 +13,13 @@
         {% if page.introduction %}
         <p class="introduction{% if page.bold_intro %} bold {% endif %}">{{page.introduction}}</p>
         {% endif %}
-
         {% for block in page.content %}
         {% if block.block_type == 'table' %}
         <div class="table">{% include_block block %}</div>
         {% elif block.block_type == 'docs' %}
         {% include_block block %}
         {% else %}
-        <div class="block-{{ block.block_type }}">
+        <div class="block-{{ block.block_type }} block__text">
             {% include_block block %}
         </div>
         {% endif %}

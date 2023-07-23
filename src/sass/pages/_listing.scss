@@ -11,16 +11,6 @@
 
 .index__link {
     font-size: 1.7rem;
-    text-decoration-color: transparent;
+    @include link-primary(2px,2px, transparent);
     text-underline-offset: 3px;
-    text-decoration-thickness: 2px;
-    color: $color-primary-dark;
-    font-weight: bold;
-    transition: text-decoration-color .3s;
-
-    &:hover,
-    &:focus,
-    &:active {
-        text-decoration-color: $color-primary-dark;
-    }
 }
