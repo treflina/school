@@ -8,7 +8,6 @@
 <div class="wrapper">
     {%include 'includes/breadcrumb.html'%}
     <div class="flex-wrapper">
-
         <main id="main">
             <section id="introduction" class="news group">
                 <h1 class="heading-primary mtb-3">{{self.title}}</h1>
@@ -30,7 +29,7 @@
                 <div class="news__content">
                     {% if page.banner_image %}
                     <div class="news__bannerimg">
-                        {% image page.banner_image width-500 as img %}
+                        {% image page.banner_image fill-500x380 as img %}
                         {% image page.banner_image original as org_img %}
                         <a class="image-link" href="{{org_img.file.url}}"><span class="screenReaderOnly">Powiększ zdjęcie</span>
             <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.alt_attr }}" />
@@ -43,37 +42,31 @@
             <section id="additional-content">
                 <div class="block">
                     {%for block in page.body %}
-                    {% if block.block_type == 'image' %}
-                    <div class="block__image">
-                        {% image block.value.img width-800 as img %}
-                        <img class="block__image-img" src="{{img.url}}" alt="{{block.value.alt_attr}}">
-                    </div>
-                    {% elif block.block_type == 'table' %}
+                    {% if block.block_type == 'table' %}
                     <div class="block__table">
                         {% include_block block %}
                     </div>
                     {% elif block.block_type == 'docs' %}
                     {% include_block block %}
                     {% else %}
-                    <div class="block__text">
+                    <div class="block__text group">
                         {% include_block block %}
                     </div>
                     {% endif %}
                     {% endfor %}
                 </div>
-
-
             </section>
             <section class="news-gallery">
                 <div class="gallery">
                     <ul class="gallery__list">
                         {% for i in page.gallery_images.all %}
-                        {% image i.image width-600 as thumbimg %}
+                        {% image i.image fill-350x230 as thumbimg %}
                         {% image i.image original as img %}
                         <li class="gallery__list-item">
                             <a data-fslightbox="gallery" href="{{img.file.url}}" data-alt="{{i.alt_attr}}">
                                 <span class="screenReaderOnly">Link do powiększonego zdjęcia</span>
-                            <img class="gallery-image" src="{{thumbimg.url}}" alt="Podgląd zdjęcia {{i.image.title}}"/>
+                            <img class="gallery-image" src="{{thumbimg.url}}" alt="Podgląd zdjęcia {{i.image.title}}"
+                          />
                         </a>
                         </li>
                         {% endfor %}

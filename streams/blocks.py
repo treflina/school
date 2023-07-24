@@ -114,7 +114,7 @@ class RichtextAndTableBlock(blocks.StreamBlock):
     docs = blocks.ListBlock(
         DocumentChooserBlock(),
         required=False,
-        label="DokumentY do pobrania",
+        label="Dokumenty do pobrania",
         template="streams/document_link_block.html",
     )
 

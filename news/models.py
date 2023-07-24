@@ -165,11 +165,11 @@ class NewsDetailPage(Page):
         ],
     )
     body = StreamField(
-        blocks.ContentBlock(),
+        blocks.RichtextAndTableBlock(),
         null=True,
         blank=True,
         use_json_field=True,
-        verbose_name="Dodatkowe teksty, zdjęcia, tabele",
+        verbose_name="Dodatkowe teksty, tabele, dokumenty",
     )
     highlight = models.BooleanField(
         default=False,
