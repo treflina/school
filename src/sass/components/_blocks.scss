@@ -52,6 +52,7 @@
 
     &__text {
         width: 100%;
+
         a {
             @include link-primary(1px, 2px, $color-primary-dark)
         }
@@ -62,9 +63,6 @@
             padding-bottom: .5em;
         }
 
-        p + p {
-             padding-bottom: .5em;
-        }
     }
 }
 

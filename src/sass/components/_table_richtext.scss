@@ -73,12 +73,13 @@ div[tabindex="0"][aria-labelledby][role="region"].colheaders {
 .richtext-image {
     max-width: 100%;
     height: auto;
-    margin: 0 16px 10px;
+    margin: 0 1.5rem 1rem;
 
 }
 
 .right {
     float: right;
+    
 }
 
 .left {
@@ -87,7 +88,8 @@ div[tabindex="0"][aria-labelledby][role="region"].colheaders {
 
 .full-width {
     display: block;
-    margin: 0 auto 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .responsive-object {

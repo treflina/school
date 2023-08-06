@@ -118,8 +118,22 @@
                 background-color: #efefef;
             }
 
-            &::after {
-                @include pseudocontent-basic;
+            &--secondary {
+
+
+                &::after {
+                    @include pseudocontent-basic;
+                }
+            }
+
+            &--primary {
+                transition: background-color .5s,
+                    transform .5s;
+
+                &:hover,
+                &:focus {
+                    transform: translateY(-3px);
+                }
             }
         }
 

@@ -9,7 +9,6 @@ register = template.Library()
 def url_replace(request, **kwargs):
     """
     This tag can help us replace or add querystring
-
     TO replace the page field in URL
     {% url_replace request page=page_num %}
     """

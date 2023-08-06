@@ -9,6 +9,7 @@ Dockerfile
 
 # Django project
 /media/*
+/public/*
 /static/
 django.log
 staticfiles
