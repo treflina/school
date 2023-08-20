@@ -3,13 +3,12 @@ from itertools import chain, islice
 from operator import attrgetter
 
 from core.models import CategorySnippet
-from django import forms
 from django.db import models
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
 from news.models import NewsDetailPage
 from streams import blocks
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
@@ -19,6 +18,7 @@ from wagtail.search import index
 class HomePage(RoutablePageMixin, Page):
     template = "home/home_page.html"
     parent_page_types = []
+    max_count = 1
 
     def get_today(self):
         return date.today()
@@ -106,7 +106,7 @@ class HomePage(RoutablePageMixin, Page):
 
 class OrdinaryPage(Page):
     template = "home/ordinary_page.html"
-
+    parent_page_types = ["core.IndexPage", "home.HomePage"]
     # introduction = models.TextField(verbose_name="Tekst", blank=True)
     # bold_intro = models.BooleanField(
     #     verbose_name="Pogrubienie", default=False, null=True
@@ -144,6 +144,7 @@ class OrdinaryPage(Page):
 
 class TeachersPage(Page):
     template = "home/teachers_page.html"
+    parent_page_types = ["core.IndexPage"]
     page_description = """Używana np. do stworzenia
              zakładek 'Grono pedagogiczne', 'RSU'"""
 

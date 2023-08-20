@@ -22,6 +22,7 @@
     }
 
     &__text {
+        display: flex;
         position: relative;
         z-index: 3;
         padding: 2rem 3rem;
@@ -33,6 +34,15 @@
             line-height: 1.5;
             color: white;
         }
+    }
+
+    &__emblem {
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        width: 50px;
+        z-index: 3;
+
     }
 
     &__icon {
@@ -118,6 +128,17 @@
     }
 }
 
+@include media(xl) {
+    .header {
+        &__emblem {
+            left: 8px;
+            width: 40px;
+        }
+
+
+    }
+}
+
 @include media(l) {
     .header {
         &::before {
@@ -143,6 +164,11 @@
 
 @include media(xsm) {
     .header {
+
+        &__emblem {
+            left: 10px;
+            width: 40px;
+        }
 
         &__text {
             margin-top: -20px;

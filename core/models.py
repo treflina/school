@@ -108,6 +108,7 @@ class PagePaginationMixin:
 
 class IndexPage(Page):
     template = "core/index_page.html"
+    parent_page_types = ["home.HomePage"]
     page_description = """Np. 'O szkole', 'Dla rodziców' - używana do stworzenia rodzica
                 dla innych podstron"""
 
