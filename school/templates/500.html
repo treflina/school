@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8" />
-        <title>Internal server error</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
-        <h1>Internal server error</h1>
-
-        <h2>Sorry, there seems to be an error. Please try again soon.</h2>
-    </body>
-</html>
+{% extends 'base.html' %}
+{% load wagtailcore_tags menu_tags %}
+{% load static %}
+{% block title %}Błąd serwera{% endblock %}
+{% block content %}
+<div class="wrapper" style="margin-top: 4rem;">
+    <h1>Błąd serwera.</h1>
+</div>
+{% endblock %}
