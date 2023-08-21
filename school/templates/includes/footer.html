@@ -2,29 +2,25 @@
 <footer class="footer" id="footer">
     <div class="footer__upper">
         <div class="footer__upper-contact">
-            <p>Publiczna Szkoła Podstawowa w Turawie</p>
-            <p>ul. Opolska 47</p>
-            <p>46-045 Turawa</p>
-            <div class="footer__upper-contact--phone"><img src="{% static '/img/phone.svg' %}" alt="">
+            <p>Kontakt:</p>
+            <div class="footer__upper-contact--phone"><img src="{% static 'img/phone.svg' %}" alt="">
                 <p>tel.: 77 4212 029, 77 4212 082</p>
             </div>
-            <div class="footer__upper-contact--mail"><img src="{% static '/img/mail.svg' %}" alt="">
+            <div class="footer__upper-contact--mail"><img src="{% static 'img/mail.svg' %}" alt="">
                 <p>email: psp.turawa@oswiata-turawa.pl</p>
             </div>
         </div>
         <div class="footer__upper-links">
-            <div class="links-box">
             <a href="#footer">RODO</a>
             <a href="#footer">Deklaracja dostępności</a>
             <a href="http://g_turawa.wodip.opole.pl/">Poprzednia wersja strony</a>
-            </div>
             <div class="bip-box">
-                <a href="http://pspturawa.oswiata-turawa.pl/7/strona-glowna-bip.html" aria-label="Przejdź do biuletynu informacji publicznej"><img class="bip" src="{% static '/img/bip.png' %}" alt=""></a>
+                <a href="http://pspturawa.oswiata-turawa.pl/7/strona-glowna-bip.html" aria-label="Przejdź do biuletynu informacji publicznej" class="bip-link"><img class="bip" src="{% static 'img/bip.png' %}" alt=""></a>
             </div>
         </div>
     </div>
     <div class="footer__bottom">
         <p>&copy; <span class="footer__year">{% now "Y" %}</span> Publiczna Szkoła Podstawowa w Turawie</p>
-        <p>Projekt i wykonanie: IS</p>
+        <p>Projekt i wykonanie: I.Słychań-Ćwik</p>
     </div>
 </footer>

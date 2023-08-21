@@ -9,10 +9,8 @@
     &__upper {
         position: relative;
         display: flex;
-        justify-content: space-evenly;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        padding: 2em;
+        flex-direction: column;
+        padding: 1em 2em;
         margin-top: 4rem;
         background-color: transparent;
         color: white;
@@ -25,19 +23,34 @@
             z-index: -2;
         }
 
-        &-contact {
+        &-contact,
+        &-links {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 0 auto;
             padding: 1em;
+        }
+
+        &-contact *,
+        &-links * {
+            margin: .5rem 1rem;
+        }
+
+
+        &-contact {
             margin-bottom: 1em;
 
             &--phone,
             &--mail {
                 display: flex;
-                margin-top: .5em;
+                align-items: center;
                 overflow-wrap: anywhere;
 
                 img {
-                    margin-right: .5em;
+                    margin-right: 0;
                     width: 24px;
                     height: 24px;
                 }
@@ -52,25 +65,22 @@
         }
 
         &-links {
-            position: relative;
-            padding: 1em;
-
             .bip-box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 width: min-content;
-                margin: 1em auto 1em;
                 background-color: white;
                 border-radius: 5px;
+                margin: .5rem 1rem;
             }
 
-            .links-box {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
+            .bip-link {
+                height: 3rem;
+                margin: 0 .5rem;
             }
 
             a {
-                display: flex;
-                justify-content: center;
                 text-decoration: none;
                 color: white;
                 transition: color .3s;
@@ -78,18 +88,16 @@
                 &:hover {
                     color: $color-secondary-basic;
                 }
+            }
 
-                img {
-                    display: inline-block;
-                    margin-left: 1em;
-                }
-
-                .bip {
-                    height: 4rem;
-                }
+            .bip {
+                height: 100%;
+                margin: 0;
             }
         }
     }
+
+
 
     &__bottom {
         display: flex;
@@ -108,13 +116,51 @@
     }
 }
 
+
 @include media(l) {
     .footer {
         &__upper {
+
             &::before {
                 background-image: linear-gradient(rgba(32, 83, 117, .7), rgba(32, 83, 117, .7)),
                     url("/static/img/squaressm.jpg");
             }
+        }
+    }
+}
+
+@include media(sm) {
+    .footer {
+        &__upper {
+            padding: 2em 0;
+        }
+    }
+}
+
+@include media(xxsm) {
+    .footer {
+        &__upper {
+            padding: 1em 0;
+
+            &-contact,
+            &-links {
+                justify-content: flex-start;
+
+                &--phone,
+                &--mail {
+                    img {
+                        margin-right: 0.25em;
+
+                    }
+                }
+            }
+
+            &-contact *,
+            &-links * {
+                margin: .5rem 1rem .5rem 0;
+            }
+
+
         }
     }
 }
