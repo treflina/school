@@ -16,6 +16,7 @@ staticfiles
 *.sqlite3
 
 
+
 /home/migrations/*
 /search/migrations/*
 /streams/migrations/*
@@ -62,3 +63,4 @@ wheels/
 
 notes.txt
 django.log
+school/templates/includes/footer2.html

@@ -57,6 +57,7 @@
                 </div>
             </section>
             <section class="news-gallery">
+                {% if page.gallery_images.all|length > 0 %}
                 <div class="gallery">
                     <ul class="gallery__list">
                         {% for i in page.gallery_images.all %}
@@ -72,6 +73,7 @@
                         {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
                 {% if page.button_cta %}
                 <a href="{{page.button_cta.url}}" class="gallery-link">Zobacz zdjęcia</a>
                 {% endif %}
