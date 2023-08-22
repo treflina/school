@@ -24,13 +24,13 @@
 
         a {
             text-decoration: none;
-            // color: black;
         }
 
         &--primary {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+            width: 100%;
             max-width: 1200px;
             margin: 3rem 0 3rem;
             gap: 20px;
@@ -377,12 +377,6 @@
             grid-template-columns: auto;
         }
 
-        // &__main {
-        //     &--secondary {
-        //         margin: 2rem 1rem 0;
-        //     }
-        // }
-
         &__linktoall {
             margin-right: .5em;
 
@@ -414,10 +408,6 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
-            // &--secondary {
-            //     width: 95vw;
-            // }
 
             &-box {
                 &--secondary {
