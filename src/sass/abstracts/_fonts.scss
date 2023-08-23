@@ -1,3 +1,38 @@
-$main-font: "Martel Sans", sans-serif;
-// $main-font: 'Source Sans 3', sans-serif;
-$heading-font: "Rubik", sans-serif;
+$main-font: "martel_sans", sans-serif;
+$heading-font: "rubikmedium", sans-serif;
+
+
+@font-face {
+    font-family: 'martel_sans';
+    src: url('/static/fonts/martelsans-regular-webfont.woff2') format('woff2'),
+        url('/static/fonts/martelsans-regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'martel_sans';
+    src: url('/static/fonts/martelsans-semibold-webfont.woff2') format('woff2'),
+        url('/static/fonts/martelsans-semibold-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'martel_sans';
+    src: url('/static/fonts/martelsans-bold-webfont.woff2') format('woff2'),
+        url('/static/fonts/martelsans-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'rubikmedium';
+    src: url('/static/fonts/Rubik-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
