@@ -22,7 +22,7 @@
         <form class="nav__search" action="{% url 'search' %}" method="get">
             <label for="txtSearch" class="screenReaderOnly">Szukaj: </label>
             <input id="txtSearch" type="text" placeholder="Wyszukaj" class="nav__search-input" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}/>
-            <button id="btnSearch" value="Search" type="submit" class="nav__search-btn"><img src="{% static 'img/search.svg' %}" width="55" height="35"
+            <button id="btnSearch" value="Search" type="submit" class="nav__search-btn"><img src="{% static 'img/search.svg' %}" width="24" height="24"
                     alt="Szukaj" title="Szukaj"></button>
         </form>
         <button class="hamburger hamburger--spring" type="button" aria-haspopup="true" aria-expanded="false">
