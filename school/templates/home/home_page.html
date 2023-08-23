@@ -25,7 +25,7 @@
     </div>
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
-            {% image main_post.banner_image fill-500x400 as img %}
+            {% image main_post.banner_image fill-500x400 format-jpeg jpegquality-60 as img %}
             <img src="{{img.url}}" alt="{{main_post.alt_attr}}" class="posts__main-img posts__main-img--primary" width="{{img.width}}" height="{{img.height}}"
             decoding="async" loading="lazy">
             <div class="posts__main-box posts__main-box--primary">
@@ -89,11 +89,11 @@
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
                     {% if post.get_banner_image is not None %}
-                     {% image post.get_banner_image.image fill-500x400 as img %}
+                     {% image post.get_banner_image.image fill-500x400 format-jpeg jpegquality-60 as img %}
                      <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}" height="{{img.height}}"
                      class="posts__main-img posts__main-img--secondary" decoding="async" loading="lazy">
                     {% elif post.banner_image %}
-                     {% image post.banner_image fill-500x400 as img %}
+                     {% image post.banner_image fill-500x400 format-jpeg jpegquality-60 as img %}
                      <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary" width="{{img.width}}" height="{{img.height}}"
                      decoding="async" loading="lazy">
                      {% endif %}
