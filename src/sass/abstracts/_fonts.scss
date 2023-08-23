@@ -1,5 +1,5 @@
 $main-font: "martel_sans", sans-serif;
-$heading-font: "rubikmedium", sans-serif;
+$heading-font: "Rubik", sans-serif;
 
 
 @font-face {
@@ -25,14 +25,6 @@ $heading-font: "rubikmedium", sans-serif;
     src: url('/static/fonts/martelsans-bold-webfont.woff2') format('woff2'),
         url('/static/fonts/martelsans-bold-webfont.woff') format('woff');
     font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'rubikmedium';
-    src: url('/static/fonts/Rubik-Medium.ttf');
-    font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
