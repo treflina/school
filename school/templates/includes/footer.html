@@ -4,10 +4,10 @@
         <div class="footer__upper-contact">
             <p>Kontakt:</p>
             <div class="footer__upper-contact--phone"><img src="{% static 'img/phone.svg' %}" alt="">
-                <p>tel.: 77 4212 029, 77 4212 082</p>
+                <p>tel.: <a href="tel:+48774212029" class="not-link">77 4212 029</a>, <a href="tel:+48774212029" class="not-link">77 4212 082</a></p>
             </div>
-            <div class="footer__upper-contact--mail"><img src="{% static 'img/mail.svg' %}" alt="">
-                <p>email: psp.turawa@oswiata-turawa.pl</p>
+            <div class="footer__upper-contact--mail">
+                <img src="{% static 'img/mail.svg' %}" alt=""><p><a href="mailto:psp.turawa@oswiata-turawa.pl" class="not-link"> email: psp.turawa@oswiata-turawa.pl</a></p>
             </div>
         </div>
         <div class="footer__upper-links">
@@ -21,6 +21,6 @@
     </div>
     <div class="footer__bottom">
         <p>&copy; <span class="footer__year">{% now "Y" %}</span> Publiczna Szkoła Podstawowa w Turawie</p>
-        <p>Projekt i wykonanie: I.Słychań-Ćwik</p>
+        <a href="mailto:luiza.cwik@gmail.com" class="not-link">Projekt i wykonanie: I.Słychań-Ćwik</a>
     </div>
 </footer>

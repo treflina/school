@@ -37,6 +37,12 @@
         &-contact *,
         &-links * {
             margin: .5rem 1rem;
+
+            .not-link {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
         }
 
 
@@ -102,6 +108,7 @@
     &__bottom {
         display: flex;
         justify-content: space-evenly;
+        align-items: center;
         flex-wrap: wrap;
         height: min-content;
         padding: 1em;
@@ -112,6 +119,10 @@
         p {
             margin-top: .5em;
             text-align: center;
+        }
+
+        a {
+            margin-top: .5em;
         }
     }
 }

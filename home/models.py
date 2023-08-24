@@ -33,7 +33,10 @@ class HomePage(RoutablePageMixin, Page):
             main_post = news_list.first()
 
         galleries_list = (
-            GalleryDetailPage.objects.live().specific().order_by("-publish_date")
+            GalleryDetailPage.objects.filter(on_main_page=True)
+            .live()
+            .specific()
+            .order_by("-publish_date")
         )
 
         posts = sorted(
@@ -249,7 +252,6 @@ class ContactPage(Page):
         MultiFieldPanel(
             [FieldPanel("image"), FieldPanel("alt_attr")], heading="Zdjęcie"
         ),
-
     ]
 
     search_fields = Page.search_fields + [

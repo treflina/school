@@ -11,6 +11,16 @@
     width: 1px;
 }
 
+.not-link {
+    text-decoration: none;
+    color: inherit;
+    margin-right: 0;
+
+    &:visited {
+        color: inherit;
+    }
+}
+
 .group:after {
     content: "";
     display: table;

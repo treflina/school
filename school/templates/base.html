@@ -23,6 +23,10 @@
     <base target="_blank">
     {% endif %}
     {# Global stylesheets #}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/favicon/site.webmanifest' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -30,6 +34,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/hamburger.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+
 
     {% block extra_css %}
     {# Override this in templates to add extra stylesheets #}

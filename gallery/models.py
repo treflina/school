@@ -6,14 +6,14 @@ from wagtail.admin.panels import (
     FieldPanel,
     FieldRowPanel,
     MultiFieldPanel,
-    MultipleChooserPanel,
+    # MultipleChooserPanel,
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
 
-# from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
+from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
 class GalleryIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
@@ -89,6 +89,14 @@ class GalleryDetailPage(PagePaginationMixin, Page):
         on_delete=models.SET_NULL,
         default=CategorySnippet.get_default_id,
     )
+    on_main_page = models.BooleanField(
+        default=True,
+        verbose_name="Wyświetl na głównej stronie w Najnowszych wpisach",
+        help_text="""Pole pozostaw puste jeśli o wydarzeniu z galerii został
+        opublikowany osobny
+        artykuł w aktualnościach. Dzięki temu informacja o wydarzeniu nie pojawi się
+        na stronie głównej dwukrotnie.""",
+    )
 
     @property
     def get_banner_image(self):
@@ -102,14 +110,15 @@ class GalleryDetailPage(PagePaginationMixin, Page):
             [
                 FieldRowPanel([FieldPanel("publish_date"), FieldPanel("year")]),
                 FieldPanel("author"),
+                FieldPanel("on_main_page"),
             ],
             heading="Informacje o galerii",
         ),
         FieldPanel("main_text"),
         MultiFieldPanel(
             [
-                MultipleChooserPanel(
-                    "gallery_images", label="", chooser_field_name="image"
+                MultipleImagesPanel(
+                    "gallery_images", label="", image_field_name="image"
                 ),
             ],
             heading="Zdjęcia",
