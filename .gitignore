@@ -15,13 +15,13 @@ django.log
 staticfiles
 *.sqlite3
 
-# /home/migrations/*
-# /search/migrations/*
-# /streams/migrations/*
-# /news/migrations/*
-# /gallery/migrations/*
-# /events/migrations/*
-# /core/migrations/*
+/home/migrations/*
+/search/migrations/*
+/streams/migrations/*
+/news/migrations/*
+/gallery/migrations/*
+/events/migrations/*
+/core/migrations/*
 
 !__init__.py
 
