@@ -12,7 +12,7 @@ from core.models import CategorySnippet
 
 class HomePage(Page):
     template = "home/home_page.html"
-    parent_page_types = []
+    parent_page_types = ['wagtailcore.Page']
     max_count = 1
 
     def get_today(self):
