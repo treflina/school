@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     "news.apps.NewsConfig",
     "streams",
     "search",
-    "generic_chooser",
     "wagtail.contrib.table_block",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
