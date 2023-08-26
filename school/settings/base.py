@@ -17,8 +17,7 @@ def get_secret(secret_name, secrets=secret):
         raise ImproperlyConfigured(msg)
 
 
-# DEBUG = get_secret("DEBUG")
-DEBUG = True
+DEBUG = get_secret("DEBUG")
 
 INSTALLED_APPS = [
     "core.apps.CoreConfig",

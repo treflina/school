@@ -3,9 +3,13 @@ import sys
 from urllib.parse import unquote
 
 from django.core.wsgi import get_wsgi_application
+from school.settings import base
 
 sys.path.append(os.getcwd())
-os.environ['DJANGO_SETTINGS_MODULE'] = "school.settings.dev"
+if base.DEBUG:
+    os.environ['DJANGO_SETTINGS_MODULE'] = "school.settings.dev"
+else:
+    os.environ['DJANGO_SETTINGS_MODULE'] = "school.settings.production"
 
 
 def application(environ, start_response):
