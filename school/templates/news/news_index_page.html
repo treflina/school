@@ -4,7 +4,6 @@
 {% block content %}
 
 <main class="wrapper" id="main">
-    <!-- {%include 'includes/breadcrumb.html'%} -->
     <section class="allnews" id="allnews">
         <h1 class="heading-primary mtb-3">Aktualności</h1>
         <div class="posts__categories">
@@ -43,7 +42,6 @@
                     </div>
                     <a href="{% slugurl post.slug %}" class="posts__main-newslink">
                     <h2 class="posts__main-heading">{{post.title}}</h2>
-                     {% comment %} {{post.main_text|richtext|truncatechars_html:250}} {% endcomment %}
             </a>
                 </div>
             </div>

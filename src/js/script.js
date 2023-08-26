@@ -45,7 +45,6 @@ window.onload = function () {
     window.addEventListener("click", showDropdown);
 
     if (!navBtn.classList.contains("is-active")) {
-        // window.addEventListener("mouseover", console.log("hmm5"));
     }
 
     const closeNav = () => {

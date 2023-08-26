@@ -15,7 +15,7 @@ class GalleryChooseResultsView(ImageChooseResultsView):
 
 
 class GalleryChooserViewSet(ImageChooserViewSet):
-    model = "wagtailimages.Image"
+    model = "core.CustomImage"
     per_page = 30
     choose_view_class = GalleryChooseView
     choose_results_view_class = GalleryChooseResultsView

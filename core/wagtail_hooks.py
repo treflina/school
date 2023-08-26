@@ -1,4 +1,3 @@
-"""Richtext hooks."""
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
 from django.templatetags.static import static
 from django.utils.html import format_html

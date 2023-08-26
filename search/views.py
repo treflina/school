@@ -2,12 +2,11 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
 from wagtail.contrib.search_promotions.models import Query
 from wagtail.models import Page
-from wagtail.search.backends import get_search_backend
 
 
 def search(request):
     search_query = request.GET.get("query", None)
-    page = request.GET.get("page", 1)
+    page = request.GET.get("page", 10)
 
     # Search
     if search_query:

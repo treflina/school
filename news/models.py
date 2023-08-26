@@ -15,52 +15,8 @@ from wagtail.admin.panels import (
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField, StreamField
-
-# from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.models import Orderable, Page
 from wagtail.search import index
-
-# from wagtail.snippets.models import register_snippet
-
-
-# TO REMOVE
-# @register_snippet
-class NewsCategory(models.Model):
-    """News category for a snippet."""
-
-    choices = (
-        (0, "różowy"),
-        (1, "niebieski"),
-        (2, "zielony"),
-        (3, "brązowy"),
-        (4, "pomarańczowy"),
-    )
-    name = models.CharField(max_length=25, verbose_name="nazwa kategorii")
-    # slug = models.SlugField(max_length=50)
-    color = models.IntegerField(
-        default=0, choices=choices, verbose_name="Kolor powiązany z kategorią"
-    )
-
-    panels = [
-        FieldPanel("name"),
-        FieldPanel("color"),
-    ]
-
-    class Meta:
-        verbose_name = "Kategoria"
-        verbose_name_plural = "Kategorie"
-        ordering = ["name"]
-
-    @classmethod
-    def get_default_id(cls):
-        category, created = cls.objects.get_or_create(
-            name="Galeria",
-            defaults=dict(color=3),
-        )
-        return category.id
-
-    def __str__(self):
-        return self.name
 
 
 class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
@@ -120,10 +76,7 @@ class NewsDetailPage(Page):
 
     subpage_types = []
     parent_page_types = ["news.NewsIndexPage"]
-
-    # heading = models.CharField(
-    #     max_length=90, verbose_name="Nagłówek", blank=False, null=True
-    # )
+    
     category = models.ForeignKey(
         "core.CategorySnippet",
         blank=True,
@@ -133,7 +86,7 @@ class NewsDetailPage(Page):
     )
 
     banner_image = models.ForeignKey(
-        "wagtailimages.Image",
+        "core.CustomImage",
         blank=False,
         null=True,
         related_name="+",
@@ -277,7 +230,7 @@ class MiniGalleryImage(Orderable):
     )
 
     image = models.ForeignKey(
-        "wagtailimages.Image",
+        "core.CustomImage",
         on_delete=models.CASCADE,
         related_name="+",
         verbose_name="Zdjęcie",

@@ -21,6 +21,7 @@ staticfiles
 /news/migrations/*
 /gallery/migrations/*
 /events/migrations/*
+/core/migrations/*
 
 !__init__.py
 

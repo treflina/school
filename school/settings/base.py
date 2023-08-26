@@ -21,11 +21,10 @@ def get_secret(secret_name, secrets=secret):
 DEBUG = True
 
 INSTALLED_APPS = [
-    "core",
-    "home",
-    "events",
-    "gallery",
-    "news",
+    "core.apps.CoreConfig",
+    "events.apps.EventsConfig",
+    "gallery.apps.GalleryConfig",
+    "news.apps.NewsConfig",
     "streams",
     "search",
     "generic_chooser",
@@ -178,6 +177,7 @@ WAGTAILSEARCH_BACKENDS = {
 WAGTAILADMIN_BASE_URL = "http://example.com"
 WAGTAILIMAGES_CHOOSER_PAGE_SIZE = 30
 WAGTAILDOCS_DOCUMENT_MODEL = 'core.CustomDocument'
+WAGTAILIMAGES_IMAGE_MODEL = "core.CustomImage"
 
 LOGGING = {
     "version": 1,

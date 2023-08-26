@@ -39,7 +39,6 @@
         li:not(:last-child)::after {
             display: inline-block;
             margin: 0 .5rem;
-            // content: "/";
             content: "▶";
             font-size: 1.2rem;
             color: rgba(0, 0, 0, 0.8);

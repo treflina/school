@@ -92,7 +92,7 @@ class GalleryDetailPage(PagePaginationMixin, Page):
     on_main_page = models.BooleanField(
         default=True,
         verbose_name="Wyświetl na głównej stronie w Najnowszych wpisach",
-        help_text="""Pole pozostaw puste jeśli o wydarzeniu z galerii został
+        help_text="""Pole pozostaw puste np. jeśli o wydarzeniu z galerii został
         opublikowany osobny
         artykuł w aktualnościach. Dzięki temu informacja o wydarzeniu nie pojawi się
         na stronie głównej dwukrotnie.""",
@@ -145,7 +145,7 @@ class GalleryImage(Orderable):
         GalleryDetailPage, on_delete=models.CASCADE, related_name="gallery_images"
     )
     image = models.ForeignKey(
-        "wagtailimages.Image",
+        "core.CustomImage",
         on_delete=models.CASCADE,
         related_name="+",
         verbose_name="",

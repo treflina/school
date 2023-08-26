@@ -65,7 +65,6 @@ class ContentBlock(blocks.StreamBlock):
         ],
         label="Tekst",
         blank=True,
-        # ////////////////////////////
         null=True,
     )
     image = ImageWithAltAttr()
@@ -101,7 +100,6 @@ class RichtextAndTableBlock(blocks.StreamBlock):
         ],
         label="Tekst",
         blank=True,
-        # ////////////////////////////
         null=True,
     )
     table = TableBlock(

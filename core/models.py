@@ -1,11 +1,25 @@
+from datetime import date
+from itertools import chain, islice
+from operator import attrgetter
+from PIL import Image as PILImage
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from wagtail.admin.panels import FieldPanel
+
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents.models import AbstractDocument, Document
+from wagtail.images.models import AbstractImage, AbstractRendition, Image
 from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
+from wagtail.fields import RichTextField, StreamField
+from wagtail.search import index
 
 from .utils import convert_bytes, extract_extension
+
+from events.models import EventsPage
+from gallery.models import GalleryDetailPage
+from news.models import NewsDetailPage
+from streams import blocks
 
 
 @register_snippet
@@ -82,6 +96,33 @@ class CustomDocument(AbstractDocument):
     admin_form_fields = Document.admin_form_fields
 
 
+class CustomImage(AbstractImage):
+    admin_form_fields = Image.admin_form_fields
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if (self.width > 1200 or self.height > 1200) and self.collection.name != "Root":
+            img = PILImage.open(self.file.path)
+            img.thumbnail((1200, 1200))
+            width, height = img.size
+            img.save(self.file.path)
+
+            if self.width != width or self.height != height:
+                self.width = width
+                self.height = height
+                self.file_size = self.file.size
+                self.save(update_fields=["width", "height", "file_size"])
+
+
+class CustomRendition(AbstractRendition):
+    image = models.ForeignKey(
+        CustomImage, on_delete=models.CASCADE, related_name="renditions"
+    )
+
+    class Meta:
+        unique_together = (("image", "filter_spec", "focal_point_key"),)
+
+
 class PagePaginationMixin:
     """Mixin that handles pagination for index pages giving an ability to use page
     range in case of too many subpages"""
@@ -106,6 +147,99 @@ class PagePaginationMixin:
         abstract = True
 
 
+class HomePage(Page):
+    template = "core/home_page.html"
+    parent_page_types = []
+    max_count = 1
+
+    def get_today(self):
+        return date.today()
+
+    def get_context(self, request, *args, **kwargs):
+        """Adding posts to news section"""
+        context = super().get_context(request, *args, **kwargs)
+
+        # Get all posts from news and gallery
+        news_list = NewsDetailPage.objects.live().specific().order_by("-publish_date")
+        main_post = news_list.filter(highlight=True).first()
+        if not main_post:
+            main_post = news_list.first()
+
+        galleries_list = (
+            GalleryDetailPage.objects.filter(on_main_page=True)
+            .live()
+            .specific()
+            .order_by("-publish_date")
+        )
+
+        posts = sorted(
+            chain(news_list, galleries_list),
+            key=attrgetter("publish_date"),
+            reverse=True,
+        )
+
+        categories = CategorySnippet.objects.all().order_by("id")
+
+        if request.GET.get("category", None):
+            category = request.GET.get("category")
+            try:
+                posts = list(filter(lambda x: x.category_id == int(category), posts))
+                context["active_category"] = categories.filter(id=category).first()
+            except ValueError:
+                pass
+
+        context["main_post"] = main_post
+        context["categories"] = categories
+        context["posts"] = [p for p in posts if p != main_post][:6]
+
+        # get upcoming events
+        today = self.get_today()
+
+        q = EventsPage.objects.live().all()
+        eventpage = q[len(q) - 1] if q else None
+        if eventpage:
+            allevents = eventpage.events.all().order_by("start_date", "hour")
+
+            allevents_days = {}
+            for e in allevents:
+                if e.start_date not in allevents_days:
+                    allevents_days[e.start_date] = [e]
+                else:
+                    allevents_days[e.start_date].append(e)
+
+            latest_events_days = dict(
+                filter(lambda x: x[0] < today, allevents_days.items())
+            )
+            upcoming_events_days = dict(
+                filter(lambda x: x[0] >= today, allevents_days.items())
+            )
+            latest_events_days_count = len(latest_events_days)
+            upcoming_events_days_count = len(upcoming_events_days)
+
+            num_diff = 4 - upcoming_events_days_count
+
+            if latest_events_days_count + upcoming_events_days_count <= 4:
+                events = allevents_days
+            elif num_diff < 0:
+                events = dict(islice(upcoming_events_days.items(), 4))
+            else:
+                latest_dict = dict(list(latest_events_days.items())[-num_diff:])
+                upcoming_dict = dict(
+                    islice(upcoming_events_days.items(), upcoming_events_days_count)
+                )
+                latest_dict.update(upcoming_dict)
+                events = latest_dict
+
+            context["events"] = events
+
+        return context
+
+    search_fields = Page.search_fields
+
+    class Meta: # noqa
+        verbose_name = "Strona główna"
+
+
 class IndexPage(Page):
     template = "core/index_page.html"
     parent_page_types = ["home.HomePage"]
@@ -118,3 +252,146 @@ class IndexPage(Page):
 
     class Meta:
         verbose_name = "Strona nadrzędna"
+
+
+class OrdinaryPage(Page):
+    template = "core/ordinary_page.html"
+    parent_page_types = ["core.IndexPage", "home.HomePage"]
+    content = StreamField(
+        blocks.RichtextAndTableBlock(),
+        null=True,
+        blank=True,
+        use_json_field=True,
+        verbose_name="Treść",
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("content"),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.RelatedFields("content", [index.SearchField("docs")]),
+    ]
+
+    class Meta:  # noqa
+        verbose_name = "Podstrona - zwykła"
+        verbose_name_plural = "Zwykłe podstrony"
+
+
+class TeachersPage(Page):
+    template = "core/teachers_page.html"
+    parent_page_types = ["core.IndexPage"]
+    page_description = """Używana np. do stworzenia
+             zakładek 'Grono pedagogiczne', 'RSU'"""
+
+    year = models.ForeignKey(
+        "core.SchoolYearSnippet",
+        verbose_name="Rok szkolny",
+        max_length=10,
+        blank=False,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    introduction = models.TextField(verbose_name="Wprowadzenie", null=True, blank=True)
+    content = StreamField(
+        [("info", blocks.ObjectAndDescriptionBlock())],
+        use_json_field=True,
+        verbose_name="Nauczyciele",
+        null=True,
+        blank=True,
+    )
+    image = models.ForeignKey(
+        "core.CustomImage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="",
+    )
+    alt_attr = models.CharField(
+        "Opis alternatywny", max_length=255, null=True, blank=True
+    )
+    additional_content = StreamField(
+        blocks.ContentBlock(), use_json_field=True, null=True, blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("year"),
+        FieldPanel("introduction"),
+        FieldPanel("content"),
+        MultiFieldPanel(
+            [FieldPanel("image"), FieldPanel("alt_attr")], heading="Zdjęcie główne"
+        ),
+        FieldPanel("additional_content", heading="Dodatkowy tekst, zdjęcia, tabele"),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("introduction"),
+        index.SearchField("content"),
+    ]
+
+    class Meta:  # noqa
+        verbose_name = """Podstrona typu przedmiot-bardzo krótki opis
+                 (np. imię i nazwisko)"""
+        verbose_name_plural = "Podstrony typu przedmiot-opis"
+
+
+class ContactPage(Page):
+    template = "core/contact_page.html"
+    max_count = 1
+    subpage_types = []
+    parent_page_types = ["home.HomePage"]
+
+    name = models.CharField("nazwa", max_length=255, blank=False, null=True)
+    address1 = models.CharField("ulica, numer", max_length=255, blank=False, null=True)
+    address2 = models.CharField(
+        "kod pocztowy, miejscowość", max_length=255, blank=False, null=True
+    )
+    phone = models.CharField("telefon", max_length=60, blank=False, null=True)
+    fax = models.CharField("fax", max_length=30, blank=True, null=True)
+    email = models.EmailField("e-mail", blank=False, null=True)
+
+    additional_info = RichTextField(
+        "Dodatkowe informacje",
+        features=["bold", "hr", "link", "document-link"],
+    )
+
+    image = models.ForeignKey(
+        "core.CustomImage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="",
+    )
+    alt_attr = models.CharField(
+        "Opis alternatywny", max_length=255, null=True, blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("name"),
+                FieldPanel("address1"),
+                FieldPanel("address2"),
+                FieldPanel("phone"),
+                FieldPanel("fax"),
+                FieldPanel("email"),
+            ],
+            heading="Podstawowe dane kontaktowe",
+        ),
+        FieldPanel("additional_info", heading="Dodatkowe informacje"),
+        MultiFieldPanel(
+            [FieldPanel("image"), FieldPanel("alt_attr")], heading="Zdjęcie"
+        ),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("additional_info"),
+    ]
+
+    class Meta:  # noqa
+        verbose_name = "Kontakt"
+        verbose_name_plural = "Kontakt"
+

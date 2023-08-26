@@ -26,16 +26,17 @@
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
             {% image main_post.banner_image fill-500x400 format-jpeg jpegquality-60 as img %}
-            <img src="{{img.url}}" alt="{{main_post.alt_attr}}" class="posts__main-img posts__main-img--primary" width="{{img.width}}" height="{{img.height}}"
-            decoding="async" loading="lazy">
+            <img src="{{img.url}}" alt="{{main_post.alt_attr}}" class="posts__main-img posts__main-img--primary"
+                width="{{img.width}}" height="{{img.height}}" decoding="async" loading="lazy">
             <div class="posts__main-box posts__main-box--primary">
                 <div class="posts__main-details">
-                    <div class="posts__main-category posts__main-category--{{main_post.category.color}}">{{main_post.category}}</div>
+                    <div class="posts__main-category posts__main-category--{{main_post.category.color}}">
+                        {{main_post.category}}</div>
                     <p class="posts__main-details--date">{{main_post.publish_date|date}}</p>
                 </div>
                 <h2 class="posts__main-heading posts__main-heading--primary">{{main_post.title}}</h2>
                 <div>
-                {{main_post.main_text|richtext|truncatewords:100}}
+                    {{main_post.main_text|richtext|truncatewords:100}}
                 </div>
                 {% if main_post.main_text|richtext|wordcount > 99 %}
                 <a href="{% slugurl main_post.slug %}" class="posts__main-link posts__main-link--primary">Czytaj więcej&nbsp;&raquo;</a>
@@ -55,7 +56,8 @@
                             {% for event in items %}
                             <div class="event__details-item">
                                 {% if event.end_date %}
-                                <p class="event__details-square event__details-date--end bg-soft-warning">do {{event.end_date|date:"j E"}}</p>
+                                <p class="event__details-square event__details-date--end bg-soft-warning">do
+                                    {{event.end_date|date:"j E"}}</p>
                                 {% endif %}
                                 {% if event.hour %}
                                 <p class="event__details-square event__details-hour">{{event.hour}}</p>
@@ -74,13 +76,14 @@
     </div>
     <div class="posts__box wrapper" id="news">
         <h2 class="posts__box-heading heading-secondary">Najnowsze wpisy</h2>
-      <div class="posts__categories">
+        <div class="posts__categories">
             <p class="posts__categories-category posts__categories-category--filter">Filtruj: </p>
             <ul class="posts__categories-list" id="categories-list">
                 <li><a href="{% pageurl page%}#news" class="posts__categories-category posts__categories-link {% if not active_category %} posts__categories-link--active {% endif %}">Wszystkie kategorie</a>
                 </li>
                 {% for category in categories %}
-                <li><a href="?category={{category.id}}#news" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a></li>
+                <li><a href="?category={{category.id}}#news" class="posts__categories-category posts__categories-link {% if category == active_category %} posts__categories-link--active {% endif %}">{{category.name}}</a>
+                </li>
                 {% endfor %}
             </ul>
         </div>
@@ -89,19 +92,22 @@
             <div class="posts__main posts__main--secondary" data-aos="fade-up">
                 <div class="img-wrapper">
                     {% if post.get_banner_image is not None %}
-                     {% image post.get_banner_image.image fill-500x400 format-jpeg jpegquality-60 as img %}
-                     <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}" height="{{img.height}}"
-                     class="posts__main-img posts__main-img--secondary" decoding="async" loading="lazy">
+                    {% image post.get_banner_image.image fill-500x400 format-jpeg jpegquality-60 as img %}
+                    <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}"
+                        height="{{img.height}}" class="posts__main-img posts__main-img--secondary" decoding="async"
+                        loading="lazy">
                     {% elif post.banner_image %}
-                     {% image post.banner_image fill-500x400 format-jpeg jpegquality-60 as img %}
-                     <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary" width="{{img.width}}" height="{{img.height}}"
-                     decoding="async" loading="lazy">
-                     {% endif %}
+                    {% image post.banner_image fill-500x400 format-jpeg jpegquality-60 as img %}
+                    <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary"
+                        width="{{img.width}}" height="{{img.height}}" decoding="async" loading="lazy">
+                    {% endif %}
                 </div>
                 <div class="posts__main-box posts__main-box--secondary">
                     <div class="posts__main-details">
-                        <div class="posts__main-category posts__main-category--{{post.category.color}}">{{post.category}}</div>
-                        <p class="posts__main-details--date">{% if post.publish_date %} {{post.publish_date}} {% else %} {{post.first_published_at | date }} {% endif %}</p>
+                        <div class="posts__main-category posts__main-category--{{post.category.color}}">
+                            {{post.category}}</div>
+                        <p class="posts__main-details--date">{% if post.publish_date %} {{post.publish_date}} {% else %}
+                            {{post.first_published_at | date }} {% endif %}</p>
                     </div>
                     <h3 class="posts__main-heading posts__main-heading--secondary">{{post.title}}
                     </h3>
