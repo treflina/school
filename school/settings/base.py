@@ -20,6 +20,7 @@ def get_secret(secret_name, secrets=secret):
 DEBUG = get_secret("DEBUG")
 
 INSTALLED_APPS = [
+    "home",
     "core.apps.CoreConfig",
     "events.apps.EventsConfig",
     "gallery.apps.GalleryConfig",
@@ -181,17 +182,17 @@ WAGTAILIMAGES_IMAGE_MODEL = "core.CustomImage"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "root": {"level": "DEBUG", "handlers": ["file"]},
+    "root": {"level": "WARN", "handlers": ["file"]},
     "handlers": {
         "file": {
-            "level": "DEBUG",
+            "level": "WARN",
             "class": "logging.FileHandler",
             "filename": "django.log",
             "formatter": "app",
         },
     },
     "loggers": {
-        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True},
+        "django": {"handlers": ["file"], "level": "WARN", "propagate": True},
     },
     "formatters": {
         "app": {
