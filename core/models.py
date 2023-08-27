@@ -1,19 +1,16 @@
-from PIL import Image as PILImage
-
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-
+from PIL import Image as PILImage
+from streams import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents.models import AbstractDocument, Document
+from wagtail.fields import RichTextField, StreamField
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
 from wagtail.models import Page
-from wagtail.snippets.models import register_snippet
-from wagtail.fields import RichTextField, StreamField
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 from .utils import convert_bytes, extract_extension
-
-from streams import blocks
 
 
 @register_snippet
@@ -94,7 +91,9 @@ class CustomImage(AbstractImage):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        if (self.width > 1200 or self.height > 1200) and self.collection.name != "Zdjęcia - rozmiar oryginalny":
+        if (
+            self.width > 1200 or self.height > 1200
+        ) and self.collection.name != "Zdjęcia - rozmiar oryginalny":
             img = PILImage.open(self.file.path)
             img.thumbnail((1200, 1200))
             width, height = img.size
@@ -182,7 +181,7 @@ class TeachersPage(Page):
     template = "core/teachers_page.html"
     parent_page_types = ["core.IndexPage"]
     page_description = """Używana np. do stworzenia
-             zakładek 'Grono pedagogiczne', 'RSU'"""
+             podstron 'Grono pedagogiczne', 'RSU'"""
 
     year = models.ForeignKey(
         "core.SchoolYearSnippet",
@@ -294,4 +293,3 @@ class ContactPage(Page):
     class Meta:  # noqa
         verbose_name = "Kontakt"
         verbose_name_plural = "Kontakt"
-
