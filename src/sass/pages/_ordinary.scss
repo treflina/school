@@ -7,14 +7,25 @@
 
     h2 {
         font-size: 1.9rem;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
     }
 
     h3 {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
     }
 
-    p, ol, ul, img {
-        margin-bottom: 1rem;
+    p,
+    img {
+        margin-bottom: .75rem;
+    }
+
+    ul,
+    ol {
+        margin-left: 3rem;
+        padding-bottom: 1rem;
     }
 }
 

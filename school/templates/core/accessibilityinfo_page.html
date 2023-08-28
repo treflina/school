@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags menu_tags %}
+{% load static %}
+{% block content %}
+    <main class="main ordinary wrapper wrapper-md">
+            <h1 class="heading-primary mtb-3">Deklaracja dostępności</h1>
+            <p id="a11y-wstep"><span id="a11y-podmiot">{{page.institution}}</span> zobowiązuje się zapewnić
+                dostępność swojej strony internetowej zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron
+                internetowych i aplikacji mobilnych podmiotów publicznych.
+            </p>
+            <p>Deklaracja dostępności dotyczy strony internetowej <a href="" id="a11y-url">{{page.web_url}}</a>.</p>
+            <p>Data publikacji strony internetowej: <span id="a11y-data-publikacja">{{ page.publication_date|date:"Y-m-d" }}</span></p>
+            <p>Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja">{% if page.update_date %}{{ page.update_date|date:"Y-m-d"}}{% else %} nie było {% endif %}</span></p>
+            <br>
+            <p id="a11y-status">Strona internetowa jest {% if not page.accordance %}częściowo{% else %}w pełni{% endif %} zgodna z ustawą z dnia 4 kwietnia 2019 r. o
+                dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych{% if not page.accordance %} z powodu niezgodności
+                lub wyłączeń wymienionych poniżej{% endif %}.</p>
+                {% if not page.accordance %}
+                {{page.exceptions|richtext}}
+                {% endif %}
+            <br>
+            <p>Na stronie internetowej można korzystać ze standardowych skrótów klawiaturowych.</p>
+            <p>Data sporządzenia deklaracji: <span id="a11y-data-sporzadzenie"> {{ page.publish_date|date:"Y-m-d" }}</span></p>
+            <p>Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny.</p>
+            <p>Data ostatniego przeglądu deklaracji: <span id="a11y-data-przeglad">{{ page.review_date|date:"Y-m-d" }}</span></p>
+            <h2 id="a11y-kontakt" class="heading-secondary mtb-3">Informacje zwrotne i dane kontaktowe</h2>
+            <p>W przypadku problemów z dostępnością strony internetowej prosimy o kontakt. Osobą kontaktową jest
+                <span id="a11y-osoba">{{page.contact_person}}</span>, mail: <a href="mailto:{{page.email}}" id="a11y-email">{{page.email}}</a>
+                Kontaktować można się także telefonicznie:
+                <span id="a11y-telefon">{{page.phone}}</span>. Tą samą drogą można składać wnioski o udostępnienie informacji
+                niedostępnej oraz składać skargi na brak zapewnienia dostępności.
+            </p>
+            <p id="a11y-procedura">
+                Każdy ma prawo do wystąpienia z żądaniem zapewnienia dostępności cyfrowej strony internetowej lub
+                jakiegoś jej elementu. Można także zażądać udostępnienia informacji za pomocą alternatywnego sposobu dostępu, na
+                przykład przez odczytanie niedostępnego cyfrowo dokumentu, opisanie zawartości filmu bez audiodeskrypcji
+                itp. Żądanie powinno zawierać dane osoby zgłaszającej żądanie, wskazanie, o którą stronę internetową
+                chodzi oraz sposób kontaktu. Jeżeli osoba żądająca zgłasza potrzebę otrzymania informacji za pomocą
+                alternatywnego sposobu dostępu, powinna także określić dogodny dla niej sposób przedstawienia tej informacji. Podmiot
+                publiczny powinien zrealizować żądanie niezwłocznie, nie później niż w ciągu 7 dni od dnia wystąpienia z
+                żądaniem. Jeżeli dotrzymanie tego terminu nie jest możliwe, podmiot publiczny niezwłocznie informuje o
+                tym wnoszącego żądanie, kiedy realizacja żądania będzie możliwa, przy czym termin ten nie może być dłuższy
+                niż 2 miesiące od dnia wystąpienia z żądaniem. Jeżeli zapewnienie dostępności cyfrowej nie jest możliwe,
+                podmiot publiczny może zaproponować alternatywny sposób dostępu do informacji.
+                W przypadku, gdy podmiot publiczny odmówi realizacji żądania zapewnienia dostępności lub alternatywnego
+                sposobu dostępu do informacji, wnoszący żądanie możne złożyć skargę w sprawie zapewniana dostępności
+                cyfrowej strony internetowej lub jej elementu. Po wyczerpaniu wskazanej wyżej procedury, można także
+                złożyć wniosek do Rzecznika Praw Obywatelskich.</p>
+            <h2 id="a11y-architektura" class="heading-secondary mtb-3">Dostępność architektoniczna</h2>
+            {{page.architecture_desc|richtext}}
+            {% if page.contact_methods %}
+            <h3 style="color:black;" class="mtb-3">Komunikacja dla osób niesłyszących lub słabo słyszących</h3>
+            {{page.contact_methods|richtext}}
+                {% endif %}
+    </main>
+{% endblock%}

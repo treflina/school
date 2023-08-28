@@ -4,20 +4,31 @@
         <div class="footer__upper-contact">
             <p>Kontakt:</p>
             <div class="footer__upper-contact--phone"><img src="{% static 'img/phone.svg' %}" alt="">
-                <p>tel.: <a href="tel:+48774212029" class="not-link">77 4212 029</a>, <a href="tel:+48774212029" class="not-link">77 4212 082</a></p>
+                <p>tel.: <a href="tel:+48774212029" class="not-link">77 4212 029</a>,
+                    <a href="tel:+48774212029" class="not-link">77 4212 082</a>
+                </p>
             </div>
             <div class="footer__upper-contact--mail">
-                <img src="{% static 'img/mail.svg' %}" alt=""><p><a href="mailto:psp.turawa@oswiata-turawa.pl" class="not-link"> email: psp.turawa@oswiata-turawa.pl</a></p>
+                <img src="{% static 'img/mail.svg' %}" alt="">
+                <p><a href="mailto:psp.turawa@oswiata-turawa.pl" class="not-link"> email: psp.turawa@oswiata-turawa.pl</a>
+                </p>
             </div>
         </div>
+
         <div class="footer__upper-links">
+            <div class="bip-box">
+                <a href="http://pspturawa.oswiata-turawa.pl/7/strona-glowna-bip.html" aria-label="Przejdź do biuletynu informacji publicznej" class="bip-link"><img class="bip" src="{% static 'img/bip.png' %}" alt="" width="60px" height="30px"></a>
+            </div>
             <a href="{% slugurl 'rodo' %}">RODO</a>
             <a href="{% slugurl 'deklaracja-dostepnosci' %}">Deklaracja dostępności</a>
             <a href="http://g_turawa.wodip.opole.pl/">Poprzednia wersja strony</a>
-            <div class="bip-box">
-                <a href="http://pspturawa.oswiata-turawa.pl/7/strona-glowna-bip.html" aria-label="Przejdź do biuletynu informacji publicznej" class="bip-link"><img class="bip" src="{% static 'img/bip.png' %}" alt=""></a>
+
+            <div class="fb-box" data-aos="flip-left" data-aos-duration="600">
+                <a href="https://www.facebook.com/profile.php?id=100076198090312" aria-label="Przejdź do biuletynu informacji publicznej" class="fb-link">
+                    <img class="fb" src="{% static 'img/fb2.svg' %}" alt="Logo facebooka" width="48px" height="48px">Sport szkolny</a>
             </div>
         </div>
+
     </div>
     <div class="footer__bottom">
         <p>&copy; <span class="footer__year">{% now "Y" %}</span> Publiczna Szkoła Podstawowa w Turawie</p>

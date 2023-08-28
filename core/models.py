@@ -1,7 +1,9 @@
+from PIL import Image as PILImage
+
+from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from PIL import Image as PILImage
-from streams import blocks
+
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents.models import AbstractDocument, Document
 from wagtail.fields import RichTextField, StreamField
@@ -10,6 +12,7 @@ from wagtail.models import Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
+from streams import blocks
 from .utils import convert_bytes, extract_extension
 
 
@@ -149,7 +152,7 @@ class IndexPage(Page):
     def get_child_pages(self):
         return self.get_children().public().live()
 
-    class Meta:
+    class Meta: # noqa
         verbose_name = "Strona nadrzędna"
 
 
@@ -293,3 +296,78 @@ class ContactPage(Page):
     class Meta:  # noqa
         verbose_name = "Kontakt"
         verbose_name_plural = "Kontakt"
+
+
+class AccessibilityInfoPage(Page):
+    template = "core/accessibilityinfo_page.html"
+    subpage_types = []
+    max_count = 1
+
+    institution = models.CharField(
+        "Nazwa podmiotu", max_length=250, blank=False
+        )
+    web_url = models.URLField("Adres strony internetowej", blank=False)
+    publication_date = models.DateField(
+        verbose_name="Data publikacji strony internetowej", blank=False
+    )
+    update_date = models.DateField(
+        verbose_name="Data ostatniej istotnej aktualizacji", blank=True, null=True,
+    )
+    accordance = models.BooleanField("Zgodność z ustawą", blank=False)
+    exceptions = RichTextField(
+        "Niezgodności z ustawą, wyłączenia",
+        help_text="Wypełnij w przypadku częściowej zgodności z ustawą",
+        features=["bold", "italic", "ol", "ul", "hr"],
+        blank=True,
+        null=True,
+    )
+    publish_date = models.DateField(
+        verbose_name="Data sporządzenia deklaracji", blank=False
+    )
+    review_date = models.DateField(
+        verbose_name="Data ostatniego przeglądu deklaracji", blank=False
+    )
+    contact_person = models.CharField(
+        verbose_name="Osoba do kontaktu", max_length=50, blank=False
+    )
+    email = models.EmailField("Email", blank=False)
+    phone = models.CharField("Telefon", max_length=30, blank=False)
+    architecture_desc = RichTextField(
+        "Opis dostępności architektonicznej",
+        features=["bold", "italic", "ol", "ul", "hr"],
+        blank=False,
+    )
+    contact_methods = RichTextField(
+        "Komunikacja dla osób niesłyszących lub słabo słyszących",
+        blank=True, null=True,
+        features=["bold", "italic", "ol", "ul", "hr"],
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("institution"),
+        FieldPanel("web_url"),
+        FieldPanel("publication_date"),
+        FieldPanel("update_date"),
+        FieldPanel(
+            "accordance",
+            widget=forms.RadioSelect(choices=[(True, "pełna"), (False, "częściowa")]),
+        ),
+        FieldPanel("exceptions"),
+        FieldPanel("publish_date"),
+        FieldPanel("review_date"),
+        FieldPanel("contact_person"),
+        FieldPanel("email"),
+        FieldPanel("phone"),
+        FieldPanel("architecture_desc"),
+        FieldPanel("contact_methods"),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("accordance"),
+        index.SearchField("exceptions"),
+        index.SearchField("architecture_desc"),
+        index.SearchField("contact_methods"),
+    ]
+
+    class Meta:  # noqa
+        verbose_name = "Deklaracja dostępności"
