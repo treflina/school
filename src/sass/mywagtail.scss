@@ -1,6 +1,11 @@
 .w-combobox {
     &__field {
-    input {
-        display: none;
+        input {
+            display: none;
+        }
     }
-}}
+}
+
+.DraftEditor-root {
+    min-height: 200px;
+}

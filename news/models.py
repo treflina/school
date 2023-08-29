@@ -76,7 +76,7 @@ class NewsDetailPage(Page):
 
     subpage_types = []
     parent_page_types = ["news.NewsIndexPage"]
-    
+
     category = models.ForeignKey(
         "core.CategorySnippet",
         blank=True,
@@ -125,7 +125,7 @@ class NewsDetailPage(Page):
         verbose_name="Dodatkowe teksty, tabele, dokumenty",
     )
     highlight = models.BooleanField(
-        default=False,
+        default=True,
         verbose_name="Wyróżnienie na stronie głównej",
         help_text="""Wyświetl wprowadzaną aktualność jako pierwszą informację na głównej
         stronie.""",
