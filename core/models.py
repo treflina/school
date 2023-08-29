@@ -313,7 +313,7 @@ class AccessibilityInfoPage(Page):
     update_date = models.DateField(
         verbose_name="Data ostatniej istotnej aktualizacji", blank=True, null=True,
     )
-    accordance = models.BooleanField("Zgodność z ustawą", blank=False)
+    accordance = models.BooleanField("Zgodność z ustawą", blank=False, default=True)
     exceptions = RichTextField(
         "Niezgodności z ustawą, wyłączenia",
         help_text="Wypełnij w przypadku częściowej zgodności z ustawą",
@@ -338,7 +338,7 @@ class AccessibilityInfoPage(Page):
         blank=False,
     )
     contact_methods = RichTextField(
-        "Komunikacja dla osób niesłyszących lub słabo słyszących",
+        "Informacja o dostępności tłumacza języka migowego.",
         blank=True, null=True,
         features=["bold", "italic", "ol", "ul", "hr"],
     )
