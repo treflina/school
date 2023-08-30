@@ -35,8 +35,9 @@
                 </div>
                 <div class="posts__main-box posts__main-box--secondary">
                     <div class="posts__main-details">
+                        {% if post.category %}
                         <div class="posts__main-category posts__main-category--{{post.category.color}}">
-                            {{post.category}}</div>
+                            {{post.category}}</div>{% endif %}
                         <p class="posts__main-details--date">{% if post.publish_date%} {{post.publish_date}} {% else %}
                             {{post.first_published_at | date }} {% endif %}</p>
                     </div>

@@ -30,8 +30,9 @@
                 width="{{img.width}}" height="{{img.height}}" decoding="async" loading="lazy">
             <div class="posts__main-box posts__main-box--primary">
                 <div class="posts__main-details">
+                    {% if main_post.category %}
                     <div class="posts__main-category posts__main-category--{{main_post.category.color}}">
-                        {{main_post.category}}</div>
+                        {{main_post.category}}</div>{% endif %}
                     <p class="posts__main-details--date">{{main_post.publish_date|date}}</p>
                 </div>
                 <h2 class="posts__main-heading posts__main-heading--primary">{{main_post.title}}</h2>
@@ -104,8 +105,10 @@
                 </div>
                 <div class="posts__main-box posts__main-box--secondary">
                     <div class="posts__main-details">
+                        {% if post.category %}
                         <div class="posts__main-category posts__main-category--{{post.category.color}}">
                             {{post.category}}</div>
+                        {% endif %}
                         <p class="posts__main-details--date">{% if post.publish_date %} {{post.publish_date}} {% else %}
                             {{post.first_published_at | date }} {% endif %}</p>
                     </div>

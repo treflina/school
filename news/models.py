@@ -79,7 +79,7 @@ class NewsDetailPage(Page):
 
     category = models.ForeignKey(
         "core.CategorySnippet",
-        blank=True,
+        blank=False,
         null=True,
         on_delete=models.SET_NULL,
         verbose_name="Kategoria",
