@@ -122,6 +122,7 @@ class GalleryDetailPage(PagePaginationMixin, Page):
                 ),
             ],
             heading="Zdjęcia",
+            
         ),
     ]
 
@@ -151,13 +152,13 @@ class GalleryImage(Orderable):
         verbose_name="",
         null=True,
     )
-    alt_attr = models.CharField(
-        blank=True,
-        max_length=255,
-        verbose_name="Opis alternatywny",
-        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
-        na celu m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
-    )
+    # alt_attr = models.CharField(
+    #     blank=True,
+    #     max_length=255,
+    #     verbose_name="Opis alternatywny",
+    #     help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
+    #     na celu m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
+    # )
     highlight = models.BooleanField(
         default=False,
         verbose_name="Zdjęcie główne",
@@ -166,7 +167,7 @@ class GalleryImage(Orderable):
 
     panels = [
         FieldRowPanel([FieldPanel("image"), FieldPanel("highlight")]),
-        FieldPanel("alt_attr"),
+        # FieldPanel("alt_attr"),
     ]
 
     def __str__(self):

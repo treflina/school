@@ -28,7 +28,7 @@
             {% image i.image fill-300x250 as thumbimg %}
             {% image i.image original as img %}
             <li class="gallery__list-item">
-                <a data-fslightbox="gallery" href="{{img.file.url}}" data-alt="{{i.alt_attr}}">
+                <a data-fslightbox="gallery" href="{{img.file.url}}" data-alt="{{i.image.alt_attr}}">
                     <img class="gallery-image" src="{{thumbimg.url}}" alt="Podgląd zdjęcia {{i.image.title}}"/>
                     <span class="screenReaderOnly">Link do powiększonego zdjęcia</span>
                 </a>

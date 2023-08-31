@@ -28,7 +28,7 @@
                 <div class="img-wrapper">
                     {% if gallery.get_banner_image is not None %}
                     {% image gallery.get_banner_image.image fill-500x400 as img %}
-                    <img src="{{img.url}}" alt="{{gallery.get_banner_image.alt_attr}}" width="{{img.width}}" height="{{img.height}}"
+                    <img src="{{img.url}}" alt="{{gallery.get_banner_image.image.alt_attr}}" width="{{img.width}}" height="{{img.height}}"
                         class="posts__main-img posts__main-img--secondary">
                     {% endif %}
                 </div>
