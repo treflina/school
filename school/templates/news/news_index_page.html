@@ -27,10 +27,10 @@
                 <div class="img-wrapper">
                   {% if post.get_banner_image is not None %}
                      {% image post.get_banner_image.image fill-550x370 as img %}
-                     <img src="{{img.url}}" alt="{{post.get_banner_image.image.alt_attr}}" width="{{img.width}}" height="{{img.height}}" class="posts__main-img posts__main-img--secondary">
+                     <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}" height="{{img.height}}" class="posts__main-img posts__main-img--secondary">
                     {% elif post.banner_image %}
                      {% image post.banner_image fill-550x370 as img %}
-                     <img src="{{img.url}}" alt="{{post.banner_image.alt_attr}}" class="posts__main-img posts__main-img--secondary" width="{{img.width}}" height="{{img.height}}">
+                     <img src="{{img.url}}" alt="{{post.alt_attr}}" class="posts__main-img posts__main-img--secondary" width="{{img.width}}" height="{{img.height}}">
                      {% endif %}
                 </div>
                 <div class="posts__main-box posts__main-box--secondary">

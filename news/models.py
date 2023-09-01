@@ -94,13 +94,13 @@ class NewsDetailPage(Page):
         verbose_name="Zdjęcie główne",
         help_text="Preferowana orientacja pozioma."
     )
-    # alt_attr = models.CharField(
-    #     blank=True,
-    #     max_length=255,
-    #     verbose_name="Opis alternatywny",
-    #     help_text="""Opis tekstowy zdjęcia głównego (najczęściej od 5 do 15 słów) mający
-    #     na celu umożliwienie przekazu treści osobom słabowidzącym.""",
-    # )
+    alt_attr = models.CharField(
+        blank=True,
+        max_length=255,
+        verbose_name="Opis alternatywny",
+        help_text="""Opis tekstowy zdjęcia głównego (najczęściej od 5 do 15 słów) mający
+        na celu umożliwienie przekazu treści osobom słabowidzącym.""",
+    )
     main_text = RichTextField(
         blank=False,
         null=True,
@@ -166,7 +166,7 @@ class NewsDetailPage(Page):
             [
                 # FieldPanel("heading"),
                 FieldPanel("banner_image"),
-                # FieldPanel("alt_attr"),
+                FieldPanel("alt_attr"),
                 FieldPanel("main_text"),
                 FieldPanel("body"),
             ],
@@ -235,18 +235,15 @@ class MiniGalleryImage(Orderable):
         related_name="+",
         verbose_name="Zdjęcie",
     )
-    # alt_attr = models.CharField(
-    #     blank=True,
-    #     max_length=255,
-    #     verbose_name="Opis alternatywny",
-    #     help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
-    #     na celu m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
-    # )
+    alt_attr = models.CharField(
+        blank=True,
+        max_length=255,
+        verbose_name="Opis alternatywny",
+        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
+        na celu m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
+    )
 
-    panels = [
-        FieldPanel("image"),
-        # FieldPanel("alt_attr")
-        ]
+    panels = [FieldPanel("image"), FieldPanel("alt_attr")]
 
 
 NewsDetailPage._meta.get_field(

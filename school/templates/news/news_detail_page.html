@@ -32,7 +32,7 @@
                         {% image page.banner_image fill-500x380 as img %}
                         {% image page.banner_image original as org_img %}
                         <a class="image-link" href="{{org_img.file.url}}"><span class="screenReaderOnly">Powiększ zdjęcie</span>
-            <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.banner_image.alt_attr }}" />
+            <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.alt_attr }}" />
             </a>
                     </div>
                     {% endif %}
@@ -64,7 +64,7 @@
                         {% image i.image fill-350x230 as thumbimg %}
                         {% image i.image original as img %}
                         <li class="gallery__list-item">
-                            <a data-fslightbox="gallery" href="{{img.file.url}}" data-alt="{{i.image.alt_attr}}">
+                            <a data-fslightbox="gallery" href="{{img.file.url}}" data-alt="{{i.alt_attr}}">
                                 <span class="screenReaderOnly">Link do powiększonego zdjęcia</span>
                             <img class="gallery-image" src="{{thumbimg.url}}" alt="Podgląd zdjęcia {{i.image.title}}"
                           />
@@ -92,11 +92,11 @@
                     <div class="news__aside-item--img">
                         {% if news.get_banner_image is not None %}
                         {% image news.get_banner_image.image width-500 as img %}
-                        <img src="{{img.url}}" alt="{{news.get_banner_image.image.alt_attr}}" width="{{img.width}}"
+                        <img src="{{img.url}}" alt="{{post.get_banner_image.alt_attr}}" width="{{img.width}}"
                             height="{{img.height}}" class="posts__main-img posts__main-img--secondary">
                         {% elif news.banner_image %}
                         {% image news.banner_image width-500 as img %}
-                        <img src="{{img.url}}" alt="{{news.banner_image.alt_attr}}"
+                        <img src="{{img.url}}" alt="{{post.alt_attr}}"
                             class="posts__main-img posts__main-img--secondary" width="{{img.width}}"
                             height="{{img.height}}">
                         {% endif %}

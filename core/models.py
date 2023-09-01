@@ -1,8 +1,9 @@
+from PIL import Image as PILImage
+
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from PIL import Image as PILImage
-from streams import blocks
+
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents.models import AbstractDocument, Document
 from wagtail.fields import RichTextField, StreamField
@@ -11,6 +12,7 @@ from wagtail.models import Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
+from streams import blocks
 from .utils import convert_bytes, extract_extension
 
 
@@ -88,15 +90,7 @@ class CustomDocument(AbstractDocument):
 
 
 class CustomImage(AbstractImage):
-    alt_attr = models.CharField(
-        blank=True,
-        null=True,
-        max_length=255,
-        verbose_name="Opis alternatywny",
-        help_text="""Opis tekstowy zdjęcia głównego (najczęściej od 5 do 15 słów) mający
-        na celu umożliwienie przekazu treści osobom słabowidzącym.""",
-    )
-    admin_form_fields = Image.admin_form_fields + ("alt_attr",)
+    admin_form_fields = Image.admin_form_fields
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -158,7 +152,7 @@ class IndexPage(Page):
     def get_child_pages(self):
         return self.get_children().public().live()
 
-    class Meta:  # noqa
+    class Meta: # noqa
         verbose_name = "Strona nadrzędna"
 
 
@@ -217,9 +211,9 @@ class TeachersPage(Page):
         related_name="+",
         verbose_name="",
     )
-    # alt_attr = models.CharField(
-    #     "Opis alternatywny", max_length=255, null=True, blank=True
-    # )
+    alt_attr = models.CharField(
+        "Opis alternatywny", max_length=255, null=True, blank=True
+    )
     additional_content = StreamField(
         blocks.ContentBlock(), use_json_field=True, null=True, blank=True
     )
@@ -229,10 +223,7 @@ class TeachersPage(Page):
         FieldPanel("introduction"),
         FieldPanel("content"),
         MultiFieldPanel(
-            [
-                FieldPanel("image"),
-                # FieldPanel("alt_attr")
-                ], heading="Zdjęcie główne"
+            [FieldPanel("image"), FieldPanel("alt_attr")], heading="Zdjęcie główne"
         ),
         FieldPanel("additional_content", heading="Dodatkowy tekst, zdjęcia, tabele"),
     ]
@@ -276,9 +267,9 @@ class ContactPage(Page):
         related_name="+",
         verbose_name="",
     )
-    # alt_attr = models.CharField(
-    #     "Opis alternatywny", max_length=255, null=True, blank=True
-    # )
+    alt_attr = models.CharField(
+        "Opis alternatywny", max_length=255, null=True, blank=True
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -294,10 +285,7 @@ class ContactPage(Page):
         ),
         FieldPanel("additional_info", heading="Dodatkowe informacje"),
         MultiFieldPanel(
-            [
-                FieldPanel("image"),
-                # FieldPanel("alt_attr")
-                ], heading="Zdjęcie"
+            [FieldPanel("image"), FieldPanel("alt_attr")], heading="Zdjęcie"
         ),
     ]
 
@@ -315,15 +303,15 @@ class AccessibilityInfoPage(Page):
     subpage_types = []
     max_count = 1
 
-    institution = models.CharField("Nazwa podmiotu", max_length=250, blank=False)
+    institution = models.CharField(
+        "Nazwa podmiotu", max_length=250, blank=False
+        )
     web_url = models.URLField("Adres strony internetowej", blank=False)
     publication_date = models.DateField(
         verbose_name="Data publikacji strony internetowej", blank=False
     )
     update_date = models.DateField(
-        verbose_name="Data ostatniej istotnej aktualizacji",
-        blank=True,
-        null=True,
+        verbose_name="Data ostatniej istotnej aktualizacji", blank=True, null=True,
     )
     accordance = models.BooleanField("Zgodność z ustawą", blank=False, default=True)
     exceptions = RichTextField(
@@ -351,8 +339,7 @@ class AccessibilityInfoPage(Page):
     )
     contact_methods = RichTextField(
         "Informacja o dostępności tłumacza języka migowego.",
-        blank=True,
-        null=True,
+        blank=True, null=True,
         features=["bold", "italic", "ol", "ul", "hr"],
     )
 
