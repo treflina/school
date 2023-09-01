@@ -6,7 +6,7 @@ from wagtail.models import Page
 
 def search(request):
     search_query = request.GET.get("query", None)
-    page = request.GET.get("page", 10)
+    page = request.GET.get("page", 1)
 
     # Search
     if search_query:
@@ -28,7 +28,7 @@ def search(request):
         result = "0 wyników"
 
     # Pagination
-    paginator = Paginator(search_results, 1)
+    paginator = Paginator(search_results, 10)
     try:
         search_results = paginator.page(page)
     except PageNotAnInteger:
