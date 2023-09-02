@@ -91,7 +91,7 @@
             }
 
             p {
-                margin-bottom: 1em;
+                margin-bottom: .5em;
                     a {
                         @include link-primary(1px, 2px, $color-primary-dark);
                     }
