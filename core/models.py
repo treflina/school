@@ -336,6 +336,8 @@ class AccessibilityInfoPage(Page):
         "Opis dostępności architektonicznej",
         features=["bold", "italic", "ol", "ul", "hr"],
         blank=False,
+        help_text="""W pierwszym wierszu należy zamieścić adres, a dopiero
+        następnie dalszy opis."""
     )
     contact_methods = RichTextField(
         "Informacja o dostępności tłumacza języka migowego.",
