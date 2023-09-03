@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,7 @@ LOCALE_PATHS = (
      os.path.join(BASE_DIR, 'locale'),
 )
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Warsaw"
 
 USE_I18N = True
 
