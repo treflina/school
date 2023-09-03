@@ -19,20 +19,12 @@ def get_secret(secret_name, secrets=secret):
 
 DEBUG = get_secret("DEBUG")
 
-INSTALLED_APPS = [
-    "home",
-    "core.apps.CoreConfig",
-    "events.apps.EventsConfig",
-    "gallery.apps.GalleryConfig",
-    "news.apps.NewsConfig",
-    "streams",
-    "search",
+CORE_APPS = [
     "wagtail.contrib.table_block",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
     'wagtail.contrib.modeladmin',
-    'wagtailmenus',
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -43,7 +35,6 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
-    "wagtail_multi_upload",
     "modelcluster",
     "taggit",
     "django.contrib.admin",
@@ -54,6 +45,24 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
 ]
+
+THIRD_PARTY_APPS = [
+    "wagtail_multi_upload",
+    "wagtailmenus",
+    "robots",
+]
+
+LOCAL_APPS = [
+    "home",
+    "core.apps.CoreConfig",
+    "events.apps.EventsConfig",
+    "gallery.apps.GalleryConfig",
+    "news.apps.NewsConfig",
+    "streams",
+    "search",
+]
+
+INSTALLED_APPS = CORE_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",

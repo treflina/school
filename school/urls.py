@@ -18,6 +18,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path('sitemap.xml', sitemap),
+    re_path(r'^robots\.txt', include('robots.urls')),
 ]
 
 
