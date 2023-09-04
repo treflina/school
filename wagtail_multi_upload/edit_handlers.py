@@ -66,7 +66,7 @@ class MultipleImagesPanel(InlinePanel):
             collections_to_choose = None
 
             collections_perm = permission_policy.collections_user_has_permission_for(self.request.user, 'add')
-            collections_excluded = ["Aktualności - zdjęcia", "Dokumenty", "Inne", "Galerie zdjęć"]
+            collections_excluded = ["Aktualności - zdjęcia", "Dokumenty", "Inne", "Galerie - zdjęcia"]
             collections = [
                 col for col in collections_perm if (col.name not in collections_excluded) and (not col.name.startswith("20"))
                 ]
