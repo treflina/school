@@ -11,14 +11,16 @@
 
 <fieldset class="multiple_images_panel_uploader">
     <legend>Dodaj pojedyncze zdjęcie (powyżej) lub wgraj nowe zdjęcia zbiorczo (poniżej). Najpierw wybierz w "Dodaj do kolekcji:"
-        np. Galerie zdjęć, a następnie wybierz zdjęcia z komputera lub po prostu "przeciągnij i upuść" w polu poniżej.</legend>
+        np. Galerie zdjęć, a następnie wybierz zdjęcia z komputera lub po prostu "przeciągnij i upuść" w polu poniżej.
+    </legend>
     <div class="upload_area">
 
         <div class="drop-zone">
 
             {% comment %} <p>{% trans "Drag and drop images into this area to upload immediately." %}</p> {% endcomment %}
 
-            <p>{{ help_text }}</p>
+            <p><b>Utworzenie nowej kolekcji:</b> Ustawienia (menu boczne) - Kolekcje - + Dodaj nową kolekcję.
+                Proszę wpisać nazwę kolekcji i wybrać jej rodzica czyli bieżący rok szkolny pod Galeriami zdjęć.</p>
             {% if collections %}
                 <div class="field">
                     <label for="id_{{self.formset.prefix}}_addimage_collection">{% trans "Add to collection:" %}</label>

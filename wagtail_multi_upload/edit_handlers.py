@@ -1,8 +1,8 @@
-from wagtail.admin.panels import FieldPanel, InlinePanel
-from wagtail.images import get_image_model
 from django.forms.widgets import Media, MediaDefiningClass
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.images import get_image_model
 
 
 def widget_with_script(widget, script):
@@ -10,7 +10,7 @@ def widget_with_script(widget, script):
 
 
 class MultipleImagesPanel(InlinePanel):
-    
+
     def __init__(self, relation_name, image_field_name, *args, **kwargs):
         kwargs['relation_name'] = relation_name
         super().__init__(*args, **kwargs)
@@ -36,7 +36,7 @@ class MultipleImagesPanel(InlinePanel):
         js_template = "wagtail_multi_upload/edit_handlers/multiple_images_panel.js"
 
         def render_html(self, *parent_context):
-            
+
             context = {
                 'self': self,
                 'can_order': self.formset.can_order,
@@ -44,7 +44,7 @@ class MultipleImagesPanel(InlinePanel):
             context.update(self.render_extension())
             formset = render_to_string(self.template, context)
             js = self.render_js_init()
-            
+
             return widget_with_script(formset, js)
 
         def render_js_init(self):
@@ -56,16 +56,20 @@ class MultipleImagesPanel(InlinePanel):
             return mark_safe(render_to_string(self.js_template, context))
 
         def render_extension(self):
-            from wagtail.images.permissions import permission_policy
             from wagtail.images.fields import get_allowed_image_extensions
-            from wagtail.images.forms import get_image_form  
+            from wagtail.images.forms import get_image_form
+            from wagtail.images.permissions import permission_policy
 
             Image = get_image_model()
             ImageForm = get_image_form(Image)
 
             collections_to_choose = None
 
-            collections = permission_policy.collections_user_has_permission_for(self.request.user, 'add')
+            collections_perm = permission_policy.collections_user_has_permission_for(self.request.user, 'add')
+            collections_excluded = ["Aktualności - zdjęcia", "Dokumenty", "Inne", "Galerie zdjęć"]
+            collections = [
+                col for col in collections_perm if (col.name not in collections_excluded) and (not col.name.startswith("20"))
+                ]
             if len(collections) > 1:
                 collections_to_choose = collections
             else:
@@ -100,4 +104,3 @@ class MultipleImagesPanel(InlinePanel):
             ], css={
                 'screen': ('wagtail-multi-upload/css/add-multiple.css',)
             })
-    
