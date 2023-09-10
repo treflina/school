@@ -24,7 +24,7 @@
                         <p>godz. {{event.hour}}</p>
                         {% endif %}
                         {% if event.description %}
-                        <p class="calendar__event-details--description">{{event.description}}</p>
+                        <p class="calendar__event-details--description">{{event.description|linebreaks}}</p>
                         {% endif %}
                     </div>
                 </div>
