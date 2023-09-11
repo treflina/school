@@ -29,7 +29,7 @@
                 <div class="news__content">
                     {% if page.banner_image %}
                     <div class="news__bannerimg">
-                        {% image page.banner_image fill-500x380 as img %}
+                        {% image page.banner_image width-500 as img %}
                         {% image page.banner_image original as org_img %}
                         <a class="image-link" href="{{org_img.file.url}}"><span class="screenReaderOnly">Powiększ zdjęcie</span>
             <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.alt_attr }}" />

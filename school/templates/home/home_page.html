@@ -25,21 +25,22 @@
     </div>
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
-            {% image main_post.banner_image fill-500x400 as img %}
+            {% image main_post.banner_image width-550 as img %}
             <img src="{{img.url}}" alt="{{main_post.alt_attr}}" class="posts__main-img posts__main-img--primary"
                 width="{{img.width}}" height="{{img.height}}" decoding="async" loading="lazy">
             <div class="posts__main-box posts__main-box--primary">
                 <div class="posts__main-details">
                     {% if main_post.category %}
                     <div class="posts__main-category posts__main-category--{{main_post.category.color}}">
-                        {{main_post.category}}</div>{% endif %}
+                        {{main_post.category}}
+                    </div>{% endif %}
                     <p class="posts__main-details--date">{{main_post.publish_date|date}}</p>
                 </div>
                 <h2 class="posts__main-heading posts__main-heading--primary">{{main_post.title}}</h2>
                 <div>
-                    {{main_post.main_text|richtext|truncatewords:100}}
+                    {{main_post.main_text|richtext}}
                 </div>
-                {% if main_post.main_text|richtext|wordcount > 99 %}
+                {% if main_post.body %}
                 <a href="{% slugurl main_post.slug %}" class="posts__main-link posts__main-link--primary">Czytaj więcej&nbsp;&raquo;</a>
                 {% endif %}
             </div>
@@ -126,6 +127,7 @@
         </div>
         <a href="{% slugurl 'aktualnosci'%}" class="posts__linktoall"><span>Przejdź do wszystkich aktualności &raquo;</span></a>
     </div>
+
 </main>
 {% endblock %}
 {% block extra_js %}

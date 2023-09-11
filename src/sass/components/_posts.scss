@@ -29,11 +29,11 @@
         &--primary {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            justify-content: center;
             width: 100%;
             max-width: 1200px;
             margin: 3rem 0 3rem;
-            gap: 20px;
+            gap: 40px;
         }
 
         &--secondary {
@@ -56,7 +56,7 @@
 
             &--primary {
                 flex: 0 1 550px;
-                height: 400px;
+                height: auto;
 
             }
 
@@ -127,6 +127,10 @@
             }
 
             &--primary {
+                display: block;
+                width: max-content;
+                margin-top: 2rem;
+
                 transition: background-color .5s,
                     transform .5s;
 
@@ -335,13 +339,13 @@
             gap: 30px;
         }
 
-        &__main {
-            &-img {
-                &--primary {
-                    height: 270px;
-                }
-            }
-        }
+        // &__main {
+        //     &-img {
+        //         &--primary {
+        //             height: 270px;
+        //         }
+        //     }
+        // }
     }
 }
 
