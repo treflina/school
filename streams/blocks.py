@@ -1,5 +1,6 @@
 from wagtail import blocks
 from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.contrib.typed_table_block.blocks import TypedTableBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -109,6 +110,28 @@ class RichtextAndTableBlock(blocks.StreamBlock):
         table_options=custom_table_options,
     )
 
+    typed_table = TypedTableBlock([
+        ('text', blocks.CharBlock(label="Krótki tekst.")),
+        ('long_text', blocks.TextBlock(label="Długi tekst.")),
+        ('rich_text', blocks.RichTextBlock(label="Tekst z edycją",  features=[
+            "bold",
+            "italic",
+            "ol",
+            "ul",
+            "text-green",
+            "text-violet",
+            "text-red",
+            "text-orange",
+            "image",
+            "link"
+        ],)),
+        ('image', ImageChooserBlock(label="Obraz")),
+
+    ],  required=False,
+        label="Tabela z dodatkową edycją komórek",
+        template="streams/typed_table_block.html",
+        table_options=custom_table_options,)
+
     docs = blocks.ListBlock(
         DocumentChooserBlock(),
         required=False,
@@ -124,3 +147,5 @@ class ObjectAndDescriptionBlock(blocks.StructBlock):
     class Meta:
         label = "Przedmiot (funkcja)"
         template = "streams/object_description_block.html"
+
+

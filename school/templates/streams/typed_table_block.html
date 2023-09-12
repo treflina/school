@@ -1,0 +1,22 @@
+{% load wagtailcore_tags static %}
+
+<div role="region" aria-labelledby="HeadersRow-{{block.id}}" tabindex="0" class="colheaders mtb-1">
+<table class="tb-block" id="HeadersRow-{{block.id}}">
+    <thead>
+        <tr>
+            {% for col in value.columns %}
+                <th class="th-block" scope="col">{{ col.heading }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in value.rows %}
+            <tr>
+                {% for block in row %}
+                    <td class="td-block">{% include_block block %}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>

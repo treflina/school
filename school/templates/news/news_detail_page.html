@@ -48,6 +48,9 @@
                     </div>
                     {% elif block.block_type == 'docs' %}
                     {% include_block block %}
+                    
+                    {% elif block.block_type == 'typed_table' %}
+                    {% include_block block %}
                     {% else %}
                     <div class="block__text group">
                         {% include_block block %}
