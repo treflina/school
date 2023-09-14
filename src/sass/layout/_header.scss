@@ -45,54 +45,16 @@
 
     }
 
-    &__icon {
-        position: absolute;
-        opacity: 1;
-        z-index: 2;
-
-        &--book {
-            right: 10%;
-            top: 10%;
-            width: 90px;
-            rotate: 30deg;
-        }
-
-        &--abacus {
-            right: 45%;
-            top: 4%;
-            width: 100px;
-            rotate: -35deg;
-        }
-
-        &--pencil {
-            left: 3%;
-            bottom: 5%;
-            width: 100px;
-            rotate: 0deg;
-        }
-
-        &--ball {
-
-            left: 10%;
-            top: 5%;
-            width: 100px;
-        }
-
-        &--backpack {
-            right: 15%;
-            bottom: 1%;
-            width: 120px;
-            rotate: 20deg;
-        }
-    }
-
     &__links {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
         width: 100%;
+        max-width: 1000px;
         min-height: 10rem;
         margin-top: -40px;
+        margin-left: auto;
+        margin-right: auto;
         z-index: 5;
 
 
@@ -101,6 +63,7 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+            flex: 1 0 15rem;
             margin: .5em 1em;
             width: 300px;
             padding: 1em;
@@ -120,7 +83,7 @@
 
             img {
                 height: 3.5rem;
-                padding: 0 1em 0 0;
+                padding: 0 .5em 0 0.5em;
                 margin-bottom: .3em;
             }
 
@@ -158,13 +121,26 @@
                 font-size: 4.4rem;
             }
         }
+
+        &__links {
+            &-link {
+                flex-direction: column;
+                flex: 1 1 10rem;
+                padding: .5em .3em;
+                min-width: 10rem;
+                font-size: 1.6rem;
+
+                img {
+                    height: 2.5rem;
+                }
+            }
+        }
     }
 }
 
 
 @include media(xsm) {
     .header {
-
         &__emblem {
             left: 10px;
             width: 40px;
@@ -182,12 +158,22 @@
             margin-top: -40px;
 
             &-link {
-                margin: .5em 0;
+                margin: .5em .5em;
 
                 img {
                     padding: 0 .5em;
                 }
 
+            }
+        }
+    }
+}
+
+@include media(xsm) {
+    .header {
+        &__links {
+            &-link {
+                margin: .5em .25em;
             }
         }
     }
