@@ -8,7 +8,7 @@
                 {% if not item.sub_menu %}
                 <a href="{{item.href}}" class="nav__list-link nav__item-link menu-close">{{ item.text }}</a>
                 {% else %}
-                <button class="nav__list-link nav-link nav__btn" aria-haspopup="true" data-dropdown="dropdown{{item.id}}"> {{item.text}}<img src="{% static 'img/chevrond.svg' %}" alt="" class="nav__list-icon" width="24" height="24">
+                <button class="nav__list-link nav-link nav__btn" aria-haspopup="true" aria-expanded="false" data-dropdown="dropdown{{item.id}}"> {{item.text}}<img src="{% static 'img/chevrond.svg' %}" alt="" class="nav__list-icon" width="24" height="24">
                  </button>
                 <ul class="nav__dropdown" id="dropdown{{item.id}}">
                     {% for sub_item in item.sub_menu.items %}
