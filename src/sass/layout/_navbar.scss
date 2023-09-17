@@ -70,8 +70,9 @@
         max-width: 100vw;
         min-width: 300px;
         max-height: 0;
-        background-color: #faf7f4;
+        background-color: white;
         box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+        border-bottom: 4px solid $color-primary-dark;
         list-style: none;
         z-index: 10;
         opacity: 0;
@@ -81,7 +82,7 @@
             display: inline-block;
             padding: .75em;
             width: 100%;
-            box-shadow: 0 0 1px rgba(0, 0, 0, .5);
+            box-shadow: 0 0 1px rgba(0, 0, 0, .2);
             text-decoration: none;
             color: black;
             transition: background-color .3s;
@@ -260,8 +261,8 @@
             position: static;
             width: max-content;
             margin: 0 auto;
-            background-color: white;
             box-shadow: none;
+            border-bottom: none;
 
             &-link {
                 box-shadow: none;
