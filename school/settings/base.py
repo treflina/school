@@ -24,7 +24,7 @@ CORE_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
-    'wagtail.contrib.modeladmin',
+    # 'wagtail.contrib.modeladmin',
     "wagtail.contrib.typed_table_block",
     "wagtail.embeds",
     "wagtail.sites",
