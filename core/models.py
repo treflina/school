@@ -3,6 +3,8 @@ from PIL import Image as PILImage
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
+from django.utils.timezone import now
+
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents.models import AbstractDocument, Document
@@ -75,6 +77,31 @@ class SchoolYearSnippet(models.Model):
     class Meta:
         verbose_name = "Rok szkolny"
         verbose_name_plural = "Rok szkolny"
+
+
+@register_snippet
+class LuckyNumberSnippet(models.Model):
+    """Lucky number snippet model."""
+
+    number = models.CharField("Wylosowany numerek", max_length=2)
+    date = models.DateField(
+        blank=False,
+        null=True,
+        default=now,
+        verbose_name="Data",
+    )
+
+    panels = [
+        FieldPanel("number"),
+        FieldPanel("date")
+        ]
+
+    def __str__(self):
+        return f"{self.number} ( {self.date} )"
+
+    class Meta:
+        verbose_name = "Niepytany numerek"
+        verbose_name_plural = "Niepytany numerek"
 
 
 class CustomDocument(AbstractDocument):

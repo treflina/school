@@ -2,17 +2,16 @@ from datetime import date
 from itertools import chain, islice
 from operator import attrgetter
 
-from wagtail.models import Page
-
-from gallery.models import GalleryDetailPage
+from core.models import CategorySnippet, LuckyNumberSnippet
 from events.models import EventsPage
+from gallery.models import GalleryDetailPage
 from news.models import NewsDetailPage
-from core.models import CategorySnippet
+from wagtail.models import Page
 
 
 class HomePage(Page):
     template = "home/home_page.html"
-    parent_page_types = ['wagtailcore.Page']
+    parent_page_types = ["wagtailcore.Page"]
     max_count = 1
 
     def get_today(self):
@@ -23,7 +22,11 @@ class HomePage(Page):
         context = super().get_context(request, *args, **kwargs)
 
         # Get all posts from news and gallery
-        news_list = NewsDetailPage.objects.live().specific().order_by("-publish_date")
+        news_list = (
+            NewsDetailPage.objects.live()
+            .specific()
+            .order_by("-publish_date", "-first_published_at")
+        )
         main_post = news_list.filter(highlight=True).first()
         if not main_post:
             main_post = news_list.first()
@@ -32,7 +35,7 @@ class HomePage(Page):
             GalleryDetailPage.objects.filter(on_main_page=True)
             .live()
             .specific()
-            .order_by("-publish_date")
+            .order_by("-publish_date", "-first_published_at")
         )
 
         posts = sorted(
@@ -53,6 +56,7 @@ class HomePage(Page):
 
         context["main_post"] = main_post
         context["categories"] = categories
+        context["lucky_number"] = LuckyNumberSnippet.objects.last()
         context["posts"] = [p for p in posts if p != main_post][:6]
 
         # get upcoming events
@@ -99,5 +103,5 @@ class HomePage(Page):
 
     search_fields = Page.search_fields
 
-    class Meta: # noqa
+    class Meta:  # noqa
         verbose_name = "Strona główna"

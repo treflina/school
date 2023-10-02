@@ -9,12 +9,10 @@
 <header class="header" id="main">
     <img src="{% static 'img/emblem.svg' %}" class="header__emblem" alt="Godło Polski" width="50px" height="59px">
     <div class="header__text">
-
         <h1><span class="first-letter">P</span>ubliczna <span class="first-letter">S</span>zkoła
             <span class="first-letter">P</span>odstawowa <br>w&nbsp;Turawie
         </h1>
     </div>
-
 </header>
 <main class="main">
     <div class="header__links">
@@ -23,6 +21,15 @@
             <img src="{% static 'img/logosz2.jpg' %}" alt="" aria-hidden="true" height="35px"> Opolska eSzkoła</a>
         <a href="{% slugurl 'rekrutacja' %}" class="header__links-link"><img src="{% static 'img/calendar.svg' %}" alt="" aria-hidden="true" height="35px"> Rekrutacja</a>
     </div>
+    {% if lucky_number %}
+    <div class="lucky-num">
+        <p class="lucky-num__date"><span style="color:green;">Niepytany numerek</span> {{lucky_number.date|date:"j.m."}} ({{lucky_number.date|date:"l"|lower}}):</p>
+        <div class="lucky-num__imgbox">
+            <img src="{% static 'img/lucky_num.png' %}" alt="" class="lucky-num__img">
+            <p class="lucky-num__num">{{lucky_number.number}}</p>
+        </div>
+    </div>
+    {% endif %}
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
             {% image main_post.banner_image width-550 as img %}
