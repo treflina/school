@@ -3,16 +3,14 @@ from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import (
-    FieldPanel,
+    FieldPanel,  
     FieldRowPanel,
     MultiFieldPanel,
-    # MultipleChooserPanel,
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
-
 from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
@@ -27,7 +25,9 @@ class GalleryIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         galleries = (
-            GalleryDetailPage.objects.specific().live().order_by("-publish_date")
+            GalleryDetailPage.objects.specific()
+            .live()
+            .order_by("-publish_date", "-first_published_at")
         )
 
         context["years"] = SchoolYearSnippet.objects.all()

@@ -36,9 +36,15 @@ class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
         """Adding custom stuff to our context."""
         context = super().get_context(request, *args, **kwargs)
 
-        news = NewsDetailPage.objects.live().specific().order_by("-publish_date")
+        news = (
+            NewsDetailPage.objects.live()
+            .specific()
+            .order_by("-publish_date", "-first_published_at")
+        )
         galleries_list = (
-            GalleryDetailPage.objects.live().specific().order_by("-publish_date")
+            GalleryDetailPage.objects.live()
+            .specific()
+            .order_by("-publish_date", "-first_published_at")
         )
 
         all_news = sorted(
@@ -92,7 +98,7 @@ class NewsDetailPage(Page):
         related_name="+",
         on_delete=models.SET_NULL,
         verbose_name="Zdjęcie główne",
-        help_text="Preferowana orientacja pozioma."
+        help_text="Preferowana orientacja pozioma.",
     )
     alt_attr = models.CharField(
         blank=True,
@@ -155,12 +161,14 @@ class NewsDetailPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            FieldPanel("category"),
-            FieldPanel("highlight"),
-            FieldPanel("publish_date"),
-            FieldPanel("author"),
-        ], heading="Informacje o artykule",
+        MultiFieldPanel(
+            [
+                FieldPanel("category"),
+                FieldPanel("highlight"),
+                FieldPanel("publish_date"),
+                FieldPanel("author"),
+            ],
+            heading="Informacje o artykule",
         ),
         MultiFieldPanel(
             [
@@ -172,7 +180,6 @@ class NewsDetailPage(Page):
             ],
             heading="Treść",
         ),
-
         MultiFieldPanel(
             [
                 PageChooserPanel("button_cta", "gallery.GalleryDetailPage"),
