@@ -38,6 +38,11 @@
             p {
                 margin-bottom: .5em;
             }
+
+            a {
+                @include link-primary(2px, 2px, transparent);
+                text-underline-offset: 3px;
+            }
         }
 
         &--secondary {
@@ -95,11 +100,12 @@
                 margin-bottom: 1em;
             }
 
-            & > p {
+            &>p {
                 margin-bottom: .5em;
-                    a {
-                        @include link-primary(1px, 2px, $color-primary-dark);
-                    }
+
+                a {
+                    @include link-primary(1px, 2px, $color-primary-dark);
+                }
             }
         }
 
