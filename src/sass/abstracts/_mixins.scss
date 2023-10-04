@@ -32,6 +32,7 @@ $media: (xxsm: 25em, //400px
 @mixin link-primary($start-thickness, $end-thickness, $color-start) {
     color: $color-primary-dark;
     font-weight: bold;
+    text-decoration: underline;
     text-decoration-color: $color-start;
     text-decoration-thickness: $start-thickness;
     transition: text-decoration-color .2s;
