@@ -23,6 +23,14 @@
     a[href$='xls']::before,
     a[href$='xlsx']::before {
         @include link-document;
+        content: url('/static/img/file-text.svg');
+    }
+    a[href$='jpeg']::before,
+    a[href$='jpg']::before,
+    a[href$='png']::before,
+    a[href$='webp']::before {
+        @include link-document;
+        content: url('/static/img/file-img.svg');
     }
 }
 

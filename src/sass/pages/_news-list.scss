@@ -57,6 +57,7 @@
 
             &-newslink {
                 color: black;
+                text-decoration: none;
 
                 &::after {
                     @include pseudocontent-basic;
