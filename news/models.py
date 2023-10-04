@@ -225,7 +225,7 @@ class NewsDetailPage(Page):
             chain(news, galleries),
             key=attrgetter("publish_date"),
             reverse=True,
-        )
+        )[:10]
 
         context["prev_news"] = all_posts
 
