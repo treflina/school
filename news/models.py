@@ -10,13 +10,14 @@ from streams import blocks
 from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
-    MultipleChooserPanel,
+    # MultipleChooserPanel,
     PageChooserPanel,
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
+from wagtail_multi_upload.edit_handlers import MultipleImagesPanel
 
 
 class NewsIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
@@ -183,10 +184,10 @@ class NewsDetailPage(Page):
         MultiFieldPanel(
             [
                 PageChooserPanel("button_cta", "gallery.GalleryDetailPage"),
-                MultipleChooserPanel(
+                MultipleImagesPanel(
                     "gallery_images",
                     label="Zdjęcia",
-                    chooser_field_name="image",
+                    image_field_name="image",
                     help_text="Wybrane zdjęcia zostaną zamieszczone na końcu artykułu.",
                 ),
             ],
