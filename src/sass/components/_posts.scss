@@ -39,6 +39,20 @@
                 @include link-primary(2px, 2px, transparent);
                 text-underline-offset: 3px;
             }
+
+            .posts__main-link--primary {
+                display: block;
+                width: max-content;
+                margin-top: 2rem;
+
+                transition: background-color .5s,
+                    transform .5s;
+
+                &:hover,
+                &:focus {
+                    transform: translateY(-3px);
+                }
+            }
         }
 
         &--secondary {
@@ -133,19 +147,6 @@
                 }
             }
 
-            &--primary {
-                display: block;
-                width: max-content;
-                margin-top: 2rem;
-
-                transition: background-color .5s,
-                    transform .5s;
-
-                &:hover,
-                &:focus {
-                    transform: translateY(-3px);
-                }
-            }
         }
 
         &-heading {
