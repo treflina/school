@@ -50,6 +50,7 @@ CORE_APPS = [
 THIRD_PARTY_APPS = [
     "wagtail_multi_upload",
     "wagtailmenus",
+    "wagtail_modeladmin",
     "robots",
 ]
 
