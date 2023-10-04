@@ -6,13 +6,12 @@ from wagtail.images import get_image_model
 
 
 def widget_with_script(widget, script):
-    return mark_safe('{0}<script>{1}</script>'.format(widget, script))
+    return mark_safe("{0}<script>{1}</script>".format(widget, script))
 
 
 class MultipleImagesPanel(InlinePanel):
-
     def __init__(self, relation_name, image_field_name, *args, **kwargs):
-        kwargs['relation_name'] = relation_name
+        kwargs["relation_name"] = relation_name
         super().__init__(*args, **kwargs)
         self.image_field_name = image_field_name
 
@@ -31,15 +30,13 @@ class MultipleImagesPanel(InlinePanel):
         )
 
     class BoundPanel(InlinePanel.BoundPanel):
-
         template = "wagtail_multi_upload/edit_handlers/multiple_images_panel.html"
         js_template = "wagtail_multi_upload/edit_handlers/multiple_images_panel.js"
 
         def render_html(self, *parent_context):
-
             context = {
-                'self': self,
-                'can_order': self.formset.can_order,
+                "self": self,
+                "can_order": self.formset.can_order,
             }
             context.update(self.render_extension())
             formset = render_to_string(self.template, context)
@@ -49,8 +46,8 @@ class MultipleImagesPanel(InlinePanel):
 
         def render_js_init(self):
             context = {
-                'self': self,
-                'can_order': self.formset.can_order,
+                "self": self,
+                "can_order": self.formset.can_order,
             }
             context.update(self.render_extension_js_init())
             return mark_safe(render_to_string(self.js_template, context))
@@ -65,11 +62,22 @@ class MultipleImagesPanel(InlinePanel):
 
             collections_to_choose = None
 
-            collections_perm = permission_policy.collections_user_has_permission_for(self.request.user, 'add')
-            collections_excluded = ["Dokumenty", "Inne"]
+            collections_perm = permission_policy.collections_user_has_permission_for(
+                self.request.user, "add"
+            )
+            collections_excluded = [
+                "Archiwum",
+                "Dokumenty",
+                "Zasady oceniania",
+                "Rozpoczęcie roku szkolnego",
+                "Inne",
+            ]
             collections = [
-                col for col in collections_perm if (col.name not in collections_excluded) and (not col.name.startswith("20"))
-                ]
+                col
+                for col in collections_perm
+                if (col.name not in collections_excluded)
+                and (not col.name.startswith("20"))
+            ]
             if len(collections) > 1:
                 collections_to_choose = collections
             else:
@@ -79,12 +87,16 @@ class MultipleImagesPanel(InlinePanel):
             form = ImageForm(user=self.request.user)
 
             return {
-                'max_filesize': form.fields['file'].max_upload_size,
-                'help_text': form.fields['file'].help_text,
-                'allowed_extensions': get_allowed_image_extensions,
-                'error_max_file_size': form.fields['file'].error_messages['file_too_large_unknown_size'],
-                'error_accepted_file_types': form.fields['file'].error_messages['invalid_image'],
-                'collections': collections_to_choose,
+                "max_filesize": form.fields["file"].max_upload_size,
+                "help_text": form.fields["file"].help_text,
+                "allowed_extensions": get_allowed_image_extensions,
+                "error_max_file_size": form.fields["file"].error_messages[
+                    "file_too_large_unknown_size"
+                ],
+                "error_accepted_file_types": form.fields["file"].error_messages[
+                    "invalid_image"
+                ],
+                "collections": collections_to_choose,
             }
 
         def render_extension_js_init(self):
@@ -92,15 +104,16 @@ class MultipleImagesPanel(InlinePanel):
 
         @property
         def media(self):
-            return Media(js=[
-                'wagtailimages/js/vendor/load-image.min.js',
-                'wagtailimages/js/vendor/canvas-to-blob.min.js',
-                'wagtailadmin/js/vendor/jquery.iframe-transport.js',
-                'wagtailadmin/js/vendor/jquery.fileupload.js',
-                'wagtailadmin/js/vendor/jquery.fileupload-process.js',
-                'wagtailimages/js/vendor/jquery.fileupload-image.js',
-                'wagtailimages/js/vendor/jquery.fileupload-validate.js',
-                'wagtailadmin/js/vendor/tag-it.js'
-            ], css={
-                'screen': ('wagtail-multi-upload/css/add-multiple.css',)
-            })
+            return Media(
+                js=[
+                    "wagtailimages/js/vendor/load-image.min.js",
+                    "wagtailimages/js/vendor/canvas-to-blob.min.js",
+                    "wagtailadmin/js/vendor/jquery.iframe-transport.js",
+                    "wagtailadmin/js/vendor/jquery.fileupload.js",
+                    "wagtailadmin/js/vendor/jquery.fileupload-process.js",
+                    "wagtailimages/js/vendor/jquery.fileupload-image.js",
+                    "wagtailimages/js/vendor/jquery.fileupload-validate.js",
+                    "wagtailadmin/js/vendor/tag-it.js",
+                ],
+                css={"screen": ("wagtail-multi-upload/css/add-multiple.css",)},
+            )
