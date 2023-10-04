@@ -21,6 +21,8 @@ class HomePage(Page):
         """Adding posts to news section"""
         context = super().get_context(request, *args, **kwargs)
 
+        today = self.get_today()
+
         # Get all posts from news and gallery
         news_list = (
             NewsDetailPage.objects.live()
@@ -56,11 +58,10 @@ class HomePage(Page):
 
         context["main_post"] = main_post
         context["categories"] = categories
-        context["lucky_number"] = LuckyNumberSnippet.objects.last()
+        context["lucky_number"] = LuckyNumberSnippet.objects.filter(date=today).last()
         context["posts"] = [p for p in posts if p != main_post][:6]
 
         # get upcoming events
-        today = self.get_today()
 
         q = EventsPage.objects.live().all()
         eventpage = q[len(q) - 1] if q else None
