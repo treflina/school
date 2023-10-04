@@ -47,7 +47,7 @@
                 <div>
                     {{main_post.main_text|richtext}}
                 </div>
-                {% if main_post.body %}
+                {% if main_post.body or main_post.gallery_images or main_post.button_cta %}
                 <a href="{% slugurl main_post.slug %}" class="posts__main-link posts__main-link--primary">Czytaj więcej&nbsp;&raquo;</a>
                 {% endif %}
             </div>
