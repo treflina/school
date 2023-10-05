@@ -12,7 +12,7 @@
                  </button>
                 <ul class="nav__dropdown" id="dropdown{{item.id}}">
                     {% for sub_item in item.sub_menu.items %}
-                    <li class="nav__dropdown-item "><a href="{{sub_item.href}}" class="nav__dropdown-link nav-link menu-close">{% if sub_item.text != "Opolska eSzkoła - instrukcja" %}{{ sub_item.text|lower|capfirst }}{% else %} {{sub_item.text}}{% endif %}</a></li>
+                    <li class="nav__dropdown-item "><a href="{{sub_item.href}}" class="nav__dropdown-link nav-link menu-close">{{sub_item.text}}</a></li>
                     {% endfor %}
                 </ul>
                 {% endif %}
