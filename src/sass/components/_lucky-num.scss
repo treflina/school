@@ -2,11 +2,11 @@
 
 .lucky-num {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    width: 45rem;
+    width: 46rem;
     height: max-content;
-    padding-right: 5rem;
+    padding-right: 2rem;
     font-weight: bold;
     margin: 1rem 0 -5rem auto;
     border-top: 2px solid #ddd;
@@ -53,6 +53,7 @@
         margin: 1rem 0 -2rem;
         border-top: 0;
         border-bottom: 0;
+
 
         &__date {
             width: max-content;
