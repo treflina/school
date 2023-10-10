@@ -170,6 +170,14 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "public", "media")
 
+EMAIL_HOST = get_secret("EMAIL_HOST")
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = get_secret("EMAIL_PORT")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = get_secret("EMAIL_HOST_USER")
+
 
 # Wagtail settings
 
