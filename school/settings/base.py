@@ -193,7 +193,7 @@ WAGTAILSEARCH_BACKENDS = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "http://example.com"
+WAGTAILADMIN_BASE_URL = get_secret("WAGTAILADMIN_BASE_URL")
 WAGTAILIMAGES_CHOOSER_PAGE_SIZE = 30
 WAGTAILDOCS_DOCUMENT_MODEL = 'core.CustomDocument'
 WAGTAILIMAGES_IMAGE_MODEL = "core.CustomImage"
