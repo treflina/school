@@ -22,6 +22,7 @@
     &__main {
         position: relative;
 
+
         &--primary {
             display: flex;
             flex-wrap: wrap;
@@ -30,6 +31,16 @@
             max-width: 1200px;
             margin: 3rem 0 3rem;
             gap: 40px;
+
+            .posts__main-authorbox {
+                margin-bottom: .5rem;
+            }
+
+            .posts__main-author {
+                margin-bottom: 0rem;
+                margin-left: 1rem;
+
+            }
 
             p {
                 margin-bottom: .5em;
@@ -86,6 +97,8 @@
             }
 
         }
+
+
 
         &-box {
             display: flex;
@@ -151,7 +164,7 @@
 
         &-heading {
             font-weight: 700;
-            margin: .5em 0 1em;
+            margin: .5em 0 .5em;
             overflow-wrap: anywhere;
 
 
@@ -165,6 +178,7 @@
         }
 
         &-text {
+            margin-top: 1.5rem;
             margin-bottom: 1em;
         }
 

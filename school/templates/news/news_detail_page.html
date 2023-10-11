@@ -17,7 +17,8 @@
                     {% endif %}
                     <div class="page-dbox">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                            class="bi bi-calendar-event" viewBox="0 0 16 16">
+                            class="bi bi-calendar-event" viewBox="0 0 16 16" aria-labelledby="calendar" role="img">
+                            <title id="calendar">Ikona kalendarza</title>
                             <path
                                 d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
                             <path
@@ -48,7 +49,7 @@
                     </div>
                     {% elif block.block_type == 'docs' %}
                     {% include_block block %}
-                    
+
                     {% elif block.block_type == 'typed_table' %}
                     {% include_block block %}
                     {% else %}
