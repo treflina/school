@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import (
-    FieldPanel,  
+    FieldPanel,
     FieldRowPanel,
     MultiFieldPanel,
 )
@@ -155,8 +155,8 @@ class GalleryImage(Orderable):
         blank=True,
         max_length=255,
         verbose_name="Opis alternatywny",
-        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów) mający
-        na celu m.in. umożliwienie przekazu treści osobom słabowidzącym.""",
+        help_text="""Opis tekstowy zdjęcia. Zadbaj o to,
+        żeby co najmniej dla zdjęcia głównego to pole nie pozostało puste.""",
     )
     highlight = models.BooleanField(
         default=False,
