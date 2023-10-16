@@ -8,9 +8,8 @@ from gallery.models import GalleryDetailPage
 from modelcluster.fields import ParentalKey
 from streams import blocks
 from wagtail.admin.panels import (
-    FieldPanel,
+    FieldPanel,  # MultipleChooserPanel,
     MultiFieldPanel,
-    # MultipleChooserPanel,
     PageChooserPanel,
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin
@@ -99,7 +98,9 @@ class NewsDetailPage(Page):
         related_name="+",
         on_delete=models.SET_NULL,
         verbose_name="Zdjęcie główne",
-        help_text="Preferowana orientacja pozioma.",
+        help_text="""Preferowana orientacja pozioma. Pamiętaj, że tekst zamieszczony
+            na zdjęciu jest niedostępny i powinien znaleźć się również w treści
+            artykułu (wymóg dostępności stron internetowych instytucji publicznych.)""",
     )
     alt_attr = models.CharField(
         blank=True,
