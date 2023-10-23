@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("wagtailcore", "0090_merge_20231002_1822"),
+        # ("wagtailcore", "0090_merge_20231002_1822"),
         ("events", "0001_initial"),
     ]
 
