@@ -100,14 +100,14 @@ class NewsDetailPage(Page):
         verbose_name="Zdjęcie główne",
         help_text="""Preferowana orientacja pozioma. Pamiętaj, że tekst zamieszczony
             na zdjęciu jest niedostępny cyfrowo i powinien znaleźć się również w treści
-            artykułu (wymóg dostępności stron internetowych instytucji publicznych.)""",
+            artykułu (wymóg dostępności stron internetowych instytucji publicznych).""",
     )
     alt_attr = models.CharField(
         blank=True,
         max_length=255,
         verbose_name="Opis alternatywny",
         help_text="""Opisz co przedstawia zdjęcie główne. Pole nie powinno być puste
-        (wymóg dostępności cyfrowej stron internetowych instytucji publicznych.)""",
+        (wymóg dostępności cyfrowej stron internetowych instytucji publicznych).""",
     )
     main_text = RichTextField(
         blank=False,

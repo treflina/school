@@ -19,7 +19,14 @@
                     </div>
 
                     <div class="calendar__event-details">
+                        <div style="display: flex; flex-wrap: wrap;">
                         <p class="calendar__event-details--name">{{event.name}}</p>
+                        {% if event.link_to_details %}
+                        <a href="{% pageurl event.link_to_details %}">
+                        <img class="event__details-link" src="{% static 'img/link.svg' %}"
+                        alt="Link do artykułów ze szczegółami" title="Dowiedz się więcej"></a>
+                        {% endif %}
+                        </div>
                         {% if event.hour %}
                         <p>godz. {{event.hour}}</p>
                         {% endif %}

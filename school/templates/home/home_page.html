@@ -88,6 +88,11 @@
                                 <p class="event__details-square event__details-hour">{{event.hour}}</p>
                                 {% endif %}
                                 <p class="event__details-text">{{event.name}}</p>
+                                {% if event.link_to_details %}
+                                <a href="{% pageurl event.link_to_details %}">
+                                <img class="event__details-link" src="{% static 'img/link.svg' %}"
+                                alt="Link do artykułów ze szczegółami" title="Dowiedz się więcej"></a>
+                                {% endif %}
                             </div>
                             {% endfor %}
                         </div>

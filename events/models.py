@@ -3,7 +3,13 @@ from datetime import datetime
 from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.admin.forms import WagtailAdminPageForm
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import (
+    FieldPanel,
+    FieldRowPanel,
+    InlinePanel,
+    MultiFieldPanel,
+    PageChooserPanel,
+)
 from wagtail.models import Orderable, Page
 from wagtail.search import index
 
@@ -90,6 +96,14 @@ class Event(Orderable):
     description = models.TextField(
         verbose_name="(Opcjonalnie) Krótki opis", blank=True, null=True
     )
+    link_to_details = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Link do strony ze szczegółami wydarzenia np. w Aktualnościach"
+    )
 
     panels = [
         FieldPanel("name"),
@@ -97,6 +111,7 @@ class Event(Orderable):
             [FieldPanel("start_date"), FieldPanel("end_date"), FieldPanel("hour")]
         ),
         FieldPanel("description"),
+        PageChooserPanel("link_to_details"),
     ]
 
     def __str__(self):

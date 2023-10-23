@@ -1,4 +1,4 @@
-@use 'abstracts' as *;
+@use 'abstracts'as *;
 
 .events {
     background-color: #efefef;
@@ -44,11 +44,11 @@
         }
 
         &-square {
-              min-width: 65px;
-              padding: .2em .6em;
-              margin: 0 .5em .3em;
-               box-shadow: 0 0 2px rgba(0, 0, 0, .4);
-               font-weight: bold;
+            min-width: 65px;
+            padding: .2em .6em;
+            margin: 0 .5em .3em;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .4);
+            font-weight: bold;
         }
 
         &-date {
@@ -66,6 +66,7 @@
                 color: black;
                 margin: 0 .5em .3em;
             }
+
         }
 
         &-hour {
@@ -76,6 +77,11 @@
 
         &-text {
             margin-top: .25em;
+        }
+
+        &-link {
+            margin: 0 .5rem;
+            vertical-align: middle;
         }
 
     }
@@ -102,6 +108,7 @@
                 flex-direction: row;
                 margin: 1rem 0 1.5rem;
             }
+
             &-date {
                 top: 38px;
             }
@@ -117,4 +124,5 @@
 @include media(xxsm) {
     .events {
         padding: 2em .5rem;
-    }}
+    }
+}
