@@ -131,7 +131,7 @@ class GalleryDetailPage(PagePaginationMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         gallery_images = GalleryImage.objects.filter(page_id=self.id)
         context["posts"], context["page_range"] = self.pagination(
-            request, gallery_images, num=18
+            request, gallery_images, num=24
         )
         return context
 
