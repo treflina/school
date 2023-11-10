@@ -25,6 +25,7 @@
         @include link-document;
         content: url('/static/img/file-text.svg');
     }
+
     a[href$='jpeg']::before,
     a[href$='jpg']::before,
     a[href$='png']::before,
@@ -40,9 +41,12 @@
     align-items: center;
 
     &__image,
-    &__table,
-    &__text {
+    &__table {
         margin: 2rem 0 1rem;
+    }
+
+    &__text {
+        margin: 0;
     }
 
     &__image {
