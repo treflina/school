@@ -113,6 +113,7 @@ class NewsDetailPage(Page):
         blank=False,
         null=True,
         verbose_name="Tekst główny",
+        help_text="Tekst wprowadzający. Preferowana długość odpowiadająca wysokości zdjęcia głównego.",
         features=[
             "bold",
             "italic",
@@ -130,7 +131,7 @@ class NewsDetailPage(Page):
         null=True,
         blank=True,
         use_json_field=True,
-        verbose_name="Dodatkowe teksty, tabele, dokumenty",
+        verbose_name="Dalszy tekst (w tym zdjęcia na pełną szerokość ekranu), tabele, dokumenty",
     )
     highlight = models.BooleanField(
         default=True,
