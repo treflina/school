@@ -1,11 +1,9 @@
-from PIL import Image as PILImage
-
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.timezone import now
-
-
+from PIL import Image as PILImage
+from streams import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents.models import AbstractDocument, Document
 from wagtail.fields import RichTextField, StreamField
@@ -14,7 +12,6 @@ from wagtail.models import Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
-from streams import blocks
 from .utils import convert_bytes, extract_extension
 
 
@@ -91,10 +88,7 @@ class LuckyNumberSnippet(models.Model):
         verbose_name="Data",
     )
 
-    panels = [
-        FieldPanel("number"),
-        FieldPanel("date")
-        ]
+    panels = [FieldPanel("number"), FieldPanel("date")]
 
     def __str__(self):
         return f"{self.number} ( {self.date} )"
@@ -179,7 +173,7 @@ class IndexPage(Page):
     def get_child_pages(self):
         return self.get_children().public().live()
 
-    class Meta: # noqa
+    class Meta:  # noqa
         verbose_name = "Strona nadrzędna"
 
 
@@ -199,10 +193,7 @@ class OrdinaryPage(Page):
     ]
 
     search_fields = Page.search_fields + [
-        index.RelatedFields("content", [index.SearchField("docs")]),
-        index.RelatedFields("content", [index.SearchField("text")]),
-        index.RelatedFields("content", [index.SearchField("table")]),
-        index.RelatedFields("content", [index.SearchField("typed_table")]),
+        index.SearchField("content"),
     ]
 
     class Meta:  # noqa
@@ -333,15 +324,15 @@ class AccessibilityInfoPage(Page):
     subpage_types = []
     max_count = 1
 
-    institution = models.CharField(
-        "Nazwa podmiotu", max_length=250, blank=False
-        )
+    institution = models.CharField("Nazwa podmiotu", max_length=250, blank=False)
     web_url = models.URLField("Adres strony internetowej", blank=False)
     publication_date = models.DateField(
         verbose_name="Data publikacji strony internetowej", blank=False
     )
     update_date = models.DateField(
-        verbose_name="Data ostatniej istotnej aktualizacji", blank=True, null=True,
+        verbose_name="Data ostatniej istotnej aktualizacji",
+        blank=True,
+        null=True,
     )
     accordance = models.BooleanField("Zgodność z ustawą", blank=False, default=True)
     exceptions = RichTextField(
@@ -367,11 +358,12 @@ class AccessibilityInfoPage(Page):
         features=["bold", "italic", "ol", "ul", "hr"],
         blank=False,
         help_text="""W pierwszym wierszu należy zamieścić adres, a dopiero
-        następnie dalszy opis."""
+        następnie dalszy opis.""",
     )
     contact_methods = RichTextField(
         "Informacja o dostępności tłumacza języka migowego.",
-        blank=True, null=True,
+        blank=True,
+        null=True,
         features=["bold", "italic", "ol", "ul", "hr"],
     )
 
