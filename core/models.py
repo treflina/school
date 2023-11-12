@@ -200,6 +200,9 @@ class OrdinaryPage(Page):
 
     search_fields = Page.search_fields + [
         index.RelatedFields("content", [index.SearchField("docs")]),
+        index.RelatedFields("content", [index.SearchField("text")]),
+        index.RelatedFields("content", [index.SearchField("table")]),
+        index.RelatedFields("content", [index.SearchField("typed_table")]),
     ]
 
     class Meta:  # noqa
