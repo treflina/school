@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags wagtailimages_tags menu_tags %}
+{% wagtail_site as current_site %}
 {% load static %}
 {% block extra_css %}
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -94,10 +95,10 @@
                                 <a href="{% pageurl event.link_to_details %}">
                                 <img class="event__details-link" src="{% static 'img/link.svg' %}"
                                 alt="Link do artykułów ze szczegółami" title="Dowiedz się więcej"></a>
-                                {% elif event.description %}
-                                <a href="{% slugurl 'wydarzenia' %}#{{event.id}}">
+                                {% comment %} {% elif event.description %}
+                                <a href="{{current_site.root_page}}/wydarzenia#{{event.id}}">
                                 <img class="event__details-link" src="{% static 'img/info.svg' %}"
-                                alt="Link do dodatkowej informacji" title="Dodatkowa informacja"></a>
+                                alt="Link do dodatkowej informacji" title="Dodatkowa informacja"></a> {% endcomment %}
                                 {% endif %}
                             </div>
                             {% endfor %}
