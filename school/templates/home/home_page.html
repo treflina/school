@@ -33,10 +33,12 @@
     {% endif %}
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
+            <div class="posts__main-img--primary {% if main_post.checkered %} checkered {% endif %}">
             {% image main_post.banner_image width-550 as img %}
             <img src="{{img.url}}" {%if main_post.alt_attr %}alt="{{main_post.alt_attr}}" {% endif %}
-                class="posts__main-img posts__main-img--primary" width="{{img.width}}" height="{{img.height}}"
+                class="posts__main-img " width="{{img.width}}" height="{{img.height}}"
                 decoding="async" loading="lazy">
+                </div>
             <div class="posts__main-box posts__main-box--primary">
 
                 <div class="posts__main-details">
@@ -92,6 +94,10 @@
                                 <a href="{% pageurl event.link_to_details %}">
                                 <img class="event__details-link" src="{% static 'img/link.svg' %}"
                                 alt="Link do artykułów ze szczegółami" title="Dowiedz się więcej"></a>
+                                {% elif event.description %}
+                                <a href="{% slugurl 'wydarzenia' %}#{{event.id}}">
+                                <img class="event__details-link" src="{% static 'img/info.svg' %}"
+                                alt="Link do dodatkowej informacji" title="Dodatkowa informacja"></a>
                                 {% endif %}
                             </div>
                             {% endfor %}

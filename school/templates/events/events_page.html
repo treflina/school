@@ -12,7 +12,7 @@
             </div>
             <div class="calendar__month-events">
                 {% for event in e %}
-                <div class="calendar__event">
+                <div class="calendar__event" id="{{event.id}}">
                     <div class="calendar__event-date calendar__event-date--start">
                         <span class="calendar__event-date--1 bg-soft-warning">{{event.start_date|date:"j"}}{% if event.end_date %} - {{event.end_date|date:"j"}}{% endif %} </span>
                         <span class="calendar__event-date--2">{{event.start_date|date:"b"}}{%if event.start_date.month != event.end_date.month and event.end_date.month != None %}-{{event.end_date|date:"b"}}{%endif%} </span>

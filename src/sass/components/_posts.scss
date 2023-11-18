@@ -1,5 +1,13 @@
 @use 'abstracts'as *;
 
+.checkered {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)),
+        url("/static/img/checkered.jpg");
+}
+
 .posts {
     padding: 3em .5em;
     display: flex;
@@ -31,6 +39,8 @@
             max-width: 1200px;
             margin: 3rem 0 3rem;
             gap: 40px;
+
+
 
             .posts__main-authorbox {
                 margin-bottom: .5rem;
@@ -87,9 +97,10 @@
 
             &--primary {
                 flex: 0 1 550px;
-                // height: auto;
 
+                // height: auto;
             }
+
 
             &--secondary {
                 width: 100%;
@@ -328,6 +339,14 @@
     min-width: 100%;
     overflow: hidden;
 
+}
+
+@media(max-width:1155px) {
+    .checkered {
+        background-image: none;
+        height: auto;
+        display: block;
+    }
 }
 
 

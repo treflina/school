@@ -7,11 +7,8 @@ from django.utils.timezone import now
 from gallery.models import GalleryDetailPage
 from modelcluster.fields import ParentalKey
 from streams import blocks
-from wagtail.admin.panels import (
-    FieldPanel,  # MultipleChooserPanel,
-    MultiFieldPanel,
-    PageChooserPanel,
-)
+from wagtail.admin.panels import FieldPanel  # MultipleChooserPanel,
+from wagtail.admin.panels import MultiFieldPanel, PageChooserPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
@@ -102,6 +99,12 @@ class NewsDetailPage(Page):
             na zdjęciu jest niedostępny cyfrowo i powinien znaleźć się również w treści
             artykułu (wymóg dostępności stron internetowych instytucji publicznych).""",
     )
+    checkered = models.BooleanField(
+        verbose_name="Tło zdjęcia w kratkę",
+        default=False,
+        help_text="""Wyśrodkowuje zdjęcie na stronie głównej i dodaje efekt kratki.
+        Przydatne do zdjęć o wysokości mniejszej niż tekst wprowadzający.""",
+    )
     alt_attr = models.CharField(
         blank=True,
         max_length=255,
@@ -178,6 +181,7 @@ class NewsDetailPage(Page):
                 # FieldPanel("heading"),
                 FieldPanel("banner_image"),
                 FieldPanel("alt_attr"),
+                FieldPanel("checkered"),
                 FieldPanel("main_text"),
                 FieldPanel("body"),
             ],
