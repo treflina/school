@@ -83,7 +83,12 @@
             margin: 0 .5rem;
             vertical-align: middle;
         }
+        &-linkdescr {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
 
+        }
     }
 }
 

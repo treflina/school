@@ -90,15 +90,16 @@
                                 {% if event.hour %}
                                 <p class="event__details-square event__details-hour">{{event.hour}}</p>
                                 {% endif %}
-                                <p class="event__details-text">{{event.name}}</p>
                                 {% if event.link_to_details %}
+                                <p class="event__details-text">{{event.name}}</p>
                                 <a href="{% pageurl event.link_to_details %}">
                                 <img class="event__details-link" src="{% static 'img/link.svg' %}"
                                 alt="Link do artykułów ze szczegółami" title="Dowiedz się więcej"></a>
-                                {% comment %} {% elif event.description %}
-                                <a href="{{current_site.root_page}}/wydarzenia#{{event.id}}">
-                                <img class="event__details-link" src="{% static 'img/info.svg' %}"
-                                alt="Link do dodatkowej informacji" title="Dodatkowa informacja"></a> {% endcomment %}
+                                {% elif event.description %}
+                                <a href="{{current_site.root_page}}/wydarzenia#{{event.id}}" class="event__details-linkdescr">
+                                {{event.name}}</a>
+                                {% else %}
+                                <p class="event__details-text">{{event.name}}</p>
                                 {% endif %}
                             </div>
                             {% endfor %}
