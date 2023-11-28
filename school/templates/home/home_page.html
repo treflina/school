@@ -37,7 +37,7 @@
             <div class="posts__main-img--primary {% if main_post.checkered %} checkered {% endif %}">
             {% image main_post.banner_image width-550 as img %}
             <img src="{{img.url}}" {%if main_post.alt_attr %}alt="{{main_post.alt_attr}}" {% endif %}
-                class="posts__main-img " width="{{img.width}}" height="{{img.height}}"
+                class="posts__main-img "
                 decoding="async" loading="lazy">
                 </div>
             <div class="posts__main-box posts__main-box--primary">
