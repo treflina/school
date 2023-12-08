@@ -78,8 +78,10 @@
                     </ul>
                 </div>
                 {% endif %}
-                {% if page.button_cta %}
-                <a href="{{page.button_cta.url}}" class="gallery-link">Zobacz zdjęcia</a>
+                {% if page.button_cta and page.gallery_images.all|length > 0 %}
+                <a href="{{page.button_cta.url}}" class="gallery-link">Zobacz pozostałe zdjęcia</a>
+                {% elif page.button_cta %}
+                 <a href="{{page.button_cta.url}}" class="gallery-link">Zobacz zdjęcia</a>
                 {% endif %}
             </section>
         </main>
