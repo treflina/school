@@ -81,6 +81,7 @@ class HomePage(Page):
             upcoming_events_days = dict(
                 filter(lambda x: x[0] >= today, allevents_days.items())
             )
+            print(upcoming_events_days)
             latest_events_days_count = len(latest_events_days)
             upcoming_events_days_count = len(upcoming_events_days)
 
@@ -88,8 +89,12 @@ class HomePage(Page):
 
             if latest_events_days_count + upcoming_events_days_count <= 4:
                 events = allevents_days
+                print("all")
             elif num_diff < 0:
                 events = dict(islice(upcoming_events_days.items(), 4))
+                print("elif")
+            elif num_diff == 0:
+                events = upcoming_events_days
             else:
                 latest_dict = dict(list(latest_events_days.items())[-num_diff:])
                 upcoming_dict = dict(
@@ -97,6 +102,7 @@ class HomePage(Page):
                 )
                 latest_dict.update(upcoming_dict)
                 events = latest_dict
+                print("else")
 
             context["events"] = events
 
