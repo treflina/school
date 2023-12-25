@@ -75,13 +75,24 @@ class HomePage(Page):
                 else:
                     allevents_days[e.start_date].append(e)
 
-            latest_events_days = dict(
-                filter(lambda x: x[0] < today, allevents_days.items())
-            )
+            def upcoming_date(arr):
+                for event in arr:
+                    if event.end_date is not None:
+                        return event.end_date >= today
+
             upcoming_events_days = dict(
-                filter(lambda x: x[0] >= today, allevents_days.items())
+                filter(
+                    lambda x: upcoming_date(x[1]) or x[0] >= today,
+                    allevents_days.items(),
+                )
             )
-            print(upcoming_events_days)
+
+            latest_events_days = {
+                k: v
+                for k, v in allevents_days.items()
+                if k not in upcoming_events_days.keys()
+            }
+
             latest_events_days_count = len(latest_events_days)
             upcoming_events_days_count = len(upcoming_events_days)
 
@@ -89,10 +100,8 @@ class HomePage(Page):
 
             if latest_events_days_count + upcoming_events_days_count <= 4:
                 events = allevents_days
-                print("all")
             elif num_diff < 0:
                 events = dict(islice(upcoming_events_days.items(), 4))
-                print("elif")
             elif num_diff == 0:
                 events = upcoming_events_days
             else:
@@ -102,8 +111,6 @@ class HomePage(Page):
                 )
                 latest_dict.update(upcoming_dict)
                 events = latest_dict
-                print("else")
-
             context["events"] = events
 
         return context
