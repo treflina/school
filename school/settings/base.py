@@ -106,8 +106,6 @@ WSGI_APPLICATION = "school.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -170,6 +168,8 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "public", "media")
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
 EMAIL_HOST = get_secret("EMAIL_HOST")
 EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
@@ -222,4 +222,3 @@ LOGGING = {
         },
     },
 }
-

@@ -33,8 +33,8 @@
                         {% image page.banner_image width-500 as img %}
                         {% image page.banner_image original as org_img %}
                         <a class="image-link" href="{{org_img.file.url}}"><span class="screenReaderOnly">Powiększ zdjęcie</span>
-            <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.alt_attr }}" />
-            </a>
+                        <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ page.alt_attr }}" />
+                        </a>
                     </div>
                     {% endif %}
                     {{page.main_text|richtext}}
@@ -49,9 +49,10 @@
                     </div>
                     {% elif block.block_type == 'docs' %}
                     {% include_block block %}
-
                     {% elif block.block_type == 'typed_table' %}
                     {% include_block block %}
+                    {% elif block.block_type == 'pdf_file' %}
+                    <iframe title="{{block.value.title}}" src="https://docs.google.com/gview?url={% wagtail_site %}{{block.value.file.url}}&embedded=true" style="width:100%; height:500px; max-width:800px" frameborder="0"></iframe>
                     {% else %}
                     <div class="block__text group">
                         {% include_block block %}

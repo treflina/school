@@ -139,6 +139,11 @@ class RichtextAndTableBlock(blocks.StreamBlock):
         template="streams/document_link_block.html",
     )
 
+    pdf_file = DocumentChooserBlock(
+        required=False,
+        label="Pdf z podglądem",
+    )
+
 
 class ObjectAndDescriptionBlock(blocks.StructBlock):
     subject = blocks.CharBlock(label="Nazwa")
@@ -147,5 +152,3 @@ class ObjectAndDescriptionBlock(blocks.StructBlock):
     class Meta:
         label = "Przedmiot (funkcja)"
         template = "streams/object_description_block.html"
-
-
