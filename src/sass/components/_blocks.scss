@@ -73,7 +73,17 @@
         ul,
         ol {
             margin-left: 3rem;
-            padding-bottom: .5em;
+            padding-bottom: .5rem;
+            padding-top: .5rem;
+        }
+
+        ol {
+            ol {
+                list-style-type: lower-alpha;
+                margin-left: 2rem;
+                padding-top: 0rem;
+                padding-bottom: 0rem;
+            }
         }
 
     }

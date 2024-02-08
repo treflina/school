@@ -109,8 +109,11 @@ class NewsDetailPage(Page):
         blank=True,
         max_length=255,
         verbose_name="Opis alternatywny",
-        help_text="""Opisz co przedstawia zdjęcie główne. Pole nie powinno być puste
-        (wymóg dostępności cyfrowej stron internetowych instytucji publicznych).""",
+        help_text="""*!*!*!*!* Proszę opisać co przedstawia zdjęcie. Pole nie powinno być puste
+        (wymóg dostępności cyfrowej stron internetowych instytucji publicznych). Jeżeli zdjęcie
+        zawiera informację tekstową, musi być ona zawarta również w tekstowej części artykułu lub ewentualnie w opisie
+        alternatywnym. To samo dotyczy pozostałych zdjęć w artykule. Więcej informacji np. tu:
+        https://www.uke.gov.pl/blog/tekst-alternatywny-do-grafik-i-zdjec-czyli-kilka-slow-o-altach,96.html""",
     )
     main_text = RichTextField(
         blank=False,
@@ -253,7 +256,7 @@ class MiniGalleryImage(Orderable):
         blank=True,
         max_length=255,
         verbose_name="Opis alternatywny",
-        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów).""",
+        help_text="""Opis tekstowy zdjęcia (najczęściej od 5 do 15 słów). Proszę nie pozostawiać bez opisu""",
     )
 
     panels = [FieldPanel("image"), FieldPanel("alt_attr")]
