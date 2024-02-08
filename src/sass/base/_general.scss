@@ -26,6 +26,15 @@ body {
     line-height: 1.5;
 }
 
+ol {
+    ol {
+        list-style-type: lower-alpha;
+        margin-left: 2rem;
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+    }
+}
+
 .main {
     display: flex;
     flex-direction: column;
