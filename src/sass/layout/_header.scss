@@ -1,4 +1,4 @@
-@use 'abstracts' as *;
+@use 'abstracts'as *;
 
 .header {
     position: relative;
@@ -72,6 +72,7 @@
             background-color: #EFEFEF;
             color: #112B3C;
             box-shadow: 0 0 10px rgba(0, 0, 0, .7);
+            ;
             text-decoration: none;
             text-align: center;
             transition: transform .5s;
@@ -80,6 +81,18 @@
                 transform: translateY(-4px);
                 box-shadow: 0 0 20px rgba(0, 0, 0, .7);
             }
+
+            &--active {
+                box-shadow: 0 0 10px rgba(0, 0, 0, .7),
+                    inset 0px 0px 8px 3px $color-secondary-basic;
+
+                &:hover {
+                    box-shadow: 0 0 20px rgba(0, 0, 0, .7),
+                        inset 0px 0px 8px 3px $color-secondary-basic;
+                }
+            }
+
+
 
             img {
                 height: 3.5rem;

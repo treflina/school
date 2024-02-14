@@ -2,14 +2,23 @@ from datetime import date
 from itertools import chain, islice
 from operator import attrgetter
 
+from django.db import models
+
 from core.models import CategorySnippet, LuckyNumberSnippet
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
 from news.models import NewsDetailPage
 from wagtail.models import Page
+from wagtail.admin.panels import FieldPanel
 
 
 class HomePage(Page):
+    highlight = models.BooleanField(
+        verbose_name="Wyróżnienie przycisku Rekrutacja",
+        default=False,
+        help_text="""Dodaj dodatkowy pomarańczowy cień wokół przycisku, aby był bardziej widoczny podczas rekrutacji.""",
+    )
+
     template = "home/home_page.html"
     parent_page_types = ["wagtailcore.Page"]
     max_count = 1
@@ -116,6 +125,8 @@ class HomePage(Page):
         return context
 
     search_fields = Page.search_fields
+    content_panels = Page.content_panels + [
+                FieldPanel("highlight")]
 
     class Meta:  # noqa
         verbose_name = "Strona główna"

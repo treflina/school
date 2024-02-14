@@ -95,9 +95,7 @@ class NewsDetailPage(Page):
         related_name="+",
         on_delete=models.SET_NULL,
         verbose_name="Zdjęcie główne",
-        help_text="""Preferowana orientacja pozioma. Pamiętaj, że tekst zamieszczony
-            na zdjęciu jest niedostępny cyfrowo i powinien znaleźć się również w treści
-            artykułu (wymóg dostępności stron internetowych instytucji publicznych).""",
+        help_text="""Preferowana orientacja pozioma.""",
     )
     checkered = models.BooleanField(
         verbose_name="Tło zdjęcia w kratkę",
@@ -109,10 +107,10 @@ class NewsDetailPage(Page):
         blank=True,
         max_length=255,
         verbose_name="Opis alternatywny",
-        help_text="""*!*!*!*!* Proszę opisać co przedstawia zdjęcie. Pole nie powinno być puste
+        help_text="""Proszę opisać co przedstawia zdjęcie. Pole nie powinno być puste
         (wymóg dostępności cyfrowej stron internetowych instytucji publicznych). Jeżeli zdjęcie
         zawiera informację tekstową, musi być ona zawarta również w tekstowej części artykułu lub ewentualnie w opisie
-        alternatywnym. To samo dotyczy pozostałych zdjęć w artykule. Więcej informacji np. tu:
+        alternatywnym. To samo dotyczy pozostałych zdjęć w artykule. Więcej informacji:
         https://www.uke.gov.pl/blog/tekst-alternatywny-do-grafik-i-zdjec-czyli-kilka-slow-o-altach,96.html""",
     )
     main_text = RichTextField(
