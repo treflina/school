@@ -2,14 +2,15 @@ from datetime import date
 from itertools import chain, islice
 from operator import attrgetter
 
-from django.db import models
-
 from core.models import CategorySnippet, LuckyNumberSnippet
+from django.db import models
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
+from modelcluster.fields import ParentalKey
 from news.models import NewsDetailPage
-from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import (FieldPanel, InlinePanel, MultiFieldPanel,
+                                  PageChooserPanel)
+from wagtail.models import Orderable, Page
 
 
 class HomePage(Page):
@@ -126,7 +127,61 @@ class HomePage(Page):
 
     search_fields = Page.search_fields
     content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [InlinePanel("programmes", label="")],
+            classname="collapsed", heading="Uczestniczymy w programach"
+        ),
                 FieldPanel("highlight")]
 
     class Meta:  # noqa
         verbose_name = "Strona główna"
+
+
+class Programme(Orderable):
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name="programmes")
+    name = models.CharField(
+        max_length=70, verbose_name="Nazwa programu", blank=False, null=True
+    )
+    bcgimg = models.ForeignKey(
+        "core.CustomImage",
+        blank=True,
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+        verbose_name="Zdjęcie w tle",
+        help_text="""Poziome, szerokość 450px""",
+    )
+
+    logo = models.ForeignKey(
+        "core.CustomImage",
+        blank=False,
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+        verbose_name="Logo lub główne zdjęcie",
+        help_text="""Logo - plik PNG z tłem transparentnym lub
+        zwykłe poziome zdjęcie o szerokości 450px""",
+    )
+    alt_attr = models.CharField(
+        verbose_name="Opis alternaywny loga/zdjęcia",
+        max_length=255,
+        default="",
+        null=True
+        )
+
+    link_to_details = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Link do podstrony ze szczegółami programu"
+    )
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("bcgimg"),
+        FieldPanel("logo"),
+        FieldPanel("alt_attr"),
+        PageChooserPanel("link_to_details"),
+    ]

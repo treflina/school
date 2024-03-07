@@ -35,11 +35,10 @@
     <div class="posts wrapper">
         <div class="posts__main posts__main--primary">
             <div class="posts__main-img--primary {% if main_post.checkered %} checkered {% endif %}">
-            {% image main_post.banner_image width-550 as img %}
-            <img src="{{img.url}}" {%if main_post.alt_attr %}alt="{{main_post.alt_attr}}" {% endif %}
-                class="posts__main-img "
-                decoding="async" loading="lazy" width="550">
-                </div>
+                {% image main_post.banner_image width-550 as img %}
+                <img src="{{img.url}}" {%if main_post.alt_attr %}alt="{{main_post.alt_attr}}" {% endif %}
+                    class="posts__main-img " decoding="async" loading="lazy" width="550">
+            </div>
             <div class="posts__main-box posts__main-box--primary">
 
                 <div class="posts__main-details">
@@ -66,7 +65,7 @@
                 <div class="posts__main-text">
                     {{main_post.main_text|richtext}}
                 </div>
-                {% if main_post.body or main_post.gallery_images.all|length > 0  or main_post.button_cta %}
+                {% if main_post.body or main_post.gallery_images.all|length > 0 or main_post.button_cta %}
                 <a href="{% slugurl main_post.slug %}" class="posts__main-link posts__main-link--primary">Czytaj więcej&nbsp;&raquo;</a>
                 {% endif %}
             </div>
@@ -163,8 +162,39 @@
             </div>
             {% endfor %}
         </div>
-        <a href="{% slugurl 'aktualnosci'%}" class="posts__linktoall"><span>Przejdź do wszystkich aktualności &raquo;</span></a>
+        <a href="{% slugurl 'aktualnosci'%}" class="posts__linktoall"  {% if page.programmes.count == 0 %} style="margin-bottom:3em;" {% endif %}>
+            <span>Przejdź do wszystkich aktualności &raquo;</span></a>
     </div>
+    {% if page.programmes.count > 0 %}
+    <div class="programmes">
+        <div class="wrapper ">
+            <h2 class="posts__box-heading heading-secondary"> Uczestniczymy w programach</h2>
+            <div class="programmes__wrapper">
+                {% for programme in page.programmes.all %}
+                <div class="programmes__content">
+                    <div class="programmes__logobox">
+                        {% if programme.bcgimg %}
+                        {% image programme.bcgimg width-450 as bcgimg %}
+                        <img src="{{bcgimg.url}}" alt="" class="programmes__logobox-bcgimg" width="450" height="300">
+                        {% endif %}
+                        {% if programme.logo %}
+                        {% image programme.logo width-450 as logoimg %}
+                        <img src="{{logoimg.url}}" alt="{{programme.alt_attr}}" class="programmes__logobox-logo"
+                            width="450" height="300">
+                        {% endif %}
+                    </div>
+                    <div class="programmes__content-box">
+                        <p class="programmes__content-name">{{programme.name}}</p>
+                        {% if programme.link_to_details %}
+                        <a href="{{programme.link_to_details.url}}" class="posts__main-link posts__main-link--primary programmes__content-link text-center"><span class="show-lg">Przeczytaj więcej o programie &raquo;</span><span class="show-sm">O&nbsp;programie&nbsp;&raquo;</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
 </main>
 {% endblock %}
