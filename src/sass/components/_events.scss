@@ -21,6 +21,7 @@
 .event {
     display: inline-block;
     position: relative;
+    max-width: 25%;
     text-align: center;
     padding: 2em 1em 0 1em;
     margin-right: 0;
@@ -83,6 +84,7 @@
             margin: 0 .5rem;
             vertical-align: middle;
         }
+
         &-linkdescr {
             color: inherit;
             text-decoration: none;
@@ -106,6 +108,7 @@
     .event {
         display: block;
         padding: 70px 0 0 0;
+        max-width: none;
 
 
         &__details {
