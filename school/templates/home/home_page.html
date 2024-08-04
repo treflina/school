@@ -8,7 +8,10 @@
 {% block content %}
 
 <header class="header" id="main">
-    <img src="{% static 'img/emblem.svg' %}" class="header__emblem" alt="Godło Polski" width="50px" height="59px">
+    <div class="header__emblem">
+        <img src="{% static 'img/emblem.svg' %}" alt="Godło Polski" width="50px" height="59px">
+        <img src="{% static 'img/godlo.png' %}" alt="Logo szkoły" width="52px" height="63px">
+    </div>
     <div class="header__text">
         <h1><span class="first-letter">P</span>ubliczna <span class="first-letter">S</span>zkoła
             <span class="first-letter">P</span>odstawowa <br>w&nbsp;Turawie

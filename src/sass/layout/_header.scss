@@ -37,12 +37,15 @@
     }
 
     &__emblem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
         position: absolute;
         top: 10px;
+        right: 30px;
         left: 30px;
-        width: 50px;
         z-index: 3;
-
     }
 
     &__links {
@@ -108,7 +111,7 @@
     .header {
         &__emblem {
             left: 8px;
-            width: 40px;
+            right: 8px;
         }
 
 
@@ -156,14 +159,14 @@
     .header {
         &__emblem {
             left: 10px;
-            width: 40px;
+            right: 10px;
         }
 
         &__text {
-            margin-top: -20px;
 
             h1 {
                 font-size: 4rem;
+                line-height: 1.3;
             }
         }
 
