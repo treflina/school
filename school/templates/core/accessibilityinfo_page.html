@@ -4,34 +4,40 @@
 {% block content %}
     <main class="main ordinary wrapper wrapper-md">
             <h1 class="heading-primary mtb-3">Deklaracja dostępności</h1>
-            <p id="a11y-wstep"><span id="a11y-podmiot">{{page.institution}}</span> zobowiązuje się zapewnić
-                dostępność swojej strony internetowej zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron
-                internetowych i aplikacji mobilnych podmiotów publicznych.
-            </p>
-            <p>Deklaracja dostępności dotyczy strony internetowej <a href="" id="a11y-url">{{page.web_url}}</a>.</p>
-            <p>Data publikacji strony internetowej: <span id="a11y-data-publikacja">{{ page.publication_date|date:"Y-m-d" }}</span></p>
-            <p>Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja">{% if page.update_date %}{{ page.update_date|date:"Y-m-d"}}{% else %} nie było {% endif %}</span></p>
-            <br>
-            <p id="a11y-status">Strona internetowa jest {% if not page.accordance %}częściowo{% else %}w pełni{% endif %} zgodna z ustawą z dnia 4 kwietnia 2019 r. o
-                dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych{% if not page.accordance %} z powodu niezgodności
-                lub wyłączeń wymienionych poniżej{% endif %}.</p>
+            <section id="a11y-wstep">
+                <p><span id="a11y-podmiot">{{page.institution}}</span> zobowiązuje się zapewnić
+                    dostępność swojej strony internetowej zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron
+                    internetowych i aplikacji mobilnych podmiotów publicznych.
+                </p>
+                <p>Deklaracja dostępności dotyczy <span id="a11y-zakres">strony internetowej </span><a href="{{page.web_url}}" id="a11y-url">{{page.web_url}}</a>.</p>
+            </section>
+            <p>Data publikacji strony internetowej: <time id="a11y-data-publikacja" datetime="{{ page.publication_date|date:'Y-m-d' }}">{{ page.publication_date|date:"d E Y" }}</time></p>
+            <p>Data ostatniej istotnej aktualizacji:  {% if page.update_date %} <time id="a11y-data-aktualizacja" datetime="{{ page.update_date|date:'Y-m-d' }}">
+               {{ page.update_date|date:"d E Y"}}</time> {% else %} nie było {% endif %}</p>
+            <h2>Stan dostępności cyfrowej</h2>
+            <p id="a11y-status">Ta strona internetowa jest {% if not page.accordance %}częściowo{% else %}w pełni{% endif %} zgodna z załącznikiem do ustawy z dnia 4 kwietnia 2019 r. o
+                dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych{% if not page.accordance %} z powodu [niezgodności i wyłączeń] wymienionych poniżej{% endif %}.</p>
                 {% if not page.accordance %}
+                <h2>Niedostępne treści</h2>
+                <h3>Niezgodność z załącznikiem</h3>
                 {{page.exceptions|richtext}}
                 {% endif %}
-            <br>
-            <p>Na stronie internetowej można korzystać ze standardowych skrótów klawiaturowych.</p>
-            <br>
-            <p>Data sporządzenia deklaracji: <span id="a11y-data-sporzadzenie"> {{ page.publish_date|date:"Y-m-d" }}</span></p>
-            <p>Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny.</p>
-            <p>Data ostatniego przeglądu deklaracji: <span id="a11y-data-przeglad">{{ page.review_date|date:"Y-m-d" }}</span></p>
-            <h2 id="a11y-kontakt" class="heading-secondary mtb-3">Informacje zwrotne i dane kontaktowe</h2>
+            <section>
+                <h2>Przygotowanie deklaracji dostępności</h2>
+                <h3>Przygotowanie deklaracji dostępności i jej aktualizacja</h3>
+                <p>Data sporządzenia deklaracji: <time id="a11y-data-sporzadzenie" datetime="{{ page.publish_date|date:'Y-m-d' }}"> {{ page.publish_date|date:"d E Y" }}</time></p>
+                <p>Data ostatniego przeglądu deklaracji: <time id="a11y-data-przeglad" datetime="{{ page.review_date|date:'Y-m-d' }}">{{ page.review_date|date:"d E Y" }}</time></p>
+                <p>Deklarację sporządziliśmy na podstawie samooceny w oparciu o
+                    <a href="https://www.gov.pl/attachment/1a3e2bb5-6d60-4897-ac2f-07a8e91e70ed">Listę kontrolną do badania dostępności cyfrowej strony internetowej v. 2.2 (docx, 0,12MB)</a>.</p>
+            </section>
+            <h2>Informacje zwrotne i dane kontaktowe</h2>
             <p>W przypadku problemów z dostępnością strony internetowej prosimy o kontakt. Osobą kontaktową jest
-                <span id="a11y-osoba">{{page.contact_person}}</span>, mail: <a href="mailto:{{page.email}}" id="a11y-email">{{page.email}}</a>
+                <span id="a11y-kontakt">{{page.contact_person}}</span>, mail: <a href="mailto:{{page.email}}" id="a11y-email">{{page.email}}</a>
                 Kontaktować można się także telefonicznie:
-                <span id="a11y-telefon">{{page.phone}}</span>. Tą samą drogą można składać wnioski o udostępnienie informacji
+                <a href="tel:+48{{page.phone}}" id="a11y-telefon">{{page.phone}}</a>. Tą samą drogą można składać wnioski o udostępnienie informacji
                 niedostępnej oraz składać skargi na brak zapewnienia dostępności.
             </p>
-            <p id="a11y-procedura">
+            <p>
                 Każdy ma prawo do wystąpienia z żądaniem zapewnienia dostępności cyfrowej strony internetowej lub
                 jakiegoś jej elementu. Można także zażądać udostępnienia informacji za pomocą alternatywnego sposobu dostępu, na
                 przykład przez odczytanie niedostępnego cyfrowo dokumentu, opisanie zawartości filmu bez audiodeskrypcji
@@ -43,15 +49,41 @@
                 tym wnoszącego żądanie, kiedy realizacja żądania będzie możliwa, przy czym termin ten nie może być dłuższy
                 niż 2 miesiące od dnia wystąpienia z żądaniem. Jeżeli zapewnienie dostępności cyfrowej nie jest możliwe,
                 podmiot publiczny może zaproponować alternatywny sposób dostępu do informacji.
-                W przypadku, gdy podmiot publiczny odmówi realizacji żądania zapewnienia dostępności lub alternatywnego
-                sposobu dostępu do informacji, wnoszący żądanie możne złożyć skargę w sprawie zapewniana dostępności
-                cyfrowej strony internetowej lub jej elementu. Po wyczerpaniu wskazanej wyżej procedury, można także
-                złożyć wniosek do Rzecznika Praw Obywatelskich.</p>
-            <h2 id="a11y-architektura" class="heading-secondary mtb-3">Dostępność architektoniczna</h2>
-            {{page.architecture_desc|richtext}}
-            {% if page.contact_methods %}
-            <h3 style="color:black;" class="mtb-3">Komunikacja dla osób niesłyszących lub słabo słyszących</h3>
-            {{page.contact_methods|richtext}}
-                {% endif %}
+            </p>
+            <section id="a11y-procedura">
+                <h3> Obsługa wniosków i skarg związanych z dostępnością </h3>
+                <p>Jeżeli w odpowiedzi na Twój wniosek o zapewnienie dostępności
+                cyfrowej, odmówimy zapewnienia żądanej przez Ciebie dostępności
+                cyfrowej, a Ty nie zgadzasz się z tą odmową, masz prawo złożyć
+                skargę.</p>
+                <p>Skargę masz prawo złożyć także, jeśli nie zgadzasz się na
+                skorzystanie z alternatywnego sposobu dostępu, który zaproponowaliśmy Ci
+                w odpowiedzi na Twój wniosek o zapewnienie dostępności cyfrowej.</p>
+                <p>Ewentualną skargę złóż listownie lub mailem do kierownictwa naszego
+                urzędu:
+                <ul>
+                    <li>{{page.contact_person}} — Dyrektor Publicznej Szkoły Podstawowej w Turawie,</li>
+                    <li>Adres: ul. Opolska 47, 46-045 Turawa,</li>
+                    <li>mejl: <a href="{{page.email}">
+                    {{page.email}}</a>.</li>
+                </ul>
+                <a href="https://www.gov.pl/web/gov/zloz-wniosek-o-zapewnienie-
+                dostepnosci-cyfrowej-strony-internetowej-lub-aplikacji-mobilnej">Pomocne
+                mogą być informacje, które można znaleźć na rządowym portalu
+                gov.pl</a>.</p>
+                <p>Możesz także poinformować o tej sytuacji <a
+                href="https://bip.brpo.gov.pl/"> Rzecznika Praw Obywatelskich</a>
+                i poprosić o interwencję w Twojej sprawie.</p>
+                </section>
+            <h2>Pozostałe informacje</h2>
+            <section id="a11y-architektura">
+                <h3>Dostępność architektoniczna</h3>
+                <p>ul. Opolska 47, 46-045 Turawa</p>
+                {{page.architecture_desc|richtext}}
+            </section>
+            <section id="a11y-komunikacja">
+                <h3>Dostępność komunikacyjno-informacyjna</h3>
+                {{page.contact_methods|richtext}}
+            </section>
     </main>
 {% endblock%}
