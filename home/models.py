@@ -2,7 +2,7 @@ from datetime import date
 from itertools import chain, islice
 from operator import attrgetter
 
-from core.models import CategorySnippet, LuckyNumberSnippet
+from core.models import CategorySnippet, ESchoolSnippet, LuckyNumberSnippet
 from django.db import models
 from events.models import EventsPage
 from gallery.models import GalleryDetailPage
@@ -69,6 +69,7 @@ class HomePage(Page):
         context["main_post"] = main_post
         context["categories"] = categories
         context["lucky_number"] = LuckyNumberSnippet.objects.filter(date=today).last()
+        context["link_eschool"] = ESchoolSnippet.objects.first()
         context["posts"] = [p for p in posts if p != main_post][:6]
 
         # get upcoming events

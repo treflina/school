@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.timezone import now
 from PIL import Image as PILImage
 from streams import blocks
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.documents.models import AbstractDocument, Document
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
@@ -74,6 +74,46 @@ class SchoolYearSnippet(models.Model):
     class Meta:
         verbose_name = "Rok szkolny"
         verbose_name_plural = "Rok szkolny"
+
+
+
+class LinkFields(models.Model):
+    link_page = models.ForeignKey(
+        Page,
+        verbose_name="Link do podstrony",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    external_link = models.URLField("Link zewnętrzny", blank=True)
+
+    @property
+    def link(self):
+        if self.external_link:
+            return self.external_link
+        return self.link_page.url
+
+    def __str__(self):
+        return f"{self.link}"
+
+    class Meta:
+        abstract = True
+
+
+@register_snippet
+class ESchoolSnippet(LinkFields, models.Model):
+    """E-school snippet."""
+
+    panels = [
+        HelpPanel(content="<p>Wybierz podstronę LUB podaj link zewnętrzny.</p>", heading="Uwaga"),
+        PageChooserPanel('link_page'),
+        FieldPanel('external_link'),
+    ]
+
+    class Meta:
+        verbose_name = "Link do eSzkoły"
+        verbose_name_plural = "Link do eSzkoły"
 
 
 @register_snippet
