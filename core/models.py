@@ -2,7 +2,7 @@ from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.timezone import now
-from PIL import Image as PILImage
+from PIL import Image as PILImage, ImageOps
 from streams import blocks
 from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.documents.models import AbstractDocument, Document
@@ -159,9 +159,11 @@ class CustomImage(AbstractImage):
             self.width > 1200 or self.height > 1200
         ) and self.collection.name != "Zdjęcia - rozmiar oryginalny":
             img = PILImage.open(self.file.path)
+            img = ImageOps.exif_transpose(img)
             img.thumbnail((1200, 1200))
             width, height = img.size
             img.save(self.file.path)
+            img.close()
 
             if self.width != width or self.height != height:
                 self.width = width

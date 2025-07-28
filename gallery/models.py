@@ -30,7 +30,7 @@ class GalleryIndexPage(PagePaginationMixin, RoutablePageMixin, Page):
             .order_by("-publish_date", "-first_published_at")
         )
 
-        context["years"] = SchoolYearSnippet.objects.all()
+        context["years"] = SchoolYearSnippet.objects.all().order_by("-name")
 
         if request.GET.get("year", None):
             urlyear = request.GET.get("year")
